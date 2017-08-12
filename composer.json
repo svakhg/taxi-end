@@ -9,7 +9,6 @@
         "adamwathan/bootforms": "^0.8.5",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "nexmo/laravel": "^0.4.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
