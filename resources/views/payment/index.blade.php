@@ -126,6 +126,7 @@
     </div>        
 </div>
 
+<input type="hidden" name="hidden_view" id="hidden_view" value="{{ url('payments/taxi-payment/view') }}">
 <div class="modal fade" id="paymentModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -133,14 +134,107 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Recive Payment</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="font-size: 15px;">
+            <p>Taxi Number: <span id="view_taxiNo" class="text-success"></span></p>
+            <p>Call Code: <span id="view_callCode" class="text-success"></span></p>
+            <p>Center Name: <span id="view_centerName" class="text-success"></span></p>
+            <p>Driver Name: <span id="view_driverName" class="text-success"></span></p>
+            <p>Recipt Number: <span id="view_reciptNo" class="text-success"></span></p>
+            <form action="" method="POST" role="form">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="total">Total Amount</label>
+                    <input type="number" name="total" class="form-control" id="view_total" placeholder="Enter Amount">
+                </div>
+                
+                <div class="form-group">
+                    <label for="total">Fine on Late Payment</label>
+                    <input type="number" name="subtotal" class="form-control" id="view_subtotal" placeholder="Enter Amount">
+                </div>
+                
+                <input type="hidden" name="idPayment" id="idPayment" class="form-control" value="">
+                <div class="form-group">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" onclick="javascript:yesnoCheck();" name="send_sms" id="noCheck" value="0" checked>
+                            Dont Send Sms
+                        </label>
+                        <label>
+                            <input type="radio" onclick="javascript:yesnoCheck();" name="send_sms" id="yesCheck" value="1">
+                            Send Sms
+                        </label>
+                    </div>    
+                </div>
+                
+                <div id="ifYes" style="display: none">
+                    <div class="form-group">
+                        <label for="total">Driver Number</label>
+                        <input type="text" name="driverNumber" id="view_driverNumber" class="form-control" placeholder="Enter Driver Phone Number">
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="total">SMS Text</label>
+                        <textarea name="smsText" class="form-control" maxlength="180" id="smsText">This is a sample text</textarea>
+                        <script>
+                            $('#smsText').keyup(function () {
+                            var max = 180;
+                            var len = $(this).val().length;
+                            if (len >= max) {
+                                $('#charNum').text(' you have reached the limit');
+                            } else {
+                                var char = max - len;
+                                $('#charNum').text(char + ' characters left');
+                            }
+                            });
+                        </script>
+                        <div id="charNum"></div>
+                    </div>
+                </div>
+                <script>
+                    function yesnoCheck() {
+                        if (document.getElementById('yesCheck').checked) {
+                            document.getElementById('ifYes').style.display = 'block';
+                        }
+                        else document.getElementById('ifYes').style.display = 'none';
+
+                    }
+                </script>
             </div>
             <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+var totalValue = 0; 
+    function c_payment(id){
+        var view_url = $("#hidden_view").val();
+        $.ajax({
+            url: view_url,
+            type:"GET", 
+            data: {"id":id}, 
+            success: function(result){
+                $("#idPayment").text(result.id);
+                $("#view_taxiNo").text(result.taxi.taxiNo);
+                $("#view_callCode").text(result.callcode.callCode);
+                $("#view_centerName").text(result.center.name);
+                $("#view_driverName").text(result.taxi.driver.driverName);
+                $("#view_total").val(result.taxi.rate);
+                $("#view_subtotal").val(result.subtotal);
+                $("#view_driverNumber").val(result.taxi.driver.driverMobile);
 
+                var z = 0;
+                var x = $("#view_total").val();
+                var y = $("#view_subtotal").val();
+                var z = x + y;
+                $("#totalAmount").val(z);
+                $("#totalAmountA").text(z);
+            }
+        });
+    }
+</script>   
 @endsection

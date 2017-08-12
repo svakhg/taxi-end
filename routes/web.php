@@ -27,7 +27,7 @@ Route::get('genpayment', function () {
     
     if ($payments)
     {
-        $info = array('status' => 'payment generated already generated for this month');
+        $info = array('status' => 'payment already generated for this month');
         return response()->json([$info]);
     }
     
@@ -102,4 +102,6 @@ Route::group(['prefix' => 'configure'], function () {
 */
 Route::group(['prefix' => 'payments'], function () {
     Route::get('taxi-payment', 'PaymentHistoryController@index');
+    Route::post('taxi-payment', 'PaymentHistoryController@add');
+    Route::get('taxi-payment/view', 'PaymentHistoryController@view');
 });
