@@ -116,7 +116,20 @@
                                 }
                             ?>
                             </td>
-                            <td><button style="display: block; margin: auto;" class="btn btn-info" data-toggle="modal" data-target="#paymentModal" onclick="c_payment('{{ $payment->id }}')">Recive Payment</button>
+                            <td>
+                            <?php
+                            if ($payment->paymentStatus == "0") 
+                            {
+                            ?>
+                                <button style="display: block; margin: auto;" class="btn btn-info" data-toggle="modal" data-target="#paymentModal" onclick="c_payment('{{ $payment->id }}')">Recive Payment</button>
+                            <?php
+                            } elseif($payment->paymentStatus == "1") {
+                                echo '<button style="display: block; margin: auto;" class="btn btn-info" disabled>View</button>';
+                            } else {
+                                return;
+                            }
+                            ?>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -218,7 +231,7 @@ var totalValue = 0;
             type:"GET", 
             data: {"id":id}, 
             success: function(result){
-                $("#idPayment").text(result.id);
+                $("#idPayment").val(result.id);
                 $("#view_taxiNo").text(result.taxi.taxiNo);
                 $("#view_callCode").text(result.callcode.callCode);
                 $("#view_centerName").text(result.center.name);

@@ -43,8 +43,8 @@ Route::get('genpayment', function () {
             ]);
             
         }
-        $info = array('status' => 'payment generated successfully');
-        return response()->json($info);
+        
+        return redirect()->route('payment')->with('success','Payment Recived Successfully.');
     }    
 
     
@@ -101,7 +101,7 @@ Route::group(['prefix' => 'configure'], function () {
 |--------------------------------------------------------------------------
 */
 Route::group(['prefix' => 'payments'], function () {
-    Route::get('taxi-payment', 'PaymentHistoryController@index');
+    Route::get('taxi-payment', 'PaymentHistoryController@index')->name('payment');
     Route::post('taxi-payment', 'PaymentHistoryController@add');
     Route::get('taxi-payment/view', 'PaymentHistoryController@view');
 });
