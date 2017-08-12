@@ -26,6 +26,7 @@ class CreateDriversTable extends Migration
             $table->string('driverLicenceExp')->nullable();
             $table->string('driverPermitNo')->nullable();
             $table->string('driverPermitExp')->nullable();
+            $table->string('photoURL')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
