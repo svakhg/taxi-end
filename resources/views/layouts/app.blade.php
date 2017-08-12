@@ -128,7 +128,7 @@
                                     <li><a href="{{ url('configure/driver') }}">Configure Drivers</a></li>
                                 </ul>
                             </li>
-                            <li class="disabled"><a href="#">Display JR</a></li>
+                            <li><a href="{{ url('display/jr') }}">Display JR</a></li>
                             <li class="disabled"><a href="#">Display City Cab</a></li>
                         @endif
                     </ul>
@@ -179,9 +179,6 @@
     ga('send', 'pageview');
 
     </script>
-
-    <script src="{{ url('js/nanobar.min.js') }}"></script>
-    
     
 </body>
 </html>

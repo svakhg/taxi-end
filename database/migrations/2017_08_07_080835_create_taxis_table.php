@@ -31,7 +31,7 @@ class CreateTaxisTable extends Migration
             $table->string('roadWorthinessExpiry')->nullable();
             $table->string('insuranceExpiry')->nullable();
             $table->string('rate')->nullable();
-            $table->string('state')->nullable();
+            $table->string('state')->default('0');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });

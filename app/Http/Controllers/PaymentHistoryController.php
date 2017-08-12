@@ -53,7 +53,19 @@ class PaymentHistoryController extends Controller
             $payment->paymentStatus = '1';
             $payment->save();
 
-            Twilio::message('+9609105616', 'sms test');
+            $checkP = paymentHistory::where('taxi_id', $payment->taxi_id)->where('paymentStatus', '0')->get();
+
+            if ($checkP->count() >= 1) {
+                $taxi = Taxi::find($payment->taxi_id);
+                $taxi->state = '0';
+                $taxi->save();    
+            } else {
+                $taxi = Taxi::find($payment->taxi_id);
+                $taxi->state = '1';
+                $taxi->save(); 
+            }
+
+            #Twilio::message('+9609105616', 'sms test');
 
             return back()->with('success','Payment Recived Successfully.');
         } elseif ($request->send_sms = "0") {
@@ -64,8 +76,21 @@ class PaymentHistoryController extends Controller
             $payment->totalAmount = $request->total + $request->subtotal;
             $payment->user_id = Auth::user()->id;
             $payment->paymentStatus = '1';
+            $payment->save();
+            
+            $checkP = paymentHistory::where('taxi_id', $payment->taxi_id)->where('paymentStatus', '0')->get();
+
+            if ($checkP->count() >= 1) {
+                $taxi = Taxi::find($payment->taxi_id);
+                $taxi->state = '0';
+                $taxi->save();    
+            } else {
+                $taxi = Taxi::find($payment->taxi_id);
+                $taxi->state = '1';
+                $taxi->save(); 
+            }
+
             return back()->with('success','Payment Recived Successfully.');
-            return;
         } else {
             return;
         }

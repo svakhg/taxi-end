@@ -43,8 +43,10 @@ Route::get('genpayment', function () {
             ]);
             
         }
+
+        $taxiUp = App\Taxi::where('state', '1')->update(['state' => 0]);
         
-        return redirect()->route('payment')->with('success','Payment Recived Successfully.');
+        return redirect()->route('payment')->with('success','Payment Generated Successfully.');
     }    
 
     
@@ -105,3 +107,20 @@ Route::group(['prefix' => 'payments'], function () {
     Route::post('taxi-payment', 'PaymentHistoryController@add');
     Route::get('taxi-payment/view', 'PaymentHistoryController@view');
 });
+
+/*
+|--------------------------------------------------------------------------
+|Diplay Routes (JR)
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => 'display'], function () {
+    Route::get('jr', 'DisplayController@jrIndex');
+
+    Route::get('jr-ajax', function () {
+        $taxis = App\Taxi::all();
+        $payments = App\paymentHistory::all();
+        return view('display.jrAjax', compact('taxis', 'payments'));
+    });
+});
+
+
