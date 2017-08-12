@@ -178,6 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Nexmo\Laravel\NexmoServiceProvider::class,
     ],
 
     /*
@@ -227,7 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'BootForm' => AdamWathan\BootForms\Facades\BootForm::class,
-
+        'Nexmo' => \Nexmo\Laravel\Facade\Nexmo::class,
     ],
 
 ];
