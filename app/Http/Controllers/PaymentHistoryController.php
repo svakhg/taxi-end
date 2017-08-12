@@ -9,6 +9,7 @@ use App\Driver;
 use App\CallCode;
 use App\TaxiCenter;
 use Illuminate\Support\Facades\Auth;
+use Twilio;
 
 class PaymentHistoryController extends Controller
 {
@@ -51,6 +52,9 @@ class PaymentHistoryController extends Controller
             $payment->user_id = Auth::user()->id;
             $payment->paymentStatus = '1';
             $payment->save();
+
+            Twilio::message('+9609105616', 'sms test');
+
             return back()->with('success','Payment Recived Successfully.');
         } elseif ($request->send_sms = "0") {
             $payment = paymentHistory::find($request->idPayment);
