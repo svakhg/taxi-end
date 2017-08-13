@@ -15,4 +15,9 @@ class DisplayController extends Controller
     {
         return view('display.jr');
     }
+
+    public function cityIndex()
+    {
+        return view('display.city');
+    }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CallCode extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['center_id', 'callCode'];
+    protected $fillable = ['center_id', 'callCode', 'taken'];
     protected $dates = ['deleted_at'];
 
     public function taxicenter()

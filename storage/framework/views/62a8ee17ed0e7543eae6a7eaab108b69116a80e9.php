@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <script>
 $(document).ready(function() {
         var dataSrc = [];
@@ -81,7 +79,7 @@ $(document).ready(function() {
   } );
 </script>
 <ul class="breadcrumb">
-    <li><a href="{{ url('home') }}">Home</a></li>
+    <li><a href="<?php echo e(url('home')); ?>">Home</a></li>
     <li><a href="#">Configure</a></li>
     <li class="active">Taxi</li>
 </ul>
@@ -93,12 +91,12 @@ $(document).ready(function() {
     <div class="panel-body">
         <div class="row">                
             <div class="col-md-12">
-                @if ($message = Session::get('success'))
+                <?php if($message = Session::get('success')): ?>
                     <div class="alert alert-success alert-block">
                         <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>{{ $message }}</strong>
+                        <strong><?php echo e($message); ?></strong>
                     </div>
-                @endif
+                <?php endif; ?>
                 <table id="taxi" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>                            
@@ -115,26 +113,26 @@ $(document).ready(function() {
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($taxis as $taxi)
+                        <?php $__currentLoopData = $taxis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $taxi): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td>{{ $taxi->callcode->callCode }}</th>
-                            <td>{{ $taxi->callcode->taxicenter->name }}</td>
-                            <td>{{ $taxi->taxiNo }}</td>
-                            <td>{{ $taxi->taxiOwnerName }}</td>
-                            <td>{{ $taxi->taxiOwnerMobile }}</td>
-                            <td>{{ $taxi->registeredDate }}</td>
-                            <td>{{ $taxi->rate }}</td>
+                            <td><?php echo e($taxi->callcode->callCode); ?></th>
+                            <td><?php echo e($taxi->callcode->taxicenter->name); ?></td>
+                            <td><?php echo e($taxi->taxiNo); ?></td>
+                            <td><?php echo e($taxi->taxiOwnerName); ?></td>
+                            <td><?php echo e($taxi->taxiOwnerMobile); ?></td>
+                            <td><?php echo e($taxi->registeredDate); ?></td>
+                            <td><?php echo e($taxi->rate); ?></td>
                             <td>
-                                <button style="display: block; margin: auto;" class="btn btn-info" data-toggle="modal" data-target="#viewModal" onclick="c_view('{{ $taxi->id }}')">View</button>
+                                <button style="display: block; margin: auto;" class="btn btn-info" data-toggle="modal" data-target="#viewModal" onclick="c_view('<?php echo e($taxi->id); ?>')">View</button>
                             </td>
                             <td>
-                                <button style="display: block; margin: auto;" class="btn btn-warning" data-toggle="modal" data-target="#editModal" onclick="c_edit('{{ $taxi->id }}')">Edit</button>
+                                <button style="display: block; margin: auto;" class="btn btn-warning" data-toggle="modal" data-target="#editModal" onclick="c_edit('<?php echo e($taxi->id); ?>')">Edit</button>
                             </td>                                
                             <td>
-                                <button style="display: block; margin: auto;" class="btn btn-danger" onclick="c_delete('{{ $taxi->id }}')">Delete</button>
+                                <button style="display: block; margin: auto;" class="btn btn-danger" onclick="c_delete('<?php echo e($taxi->id); ?>')">Delete</button>
                             </td>
                         </tr>                            
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
             </div> 
@@ -150,26 +148,38 @@ $(document).ready(function() {
                 <h4 class="modal-title">Add Record</h4>
             </div>
             <div class="modal-body">
-                {!! BootForm::open()->post()->action(''); !!}
-                {!! BootForm::token() !!}
+                <?php echo BootForm::open()->post()->action('');; ?>
+
+                <?php echo BootForm::token(); ?>
+
                 <div class="form-group">
                     <label class="control-label" for="name">Call Code</label>
                     <select class="form-control" name="callcode_id">
-                        @foreach($callcodes as $callcode)
-                            <option value="{{ $callcode->id }}">{{ $callcode->callCode }} - ( {{ $callcode->taxicenter->name }} )</option>    
-                        @endforeach
+                        <?php $__currentLoopData = $callcodes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $callcode): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($callcode->id); ?>"><?php echo e($callcode->callCode); ?> - ( <?php echo e($callcode->taxicenter->name); ?> )</option>    
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
                 </div>
-                {!! BootForm::text('Taxi No.', 'taxiNo') !!}
-                {!! BootForm::text('Taxi Chasis No.', 'taxiChasisNo') !!}
-                {!! BootForm::text('Taxi Engine No.', 'taxiEngineNo ') !!}
-                {!! BootForm::text('Taxi Brand', 'taxiBrand') !!}
-                {!! BootForm::text('Taxi Model', 'taxiModel') !!}
-                {!! BootForm::text('Taxi Color', 'taxiColor') !!}
-                {!! BootForm::text('Taxi Owner Name', 'taxiOwnerName') !!}
-                {!! BootForm::text('Taxi Owner Mobile', 'taxiOwnerMobile') !!}
-                {!! BootForm::text('Taxi Owner Email', 'taxiOwnerEmail') !!}
-                {!! BootForm::text('Taxi Owner Address', 'taxiOwnerAddress') !!}
+                <?php echo BootForm::text('Taxi No.', 'taxiNo'); ?>
+
+                <?php echo BootForm::text('Taxi Chasis No.', 'taxiChasisNo'); ?>
+
+                <?php echo BootForm::text('Taxi Engine No.', 'taxiEngineNo '); ?>
+
+                <?php echo BootForm::text('Taxi Brand', 'taxiBrand'); ?>
+
+                <?php echo BootForm::text('Taxi Model', 'taxiModel'); ?>
+
+                <?php echo BootForm::text('Taxi Color', 'taxiColor'); ?>
+
+                <?php echo BootForm::text('Taxi Owner Name', 'taxiOwnerName'); ?>
+
+                <?php echo BootForm::text('Taxi Owner Mobile', 'taxiOwnerMobile'); ?>
+
+                <?php echo BootForm::text('Taxi Owner Email', 'taxiOwnerEmail'); ?>
+
+                <?php echo BootForm::text('Taxi Owner Address', 'taxiOwnerAddress'); ?>
+
 
                 <div class="form-group" style="z-index:2151 !important;">
                     <label class="control-label" for="registeredDate">Registered Date </label>
@@ -198,19 +208,22 @@ $(document).ready(function() {
                         <input type="text" name="insuranceExpiry" id="insuranceExpiry" class="datepicker form-control" data-date-format="yyyy/mm/dd" type="text" value="<?php echo date('Y/m/d') ?>">
                     </div>    
                 </div>
-                {!! BootForm::text('Rate', 'rate') !!}
+                <?php echo BootForm::text('Rate', 'rate'); ?>
+
             </div>
             <div class="modal-footer">
-                {!! BootForm::submit('Submit')->class('btn btn-success') !!}
-                {!! BootForm::close() !!}
+                <?php echo BootForm::submit('Submit')->class('btn btn-success'); ?>
+
+                <?php echo BootForm::close(); ?>
+
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-<input type="hidden" name="hidden_view" id="hidden_view" value="{{ url('configure/taxi/view') }}">
-<input type="hidden" name="hidden_delete" id="hidden_delete" value="{{ url('configure/taxi/delete') }}">
+<input type="hidden" name="hidden_view" id="hidden_view" value="<?php echo e(url('configure/taxi/view')); ?>">
+<input type="hidden" name="hidden_delete" id="hidden_delete" value="<?php echo e(url('configure/taxi/delete')); ?>">
 
 <div class="modal fade" id="viewModal" role="dialog">
     <div class="modal-dialog">
@@ -299,7 +312,7 @@ $(document).ready(function() {
         $.ajax({
           url: delete_url,
           type:"POST", 
-          data: {"id":id,_token: "{{ csrf_token() }}"}, 
+          data: {"id":id,_token: "<?php echo e(csrf_token()); ?>"}, 
           success: function(response){
             alert(response);
             location.reload(); 
@@ -312,4 +325,5 @@ $(document).ready(function() {
     }
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

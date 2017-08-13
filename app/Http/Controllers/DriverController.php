@@ -20,7 +20,7 @@ class DriverController extends Controller
     {
         $centers = TaxiCenter::all();
         $callcodes = CallCode::all();
-        $taxis = Taxi::all();
+        $taxis = Taxi::where('taken', '0')->get();
         $drivers = Driver::all();
         return view('configure.driver', compact('centers', 'callcodes', 'taxis', 'drivers'));
     }
@@ -29,11 +29,16 @@ class DriverController extends Controller
     {
         $driver = Driver::create(Input::except('_token', 'photoUrl'), ['photoUrl' => 'test']);
         
-        $path = $request->file('photoUrl')->store('driverPhotos');
+        if ($request->file('photoUrl')){
+            $path = $request->file('photoUrl')->store('driverPhotos');
 
-        $driverPhoto = Driver::find($driver->id);
-        $driverPhoto->photoUrl = $path;
-        $driverPhoto->save();
+            $driverPhoto = Driver::find($driver->id);
+            $driverPhoto->photoUrl = $path;
+            $driverPhoto->save();
+        }
+        $taxi = Taxi::find($driver->taxi_id);
+        $taxi->taken = '1';
+        $taxi->save();
 
         return back()->with('success','Driver Added successfully.');
 

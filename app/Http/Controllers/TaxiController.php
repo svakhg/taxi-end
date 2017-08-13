@@ -18,14 +18,23 @@ class TaxiController extends Controller
     public function index()
     {
         $centers = TaxiCenter::all();
-        $callcodes = CallCode::orderBy('callCode')->get();
+        $callcodes = CallCode::where('taken', '0')->orderBy('callCode')->get();
         $taxis = Taxi::all();
         return view('configure.taxi', compact('centers', 'callcodes', 'taxis'));
     }
 
     public function add(Request $request)
     {
-        Taxi::create(Input::except('_token'));
+        $taxi = Taxi::create(Input::except('_token'));
+        
+        $taxiCenter = Taxi::find($taxi->id);
+        $taxiCenter->center_name = $taxi->callcode->taxicenter->cCode;
+        $taxiCenter->save();
+
+        $callcode = CallCode::find($taxi->callcode_id);
+        $callcode->taken = '1';
+        $callcode->save();
+
         return back()->with('success','Taxi Added successfully.');
     }
 

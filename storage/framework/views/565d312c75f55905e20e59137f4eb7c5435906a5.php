@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <script>
     $(document).ready(function() {
             var dataSrc = [];
@@ -80,7 +78,7 @@
     });
 </script>
 <ul class="breadcrumb">
-    <li><a href="{{ url('home') }}">Home</a></li>
+    <li><a href="<?php echo e(url('home')); ?>">Home</a></li>
     <li><a href="#">Configure</a></li>
     <li class="active">Driver</li>
 </ul>    
@@ -92,12 +90,12 @@
     <div class="panel-body">
         <div class="row">                
             <div class="col-md-12">
-                @if ($message = Session::get('success'))
+                <?php if($message = Session::get('success')): ?>
                     <div class="alert alert-success alert-block">
                         <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>{{ $message }}</strong>
+                        <strong><?php echo e($message); ?></strong>
                     </div>
-                @endif
+                <?php endif; ?>
                 <table id="driver" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -117,29 +115,29 @@
                         </tr>                            
                     </thead>
                     <tbody>
-                    @foreach($drivers as $driver)
+                    <?php $__currentLoopData = $drivers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $driver): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td>{{ $driver->taxi->taxiNo }}</td>
-                            <td>{{ $driver->driverName }}</td>
-                            <td>{{ $driver->driverLicenceNo }}</td>
-                            <td>{{ $driver->driverLicenceExp }}</td>
-                            <td>{{ $driver->driverPermitNo }}</td>
-                            <td>{{ $driver->driverPermitExp }}</td>
-                            <td>{{ $driver->driverMobile }}</td>
-                            <td>{{ $driver->driverIdNo }}</td>
-                            <td>{{ $driver->driverPermAdd }}</td>
-                            <td>{{ $driver->driverTempAdd }}</td>
+                            <td><?php echo e($driver->taxi->taxiNo); ?></td>
+                            <td><?php echo e($driver->driverName); ?></td>
+                            <td><?php echo e($driver->driverLicenceNo); ?></td>
+                            <td><?php echo e($driver->driverLicenceExp); ?></td>
+                            <td><?php echo e($driver->driverPermitNo); ?></td>
+                            <td><?php echo e($driver->driverPermitExp); ?></td>
+                            <td><?php echo e($driver->driverMobile); ?></td>
+                            <td><?php echo e($driver->driverIdNo); ?></td>
+                            <td><?php echo e($driver->driverPermAdd); ?></td>
+                            <td><?php echo e($driver->driverTempAdd); ?></td>
                             <td>
-                                <button style="display: block; margin: auto;" class="btn btn-info" data-toggle="modal" data-target="#viewModal" onclick="c_view('{{ $driver->id }}')">View</button>
+                                <button style="display: block; margin: auto;" class="btn btn-info" data-toggle="modal" data-target="#viewModal" onclick="c_view('<?php echo e($driver->id); ?>')">View</button>
                             </td>
                             <td>
-                                <button style="display: block; margin: auto;" class="btn btn-warning" data-toggle="modal" data-target="#editModal" onclick="c_edit('{{ $driver->id }}')">Edit</button>
+                                <button style="display: block; margin: auto;" class="btn btn-warning" data-toggle="modal" data-target="#editModal" onclick="c_edit('<?php echo e($driver->id); ?>')">Edit</button>
                             </td>                                
                             <td>
-                                <button style="display: block; margin: auto;" class="btn btn-danger" onclick="c_delete('{{ $driver->id }}')">Delete</button>
+                                <button style="display: block; margin: auto;" class="btn btn-danger" onclick="c_delete('<?php echo e($driver->id); ?>')">Delete</button>
                             </td>
                         </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
             </div> 
@@ -156,7 +154,7 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action="" enctype="multipart/form-data">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                 <div class="form-group">
                     <label class="control-label" for="driverPhoto">Add Driver Photo</label>
                     <input type='file' name="photoUrl" id="imgInp" />
@@ -183,9 +181,9 @@
                 <div class="form-group">
                     <label class="control-label" for="name">Taxi No</label>
                     <select class="form-control" name="taxi_id">
-                        @foreach($taxis as $taxi)
-                            <option value="{{ $taxi->id }}">Taxi No - ( {{ $taxi->taxiNo }} ) Callcode - ( {{ $taxi->callcode->callCode }} ) </option>    
-                        @endforeach
+                        <?php $__currentLoopData = $taxis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $taxi): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($taxi->id); ?>">Taxi No - ( <?php echo e($taxi->taxiNo); ?> ) Callcode - ( <?php echo e($taxi->callcode->callCode); ?> ) </option>    
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
                 </div>
 
@@ -264,4 +262,5 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

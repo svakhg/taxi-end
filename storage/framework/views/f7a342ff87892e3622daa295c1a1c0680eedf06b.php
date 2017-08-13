@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="<?php echo e(app()->getLocale()); ?>">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,9 +25,9 @@
     <meta name="theme-color" content="#ffffff">
     
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title>{{ config('app.name', 'TaxiEnd') }}</title>
+    <title><?php echo e(config('app.name', 'TaxiEnd')); ?></title>
 
     <!-- Styles -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -44,7 +44,7 @@
         
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Lato|Open+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"/>
-    <link href="{{ url('css/app.css') }}" rel="stylesheet">
+    <link href="<?php echo e(url('css/app.css')); ?>" rel="stylesheet">
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
 
@@ -59,7 +59,7 @@
             
         }
     </style>    
-    @yield('css')
+    <?php echo $__env->yieldContent('css'); ?>
 </head>
 <body>
         <nav class="navbar navbar-default navbar-static-top">
@@ -75,23 +75,24 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'TaxiEnd') }}
+                    <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+                        <?php echo e(config('app.name', 'TaxiEnd')); ?>
+
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        @if (Auth::guest())
+                        <?php if(Auth::guest()): ?>
                             <li class="disabled"><a href="#">Not Logged In</a></li>
-                        @else
+                        <?php else: ?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     Payments <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ url('payments/taxi-payment') }}">Taxi Payments</a></li>
+                                    <li><a href="<?php echo e(url('payments/taxi-payment')); ?>">Taxi Payments</a></li>
                                     <li class="disabled"><a href="#">Other Payments</a></li>
                                 </ul>
                             </li>
@@ -121,50 +122,51 @@
                                     Master Data <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ url('configure/company') }}">Configure Company</a></li>
-                                    <li><a href="{{ url('configure/taxi-center') }}">Configure Taxi Centers</a></li>
-                                    <li><a href="{{ url('configure/call-code') }}">Configure Call Codes</a></li>
-                                    <li><a href="{{ url('configure/taxi') }}">Configure Taxis</a></li>
-                                    <li><a href="{{ url('configure/driver') }}">Configure Drivers</a></li>
+                                    <li><a href="<?php echo e(url('configure/company')); ?>">Configure Company</a></li>
+                                    <li><a href="<?php echo e(url('configure/taxi-center')); ?>">Configure Taxi Centers</a></li>
+                                    <li><a href="<?php echo e(url('configure/call-code')); ?>">Configure Call Codes</a></li>
+                                    <li><a href="<?php echo e(url('configure/taxi')); ?>">Configure Taxis</a></li>
+                                    <li><a href="<?php echo e(url('configure/driver')); ?>">Configure Drivers</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{ url('display/jr') }}">Display JR</a></li>
-                            <li><a href="{{ url('display/city-cab') }}">Display City Cab</a></li>
-                        @endif
+                            <li><a href="<?php echo e(url('display/jr')); ?>">Display JR</a></li>
+                            <li><a href="<?php echo e(url('display/city-cab')); ?>">Display City Cab</a></li>
+                        <?php endif; ?>
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                        @else
+                        <?php if(Auth::guest()): ?>
+                            <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
+                        <?php else: ?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                Username:    {{ Auth::user()->name }} <span class="caret"></span>
+                                Username:    <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <a href="<?php echo e(route('logout')); ?>"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
+                                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                            <?php echo e(csrf_field()); ?>
+
                                         </form>
                                     </li>
                                 </ul>
                             </li>
-                        @endif
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
         </nav>
         
         <div class="container">
-            @yield('content')
+            <?php echo $__env->yieldContent('content'); ?>
         </div>
 
 
