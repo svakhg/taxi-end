@@ -1,8 +1,8 @@
 @foreach($taxis as $key=>$taxi)
-    <div class="col-md-2">
+    <div data-toggle="modal" data-target="#viewModal" onClick="c_view('{{ $taxi->driver->id }}')" class="col-md-2">
         <div class="box" style="
                 <?php
-                if($taxi->state == '0') {
+                if($taxi->state == '0' || $taxi->state == null) {
                     echo 'background-color: #e74c3c';
                 } elseif ($taxi->state == '1' && strtotime($taxi->anualFeeExpiry) > time() && strtotime($taxi->roadWorthinessExpiry) > time() && strtotime($taxi->insuranceExpiry) > time() ){
                     echo 'background-color: #1abc9c';

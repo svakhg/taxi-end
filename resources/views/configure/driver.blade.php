@@ -280,9 +280,6 @@
 
     function c_view(id){
         $('#viewDriverDetails').load('driver/ajax/'+id,function () {});
-        setInterval(function(){
-            $('#viewDriverDetails').load('driver/ajax/'+id,function () {});
-        }, 5000);
     };
 
 </script>

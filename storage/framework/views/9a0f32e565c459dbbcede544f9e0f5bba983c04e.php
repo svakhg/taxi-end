@@ -19,8 +19,9 @@
         <div class="col-md-10">
             <div class="row" style="margin-left:10px">
                 <h4 style="display: inline"><strong>Call Code: </strong><?php echo e($driver->taxi->callcode->callCode); ?></h4>
-                <h4 style="display: inline; padding-left:100px"><strong>Taxi No: </strong><?php echo e($driver->taxi->taxiNo); ?></h4>
-                <h4 style="display: inline; padding-left:100px"><strong>Driver Name: </strong><?php echo e($driver->driverName); ?></h4>
+                <h4 style="display: inline; padding-left:30px"><strong>Taxi Center: </strong><?php echo e($driver->taxi->callcode->taxicenter->name); ?></h4>
+                <h4 style="display: inline; padding-left:30px"><strong>Taxi No: </strong><?php echo e($driver->taxi->taxiNo); ?></h4>
+                <h4 style="display: inline; padding-left:30px"><strong>Driver Name: </strong><?php echo e($driver->driverName); ?></h4>
                 <hr style="clear:both;"/>
             </div>
             <div class="row" style="margin-top:10px">

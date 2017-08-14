@@ -278,9 +278,6 @@
 
     function c_view(id){
         $('#viewDriverDetails').load('driver/ajax/'+id,function () {});
-        setInterval(function(){
-            $('#viewDriverDetails').load('driver/ajax/'+id,function () {});
-        }, 10000);
     };
 
 </script>

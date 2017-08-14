@@ -130,6 +130,11 @@ Route::group(['prefix' => 'display'], function () {
         $payments = App\paymentHistory::all();
         return view('display.Ajax', compact('taxis', 'payments'));
     });
+
+    Route::get('driver-ajax/{id}', function ($id) {
+        $driver = App\Driver::find($id);
+        return view('configure.driverAjax', compact('driver'));
+    });
 });
 
 
