@@ -1,3 +1,11 @@
+<?php $__env->startSection('css'); ?>
+    <style>
+        .view .modal-dialog {
+            width: 95%
+        }
+    </style>
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
 <script>
     $(document).ready(function() {
@@ -144,6 +152,71 @@
         </div>
     </div>        
 </div>                               
+
+<div class="modal fade" id="viewModal" role="dialog">
+    <div class="view">
+        <div class="modal-dialog">
+            <div class="modal-content" style="border: 5px solid rgb(255, 3, 3); border-radius: 10px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="margin-left:15px;">Driver View</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-2">
+                        <img src="http://via.placeholder.com/180x250">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row" style="margin-left:10px">
+                            <h4 style="display: inline"><strong>Call Code: </strong>XX</h4>
+                            <h4 style="display: inline; padding-left:100px"><strong>Taxi No: </strong>T-XXXX</h4>
+                            <h4 style="display: inline; padding-left:100px"><strong>Driver Name: </strong>RXXXX RXXXXXX</h4>
+                            <hr style="clear:both;"/>
+                        </div>
+                        <div class="row" style="margin-left:10px">
+                            <p>The Alert and Border Will Change Depending on status<p>
+                        </div>
+                        <div class="row" style="margin-left:10px">
+                            <div style="display: inline;float: left; font-size:23px; width:50%; height:100%">
+                                <h4 style="text-decoration: underline;">Expiry Dates</h4>
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li>Annual Fee Expiry: XX/XX/XXX</li>
+                                    <li>Road Worthiness Expiry: XX/XX/XXX</li>
+                                    <li>Insurance Expiry: XX/XX/XXX</li>
+                                </ul>    
+                            </div>
+                            <div style="display: inline;float: left; font-size:23px; width:50%; height:100%">
+                                <h4 style="text-decoration: underline;">Driver Details</h4>
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li>Driver Mobile: XXXXXXX</li>
+                                    <li>Driver Licence No: XXXXXXX</li>
+                                    <li>Driver Id Card No: AXXXXXX</li>
+                                </ul>
+                            </div> 
+                        </div> 
+                        <div class="row" style="margin-top:10px">
+                            <div class="alert alert-danger">
+                                <strong>Alert!</strong> The Payment for this month is unpaid
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:10px">
+                            <div class="alert alert-warning">
+                                <strong>Alert!</strong> The {show the expired thing(s)} has been expired
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:10px">
+                            <div class="alert alert-success">
+                                <strong>Info</strong> All Payments are complete and Nothing is expired
+                            </div>
+                        </div>                 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="addModal" role="dialog">
     <div class="modal-dialog">

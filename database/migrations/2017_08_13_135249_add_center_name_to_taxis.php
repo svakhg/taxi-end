@@ -14,7 +14,7 @@ class AddCenterNameToTaxis extends Migration
     public function up()
     {
         Schema::table('taxis', function($table) {
-            $table->string('center_name');
+            $table->string('center_name')->nullable();
         });
     }
 

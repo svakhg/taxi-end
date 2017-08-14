@@ -117,7 +117,7 @@ Route::group(['prefix' => 'display'], function () {
     Route::get('jr', 'DisplayController@jrIndex');
 
     Route::get('jr-ajax', function () {
-        $taxis = App\Taxi::where('center_name', 'JRMM')->get();
+        $taxis = App\Taxi::where('center_name', 'JRMM')->where('taken', '1')->get();
         $payments = App\paymentHistory::all();
         return view('display.Ajax', compact('taxis', 'payments'));
     });
@@ -125,7 +125,7 @@ Route::group(['prefix' => 'display'], function () {
     Route::get('city-cab', 'DisplayController@cityIndex');
 
     Route::get('city-ajax', function () {
-        $taxis = App\Taxi::where('center_name', 'CBMM')->get();
+        $taxis = App\Taxi::where('center_name', 'CBMM')->where('taken', '1')->get();
         $payments = App\paymentHistory::all();
         return view('display.Ajax', compact('taxis', 'payments'));
     });
