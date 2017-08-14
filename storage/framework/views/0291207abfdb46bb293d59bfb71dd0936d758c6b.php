@@ -6,13 +6,13 @@
     
 <script type="text/javascript">
 $(document).ready(function(){
-    function loadDisplay(){
-        $('#display').load('city-ajax',function () {
+    function loadDisplay(id){
+        $('#display').load('city-ajax?id='+id,function () {
         });
     }
-    loadDisplay();
+    loadDisplay(1);
     setInterval(function(){
-        loadDisplay() 
+        loadDisplay(1) 
     }, 5000);
 });
 </script>

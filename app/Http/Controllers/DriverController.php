@@ -66,4 +66,10 @@ class DriverController extends Controller
         else
             echo "There was a problem. Please try again later.";
     }
+
+    public function ajax($id)
+    {
+        $driver = Driver::find($id);
+        return view('configure.driverAjax', compact('driver'));
+    }
 }

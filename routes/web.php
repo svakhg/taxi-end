@@ -92,6 +92,7 @@ Route::group(['prefix' => 'configure'], function () {
     Route::post('driver', 'DriverController@add');
     Route::get('driver/view', 'DriverController@view');
     Route::post('driver/delete', 'DriverController@delete');
+    Route::get('driver/ajax/{id}', 'DriverController@ajax');
     /*End of Driver Configure Routes*/
 });
 
