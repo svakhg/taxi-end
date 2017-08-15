@@ -25,23 +25,23 @@
                 <hr style="clear:both;"/>
             </div>
             <div class="row" style="margin-top:10px">
-            <?php
-                if ($color == "#e74c3c"){
-                    echo '<div class="alert alert-danger">';
-                    echo '<strong>Alert!</strong> There are some unpaid payments';
-                    echo '</div>';
-                } 
-                elseif ($color == "#9b59b6"){
-                    echo '<div class="alert alert-warning">';
-                    echo '<strong>Alert!</strong> There are some expired items';
-                    echo '</div>';
-                }
-                elseif ($color == "#1abc9c"){
-                    echo '<div class="alert alert-success">';
-                    echo '<strong>Info</strong> The Payment for this month is paid and nothing is expired';
-                    echo '</div>';
-                }
-            ?>
+                <?php
+                    if ($color == "#e74c3c"){
+                        echo '<div class="alert alert-danger">';
+                        echo '<strong>Alert!</strong> There are some unpaid payments';
+                        echo '</div>';
+                    } 
+                    elseif ($color == "#9b59b6"){
+                        echo '<div class="alert alert-warning">';
+                        echo '<strong>Alert!</strong> There are some expired items';
+                        echo '</div>';
+                    }
+                    elseif ($color == "#1abc9c"){
+                        echo '<div class="alert alert-success">';
+                        echo '<strong>Info</strong> The Payment for this month is paid and nothing is expired';
+                        echo '</div>';
+                    }
+                ?>
             </div>                 
             <div class="row" style="margin-left:10px">
                 <div style="display: inline;float: left; font-size:23px; width:50%; height:100%">
