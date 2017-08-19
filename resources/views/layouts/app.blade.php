@@ -103,7 +103,7 @@
                                     Message Center <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="disabled"><a href="#">Send SMS</a></li>
+                                    <li><a href="{{ url('sms') }}">Send SMS</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

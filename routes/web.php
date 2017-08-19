@@ -139,6 +139,11 @@ Route::group(['prefix' => 'display'], function () {
 
 /*
 |--------------------------------------------------------------------------
-|Report Routes
+|SMS Routes
 |--------------------------------------------------------------------------
 */
+
+Route::group(['prefix' => 'sms'], function () {
+    Route::get('/', 'SmsController@index'); 
+    Route::post('/', 'SmsController@send'); 
+});

@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
+    <link rel="apple-touch-icon" sizes="60x60" href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
+    <link rel="apple-touch-icon" sizes="72x72" href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
+    <link rel="apple-touch-icon" sizes="76x76" href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
+    <link rel="apple-touch-icon" sizes="120x120" href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
+    <link rel="apple-touch-icon" sizes="144x144" href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
+    <link rel="apple-touch-icon" sizes="152x152" href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
+    <link rel="icon" type="image/png" sizes="192x192"  href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
+    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo e(asset('Taviyani_Logo.png')); ?>">
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
@@ -27,7 +27,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title><?php echo e(config('app.name', 'TaxiEnd')); ?></title>
+    <title>Taviyani Admin Portal</title>
+
 
     <!-- Styles -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -75,9 +76,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-                        <?php echo e(config('app.name', 'TaxiEnd')); ?>
-
+                    <a class="navbar-brand" href="<?php echo e(url('/home')); ?>">
+                          <img src="<?php echo e(asset('Taviyani_Logo.png')); ?>" width="100" height="60" style="margin-top:-17px;">
                     </a>
                 </div>
 
@@ -87,6 +87,7 @@
                         <?php if(Auth::guest()): ?>
                             <li class="disabled"><a href="#">Not Logged In</a></li>
                         <?php else: ?>
+                            <li><a href="<?php echo e(url('/home')); ?>">Dashboard</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     Payments <span class="caret"></span>
@@ -102,7 +103,7 @@
                                     Message Center <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="disabled"><a href="#">Send SMS</a></li>
+                                    <li><a href="<?php echo e(url('sms')); ?>">Send SMS</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -129,8 +130,8 @@
                                     <li><a href="<?php echo e(url('configure/driver')); ?>">Configure Drivers</a></li>
                                 </ul>
                             </li>
-                            <li><a href="<?php echo e(url('display/jr')); ?>">Display JR</a></li>
-                            <li><a href="<?php echo e(url('display/city-cab')); ?>">Display City Cab</a></li>
+                            <li class="disabled"><a href="">Display JR</a></li>
+                            <li class="disabled"><a href="">Display City Cab</a></li>
                         <?php endif; ?>
                     </ul>
                     <!-- Right Side Of Navbar -->

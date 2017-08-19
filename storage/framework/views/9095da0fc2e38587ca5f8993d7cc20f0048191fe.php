@@ -76,10 +76,13 @@
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
+              
+             <center style="margin-right:20px;"> <img src="<?php echo e(asset('Taviyani_Logo.png')); ?>" width="200" height="140" style="margin-top:-30px; margin-right:20px;"></center>
 
             <div class="content">
+                
                 <div class="title m-b-md">
-                    Taviyani - TaxiEnd
+                    Taviyani - Admin Portal
                 </div>
             </div>
         </div>
