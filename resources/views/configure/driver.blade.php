@@ -178,7 +178,7 @@
                 <div class="form-group">
                     <label class="control-label" for="driverPhoto">Add Driver Photo</label>
                     <input type='file' name="photoUrl" id="imgInp" />
-                    <img id="imgOut" src="#" class="img-responsive" alt="your image" />
+                    <center><img id="imgOut" src="#" class="img-responsive" alt="your image" /></center>
                 </div>                    
                 <script>
                     function readURL(input) {

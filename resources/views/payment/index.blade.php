@@ -91,8 +91,9 @@
                             <th>Call Code</th>
                             <th>Driver Name</th>
                             <th>Taxi Number</th>
+                            <th>Center Name</th>
                             <th>Taxi Fee</th>
-                            <th>date</th>
+                            <th>Date</th>
                             <th>Status</th>
                             <th>Recive Payment</th>
                         </tr>
@@ -103,6 +104,7 @@
                             <td>{{ $payment->taxi->callcode->callCode }}</td>
                             <td>{{ $payment->taxi->driver->driverName  }}</td>
                             <td>{{ $payment->taxi->taxiNo }}</td>
+                            <td>{{ $payment->taxi->callcode->taxicenter->name }}</td>
                             <td>{{ $payment->taxi->rate }}</td>
                             <td>{{ $payment->month }}/{{ $payment->year }}</td>
                             <td>
