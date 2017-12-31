@@ -66,5 +66,10 @@ class TaxicenterController extends Controller
         $center->save();
         return back()->with('success','Company Edited successfully.');
     }
-
+    public function destroy($id)
+    {
+        $company = TaxiCenter::findOrFail($id);
+        $company->delete();
+        return redirect()->back()->with('alert-success', 'Successfully deleted the Taxi Center');
+    }
 }

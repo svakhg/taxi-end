@@ -89,4 +89,11 @@ class DriverController extends Controller
 
         return view('configure.driver.view', compact('driver'));
     }
+
+    public function destroy($id)
+    {
+        $company = Driver::findOrFail($id);
+        $company->delete();
+        return redirect()->back()->with('alert-success', 'Successfully deleted the Driver');
+    }
 }
