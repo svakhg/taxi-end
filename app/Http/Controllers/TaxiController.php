@@ -20,7 +20,7 @@ class TaxiController extends Controller
         $centers = TaxiCenter::all();
         $callcodes = CallCode::where('taken', '0')->orderBy('callCode')->get();
         $taxis = Taxi::all();
-        return view('configure.taxi', compact('centers', 'callcodes', 'taxis'));
+        return view('configure.taxi.index', compact('centers', 'callcodes', 'taxis'));
     }
 
     public function add(Request $request)
@@ -38,28 +38,4 @@ class TaxiController extends Controller
         return back()->with('success','Taxi Added successfully.');
     }
 
-    public function view(Request $request)
-    {
-        //if($request->ajax()){            
-            $id = $request->id;
-            $info = Taxi::find($id);
-            $info2 = CallCode::find($info->callcode_id);
-            $info3 = TaxiCenter::find($info2->center_id);
-            $info->callcode = $info2;
-            $info->texicenter = $info3;
-            //echo json_decode($info);
-            return response()->json($info);
-        //}        
-    }
-
-    public function delete(Request $request)
-    {
-        $id = $request->id;
-        $data = Taxi::find($id);
-        $response = $data->delete();
-        if($response)
-            echo "Record Deleted successfully.";
-        else
-            echo "There was a problem. Please try again later.";
-    }
 }

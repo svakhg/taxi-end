@@ -19,7 +19,7 @@ class CallCodeController extends Controller
     {
         $callcodes = CallCode::all();
         $centers = TaxiCenter::all();
-        return view('configure.callcode', compact('callcodes', 'centers'));
+        return view('configure.callcode.index', compact('callcodes', 'centers'));
     }
 
     public function add(Request $request)
@@ -28,26 +28,5 @@ class CallCodeController extends Controller
         return back()->with('success','Call Code Added successfully.');
     }
 
-    public function view(Request $request)
-    {
-        //if($request->ajax()){
-            $id = $request->id;
-            $info = CallCode::find($id);
-            $info2 = TaxiCenter::find($info->center_id);
-            $info->center = $info2;
-            //echo json_decode($info);
-            return response()->json($info);
-        //}
-    }
-
-    public function delete(Request $request)
-    {
-        $id = $request->id;
-        $data = CallCode::find($id);
-        $response = $data->delete();
-        if($response)
-            echo "Record Deleted successfully.";
-        else
-            echo "There was a problem. Please try again later.";
-    }
+    
 }
