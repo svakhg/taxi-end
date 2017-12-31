@@ -9,7 +9,7 @@ use Twilio\Rest\Client;
 
 class SmsController extends Controller
 {
-    public function __construct()
+    public function __construct(Client $client)
     {
         $this->middleware('auth');
         $this->client = $client;
@@ -20,8 +20,30 @@ class SmsController extends Controller
         return view('sms.index');
     }
 
-    public function send()
+    public function send(Request $request)
     {
         $message = $request->input('message');
+        $phoneNumbers = $request->input('phoneNumber');
+
+        $phoneNumber = '+960'.$phoneNumbers;
+
+        $this->sendMessage($phoneNumber, $message);
+
+        return redirect('sms')->with('alert-success', 'SMS successfully send');
     }
+
+    private function sendMessage($phoneNumber, $message)
+    {
+        $twilioPhoneNumber = config('services.twilio')['phoneNumber'];
+        $messageParams = array(
+            'from' => 'Taviyani',
+            'body' => $message
+        );
+
+        $this->client->messages->create(
+            $phoneNumber,
+            $messageParams
+        );
+    }
+
 }
