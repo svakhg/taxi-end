@@ -48,10 +48,10 @@ class DriverController extends Controller
         $taxi->save();
 
         $s3 = \Storage::disk(env('UPLOAD_TYPE', 's3'));
-        // Image Upload (Taxi front URL)
-        $frontImage = $request->taxi_front_url;
-        $fileNameFO = 'Taxi/'.$taxi->taxiNo.'/front'.'/original'.'/'.$frontImage->getClientOriginalName();
-        $fileNameFT = 'Taxi/'.$taxi->taxiNo.'/front'.'/thumbnail'.'/'.$frontImage->getClientOriginalName();
+        // Image Upload (Lisence Front)
+        $frontImage = $request->li_front_url;
+        $fileNameFO = 'Taxi/'.$taxi->taxiNo.'/driver'.'/original'.'/'.$frontImage->getClientOriginalName();
+        $fileNameFT = 'Taxi/'.$taxi->taxiNo.'/driver'.'/thumbnail'.'/'.$frontImage->getClientOriginalName();
         $original_F = Image::make($frontImage)->resize(1080, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
@@ -62,9 +62,47 @@ class DriverController extends Controller
         });
         $s3->put($fileNameFO, $original_F->stream()->__toString(), 'public');
         $s3->put($fileNameFT, $thumbnail_F->stream()->__toString(), 'public');
-        $taxi->taxi_front_url_o = $fileNameFO;
-        $taxi->taxi_front_url_t = $fileNameFT;
+        
+        $driver->li_front_url_o = $fileNameFO;
+        $drvier->li_front_url_t = $fileNameFT;
 
+        // Image Upload (License back)
+        $backImage = $request->li_back_url;
+        $fileNameBO = 'Taxi/'.$taxi->taxiNo.'/driver'.'/original'.'/'.$backImage->getClientOriginalName();
+        $fileNameBT = 'Taxi/'.$taxi->taxiNo.'/driver'.'/thumbnail'.'/'.$backImage->getClientOriginalName();
+        $original_B = Image::make($backImage)->resize(1080, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $thumbnail_B = Image::make($backImage)->resize(null, 200, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $s3->put($fileNameBO, $original_B->stream()->__toString(), 'public');
+        $s3->put($fileNameBT, $thumbnail_B->stream()->__toString(), 'public');
+        
+        $driver->li_back_url_o = $fileNameBO;
+        $drvier->li_back_url_t = $fileNameBT;
+
+        // Image Upload (Driver Photo)
+        $driverPhoto = $request->driver_photo_url;
+        $fileNameDP = 'Taxi/'.$taxi->taxiNo.'/driver'.'/original'.'/'.$driverPhoto->getClientOriginalName();
+        $fileNameDPT = 'Taxi/'.$taxi->taxiNo.'/driver'.'/thumbnail'.'/'.$driverPhoto->getClientOriginalName();
+        $original_DP = Image::make($driverPhoto)->resize(1080, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $thumbnail_DP = Image::make($driverPhoto)->resize(null, 200, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $s3->put($fileNameDP, $original_DP->stream()->__toString(), 'public');
+        $s3->put($fileNameDPT, $thumbnail_DP->stream()->__toString(), 'public');
+        
+        $driver->driver_photo_url = $fileNameDP;
+        $drvier->driver_photo_url = $fileNameDPT;
+        
+        $driver->save();
 
 
 

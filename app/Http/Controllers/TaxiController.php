@@ -84,6 +84,8 @@ class TaxiController extends Controller
         $s3->put($fileNameFT, $thumbnail_F->stream()->__toString(), 'public');
         $taxi->taxi_back_url_o = $fileNameFO;
         $taxi->taxi_back_url_t = $fileNameFT;
+
+        $taxi->save();
         
         return back()->with('alert-success','Taxi Added successfully.');
     }
