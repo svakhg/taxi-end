@@ -40,9 +40,9 @@
                             <td>{{ $callcode->taxicenter->name }}</td>
                             <td>{{ $callcode->callCode }}</td>
                             <td>
-                                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $company->id }}" onclick="return confirm('Are you sure you would like to delete this? This process cannot be reversed.')">Delete</a>
-                                <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/update/{{ $company->id }}">Edit</a>
-                                <a style="margin:1px" class="btn btn-info" href="{{ url()->current() }}/view/{{ $company->id }}">View</a>
+                                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $callcode->id }}" onclick="return confirm('Are you sure you would like to delete this? This process cannot be reversed.')">Delete</a>
+                                <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/update/{{ $callcode->id }}">Edit</a>
+                                <a style="margin:1px" class="btn btn-info" href="{{ url()->current() }}/view/{{ $callcode->id }}">View</a>
                             </td>
                         </tr>                            
                         @endforeach

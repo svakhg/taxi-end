@@ -48,5 +48,18 @@ class TaxiController extends Controller
 
         return back()->with('success','Taxi Added successfully.');
     }
+    public function edit($id, FormBuilder $formBuilder)
+    {
+        $callcodes = Taxi::findOrFail($id);
+        $url = url('configure/taxi/update') .'/'. $callcodes->id;
 
+        $form = $formBuilder->create(\App\Forms\Taxi::class, [
+            'method' => 'POST',
+            'model' => $callcodes,
+            'url' => $url
+        ]);
+
+        return view('configure.taxi.edit', compact('form'));
+    }
+    
 }

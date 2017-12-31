@@ -38,6 +38,18 @@ class CallCodeController extends Controller
         CallCode::create(Input::except('_token'));
         return back()->with('success','Call Code Added successfully.');
     }
+    public function edit($id, FormBuilder $formBuilder)
+    {
+        $callcodes = CallCode::findOrFail($id);
+        $url = url('configure/call-code/update') .'/'. $callcodes->id;
 
+        $form = $formBuilder->create(\App\Forms\CallCode::class, [
+            'method' => 'POST',
+            'model' => $callcodes,
+            'url' => $url
+        ]);
+
+        return view('configure.callcode.edit', compact('form'));
+    }
     
 }

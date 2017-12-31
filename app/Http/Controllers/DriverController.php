@@ -48,7 +48,19 @@ class DriverController extends Controller
 
     }
 
-    
+    public function edit($id, FormBuilder $formBuilder)
+    {
+        $center = Driver::findOrFail($id);
+        $url = url('configure/driver/update') .'/'. $center->id;
+
+        $form = $formBuilder->create(\App\Forms\Driver::class, [
+            'method' => 'POST',
+            'model' => $center,
+            'url' => $url
+        ]);
+
+        return view('configure.driver.edit', compact('form'));
+    }
     // public function ajax($id)
     // {
     //     $driver = Driver::find($id);
