@@ -15,7 +15,7 @@ class TaxiCenter extends Form
             ])
             ->add('name', 'text')
             ->add('cCode', 'text', [
-                'label' => 'Call Code'
+                'label' => 'Center Name'
             ])
             ->add('address', 'text')
             ->add('telephone', 'text')

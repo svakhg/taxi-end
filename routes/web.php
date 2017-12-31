@@ -37,8 +37,7 @@ Route::get('genpayment', function () {
                                   ->where('year', date("Y"))
                                   ->first();
     
-    if ($payments)
-    {
+    if ($payments) {
         $info = array('status' => 'payment already generated for this month');
         return response()->json([$info]);
     }

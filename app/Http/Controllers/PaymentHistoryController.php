@@ -9,13 +9,15 @@ use App\Driver;
 use App\CallCode;
 use App\TaxiCenter;
 use Illuminate\Support\Facades\Auth;
-use Twilio;
+
+use Twilio\Rest\Client;
 
 class PaymentHistoryController extends Controller
 {
-    public function __construct()
+    public function __construct(Client $client)
     {
         $this->middleware('auth');
+        $this->client = $client;
     }
 
     public function index()
@@ -65,7 +67,11 @@ class PaymentHistoryController extends Controller
                 $taxi->save(); 
             }
 
-            #Twilio::message('+9609105616', 'sms test');
+            $phoneNumbers = $request->driverNumber;
+            $phoneNumber = '+960'.$phoneNumbers;
+            $message = $request->smsText;
+
+            $this->sendMessage($phoneNumber, $message);
 
             return back()->with('success','Payment Recived Successfully.');
         } elseif ($request->send_sms = "0") {
@@ -95,5 +101,19 @@ class PaymentHistoryController extends Controller
             return;
         }
         
+    }
+
+    private function sendMessage($phoneNumber, $message)
+    {
+        $twilioPhoneNumber = config('services.twilio')['phoneNumber'];
+        $messageParams = array(
+            'from' => 'Taviyani',
+            'body' => $message
+        );
+
+        $this->client->messages->create(
+            $phoneNumber,
+            $messageParams
+        );
     }
 }

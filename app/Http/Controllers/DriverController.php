@@ -42,10 +42,29 @@ class DriverController extends Controller
 
     public function store(Request $request)
     {
-        $driver = Driver::create(Input::except('_token'));
+        $driver = Driver::create(Input::except('_token', 'li_front_url', 'li_back_url', 'driver_photo_url'));
         $taxi = Taxi::find($driver->taxi_id);
         $taxi->taken = '1';
         $taxi->save();
+
+        $s3 = \Storage::disk(env('UPLOAD_TYPE', 's3'));
+        // Image Upload (Taxi front URL)
+        $frontImage = $request->taxi_front_url;
+        $fileNameFO = 'Taxi/'.$taxi->taxiNo.'/front'.'/original'.'/'.$frontImage->getClientOriginalName();
+        $fileNameFT = 'Taxi/'.$taxi->taxiNo.'/front'.'/thumbnail'.'/'.$frontImage->getClientOriginalName();
+        $original_F = Image::make($frontImage)->resize(1080, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $thumbnail_F = Image::make($frontImage)->resize(null, 200, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $s3->put($fileNameFO, $original_F->stream()->__toString(), 'public');
+        $s3->put($fileNameFT, $thumbnail_F->stream()->__toString(), 'public');
+        $taxi->taxi_front_url_o = $fileNameFO;
+        $taxi->taxi_front_url_t = $fileNameFT;
+
 
 
 
