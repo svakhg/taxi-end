@@ -92,7 +92,7 @@ class DriverController extends Controller
             $constraint->aspectRatio();
             $constraint->upsize();
         });
-        $thumbnail_DP = Image::make($driverPhoto)->resize(null, 200, function ($constraint) {
+        $thumbnail_DP = Image::make($driverPhoto)->resize(null, 80, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
