@@ -37,9 +37,7 @@
                             <th>Owner Mobile</th>
                             <th>Register Date</th>
                             <th>Rate</th>
-                            <th>View</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>

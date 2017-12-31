@@ -3,6 +3,7 @@
 namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
+use App\CallCode;
 
 class Taxi extends Form
 {
@@ -12,7 +13,8 @@ class Taxi extends Form
             ->add('callcode_id', 'entity', [
                 'class' => 'App\CallCode',
                 'label' => 'Call Code',
-                'query_builder' => function (App\CallCode $cc) {
+                'property' => 'callCode',
+                'query_builder' => function (CallCode $cc) {
                     return $cc->where('taken', 0);
                 }
             ])
