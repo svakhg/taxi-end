@@ -19,6 +19,7 @@ class Driver extends Form
             ->add('driverLicenceNo', 'text')
             ->add('driverLicenceExp', 'text')
             ->add('driverPermitNo', 'text')
-            ->add('driverPermitExp', 'date');
+            ->add('driverPermitExp', 'date')
+            ->add('submit', 'submit');
     }
 }

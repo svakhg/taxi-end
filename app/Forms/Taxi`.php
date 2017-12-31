@@ -23,6 +23,7 @@ class Taxi` extends Form
             ->add('roadWorthinessExpiry', 'date')
             ->add('insuranceExpiry', 'date')
             ->add('rate', 'text')
-            ->add('center_name', 'text');
+            ->add('center_name', 'text')
+            ->add('submit', 'submit');
     }
 }

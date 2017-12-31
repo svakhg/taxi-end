@@ -10,8 +10,12 @@ class Company extends Form
     {
         $this
             ->add('name', 'text')
-            ->add('GSTTin', 'text')
-            ->add('RegNo', 'text')
+            ->add('GSTTin', 'text', [
+                'label' => 'GST Tin'
+            ])
+            ->add('RegNo', 'text', [
+                'label' => 'Registration Number'
+            ])
             ->add('address', 'text')
             ->add('island', 'text')
             ->add('city', 'text')
@@ -20,8 +24,15 @@ class Company extends Form
             ->add('mobile', 'text')
             ->add('email', 'text')
             ->add('website', 'text')
-            ->add('ownername', 'text')
-            ->add('owneremail', 'text')
-            ->add('ownermobile', 'text');
+            ->add('ownername', 'text', [
+                'label' => 'Owner Name'
+            ])
+            ->add('owneremail', 'text', [
+                'label' => 'Owner Email'
+            ])
+            ->add('ownermobile', 'text', [
+                'label' => 'Owner Mobile'
+            ])
+            ->add('submit', 'submit');
     }
 }

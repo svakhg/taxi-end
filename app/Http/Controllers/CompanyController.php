@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Datatables;
 use App\Company;
 use Illuminate\Support\Facades\Input;
+use Kris\LaravelFormBuilder\FormBuilder;
+
 
 class CompanyController extends Controller
 {
@@ -25,7 +27,17 @@ class CompanyController extends Controller
         return view('configure.company.index', compact('companies'));
     }
 
-    public function add(Request $request)
+    public function create(FormBuilder $formBuilder)
+    {
+        $form = $formBuilder->create(\App\Forms\Company::class, [
+            'method' => 'POST',
+            'url' => url('configure/company/add')
+        ]);
+
+        return view('configure.company.add', compact('form'));
+    }
+
+    public function store(Request $request)
     {
         Company::create(Input::except('_token'));
         return back()->with('success','Company Added successfully.');

@@ -16,6 +16,7 @@ class TaxiCenter extends Form
             ->add('telephone', 'text')
             ->add('mobile', 'text')
             ->add('mobile', 'text')
-            ->add('fax', 'text');
+            ->add('fax', 'text')
+            ->add('submit', 'submit');
     }
 }
