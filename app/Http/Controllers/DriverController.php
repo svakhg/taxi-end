@@ -99,8 +99,8 @@ class DriverController extends Controller
         $s3->put($fileNameDP, $original_DP->stream()->__toString(), 'public');
         $s3->put($fileNameDPT, $thumbnail_DP->stream()->__toString(), 'public');
         
-        $driver->driver_photo_url = $fileNameDP;
-        $driver->driver_photo_url = $fileNameDPT;
+        $driver->driver_photo_url_o = $fileNameDP;
+        $driver->driver_photo_url_t = $fileNameDPT;
         
         $driver->save();
 
