@@ -189,7 +189,7 @@
                    
                     <div class="form-group">
                         <label for="total">SMS Text</label>
-                        <textarea name="smsText" class="form-control" maxlength="180" id="smsText">This is a sample text</textarea>
+                        <textarea name="smsText" class="form-control" maxlength="180" id="smsText">A Payment of MVR 600 on 22/22/2222 was recieved for 12/2017</textarea>
                         <script>
                             $('#smsText').keyup(function () {
                             var max = 180;
