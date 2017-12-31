@@ -18,6 +18,17 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('edit-gen', function () {
+    $type = '$center';
+    $fields = ['company_id', 'name', 'cCode', 'address', 'telephone', 'mobile', 'email', 'fax'];
+    foreach ($fields as $field) {
+        echo $type.'->'.$field.' = $request->'.$field.';';
+        echo '<br>';
+    }
+    echo $type.'->save();';
+
+});
+
 
 /*Payment generation*/
 Route::get('genpayment', function () {

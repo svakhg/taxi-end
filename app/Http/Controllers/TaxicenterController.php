@@ -51,4 +51,19 @@ class TaxicenterController extends Controller
         return view('configure.center.add', compact('form'));
     }
 
+    public function update($id, Request $request)
+    {
+        $center = TaxiCenter::findOrFail($id);
+        $center->company_id = $request->company_id;
+        $center->name = $request->name;
+        $center->cCode = $request->cCode;
+        $center->address = $request->address;
+        $center->telephone = $request->telephone;
+        $center->mobile = $request->mobile;
+        $center->email = $request->email;
+        $center->fax = $request->fax;
+        $center->save();
+        return back()->with('success','Company Edited successfully.');
+    }
+
 }

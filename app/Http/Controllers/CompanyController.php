@@ -59,4 +59,25 @@ class CompanyController extends Controller
         return view('configure.company.edit', compact('form'));
     }
 
+    public function update($id, Request $request)
+    {
+        $company = Company::findOrFail($id);
+        $company->name = $request->name;
+        $company->GSTTin = $request->GSTTin;
+        $company->RegNo = $request->RegNo;
+        $company->address = $request->address;
+        $company->island = $request->island;
+        $company->city = $request->city;
+        $company->telephone = $request->telephone;
+        $company->fax = $request->fax;
+        $company->mobile = $request->mobile;
+        $company->email = $request->email;
+        $company->website = $request->website;
+        $company->ownername = $request->ownername;
+        $company->owneremail = $request->owneremail;
+        $company->ownermobile = $request->ownermobile;
+        $company->save();
+        return back()->with('success','Company Edited successfully.');
+    }    
+
 }
