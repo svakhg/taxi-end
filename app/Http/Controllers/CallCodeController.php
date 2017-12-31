@@ -51,5 +51,14 @@ class CallCodeController extends Controller
 
         return view('configure.callcode.edit', compact('form'));
     }
+
+    public function update($id, Request $request)
+    {
+        $callcodes = CallCode::findOrFail($id);
+        $callcodes->center_id = $request->center_id;
+        $callcodes->callCode = $request->callCode;
+        $callcodes->save();
+        return back()->with('success','Call Code Edited successfully.');
+    }
     
 }

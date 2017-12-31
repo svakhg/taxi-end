@@ -19,8 +19,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('edit-gen', function () {
-    $type = '$center';
-    $fields = ['company_id', 'name', 'cCode', 'address', 'telephone', 'mobile', 'email', 'fax'];
+    $type = '$callcodes';
+    $fields = ['center_id', 'callCode'];
     foreach ($fields as $field) {
         echo $type.'->'.$field.' = $request->'.$field.';';
         echo '<br>';
