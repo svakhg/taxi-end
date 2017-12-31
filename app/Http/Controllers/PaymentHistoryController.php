@@ -45,7 +45,7 @@ class PaymentHistoryController extends Controller
 
     public function add(Request $request)
     {
-        $numberH = '+9609105616';
+        $numberH = '+9607774713';
 
         if ($request->send_sms = "1") {
             $payment = paymentHistory::find($request->idPayment);

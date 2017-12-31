@@ -64,7 +64,7 @@ class DriverController extends Controller
         $s3->put($fileNameFT, $thumbnail_F->stream()->__toString(), 'public');
         
         $driver->li_front_url_o = $fileNameFO;
-        $drvier->li_front_url_t = $fileNameFT;
+        $driver->li_front_url_t = $fileNameFT;
 
         // Image Upload (License back)
         $backImage = $request->li_back_url;
@@ -82,7 +82,7 @@ class DriverController extends Controller
         $s3->put($fileNameBT, $thumbnail_B->stream()->__toString(), 'public');
         
         $driver->li_back_url_o = $fileNameBO;
-        $drvier->li_back_url_t = $fileNameBT;
+        $driver->li_back_url_t = $fileNameBT;
 
         // Image Upload (Driver Photo)
         $driverPhoto = $request->driver_photo_url;
@@ -100,7 +100,7 @@ class DriverController extends Controller
         $s3->put($fileNameDPT, $thumbnail_DP->stream()->__toString(), 'public');
         
         $driver->driver_photo_url = $fileNameDP;
-        $drvier->driver_photo_url = $fileNameDPT;
+        $driver->driver_photo_url = $fileNameDPT;
         
         $driver->save();
 
