@@ -25,11 +25,8 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="phoneNumber">Phone Number</label>
                             <div class="col-md-4">
-                                <div class="input-group">
-                                    <span class="input-group-addon">+960</span>
-                                    <input id="phoneNumber" maxlength="7" name="phoneNumber" class="form-control" placeholder="9997777" type="text" required="">
-                                </div>
-                                <p class="help-block">Enter a dhiraagu or ooredoo number here</p>
+                                <input id="phoneNumber" name="phoneNumber" type="tel" required>
+                                <p class="help-block">Enter the number here</p>
                             </div>
                         </div>
                         <div class="form-group">
@@ -66,5 +63,17 @@
 <script>
     $('#message').countSms('#sms-counter')
 </script>
+
+<script src="/js/intlTelInput.min.js"></script>
+<script>
+  $("#phoneNumber").intlTelInput({
+    preferredCountries: ["MV"]
+  });
+</script>
+
+@endsection
+
+@section('css')
+<link href="/css/intlTelInput.css" rel="stylesheet">
 
 @endsection
