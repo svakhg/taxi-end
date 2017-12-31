@@ -9,7 +9,13 @@ class Taxi extends Form
     public function buildForm()
     {
         $this
-            ->add('callcode_id', 'text')
+            ->add('callcode_id', 'entity', [
+                'class' => 'App\CallCode',
+                'label' => 'Call Code',
+                'query_builder' => function (App\CallCode $cc) {
+                    return $cc->where('taken', 0);
+                }
+            ])
             ->add('taxiNo', 'text', [
                 'label' => 'Taxi Number'
             ])

@@ -9,7 +9,10 @@ class TaxiCenter extends Form
     public function buildForm()
     {
         $this
-            ->add('company_id', 'text')
+            ->add('company_id', 'entity', [
+                'class' => 'App\Company',
+                'label' => 'Company'
+            ])
             ->add('name', 'text')
             ->add('cCode', 'text', [
                 'label' => 'Call Code'

@@ -9,7 +9,10 @@ class CallCode extends Form
     public function buildForm()
     {
         $this
-            ->add('center_id', 'text')
+            ->add('center_id', 'entity', [
+                'class' => 'App\TaxiCenter',
+                'label' => 'Taxi Center'
+            ])
             ->add('callCode', 'text')
             ->add('submit', 'submit', [
                 'class' => 'btn btn-success btn-lg'

@@ -9,7 +9,10 @@ class Driver extends Form
     public function buildForm()
     {
         $this
-            ->add('taxi_id', 'text')
+            ->add('taxi_id', 'entity', [
+                'class' => 'App\Taxi',
+                'label' => 'Taxi',
+            ])
             ->add('driverName', 'text', [
                 'label' => 'Driver Name'
             ])
