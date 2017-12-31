@@ -76,32 +76,71 @@ Route::group(['prefix' => 'configure'], function () {
     /*End of Company Configure Routes*/
 
     /*Taxi Center Configure Routes*/
-    Route::get('taxi-center', 'TaxicenterController@index');
-    Route::post('taxi-center', 'TaxicenterController@add');
-    Route::get('taxi-center/view/v2/', 'TaxiCenterController@view');
-    Route::post('taxi-center/delete', 'TaxiCenterController@delete');
+    Route::group(['prefix' => 'taxi-center'], function () {
+        Route::get('/', 'TaxicenterController@index');
+        
+        Route::get('/add', 'TaxicenterController@create');
+        Route::post('/add', 'TaxicenterController@store');
+        
+        Route::get('/view/{id}', 'TaxicenterController@view');
+        
+        Route::get('/update/{id}', 'TaxicenterController@edit');
+        Route::post('/update/{id}', 'TaxicenterController@update');
+        
+        Route::get('/delete/{id}', 'TaxicenterController@destroy');
+    });
     /*End of Taxi Center Configure Routes*/
 
     /*Call Code Configure Routes*/
-    Route::get('call-code', 'CallCodeController@index');
-    Route::post('call-code', 'CallCodeController@add');
-    Route::get('call-code/view', 'CallCodeController@view');
-    Route::post('call-code/delete', 'CallCodeController@delete');
+    Route::group(['prefix' => 'call-code'], function () {
+        Route::get('/', 'CallCodeController@index');
+        
+        Route::get('/add', 'CallCodeController@create');
+        Route::post('/add', 'CallCodeController@store');
+        
+        Route::get('/view/{id}', 'CallCodeController@view');
+        
+        Route::get('/update/{id}', 'CallCodeController@edit');
+        Route::post('/update/{id}', 'CallCodeController@update');
+        
+        Route::get('/delete/{id}', 'CallCodeController@destroy');
+    });
+    
     /*End of Call Code Configure Routes*/
 
     /*Taxi Configure Routes*/
-    Route::get('taxi', 'TaxiController@index');
-    Route::post('taxi', 'TaxiController@add');
-    Route::get('taxi/view', 'TaxiController@view');
-    Route::post('taxi/delete', 'TaxiController@delete');
+    Route::group(['prefix' => 'taxi'], function () {
+        Route::get('/', 'TaxiController@index');
+        
+        Route::get('/add', 'TaxiController@create');
+        Route::post('/add', 'TaxiController@store');
+        
+        Route::get('/view/{id}', 'TaxiController@view');
+        
+        Route::get('/update/{id}', 'TaxiController@edit');
+        Route::post('/update/{id}', 'TaxiController@update');
+        
+        Route::get('/delete/{id}', 'TaxiController@destroy');
+    });
+    
     /*End of Taxi Configure Routes*/
 
     /*Driver Configure Routes*/
-    Route::get('driver', 'DriverController@index');
-    Route::post('driver', 'DriverController@add');
-    Route::get('driver/view', 'DriverController@view');
-    Route::post('driver/delete', 'DriverController@delete');
-    Route::get('driver/ajax/{id}', 'DriverController@ajax');
+    Route::group(['prefix' => 'driver'], function () {
+        Route::get('/', 'DriverController@index');
+        
+        Route::get('/add', 'DriverController@create');
+        Route::post('/add', 'DriverController@store');
+        
+        Route::get('/view/{id}', 'DriverController@view');
+        
+        Route::get('/update/{id}', 'DriverController@edit');
+        Route::post('/update/{id}', 'DriverController@update');
+        
+        Route::get('/delete/{id}', 'DriverController@destroy');
+        Route::get('/ajax/{id}', 'DriverController@ajax');
+    });
+ 
     /*End of Driver Configure Routes*/
 });
 
