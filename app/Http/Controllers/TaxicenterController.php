@@ -38,4 +38,17 @@ class TaxicenterController extends Controller
         return back()->with('success','Taxi Centers Added successfully.');
     }
 
+    public function edit($id, FormBuilder $formBuilder)
+    {
+        $center = TaxiCenter::findOrFail($id);
+
+        $form = $formBuilder->create(\App\Forms\TaxiCenter::class, [
+            'method' => 'POST',
+            'model' => $center,
+            'url' => url('configure/taxi-center/update')
+        ]);
+
+        return view('configure.center.add', compact('form'));
+    }
+
 }

@@ -44,4 +44,19 @@ class CompanyController extends Controller
         return back()->with('success','Company Added successfully.');
     }
 
+    public function edit($id, FormBuilder $formBuilder)
+    {
+        $company = Company::findOrFail($id);
+
+        $url = url('configure/company/update') .'/'. $company->id;
+
+        $form = $formBuilder->create(\App\Forms\Company::class, [
+            'method' => 'POST',
+            'model' => $company,
+            'url' => $url
+        ]);
+
+        return view('configure.company.edit', compact('form'));
+    }
+
 }
