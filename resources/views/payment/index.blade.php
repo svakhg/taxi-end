@@ -1,71 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<script>
-  $(document).ready(function() {
-        var dataSrc = [];
-        
-        $('#payments').DataTable({
-            'initComplete': function(){
-                var api = this.api();
-                api.cells('tr', [0, 1, 2, 3, 4]).every(function(){
-                    var data = this.data();
-                    if(dataSrc.indexOf(data) === -1){ dataSrc.push(data); }
-            });
-            $('.dataTables_filter input[type="search"]', api.table().container())
-                .typeahead({
-                    source: dataSrc,
-                    afterSelect: function(value){
-                        api.search(value).draw();
-                    }
-                }
-                );
-            },
-
-            responsive: true,
-            dom: 'Bfrtip',
-            buttons: [
-                    {
-                    extend: 'print',
-                    className: 'btn btn-success',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                    {
-                    extend: 'csv',
-                    className: 'btn btn-success',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                    {
-                    extend: 'excel',
-                    className: 'btn btn-success',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                    {
-                    extend: 'pdf',
-                    className: 'btn btn-success',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                    {
-                    extend: 'colvis',
-                    className: 'btn btn-success',
-                },
-            ],
-            columnDefs: [ {
-                targets: false,
-                visible: false
-            } ]
-        } );
-
-  } );
-</script>
 <ul class="breadcrumb">
     <li><a href="{{ url('home') }}">Home</a></li>
     <li><a href="#">Payment</a></li>
@@ -252,4 +187,72 @@ var totalValue = 0;
         });
     }
 </script>   
+@endsection
+
+@section('js')
+<script>
+  $(document).ready(function() {
+        var dataSrc = [];
+        
+        $('#payments').DataTable({
+            'initComplete': function(){
+                var api = this.api();
+                api.cells('tr', [0, 1, 2, 3, 4]).every(function(){
+                    var data = this.data();
+                    if(dataSrc.indexOf(data) === -1){ dataSrc.push(data); }
+            });
+            $('.dataTables_filter input[type="search"]', api.table().container())
+                .typeahead({
+                    source: dataSrc,
+                    afterSelect: function(value){
+                        api.search(value).draw();
+                    }
+                }
+                );
+            },
+
+            responsive: true,
+            dom: 'Bfrtip',
+            buttons: [
+                    {
+                    extend: 'print',
+                    className: 'btn btn-success',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                    {
+                    extend: 'csv',
+                    className: 'btn btn-success',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                    {
+                    extend: 'excel',
+                    className: 'btn btn-success',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                    {
+                    extend: 'pdf',
+                    className: 'btn btn-success',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                    {
+                    extend: 'colvis',
+                    className: 'btn btn-success',
+                },
+            ],
+            columnDefs: [ {
+                targets: false,
+                visible: false
+            } ]
+        } );
+
+  } );
+</script>
 @endsection
