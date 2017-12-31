@@ -8,7 +8,11 @@ use App\CallCode;
 use App\Taxi;
 use App\Driver;
 use Illuminate\Support\Facades\Input;
+
 use Kris\LaravelFormBuilder\FormBuilder;
+
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Image;
 
 class DriverController extends Controller
 {
@@ -39,10 +43,11 @@ class DriverController extends Controller
     public function store(Request $request)
     {
         $driver = Driver::create(Input::except('_token'));
-        
         $taxi = Taxi::find($driver->taxi_id);
         $taxi->taken = '1';
         $taxi->save();
+
+
 
         return back()->with('success','Driver Added successfully.');
 

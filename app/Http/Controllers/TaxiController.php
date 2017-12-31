@@ -7,7 +7,11 @@ use App\TaxiCenter;
 use App\CallCode;
 use App\Taxi;
 use Illuminate\Support\Facades\Input;
+
 use Kris\LaravelFormBuilder\FormBuilder;
+
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Image;
 
 class TaxiController extends Controller
 {
@@ -46,7 +50,42 @@ class TaxiController extends Controller
         $callcode->taken = '1';
         $callcode->save();
 
-        return back()->with('success','Taxi Added successfully.');
+        $s3 = \Storage::disk(env('UPLOAD_TYPE', 's3'));
+        // Image Upload (Taxi front URL)
+        $frontImage = $request->taxi_front_url;
+        $fileNameFO = 'Taxi/'.$taxi->taxiNo.'/front'.'/original'.'/'.$frontImage->getClientOriginalName();
+        $fileNameFT = 'Taxi/'.$taxi->taxiNo.'/front'.'/thumbnail'.'/'.$frontImage->getClientOriginalName();
+        $original_F = Image::make($frontImage)->resize(1080, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $thumbnail_F = Image::make($frontImage)->resize(null, 200, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $s3->put($fileNameFO, $original_F->stream()->__toString(), 'public');
+        $s3->put($fileNameFT, $thumbnail_F->stream()->__toString(), 'public');
+        $taxi->taxi_front_url_o = $fileNameFO;
+        $taxi->taxi_front_url_t = $fileNameFT;
+
+        // Image Upload (Taxi back URL)
+        $backImage = $request->taxi_back_url;
+        $fileNameBO = 'Taxi/'.$taxi->taxiNo.'/back'.'/original'.'/'.$backImage->getClientOriginalName();
+        $fileNameBT = 'Taxi/'.$taxi->taxiNo.'/back'.'/thumbnail'.'/'.$backImage->getClientOriginalName();
+        $original_B = Image::make($backImage)->resize(1080, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $thumbnail_B = Image::make($backImage)->resize(null, 200, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $s3->put($fileNameFO, $original_F->stream()->__toString(), 'public');
+        $s3->put($fileNameFT, $thumbnail_F->stream()->__toString(), 'public');
+        $taxi->taxi_back_url_o = $fileNameFO;
+        $taxi->taxi_back_url_t = $fileNameFT;
+        
+        return back()->with('alert-success','Taxi Added successfully.');
     }
     
     public function edit($id, FormBuilder $formBuilder)
