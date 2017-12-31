@@ -56,6 +56,10 @@ class Taxi extends Form
                 'label' => 'Insurance Expiry'
             ])
             ->add('rate', 'text')
+
+            ->add('taxi_front_url', 'file')
+            ->add('taxi_back_url', 'file')
+            
             ->add('submit', 'submit', [
                 'class' => 'btn btn-success btn-lg'
             ]);

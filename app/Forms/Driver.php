@@ -43,6 +43,11 @@ class Driver extends Form
             ->add('driverPermitExp', 'date', [
                 'label' => 'Permit Expirary Date '
             ])
+
+            ->add('li_front_url', 'file')
+            ->add('li_back_url', 'file')
+            ->add('driver_photo_url', 'file')
+
             ->add('submit', 'submit', [
                 'class' => 'btn btn-success btn-lg'
             ]);
