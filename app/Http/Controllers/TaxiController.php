@@ -126,7 +126,7 @@ class TaxiController extends Controller
         $taxi->center_name = $request->center_name;
         $taxi->save();
 
-        return back()->with('success','Taxi Added successfully.');
+        return back()->with('alert-success','Taxi Added successfully.');
     }
 
     public function view($id)

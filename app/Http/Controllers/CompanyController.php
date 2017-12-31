@@ -41,7 +41,7 @@ class CompanyController extends Controller
     {
         Company::create(Input::except('_token'));
         
-        return back()->with('success','Company Added successfully.');
+        return back()->with('alert-success','Company Added successfully.');
     }
 
     public function edit($id, FormBuilder $formBuilder)
@@ -77,7 +77,7 @@ class CompanyController extends Controller
         $company->owneremail = $request->owneremail;
         $company->ownermobile = $request->ownermobile;
         $company->save();
-        return back()->with('success','Company Edited successfully.');
+        return back()->with('alert-success','Company Edited successfully.');
     }    
 
     public function destroy($id)

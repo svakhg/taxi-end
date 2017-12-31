@@ -106,7 +106,7 @@ class DriverController extends Controller
 
 
 
-        return back()->with('success','Driver Added successfully.');
+        return back()->with('alert-success','Driver Added successfully.');
 
     }
 
@@ -141,7 +141,7 @@ class DriverController extends Controller
         $driver->driverPermitExp = $request->driverPermitExp;
         $driver->save();
 
-        return back()->with('success','Driver Added successfully.');
+        return back()->with('alert-success','Driver Added successfully.');
 
     }
 

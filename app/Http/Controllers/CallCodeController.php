@@ -36,7 +36,7 @@ class CallCodeController extends Controller
     public function store(Request $request)
     {
         CallCode::create(Input::except('_token'));
-        return back()->with('success','Call Code Added successfully.');
+        return back()->with('alert-success','Call Code Added successfully.');
     }
     public function edit($id, FormBuilder $formBuilder)
     {
@@ -58,7 +58,7 @@ class CallCodeController extends Controller
         $callcodes->center_id = $request->center_id;
         $callcodes->callCode = $request->callCode;
         $callcodes->save();
-        return back()->with('success','Call Code Edited successfully.');
+        return back()->with('alert-success','Call Code Edited successfully.');
     }
     public function destroy($id)
     {

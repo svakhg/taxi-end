@@ -35,7 +35,7 @@ class TaxicenterController extends Controller
     public function store(Request $request)
     {
         TaxiCenter::create(Input::except('_token'));
-        return back()->with('success','Taxi Centers Added successfully.');
+        return back()->with('alert-success','Taxi Centers Added successfully.');
     }
 
     public function edit($id, FormBuilder $formBuilder)
@@ -64,7 +64,7 @@ class TaxicenterController extends Controller
         $center->email = $request->email;
         $center->fax = $request->fax;
         $center->save();
-        return back()->with('success','Company Edited successfully.');
+        return back()->with('alert-success','Company Edited successfully.');
     }
     public function destroy($id)
     {
