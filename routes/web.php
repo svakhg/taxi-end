@@ -58,12 +58,15 @@ Route::get('genpayment', function () {
 |--------------------------------------------------------------------------
 */
 Route::group(['prefix' => 'configure'], function () {
+    
     /*Company Configure Routes*/
-    Route::get('company', 'CompanyController@index');
-    Route::post('company', 'CompanyController@add');
-    Route::get('company/view', 'CompanyController@view');
-    Route::post('company/update', 'CompanyController@update');
-    Route::post('company/delete', 'CompanyController@delete');
+    Route::group(['prefix' => 'company'], function () {
+        Route::get('/', 'CompanyController@index');
+        Route::get('/add', 'CompanyController@create');
+        Route::get('company/view', 'CompanyController@view');
+        Route::post('company/update', 'CompanyController@update');
+        Route::post('company/delete', 'CompanyController@delete');
+    });
     /*End of Company Configure Routes*/
 
     /*Taxi Center Configure Routes*/
