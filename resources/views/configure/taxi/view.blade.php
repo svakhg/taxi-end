@@ -58,8 +58,17 @@
                   </tbody>
               </table>
             </div> 
+            <div class="col-md-12">
+                <img src="{{ Helper::s3_url_gen($taxi->taxi_front_url_o) }}" alt="">
+                <hr>
+                <img src="{{ Helper::s3_url_gen($taxi->taxi_back_url_o) }}" alt="">
+                <hr>
+                <img src="{{ Helper::s3_url_gen($taxi->taxi_front_url_t) }}" alt="">
+                <hr>
+                <img src="{{ Helper::s3_url_gen($taxi->taxi_back_url_t) }}" alt="">
+                <hr>
+            </div> 
         </div>
-        
     </div>        
 </div>
 @endsection

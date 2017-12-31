@@ -45,7 +45,18 @@
                 </table>
             </div>
             <div class="col-md-12"> 
-                <img src="{{ Helper::s3_url_gen($driver->) }}" alt=""> 
+                <img src="{{ Helper::s3_url_gen($driver->li_front_url_o) }}" alt="">
+                <hr> 
+                <img src="{{ Helper::s3_url_gen($driver->li_back_url_o) }}" alt=""> 
+                <hr>
+                <img src="{{ Helper::s3_url_gen($driver->driver_photo_url_o) }}" alt=""> 
+                <hr>
+                <img src="{{ Helper::s3_url_gen($driver->li_front_url_t) }}" alt=""> 
+                <hr>
+                <img src="{{ Helper::s3_url_gen($driver->li_back_url_t) }}" alt=""> 
+                <hr>
+                <img src="{{ Helper::s3_url_gen($driver->driver_photo_url_t) }}" alt=""> 
+                <hr>
             </div>
         </div>
     </div>        

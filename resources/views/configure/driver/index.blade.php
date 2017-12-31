@@ -38,6 +38,7 @@
                 <table id="driver" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
+                            <th>Driver Photo</th>
                             <th>Taxi No</th>
                             <th>Driver Name</th>
                             <th>Driver Licence No.</th>
@@ -54,6 +55,9 @@
                     <tbody>
                     @foreach($drivers as $driver)
                         <tr>
+                            <td>
+                                <img src="{{ Helper::s3_url_gen($driver->driver_photo_url_t) }}" class="img-responsive img-thumbnail"> 
+                            </td>
                             <td>{{ $driver->taxi->taxiNo }}</td>
                             <td>{{ $driver->driverName }}</td>
                             <td>{{ $driver->driverLicenceNo }}</td>
