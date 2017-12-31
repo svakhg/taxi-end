@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="senderId">Sender Id</label>
                             <div class="col-md-4">
-                                <input id="senderId" maxlength="11" pattern="^(?=.*[a-zA-Z])(?=.*[a-zA-Z0-9])([a-zA-Z0-9 ]{1,11})$" name="senderId" type="text" placeholder="Taviyani" class="form-control input-md" required="" title="Cannot Be Loner than 11 letter. Only letters and numbers allowed">
+                                <input id="senderId" value="Taviyani" maxlength="11" pattern="^(?=.*[a-zA-Z])(?=.*[a-zA-Z0-9])([a-zA-Z0-9 ]{1,11})$" name="senderId" type="text" placeholder="Taviyani" class="form-control input-md" required="" title="Cannot Be Loner than 11 letter. Only letters and numbers allowed" disabled>
                                 <span class="help-block">Enter a sender Id here. It must be a combination of letters and numbers, It cannot be more than 11 characters.</span>
                             </div>
                         </div>
@@ -35,19 +35,14 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="message">Message</label>
                             <div class="col-md-4">
-                                <textarea class="form-control" rows="4" maxlength="160" id="message" name="message" required></textarea>
-                                <p id="remMessage"></p>
-                                <script>
-                                var area = document.getElementById("message");
-                                var message = document.getElementById("remMessage");
-                                var maxLength = 160;
-                                var checkLength = function() {
-                                    if(area.value.length < maxLength) {
-                                        message.innerHTML = (maxLength-area.value.length) + " characters remaining";
-                                    }
-                                }
-                                setInterval(checkLength, 300);
-                                </script>
+                                <textarea class="form-control" rows="4" id="message" name="message" required></textarea>
+                                <ul id="sms-counter">
+                                    <li>Encoding: <span class="encoding"></span></li>
+                                    <li>Length: <span class="length"></span></li>
+                                    <li>Messages: <span class="messages"></span></li>
+                                    <li>Per Message: <span class="per_message"></span></li>
+                                    <li>Remaining: <span class="remaining"></span></li>
+                                </ul>
                             </div>
                         </div>
                         <div class="form-group">
@@ -63,5 +58,13 @@
         </div>    
     </div>        
 </div>   
+
+@endsection
+
+@section('js')
+<script src="/js/sms_counter.min.js"></script>
+<script>
+    $('#message').countSms('#sms-counter')
+</script>
 
 @endsection
