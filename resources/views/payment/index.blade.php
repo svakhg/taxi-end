@@ -159,6 +159,150 @@
     </div>
 </div>
 
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+                <div class="modal-body">
+                    <div id="receiptContent">
+                        <style>
+                            .doubleline {
+                            padding: 1px 0;
+                            border-bottom: solid 0.180em #000;
+                            font-weight: bold;
+                            position: relative;
+                            margin-bottom: 6px;
+                            }
+                            .doubleline:after {
+                            content: '';
+                            border-bottom: solid 0.180em #000;
+                            width: 100%;
+                            position: absolute;
+                            bottom: -3px;
+                            left: 0;
+                            }
+                        </style>
+                        <table width="100%" border="0" style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif; font-size:12px; ">
+                            <tbody>
+                                <tr>
+                                    <td width="80%"><img src="img/logo.png" width="132" height="70" alt=""><br>
+                                        <span style="margin-top:5px; margin-left:10px; font-size:12px; font-weight:bold">Giving All Types of Transportation Services</span>
+                                    </td>
+                                    <td width="20%" colspan="2" align="left">
+                                        <table width="100%" border="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Date :</strong></td>
+                                                    <td align="right">27 Dec 2017</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Slip No. :</strong></td>
+                                                    <td align="right">TPL2661/2017</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>TIN No. :</strong></td>
+                                                    <td align="right">N/A</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align="center"><strong><span style="font-size:17px; font-weight:bold">CASH SLIP</span></strong></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <table width="100%" border="1" style="border-collapse:collapse">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="21%" align="center"><strong>INFO</strong></td>
+                                                    <td width="7%" align="center"><strong>MONTH/YEAR</strong></td>
+                                                    <td width="37%" align="center"><strong>DESCRIPTION</strong></td>
+                                                    <td width="10%" align="center"><strong>QTY</strong></td>
+                                                    <td width="11%" align="center"><strong>RATE</strong></td>
+                                                    <td width="14%" align="center"><strong>TOTAL</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="5" class="doubleline" style="font-weight:normal">
+                                                        &nbsp;7787<br>
+                                                        &nbsp;City Cab - Call Code: 63<br>
+                                                        &nbsp;Abdulla Naseem<br>
+                                                        &nbsp;A137977<br>
+                                                        &nbsp;9999741<br>
+                                                    </td>
+                                                    <td>&nbsp;December 2017</td>
+                                                    <td>&nbsp;Monthly Taxi Fee</td>
+                                                    <td align="center">1</td>
+                                                    <td align="center">600.00</td>
+                                                    <td align="right">600.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td align="center">&nbsp;</td>
+                                                    <td align="center">&nbsp;</td>
+                                                    <td align="right">&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td align="center">&nbsp;</td>
+                                                    <td align="center">&nbsp;</td>
+                                                    <td align="right">&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td colspan="2" align="center">SUBTOTAL </td>
+                                                    <td align="right">600.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="doubleline">&nbsp;</td>
+                                                    <td class="doubleline">&nbsp;</td>
+                                                    <td colspan="2" align="center">GST 6%</td>
+                                                    <td align="right">0.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">&nbsp;</td>
+                                                    <td class="doubleline">&nbsp;&nbsp;&nbsp; Collected By :
+                                                        Officer
+                                                    </td>
+                                                    <td colspan="2" align="center" class="doubleline">TOTAL</td>
+                                                    <td class="doubleline" align="right">600.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3" height="30px" style="border-left:0px">&nbsp;&nbsp;&nbsp;&nbsp; Follow Traffic Signals, Avoid Overtaking from Left and Avoid Cell Phones while Driving.</td>
+                                                    <td colspan="2" align="center" class="doubleline">TIME </td>
+                                                    <td align="right" class="doubleline">15:28</td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="36" colspan="6" align="center" style="border-top:1px solid #000"><strong>
+                                                        citycab13@gmail.com | H.Kulhlhavahmaage | Telephone : +9607774713 | Fax : +9603332244 | Email : citycab13@gmail.com 
+                                                        </strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <script>
 var totalValue = 0; 
     function c_payment(id){
