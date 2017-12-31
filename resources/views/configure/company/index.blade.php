@@ -34,9 +34,7 @@
                             <th>Fax</th>
                             <th>Mobile</th>
                             <th>Email</th>
-                            <th>View</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,14 +49,9 @@
                             <td>{{ $company->mobile }}</td>
                             <td>{{ $company->email }}</td>
                             <td>
-                                <button style="display: block; margin: auto;" class="btn btn-info" data-toggle="modal" data-target="#viewModal" onclick="c_view('{{$company -> id}}')">View</button>
-                            </td>
-                            <td>                                
-                                <button style="display: block; margin: auto;" class="btn btn-warning" data-toggle="modal" data-target="#editModal" onclick="c_edit('{{$company -> id}}')">Edit</button>
-                            </td>
-                            <td>    
-                                <!-- <button style="display: block; margin: auto;" class="btn btn-danger" onclick="c_delete('{{$company -> id}}')">Delete</button> -->
-                                <button style="display: block; margin: auto;" class="disabled btn btn-danger" onclick="">Delete</button>
+                                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $company->id }}" onclick="return confirm('Are you sure you would like to delete this? This process cannot be reversed.')">Delete</a>
+                                <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/update/{{ $company->id }}">Edit</a>
+                                <a style="margin:1px" class="btn btn-info" href="{{ url()->current() }}/view/{{ $company->id }}">View</a>
                             </td>
                         </tr>
                         @endforeach
