@@ -60,8 +60,7 @@
           $.fn.dataTable.ext.buttons.add = {
               text: 'Add',
               action: function () {
-                  $('#addModal').modal({ show: false})
-                  $('#addModal').modal('show');
+                window.location.href = './call-code/add';
               }
           };
         
