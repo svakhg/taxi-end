@@ -7,6 +7,7 @@ use App\TaxiCenter;
 use App\CallCode;
 use App\Taxi;
 use Illuminate\Support\Facades\Input;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class TaxiController extends Controller
 {
@@ -23,7 +24,17 @@ class TaxiController extends Controller
         return view('configure.taxi.index', compact('centers', 'callcodes', 'taxis'));
     }
 
-    public function add(Request $request)
+    public function create(FormBuilder $formBuilder)
+    {
+        $form = $formBuilder->create(\App\Forms\Taxi::class, [
+            'method' => 'POST',
+            'url' => url('configure/taxi/add')
+        ]);
+
+        return view('configure.taxi.add', compact('form'));
+    }
+
+    public function store(Request $request)
     {
         $taxi = Taxi::create(Input::except('_token'));
         

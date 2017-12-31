@@ -11,12 +11,15 @@ class TaxiCenter extends Form
         $this
             ->add('company_id', 'text')
             ->add('name', 'text')
-            ->add('cCode', 'text')
+            ->add('cCode', 'text', [
+                'label' => 'Call Code'
+            ])
             ->add('address', 'text')
             ->add('telephone', 'text')
             ->add('mobile', 'text')
-            ->add('mobile', 'text')
             ->add('fax', 'text')
-            ->add('submit', 'submit');
+            ->add('submit', 'submit', [
+                'class' => 'btn btn-success btn-lg'
+            ]);
     }
 }

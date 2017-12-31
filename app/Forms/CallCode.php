@@ -11,6 +11,8 @@ class CallCode extends Form
         $this
             ->add('center_id', 'text')
             ->add('callCode', 'text')
-            ->add('submit', 'submit');
+            ->add('submit', 'submit', [
+                'class' => 'btn btn-success btn-lg'
+            ]);
     }
 }

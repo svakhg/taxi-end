@@ -40,6 +40,7 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         Company::create(Input::except('_token'));
+        
         return back()->with('success','Company Added successfully.');
     }
 
