@@ -80,10 +80,10 @@ class TaxiController extends Controller
             $constraint->aspectRatio();
             $constraint->upsize();
         });
-        $s3->put($fileNameFO, $original_F->stream()->__toString(), 'public');
-        $s3->put($fileNameFT, $thumbnail_F->stream()->__toString(), 'public');
-        $taxi->taxi_back_url_o = $fileNameFO;
-        $taxi->taxi_back_url_t = $fileNameFT;
+        $s3->put($fileNameBO, $original_B->stream()->__toString(), 'public');
+        $s3->put($fileNameBT, $thumbnail_B->stream()->__toString(), 'public');
+        $taxi->taxi_back_url_o = $fileNameBO;
+        $taxi->taxi_back_url_t = $fileNameBT;
 
         $taxi->save();
         
