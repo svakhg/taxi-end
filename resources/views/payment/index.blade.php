@@ -77,6 +77,7 @@
 </div>
 
 <input type="hidden" name="hidden_view" id="hidden_view" value="{{ url('payments/taxi-payment/view') }}">
+
 <div class="modal fade" id="paymentModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -327,6 +328,25 @@ var totalValue = 0;
                 var z = x + y;
                 $("#totalAmount").val(z);
                 $("#totalAmountA").text(z);
+
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1; //January is 0!
+
+                var yyyy = today.getFullYear();
+                if(dd<10){
+                    dd='0'+dd;
+                } 
+                if(mm<10){
+                    mm='0'+mm;
+                } 
+                var today = dd+'/'+mm+'/'+yyyy;
+                
+                var paymentMonth = result.month;
+                var paymentYear = result.year;
+
+                var smsGeText = "A Payment of MVR 600 on "+ today +" was recieved for "+ paymentMonth + "/" + paymentYear;
+                $('#smsText').html(smsGeText);
             }
         });
     }
