@@ -40,6 +40,8 @@ class Driver extends Form
             ->add('driverPermitExp', 'date', [
                 'label' => 'Permit Expirary Date '
             ])
-            ->add('submit', 'submit');
+            ->add('submit', 'submit', [
+                'class' => 'btn btn-success btn-lg'
+            ]);
     }
 }

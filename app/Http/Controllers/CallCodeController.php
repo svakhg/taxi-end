@@ -7,6 +7,7 @@ use Datatables;
 use App\CallCode;
 use App\TaxiCenter;
 use Illuminate\Support\Facades\Input;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class CallCodeController extends Controller
 {
@@ -22,7 +23,17 @@ class CallCodeController extends Controller
         return view('configure.callcode.index', compact('callcodes', 'centers'));
     }
 
-    public function add(Request $request)
+    public function create(FormBuilder $formBuilder)
+    {
+        $form = $formBuilder->create(\App\Forms\CallCode::class, [
+            'method' => 'POST',
+            'url' => url('configure/call-code/add')
+        ]);
+
+        return view('configure.callcode.add', compact('form'));
+    }
+
+    public function store(Request $request)
     {
         CallCode::create(Input::except('_token'));
         return back()->with('success','Call Code Added successfully.');

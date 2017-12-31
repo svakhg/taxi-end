@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\TaxiCenter;
 use App\Company;
 use Illuminate\Support\Facades\Input;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class TaxicenterController extends Controller
 {
@@ -20,8 +21,18 @@ class TaxicenterController extends Controller
         $companies = Company::all();
         return view('configure.center.index', compact('centers', 'companies'));
     }
+
+    public function create(FormBuilder $formBuilder)
+    {
+        $form = $formBuilder->create(\App\Forms\TaxiCenter::class, [
+            'method' => 'POST',
+            'url' => url('configure/taxi-center/add')
+        ]);
+
+        return view('configure.center.add', compact('form'));
+    }
     
-    public function add(Request $request)
+    public function store(Request $request)
     {
         TaxiCenter::create(Input::except('_token'));
         return back()->with('success','Taxi Centers Added successfully.');

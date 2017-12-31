@@ -8,6 +8,7 @@ use App\CallCode;
 use App\Taxi;
 use App\Driver;
 use Illuminate\Support\Facades\Input;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class DriverController extends Controller
 {
@@ -25,17 +26,20 @@ class DriverController extends Controller
         return view('configure.driver.index', compact('centers', 'callcodes', 'taxis', 'drivers'));
     }
 
-    public function add(Request $request)
+    public function create(FormBuilder $formBuilder)
     {
-        $driver = Driver::create(Input::except('_token', 'photoUrl'), ['photoUrl' => 'test']);
-        
-        if ($request->file('photoUrl')){
-            $path = $request->file('photoUrl')->store('driverPhotos');
+        $form = $formBuilder->create(\App\Forms\Driver::class, [
+            'method' => 'POST',
+            'url' => url('configure/driver/add')
+        ]);
 
-            $driverPhoto = Driver::find($driver->id);
-            $driverPhoto->photoUrl = $path;
-            $driverPhoto->save();
-        }
+        return view('configure.driver.add', compact('form'));
+    }
+
+    public function store(Request $request)
+    {
+        $driver = Driver::create(Input::except('_token'));
+        
         $taxi = Taxi::find($driver->taxi_id);
         $taxi->taken = '1';
         $taxi->save();

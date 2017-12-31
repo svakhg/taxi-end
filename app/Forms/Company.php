@@ -33,6 +33,8 @@ class Company extends Form
             ->add('ownermobile', 'text', [
                 'label' => 'Owner Mobile'
             ])
-            ->add('submit', 'submit');
+            ->add('submit', 'submit', [
+                'class' => 'btn btn-success btn-lg'
+            ]);
     }
 }
