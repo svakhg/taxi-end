@@ -22,7 +22,7 @@ class DriverController extends Controller
         $callcodes = CallCode::all();
         $taxis = Taxi::where('taken', '0')->get();
         $drivers = Driver::all();
-        return view('configure.driver', compact('centers', 'callcodes', 'taxis', 'drivers'));
+        return view('configure.driver.index', compact('centers', 'callcodes', 'taxis', 'drivers'));
     }
 
     public function add(Request $request)
@@ -44,32 +44,10 @@ class DriverController extends Controller
 
     }
 
-    public function view(Request $request)
-    {
-        //if($request->ajax()){            
-            $id = $request->id;
-            $info = Driver::find($id);
-            $info2 = Taxi::find($info->taxi_id);
-            $info->taxi = $info2;
-            //echo json_decode($info);
-            return response()->json($info);
-        //}        
-    }
-
-    public function delete(Request $request)
-    {
-        $id = $request->id;
-        $data = Driver::find($id);
-        $response = $data->delete();
-        if($response)
-            echo "Record Deleted successfully.";
-        else
-            echo "There was a problem. Please try again later.";
-    }
-
-    public function ajax($id)
-    {
-        $driver = Driver::find($id);
-        return view('configure.driverAjax', compact('driver'));
-    }
+    
+    // public function ajax($id)
+    // {
+    //     $driver = Driver::find($id);
+    //     return view('configure.driverAjax', compact('driver'));
+    // }
 }

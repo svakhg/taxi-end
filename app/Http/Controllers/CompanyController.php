@@ -22,7 +22,7 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        return view('configure.company', compact('companies'));
+        return view('configure.company.index', compact('companies'));
     }
 
     public function add(Request $request)
@@ -31,24 +31,4 @@ class CompanyController extends Controller
         return back()->with('success','Company Added successfully.');
     }
 
-    public function view(Request $request)
-    {
-        //if($request->ajax()){
-            $id = $request->id;
-            $info = Company::find($id);
-            //echo json_decode($info);
-            return response()->json($info);
-        //}
-    }
-
-    public function delete(Request $request)
-    {
-        $id = $request -> id;
-        $data = Company::find($id);
-        $response = $data ->delete();
-        if($response)
-            echo "Record Deleted successfully.";
-        else
-            echo "There was a problem. Please try again later.";
-    }
 }
