@@ -50,20 +50,36 @@ class DriverController extends Controller
 
     public function edit($id, FormBuilder $formBuilder)
     {
-        $center = Driver::findOrFail($id);
-        $url = url('configure/driver/update') .'/'. $center->id;
+        $driver = Driver::findOrFail($id);
+        $url = url('configure/driver/update') .'/'. $driver->id;
 
         $form = $formBuilder->create(\App\Forms\Driver::class, [
             'method' => 'POST',
-            'model' => $center,
+            'model' => $driver,
             'url' => $url
         ]);
 
         return view('configure.driver.edit', compact('form'));
     }
-    // public function ajax($id)
-    // {
-    //     $driver = Driver::find($id);
-    //     return view('configure.driverAjax', compact('driver'));
-    // }
+    
+    public function update(Request $request)
+    {
+        $driver = Driver::create(Input::except('_token'));
+        
+        $driver->taxi_id = $request->taxi_id;
+        $driver->driverName = $request->driverName;
+        $driver->driverIdNo = $request->driverIdNo;
+        $driver->driverTempAdd = $request->driverTempAdd;
+        $driver->driverPermAdd = $request->driverPermAdd;
+        $driver->driverMobile = $request->driverMobile;
+        $driver->driverEmail = $request->driverEmail;
+        $driver->driverLicenceNo = $request->driverLicenceNo;
+        $driver->driverLicenceExp = $request->driverLicenceExp;
+        $driver->driverPermitNo = $request->driverPermitNo;
+        $driver->driverPermitExp = $request->driverPermitExp;
+        $driver->save();
+
+        return back()->with('success','Driver Added successfully.');
+
+    }
 }

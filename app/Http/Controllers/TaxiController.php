@@ -48,18 +48,44 @@ class TaxiController extends Controller
 
         return back()->with('success','Taxi Added successfully.');
     }
+    
     public function edit($id, FormBuilder $formBuilder)
     {
-        $callcodes = Taxi::findOrFail($id);
-        $url = url('configure/taxi/update') .'/'. $callcodes->id;
+        $taxi = Taxi::findOrFail($id);
+        $url = url('configure/taxi/update') .'/'. $taxi->id;
 
         $form = $formBuilder->create(\App\Forms\Taxi::class, [
             'method' => 'POST',
-            'model' => $callcodes,
+            'model' => $taxi,
             'url' => $url
         ]);
 
         return view('configure.taxi.edit', compact('form'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $taxi = Taxi::findOrFail($id);
+        $taxi->callcode_id = $request->callcode_id;
+        $taxi->taxiNo = $request->taxiNo;
+        $taxi->taxiChasisNo = $request->taxiChasisNo;
+        $taxi->taxiEngineNo = $request->taxiEngineNo;
+        $taxi->taxiBrand = $request->taxiBrand;
+        $taxi->taxiModel = $request->taxiModel;
+        $taxi->taxiColor = $request->taxiColor;
+        $taxi->taxiOwnerName = $request->taxiOwnerName;
+        $taxi->taxiOwnerMobile = $request->taxiOwnerMobile;
+        $taxi->taxiOwnerEmail = $request->taxiOwnerEmail;
+        $taxi->taxiOwnerAddress = $request->taxiOwnerAddress;
+        $taxi->registeredDate = $request->registeredDate;
+        $taxi->anualFeeExpiry = $request->anualFeeExpiry;
+        $taxi->roadWorthinessExpiry = $request->roadWorthinessExpiry;
+        $taxi->insuranceExpiry = $request->insuranceExpiry;
+        $taxi->rate = $request->rate;
+        $taxi->center_name = $request->center_name;
+        $taxi->save();
+
+        return back()->with('success','Taxi Added successfully.');
     }
     
 }
