@@ -890,7 +890,11 @@ Stack trace:
 #49 C:\\xampp\\htdocs\\taxi-end\\public\\index.php(53): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #50 {main}
 "} 
+<<<<<<< HEAD
+[2017-12-31 07:26:08] local.ERROR: Method [create] does not exist on [App\Http\Controllers\TaxiController]. {"userId":1,"email":"mohamed.yaniu.9@icloud.com","exception":"[object] (BadMethodCallException(code: 0): Method [create] does not exist on [App\\Http\\Controllers\\TaxiController]. at C:\\xampp\\htdocs\\taxi-end\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php:68)
+=======
 [2017-12-31 07:12:10] local.ERROR: Method [create] does not exist on [App\Http\Controllers\TaxiController]. {"userId":1,"email":"athik.13@gmail.com","exception":"[object] (BadMethodCallException(code: 0): Method [create] does not exist on [App\\Http\\Controllers\\TaxiController]. at C:\\xampp\\htdocs\\taxi-end\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php:68)
+>>>>>>> 061421b4c7a7750f72d4afe002590532e7388747
 [stacktrace]
 #0 [internal function]: Illuminate\\Routing\\Controller->__call('create', Array)
 #1 C:\\xampp\\htdocs\\taxi-end\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): call_user_func_array(Array, Array)
@@ -943,6 +947,10 @@ Stack trace:
 #48 C:\\xampp\\htdocs\\taxi-end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(151): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
 #49 C:\\xampp\\htdocs\\taxi-end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(116): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #50 C:\\xampp\\htdocs\\taxi-end\\public\\index.php(53): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+<<<<<<< HEAD
+#51 C:\\xampp\\htdocs\\taxi-end\\server.php(21): require_once('C:\\\\xampp\\\\htdocs...')
+#52 {main}
+=======
 #51 {main}
 "} 
 [2017-12-31 07:12:41] local.ERROR: Class App\Http\Controllers\FormBuilder does not exist {"userId":1,"email":"athik.13@gmail.com","exception":"[object] (ReflectionException(code: 0): Class App\\Http\\Controllers\\FormBuilder does not exist at C:\\xampp\\htdocs\\taxi-end\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\RouteSignatureParameters.php:25)
@@ -1179,4 +1187,5 @@ Stack trace:
 #55 C:\\xampp\\htdocs\\taxi-end\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(116): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #56 C:\\xampp\\htdocs\\taxi-end\\public\\index.php(53): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #57 {main}
+>>>>>>> 061421b4c7a7750f72d4afe002590532e7388747
 "} 
