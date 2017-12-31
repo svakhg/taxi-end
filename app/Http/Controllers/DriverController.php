@@ -82,4 +82,11 @@ class DriverController extends Controller
         return back()->with('success','Driver Added successfully.');
 
     }
+
+    public function view($id)
+    {
+        $driver = Driver::findOrFail($id);
+
+        return view('configure.driver.view', compact('driver'));
+    }
 }

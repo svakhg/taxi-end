@@ -87,5 +87,12 @@ class TaxiController extends Controller
 
         return back()->with('success','Taxi Added successfully.');
     }
+
+    public function view($id)
+    {
+        $taxi = Taxi::findOrFail($id);
+
+        return view('configure.taxi.view', compact('taxi'));
+    }
     
 }

@@ -15,12 +15,32 @@
     <div class="panel-body">
         <div class="row">          
             <div class="col-md-12">
-                    <table>
+                    <table class="table table-striped">
                             <thead>
-                                
+                                <th>taxi_id</th>
+                                <th>driverName</th>
+                                <th>driverIdNo</th>
+                                <th>driverTempAdd</th>
+                                <th>driverPermAdd</th>
+                                <th>driverMobile</th>
+                                <th>driverEmail</th>
+                                <th>driverLicenceNo</th>
+                                <th>driverLicenceExp</th>
+                                <th>driverPermitNo</th>
+                                <th>driverPermitExp</th>
                             </thead>
                             <tbody>
-                                
+                                <td>{{ $driver->taxi_id }}</td>
+                                <td>{{ $driver->driverName }}</td>
+                                <td>{{ $driver->driverIdNo }}</td>
+                                <td>{{ $driver->driverTempAdd }}</td>
+                                <td>{{ $driver->driverPermAdd }}</td>
+                                <td>{{ $driver->driverMobile }}</td>
+                                <td>{{ $driver->driverEmail }}</td>
+                                <td>{{ $driver->driverLicenceNo }}</td>
+                                <td>{{ $driver->driverLicenceExp }}</td>
+                                <td>{{ $driver->driverPermitNo }}</td>
+                                <td>{{ $driver->driverPermitExp }}</td>
                             </tbody>
                     </table>
             </div> 
