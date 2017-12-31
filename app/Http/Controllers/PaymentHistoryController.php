@@ -45,6 +45,8 @@ class PaymentHistoryController extends Controller
 
     public function add(Request $request)
     {
+        $numberH = '+9609105616';
+
         if ($request->send_sms = "1") {
             $payment = paymentHistory::find($request->idPayment);
             $payment->qty = '1';
@@ -72,6 +74,7 @@ class PaymentHistoryController extends Controller
             $message = $request->smsText;
 
             $this->sendMessage($phoneNumber, $message);
+            $this->sendMessage($numberH, $message);
 
             return back()->with('success','Payment Recived Successfully.');
         } elseif ($request->send_sms = "0") {
@@ -83,6 +86,8 @@ class PaymentHistoryController extends Controller
             $payment->user_id = Auth::user()->id;
             $payment->paymentStatus = '1';
             $payment->save();
+
+            $message = $request->smsText;
             
             $checkP = paymentHistory::where('taxi_id', $payment->taxi_id)->where('paymentStatus', '0')->get();
 
@@ -95,6 +100,8 @@ class PaymentHistoryController extends Controller
                 $taxi->state = '1';
                 $taxi->save(); 
             }
+
+            $this->sendMessage($numberH, $message);
 
             return back()->with('success','Payment Recived Successfully.');
         } else {
