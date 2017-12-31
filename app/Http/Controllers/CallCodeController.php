@@ -60,5 +60,10 @@ class CallCodeController extends Controller
         $callcodes->save();
         return back()->with('success','Call Code Edited successfully.');
     }
-    
+    public function destroy($id)
+    {
+        $company = CallCode::findOrFail($id);
+        $company->delete();
+        return redirect()->back()->with('alert-success', 'Successfully deleted the Call Code');
+    }
 }

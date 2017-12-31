@@ -133,5 +133,10 @@ class TaxiController extends Controller
 
         return view('configure.taxi.view', compact('taxi'));
     }
-    
+    public function destroy($id)
+    {
+        $company = Taxi::findOrFail($id);
+        $company->delete();
+        return redirect()->back()->with('alert-success', 'Successfully deleted the Taxi');
+    }
 }

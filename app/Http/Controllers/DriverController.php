@@ -67,7 +67,7 @@ class DriverController extends Controller
         return view('configure.driver.edit', compact('form'));
     }
     
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
         $driver = Driver::findOrFail($id);
         
@@ -93,5 +93,12 @@ class DriverController extends Controller
         $driver = Driver::findOrFail($id);
 
         return view('configure.driver.view', compact('driver'));
+    }
+
+    public function destroy($id)
+    {
+        $company = Driver::findOrFail($id);
+        $company->delete();
+        return redirect()->back()->with('alert-success', 'Successfully deleted the Driver');
     }
 }

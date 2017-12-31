@@ -35,8 +35,10 @@ class CreateTaxisTable extends Migration
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
 
-            $table->string('taxi_front_url')->nullable();
-            $table->string('taxi_back_url')->nullable();
+            $table->string('taxi_front_url_o')->nullable();
+            $table->string('taxi_back_url_o')->nullable();
+            $table->string('taxi_front_url_t')->nullable();
+            $table->string('taxi_back_url_t')->nullable();
         });
     }
 
