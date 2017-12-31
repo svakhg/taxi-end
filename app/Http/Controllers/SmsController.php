@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
+use Twilio\Rest\Client;
+
 class SmsController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+        $this->client = $client;
     }
 
     public function index()
@@ -19,6 +22,6 @@ class SmsController extends Controller
 
     public function send()
     {
-        print_r(Input::all());
+        $message = $request->input('message');
     }
 }

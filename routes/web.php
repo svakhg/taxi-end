@@ -62,10 +62,16 @@ Route::group(['prefix' => 'configure'], function () {
     /*Company Configure Routes*/
     Route::group(['prefix' => 'company'], function () {
         Route::get('/', 'CompanyController@index');
+        
         Route::get('/add', 'CompanyController@create');
-        Route::get('company/view', 'CompanyController@view');
-        Route::post('company/update', 'CompanyController@update');
-        Route::post('company/delete', 'CompanyController@delete');
+        Route::post('/add', 'CompanyController@store');
+        
+        Route::get('/view/{id}', 'CompanyController@view');
+        
+        Route::get('/update/{id}', 'CompanyController@edit');
+        Route::post('/update/{id}', 'CompanyController@update');
+        
+        Route::get('/delete/{id}', 'CompanyController@destroy');
     });
     /*End of Company Configure Routes*/
 
