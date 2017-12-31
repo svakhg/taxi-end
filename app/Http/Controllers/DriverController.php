@@ -64,7 +64,7 @@ class DriverController extends Controller
     
     public function update(Request $request)
     {
-        $driver = Driver::create(Input::except('_token'));
+        $driver = Driver::findOrFail($id);
         
         $driver->taxi_id = $request->taxi_id;
         $driver->driverName = $request->driverName;
@@ -81,5 +81,12 @@ class DriverController extends Controller
 
         return back()->with('success','Driver Added successfully.');
 
+    }
+
+    public function view($id)
+    {
+        $driver = Driver::findOrFail($id);
+
+        return view('configure.driver.view', compact('driver'));
     }
 }

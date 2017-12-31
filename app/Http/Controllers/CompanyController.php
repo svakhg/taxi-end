@@ -80,4 +80,11 @@ class CompanyController extends Controller
         return back()->with('success','Company Edited successfully.');
     }    
 
+    public function destroy($id)
+    {
+        $company = Company::findOrFail($id);
+        $company->delete();
+        return redirect()->back()->with('alert-success', 'Successfully deleted the company');
+    }
+
 }

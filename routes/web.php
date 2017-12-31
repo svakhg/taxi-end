@@ -19,13 +19,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('edit-gen', function () {
-    $type = '$driver';
-    $fields = ['taxi_id', 'driverName', 'driverIdNo', 'driverTempAdd', 'driverPermAdd', 'driverMobile', 'driverEmail', 'driverLicenceNo', 'driverLicenceExp', 'driverPermitNo', 'driverPermitExp'];
+    $type = '$taxi';
+    $fields = ['callcode_id', 'taxiNo', 'taxiChasisNo', 'taxiEngineNo', 'taxiBrand', 'taxiModel', 'taxiColor', 'taxiOwnerName', 'taxiOwnerMobile', 'taxiOwnerEmail', 'taxiOwnerAddress', 'registeredDate', 'anualFeeExpiry', 'roadWorthinessExpiry', 'insuranceExpiry', 'rate', 'taken', 'center_name'];
     foreach ($fields as $field) {
-        echo $type.'->'.$field.' = $request->'.$field.';';
+        echo htmlentities('<th>');
+        echo $field;
+        echo htmlentities('</th>');
         echo '<br>';
     }
-    echo $type.'->save();';
 
 });
 
