@@ -62,7 +62,7 @@ class DriverController extends Controller
         return view('configure.driver.edit', compact('form'));
     }
     
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
         $driver = Driver::findOrFail($id);
         
