@@ -51,10 +51,10 @@
                                     <td>{{ $paid->id }}</td>
                                     <td>{{ $paid->taxi->callcode->callCode }}</td>
                                     <td>{{ $paid->taxi->taxiNo }}</td>
-                                    <td>{{ $paid->month }}</td>
+                                    <td>{{ date("F", $paid->month) }}</td>
                                     <td>{{ $paid->year }}</td>
                                     <td>{{ $paid->qty }}</td>
-                                    <td>{{ $paid->taxi_id }}</td>
+                                    <td>{{ $paid->taxi->rate }}</td>
                                     <td>{{ $paid->subtotal }}</td>
                                     <td>{{ $paid->gstAmount }}</td>
                                     <td>{{ $paid->totalAmount }}</td>

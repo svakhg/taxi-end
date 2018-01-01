@@ -72,7 +72,7 @@ class PaymentHistoryController extends Controller
 
         //$this->sendMessage($phone_number_owner, $message);
 
-        if ($request->send_sms = "1") {
+        if ($request->send_sms == "1") {
             $phoneNumber = '+960'.$request->driverNumber;
             $this->sendMessage($phoneNumber, $message);
         }

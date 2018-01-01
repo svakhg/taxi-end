@@ -25,12 +25,14 @@
                                 <th>Collected By</th>
                         </thead>
                         <tbody>
+                            <?php $i = 0 ?>
                             @foreach ($unpaids as $unpaid)
+                                <?php $i++ ?>
                                 <tr>
-                                    <td>{{ $unpaid->id }}</td>
+                                    <td>{{ $i }}</td>
                                     <td>{{ $unpaid->taxi->callcode->callCode }} - {{ $unpaid->taxi->callcode->taxicenter->name }}</td>
-                                    <td>{{ $unpaid->taxi->taxiNo }}</td>
-                                    <td>{{ $unpaid->month }}</td>
+                                    <td>T-{{ $unpaid->taxi->taxiNo }}</td>
+                                    <td>{{ date("F", $unpaid->month) }}</td>
                                     <td>{{ $unpaid->year }}</td>
                                     <td></td>
                                 </tr>
