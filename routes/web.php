@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -70,6 +70,10 @@ Route::group(['prefix' => 'test'], function () {
             echo '<br>';
             $i++;
         }
+    });
+
+    Route::get('/driver-dump', function () {
+        $payments = paymentHistory::all();
     });
 });
 /*Payment generation*/
