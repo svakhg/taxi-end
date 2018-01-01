@@ -28,7 +28,7 @@
                             @foreach ($unpaids as $unpaid)
                                 <tr>
                                     <td>{{ $unpaid->id }}</td>
-                                    <td>{{ $unpaid->taxi->callcode->callCode }}</td>
+                                    <td>{{ $unpaid->taxi->callcode->callCode }} - {{ $unpaid->taxi->callcode->taxicenter->name }}</td>
                                     <td>{{ $unpaid->taxi->taxiNo }}</td>
                                     <td>{{ $unpaid->month }}</td>
                                     <td>{{ $unpaid->year }}</td>

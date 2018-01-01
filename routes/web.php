@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -259,13 +260,23 @@ Route::group(['prefix' => 'sms'], function () {
 
 Route::group(['prefix' => 'report'], function () {
     Route::get('/driver', function () {
-        return view('report.driver.index');
+        $drivers = \App\Driver::all();
+        return view('report.driver.index', compact('drivers'));
     });
     Route::get('/taxi', function () {
-        return view('report.taxi.index');
+        $taxis = \App\Taxi::all();
+        return view('report.taxi.index', compact('taxis'));
     });
-    Route::get('/payment-history', function () {
-        $paids = \App\paymentHistory::where('paymentStatus', '1')->get();
+    Route::get('/payment-history', function (Request $request) {
+        if(request()->exists('to') AND request()->exists('from')) {
+            $to = $request->input('to');
+            $from = $request->input('from');
+            $paids = \App\paymentHistory::where('paymentStatus', '1')
+                                        ->whereBetween('created_at', array($from, $to))
+                                        ->get();    
+        } else {
+            $paids = \App\paymentHistory::where('paymentStatus', '1')->get();
+        }
         return view('report.paymentHistory.index', compact('paids'));
     });
     Route::get('/payment-history-unpaid', function () {

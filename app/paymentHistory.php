@@ -14,4 +14,10 @@ class paymentHistory extends Model
     {
         return $this->belongsTo('App\Taxi', 'taxi_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
+    
 }

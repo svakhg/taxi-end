@@ -31,19 +31,19 @@
                         </thead>
                         <tbody>
                             @foreach ($drivers as $driver)
-                            <tr>
-                            <td>{{ $driver->taxi_id }}</td>
-                            <td>{{ $driver->driverName }}</td>
-                            <td>{{ $driver->driverIdNo }}</td>
-                            <td>{{ $driver->driverTempAdd }}</td>
-                            <td>{{ $driver->driverPermAdd }}</td>
-                            <td>{{ $driver->driverMobile }}</td>
-                            <td>{{ $driver->driverEmail }}</td>
-                            <td>{{ $driver->driverLicenceNo }}</td>
-                            <td>{{ $driver->driverLicenceExp }}</td>
-                            <td>{{ $driver->driverPermitNo }}</td>
-                            <td>{{ $driver->driverPermitExp }}</td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $driver->taxi->taxiNo }}</td>
+                                    <td>{{ $driver->driverName }}</td>
+                                    <td>{{ $driver->driverIdNo }}</td>
+                                    <td>{{ $driver->driverTempAdd }}</td>
+                                    <td>{{ $driver->driverPermAdd }}</td>
+                                    <td>{{ $driver->driverMobile }}</td>
+                                    <td>{{ $driver->driverEmail }}</td>
+                                    <td>{{ $driver->driverLicenceNo }}</td>
+                                    <td>{{ $driver->driverLicenceExp }}</td>
+                                    <td>{{ $driver->driverPermitNo }}</td>
+                                    <td>{{ $driver->driverPermitExp }}</td>
+                                </tr>
                             @endforeach
                             
                         </tbody>

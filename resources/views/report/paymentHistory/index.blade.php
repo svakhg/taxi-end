@@ -14,8 +14,23 @@
     <div class="panel-body">
         <div class="row">          
             <div class="col-md-12">
-                <table class="table table-striped">
-                    <thead>
+                <form class="form-inline" action="" method="GET">
+                    <div class="form-group">
+                        <label for="from">Date From</label>
+                        <input type="date" class="form-control" id="from" name="from">
+                    </div>
+                    <div class="form-group">
+                        <label for="to">Date To</label>
+                        <input type="date" class="form-control" id="to" name="to">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>                      
+            </div>
+            <div class="col-md-12">
+                @if(request()->exists('to') AND request()->exists('from'))
+
+                    <table class="table table-striped">
+                        <thead>
                             <th>#</th>
                             <th>Call Code</th>
                             <th>Taxi Number</th>
@@ -29,29 +44,30 @@
                             <th>Slip Number</th>
                             <th>Description	</th>
                             <th>Collected By</th>
-                    </thead>
-                    <tbody>
-                        @foreach ($paids as $paid)
-                            <tr>
-                                <td>{{ $paid->id }}</td>
-                                <td>{{ $paid->taxi_id }}</td>
-                                <td>{{ $paid->taxi_id }}</td>
-                                <td>{{ $paid->month }}</td>
-                                <td>{{ $paid->year }}</td>
-                                <td>{{ $paid->qty }}</td>
-                                <td>{{ $paid->taxi_id }}</td>
-                                <td>{{ $paid->subtotal }}</td>
-                                <td>{{ $paid->gstAmount }}</td>
-                                <td>{{ $paid->totalAmount }}</td>
-                                <td>{{ $paid->slipNo }}</td>
-                                <td>{{ $paid->desc }}</td>
-                                <td>{{ $paid->user_id }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($paids as $paid)
+                                <tr>
+                                    <td>{{ $paid->id }}</td>
+                                    <td>{{ $paid->taxi->callcode->callCode }}</td>
+                                    <td>{{ $paid->taxi->taxiNo }}</td>
+                                    <td>{{ $paid->month }}</td>
+                                    <td>{{ $paid->year }}</td>
+                                    <td>{{ $paid->qty }}</td>
+                                    <td>{{ $paid->taxi_id }}</td>
+                                    <td>{{ $paid->subtotal }}</td>
+                                    <td>{{ $paid->gstAmount }}</td>
+                                    <td>{{ $paid->totalAmount }}</td>
+                                    <td>{{ $paid->slipNo }}</td>
+                                    <td>{{ $paid->desc }}</td>
+                                    <td>{{ $paid->user->name }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                
+                @endif
             </div> 
-            
         </div>
     </div>        
 </div>

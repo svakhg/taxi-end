@@ -27,12 +27,11 @@
                         <th>anualFeeExpiry</th>
                         <th>roadWorthinessExpiry</th>
                         <th>insuranceExpiry</th>
-                        <th>rate</th>
                   </thead>
                   <tbody>
                       @foreach ($taxis as $taxi)
                           <tr>
-                                <td>{{ $taxi->callcode_id }}</td>
+                                <td>{{ $taxi->callcode->callCode }}</td>
                                 <td>{{ $taxi->taxiNo }}</td>
                                 <td>{{ $taxi->taxiOwnerName }}</td>
                                 <td>{{ $taxi->taxiOwnerMobile }}</td>
@@ -42,7 +41,6 @@
                                 <td>{{ $taxi->anualFeeExpiry }}</td>
                                 <td>{{ $taxi->roadWorthinessExpiry }}</td>
                                 <td>{{ $taxi->insuranceExpiry }}</td>
-                                <td>{{ $taxi->rate }}</td>
                           </tr>    
                       @endforeach
                         
