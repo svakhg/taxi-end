@@ -264,7 +264,7 @@ Route::group(['prefix' => 'report'], function () {
         return view('report.paymentHistory.index');
     });
     Route::get('/payment-history-unpaid', function () {
-        $upaids = \App\paymentHistory::where('paymentStatus', '0')->get();
+        $unpaids = \App\paymentHistory::where('paymentStatus', '0')->get();
         return view('report.paymentHistoryUnpaid.index', compact('unpaids'));
     });
 });
