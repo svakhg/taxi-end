@@ -126,6 +126,10 @@ class TaxiController extends Controller
         $taxi->center_name = $request->center_name;
         $taxi->save();
 
+        $callcode = CallCode::find($taxi->callcode_id);
+        $callcode->taken = '1';
+        $callcode->save();
+
         return back()->with('alert-success','Taxi Added successfully.');
     }
 
