@@ -31,7 +31,7 @@
                         <td>{{ $unpaid->taxi_id }}</td>
                         <td>{{ $unpaid->month }}</td>
                         <td>{{ $unpaid->year }}</td>
-                    <td></td>
+                        <td></td>
                     @endforeach
                   </tbody>
               </table>
