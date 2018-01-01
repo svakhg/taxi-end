@@ -98,11 +98,10 @@
                                 Report <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="disabled"><a href="#">Driver Report</a></li>
-                                <li class="disabled"><a href="#">Driver History Report</a></li>
-                                <li class="disabled"><a href="#">Taxi Report</a></li>
-                                <li class="disabled"><a href="#">Taxi History Report</a></li>
-                                <li class="disabled"><a href="#">Payment History Report</a></li>
+                                <li class="disabled"><a href="{{ url('report/driver') }}">Driver Report</a></li>
+                                <li class="disabled"><a href="{{ url('report/taxi') }}">Taxi Report</a></li>
+                                <li class="disabled"><a href="{{ url('report/payment-history') }}">Payment History Report</a></li>
+                                <li class="disabled"><a href="{{ url('report/payment-history-unpaid') }}">Payment History Report (Unpaid)</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
