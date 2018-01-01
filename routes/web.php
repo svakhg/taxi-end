@@ -73,7 +73,7 @@ Route::group(['prefix' => 'test'], function () {
     });
 });
 /*Payment generation*/
-Route::get('genpayment', function () {
+Route::get('payment-generation', function () {
     $payments = App\paymentHistory::where('month', date("m"))
                                   ->where('year', date("Y"))
                                   ->first();
