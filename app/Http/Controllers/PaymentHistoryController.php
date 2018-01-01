@@ -67,7 +67,7 @@ class PaymentHistoryController extends Controller
         }
 
         //Send SMS
-        $phone_number_owner = '+9609105616';
+        $phone_number_owner = '+9607774713';
         $message = $request->smsText;
 
         $this->sendMessage($phone_number_owner, $message);
