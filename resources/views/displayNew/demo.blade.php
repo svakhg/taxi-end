@@ -13,9 +13,6 @@
         // Comment to push to git
         return $number[$randIndex].mt_rand(100000,999999);
     }
-    function randomName() {
-        
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
