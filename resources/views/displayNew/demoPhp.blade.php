@@ -4,22 +4,22 @@
         $randIndex = array_rand($colors);
         return $colors[$randIndex];
     }
+    function checkColor($state, $feeDate, $roadDate, $insDate) {
+        $paid = ($state == '1') ? true : false;
+        $feeExpired = (strtotime($feeDate) > time()) ? true : false;
+        $roadExpired = (strtotime($roadDate) > time()) ? true : false;
+        $insuranceExpired = (strtotime($insDate) > time()) ? true : false;
+        // dd($feeDate, $paid, $feeExpired, $roadExpired, $insuranceExpired);
+        if(!$paid) {
+            return 'red';
+        }
+        if($paid AND !$feeExpired OR !$roadExpired OR !$insuranceExpired) {
+            return 'purple';
+        } 
+        elseif($paid AND $feeExpired AND $roadExpired AND $insuranceExpired) {
+            return 'green';
+        }
 
-    function randomTaxiNumber() {
-        return mt_rand(1000,9999);
-    }
-
-    function randomPhoneNumber() {
-        $number = ['9', '7'];
-        $randIndex = array_rand($number);
-        // Comment to push to git
-        return $number[$randIndex].mt_rand(100000,999999);
-    }
-
-    function randomCompany() {
-        $company = ['JR Taxi - 1919', 'City Cab - 1313', 'Cycle Taxi - 6090'];
-        $randIndex = array_rand($company);
-        return $company[$randIndex];
     }
 ?>
 <!DOCTYPE html>
@@ -39,7 +39,7 @@
     <div id="app">
         <div class="container">
             <center>
-                <h1>{{ randomCompany() }}
+                <h1>{{ $title }}
                     <button class="btn btn-info">All</button>
                     <button class="btn btn-success">Paid</button>
                     <button class="btn btn-danger">Unpaid</button>
@@ -48,16 +48,16 @@
             </center>
         </div>
         <div class="row no-gutters">
-            @for ($i = 0; $i < 150; $i++)
+            @foreach ($taxis as $taxi)
                 <div class="col-md-1">
-                    <?php $randomColor = randomColor() ?>
-                    <div class="box {{ $randomColor }}">
-                        <div class="callCode circle {{ $randomColor }}-color">{{ $i + 1 }}</div>
-                        <div class="taxiNo">{{ randomTaxiNumber() }}</div>
-                        <div class="phoneNumber">{{ randomPhoneNumber() }}</div>
+                    <?php $color = checkColor($taxi->state, $taxi->anualFeeExpiry, $taxi->roadWorthinessExpiry, $taxi->insuranceExpiry) ?>
+                    <div class="box {{ $color }}">
+                        <div class="callCode circle {{ $color }}-color">{{ $taxi->callcode->callCode }}</div>
+                        <div class="taxiNo">{{ $taxi->taxiNo }}</div>
+                        <div class="phoneNumber">{{ $taxi->driver->driverMobile }}</div>
                     </div>
                 </div>    
-            @endfor
+            @endforeach
         </div>
     </div>
     

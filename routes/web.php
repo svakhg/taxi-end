@@ -306,6 +306,19 @@ Route::group(['prefix' => 'report'], function () {
     });
 });
 
+
 Route::get('/display-demo', function () {
     return view('displayNew.demo');
+});
+
+Route::get('/display-demo/{center_name}', function ($center_name) {
+    $taxis = \App\Taxi::where('center_name', $center_name)->with('driver')->with('callcode')->get();
+    $center = \App\TaxiCenter::find($taxis[0]->callcode->center_id);
+    $title = $center->name.' - '.$center->telephone;
+    return view('displayNew.demoPhp', compact('taxis', 'title'));
+});
+
+Route::get('api/display-demo/{center_name}', function ($center_name) {
+    $taxis = \App\Taxi::where('center_name', $center_name)->with('driver')->with('callcode')->get();
+    return $taxis;
 });

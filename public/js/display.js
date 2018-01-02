@@ -9820,7 +9820,10 @@ window.Vue = __webpack_require__(3);
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    taxis: {}
+  }
 });
 
 /***/ })
