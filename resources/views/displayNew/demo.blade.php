@@ -21,6 +21,20 @@
         $randIndex = array_rand($company);
         return $company[$randIndex];
     }
+    function checkStatus($status, $color) {
+        if($status == NULL) {
+            return true;
+        }
+        if($status == 'paid') {
+            return ($color == 'green' OR $color == 'purple') ? true : false;
+        }
+        if($status == 'unpaid') {
+            return ($color == 'red') ? true : false;
+        }
+        if($status == 'expired') {
+            return ($color == 'purple') ? true : false;
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,23 +54,25 @@
         <div class="container">
             <center>
                 <h1>{{ randomCompany() }}
-                    <button class="btn btn-info">All</button>
-                    <button class="btn btn-success">Paid</button>
-                    <button class="btn btn-danger">Unpaid</button>
-                    <button class="btn purple">Expired</button> 
+                    <a href="{{ url('display-demo') }}" class="btn btn-info">All</a>
+                    <a href="{{ url('display-demo') }}?status=paid"  class="btn btn-success">Paid</a>
+                    <a href="{{ url('display-demo') }}?status=unpaid"  class="btn btn-danger">Unpaid</a>
+                    <a href="{{ url('display-demo') }}?status=expired"  class="btn purple">Expired</a>
                 </h1>
             </center>
         </div>
         <div class="row no-gutters">
             @for ($i = 0; $i < 150; $i++)
-                <div class="col-md-1">
-                    <?php $randomColor = randomColor() ?>
-                    <div class="box {{ $randomColor }}">
-                        <div class="callCode circle {{ $randomColor }}-color">{{ $i + 1 }}</div>
-                        <div class="taxiNo">{{ randomTaxiNumber() }}</div>
-                        <div class="phoneNumber">{{ randomPhoneNumber() }}</div>
+                <?php $color = randomColor() ?>
+                @if (checkStatus(request()->status, $color))
+                    <div class="col-md-1">
+                        <div class="box {{ $color }}">
+                            <div class="callCode circle {{ $color }}-color">{{ $i + 1 }}</div>
+                            <div class="taxiNo">{{ randomTaxiNumber() }}</div>
+                            <div class="phoneNumber">{{ randomPhoneNumber() }}</div>
+                        </div>
                     </div>
-                </div>    
+                @endif   
             @endfor
         </div>
     </div>

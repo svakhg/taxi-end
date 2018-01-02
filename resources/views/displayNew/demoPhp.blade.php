@@ -16,6 +16,20 @@
         }
 
     }
+    function checkStatus($status, $color) {
+        if($status == NULL) {
+            return true;
+        }
+        if($status == 'paid') {
+            return ($color == 'green' OR $color == 'purple') ? true : false;
+        }
+        if($status == 'unpaid') {
+            return ($color == 'red') ? true : false;
+        }
+        if($status == 'expired') {
+            return ($color == 'purple') ? true : false;
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,10 +49,10 @@
         <div class="container">
             <center>
                 <h1>{{ $title }}
-                    <button class="btn btn-info">All</button>
-                    <button class="btn btn-success">Paid</button>
-                    <button class="btn btn-danger">Unpaid</button>
-                    <button class="btn purple">Expired</button> 
+                    <a href="{{ url()->current() }}" class="btn btn-info">All</a>
+                    <a href="{{ url()->current() }}?status=paid"  class="btn btn-success">Paid</a>
+                    <a href="{{ url()->current() }}?status=unpaid"  class="btn btn-danger">Unpaid</a>
+                    <a href="{{ url()->current() }}?status=expired"  class="btn purple">Expired</a>
                 </h1>
             </center>
         </div>
@@ -46,11 +60,13 @@
             @foreach ($taxis as $taxi)
                 <div class="col-md-1">
                     <?php $color = checkColor($taxi->state, $taxi->anualFeeExpiry, $taxi->roadWorthinessExpiry, $taxi->insuranceExpiry) ?>
-                    <div class="box {{ $color }}">
-                        <div class="callCode circle {{ $color }}-color">{{ $taxi->callcode->callCode }}</div>
-                        <div class="taxiNo">{{ $taxi->taxiNo }}</div>
-                        <div class="phoneNumber">{{ $taxi->driver->driverMobile }}</div>
-                    </div>
+                    @if (checkStatus(request()->status, $color))
+                        <div class="box {{ $color }}">
+                            <div class="callCode circle {{ $color }}-color">{{ $taxi->callcode->callCode }}</div>
+                            <div class="taxiNo">{{ $taxi->taxiNo }}</div>
+                            <div class="phoneNumber">{{ $taxi->driver->driverMobile }}</div>
+                        </div>
+                    @endif   
                 </div>    
             @endforeach
         </div>
