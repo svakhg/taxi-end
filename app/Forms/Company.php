@@ -21,7 +21,10 @@ class Company extends Form
             ->add('city', 'text')
             ->add('telephone', 'text')
             ->add('fax', 'text')
-            ->add('mobile', 'text')
+            ->add('mobile', 'number', [
+                'label' => 'Mobile',
+                'max' => 7
+            ])
             ->add('email', 'text')
             ->add('website', 'text')
             ->add('ownername', 'text', [

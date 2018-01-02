@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Datatables;
 use App\Company;
+use App\TaxiCenter;
 use Illuminate\Support\Facades\Input;
 use Kris\LaravelFormBuilder\FormBuilder;
-
 
 class CompanyController extends Controller
 {
@@ -83,8 +83,15 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         $company = Company::findOrFail($id);
-        $company->delete();
-        return redirect()->back()->with('alert-success', 'Successfully deleted the company');
+        $result = TaxiCenter::where('company_id', $id)->get();
+        
+        if (!$result->count()) { 
+            $company->delete();
+            return redirect()->back()->with('alert-success', 'Successfully deleted the company');
+        } 
+        else {
+            return redirect()->back()->with('alert-danger', 'Taxi center(s) has been added under this company');
+        }        
     }
 
 }

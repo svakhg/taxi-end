@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TaxiCenter;
 use App\Company;
+use App\CallCode;
 use Illuminate\Support\Facades\Input;
 use Kris\LaravelFormBuilder\FormBuilder;
 
@@ -68,8 +69,15 @@ class TaxicenterController extends Controller
     }
     public function destroy($id)
     {
-        $company = TaxiCenter::findOrFail($id);
-        $company->delete();
-        return redirect()->back()->with('alert-success', 'Successfully deleted the Taxi Center');
+        $taxicenter = TaxiCenter::findOrFail($id);
+        $result = CallCode::where('center_id', $id)->get();
+        
+        if (!$result->count()) {
+            $taxicenter->delete();
+            return redirect()->back()->with('alert-success', 'Successfully deleted the Taxi Center');
+        }
+        else {
+            return redirect()->back()->with('alert-danger', 'Call Code(s) has been added under this taxi center');
+        }
     }
 }

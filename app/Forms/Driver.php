@@ -12,7 +12,7 @@ class Driver extends Form
             ->add('taxi_id', 'entity', [
                 'class' => 'App\Taxi',
                 'label' => 'Taxi',
-                'property' => 'taxiNo',
+                'property' => 'full_taxi',
             ])
             ->add('driverName', 'text', [
                 'label' => 'Driver Name'

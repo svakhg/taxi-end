@@ -41,15 +41,13 @@
                             <td>{{ $payment->taxi->taxiNo }}</td>
                             <td>{{ $payment->taxi->callcode->taxicenter->name }}</td>
                             <td>{{ $payment->taxi->rate }}</td>
-                            <td>{{ $payment->month }}/{{ $payment->year }}</td>
+                            <td>{{ date("F", $payment->month) }}/{{ $payment->year }}</td>
                             <td>
                             <?php 
                                 if ($payment->paymentStatus == "0") {
                                     echo '<button id="status" style="display: block; margin: auto;"  class="btn-danger" disabled>Not Paid</button>';
                                 } elseif($payment->paymentStatus == "1") {
                                     echo '<button id="status" style="display: block; margin: auto;"  class="btn-success" disabled>Paid</button>';
-                                } else {
-                                    return;
                                 }
                             ?>
                             </td>
@@ -304,53 +302,7 @@
     </div>
 </div>
 
-<script>
-var totalValue = 0; 
-    function c_payment(id){
-        var view_url = $("#hidden_view").val();
-        $.ajax({
-            url: view_url,
-            type:"GET", 
-            data: {"id":id}, 
-            success: function(result){
-                $("#idPayment").val(result.id);
-                $("#view_taxiNo").text(result.taxi.taxiNo);
-                $("#view_callCode").text(result.callcode.callCode);
-                $("#view_centerName").text(result.center.name);
-                $("#view_driverName").text(result.taxi.driver.driverName);
-                $("#view_total").val(result.taxi.rate);
-                $("#view_subtotal").val(result.subtotal);
-                $("#view_driverNumber").val(result.taxi.driver.driverMobile);
 
-                var z = 0;
-                var x = $("#view_total").val();
-                var y = $("#view_subtotal").val();
-                var z = x + y;
-                $("#totalAmount").val(z);
-                $("#totalAmountA").text(z);
-
-                var today = new Date();
-                var dd = today.getDate();
-                var mm = today.getMonth()+1; //January is 0!
-
-                var yyyy = today.getFullYear();
-                if(dd<10){
-                    dd='0'+dd;
-                } 
-                if(mm<10){
-                    mm='0'+mm;
-                } 
-                var today = dd+'/'+mm+'/'+yyyy;
-                
-                var paymentMonth = result.month;
-                var paymentYear = result.year;
-
-                var smsGeText = "A Payment of MVR 600 on "+ today +" was recieved for "+ paymentMonth + "/" + paymentYear;
-                $('#smsText').html(smsGeText);
-            }
-        });
-    }
-</script>   
 @endsection
 
 @section('js')
@@ -419,4 +371,52 @@ var totalValue = 0;
 
   } );
 </script>
+
+<script>
+    var totalValue = 0; 
+    function c_payment(id){
+        var view_url = $("#hidden_view").val();
+        $.ajax({
+            url: view_url,
+            type:"GET", 
+            data: {"id":id}, 
+            success: function(result){
+                $("#idPayment").val(result.id);
+                $("#view_taxiNo").text(result.taxi.taxiNo);
+                $("#view_callCode").text(result.callcode.callCode);
+                $("#view_centerName").text(result.center.name);
+                $("#view_driverName").text(result.taxi.driver.driverName);
+                $("#view_total").val(result.taxi.rate);
+                $("#view_subtotal").val(result.subtotal);
+                $("#view_driverNumber").val(result.taxi.driver.driverMobile);
+
+                var z = 0;
+                var x = $("#view_total").val();
+                var y = $("#view_subtotal").val();
+                var z = x + y;
+                $("#totalAmount").val(z);
+                $("#totalAmountA").text(z);
+
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
+
+                var yyyy = today.getFullYear();
+                if(dd<10) {
+                    dd='0'+dd;
+                } 
+                if(mm<10) {
+                    mm='0'+mm;
+                } 
+                var today = dd+'/'+mm+'/'+yyyy;
+                
+                var paymentMonth = result.month;
+                var paymentYear = result.year;
+
+                var smsGeText = "A Payment of MVR 600 on "+ today +" was recieved for "+ paymentMonth + "/" + paymentYear + '. Taxi number: T-'+ result.taxi.taxiNo;
+                $('#smsText').html(smsGeText);
+            }
+        });
+    }
+</script>   
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Datatables;
 use App\CallCode;
 use App\TaxiCenter;
+use App\Taxi;
 use Illuminate\Support\Facades\Input;
 use Kris\LaravelFormBuilder\FormBuilder;
 
@@ -64,8 +65,15 @@ class CallCodeController extends Controller
     }
     public function destroy($id)
     {
-        $company = CallCode::findOrFail($id);
-        $company->delete();
-        return redirect()->back()->with('alert-success', 'Successfully deleted the Call Code');
+        $callcode = CallCode::findOrFail($id);
+        $result = Taxi::where('callcode_id', $id)->get();
+
+        if (!$result->count()) {
+            $callcode->delete();
+            return redirect()->back()->with('alert-success', 'Successfully deleted the Call Code');
+        }
+        else {
+            return redirect()->back()->with('alert-danger', 'Taxi(s) has been added under this call code');
+        }
     }
 }

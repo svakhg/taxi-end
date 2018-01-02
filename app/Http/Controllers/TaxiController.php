@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\TaxiCenter;
 use App\CallCode;
 use App\Taxi;
+use App\Driver;
 use Illuminate\Support\Facades\Input;
 
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -49,6 +50,9 @@ class TaxiController extends Controller
         $callcode = CallCode::find($taxi->callcode_id);
         $callcode->taken = '1';
         $callcode->save();
+
+        $taxi->full_taxi = 'Call Code: '.$callcode->callCode.' - Taxi Number: '.$taxi->taxiNo;
+        $taxi->save();
 
         $s3 = \Storage::disk(env('UPLOAD_TYPE', 's3'));
         // Image Upload (Taxi front URL)
@@ -130,6 +134,9 @@ class TaxiController extends Controller
         $callcode->taken = '1';
         $callcode->save();
 
+        $taxi->full_taxi = 'Call Code: '.$callcode->callCode.' - Taxi Number: '.$taxi->taxiNo;
+        $taxi->save();
+
         return back()->with('alert-success','Taxi Added successfully.');
     }
 
@@ -142,12 +149,18 @@ class TaxiController extends Controller
     public function destroy($id)
     {
         $taxi = Taxi::findOrFail($id);
-        
-        $callcode = CallCode::find($taxi->callcode_id);
-        $callcode->taken = '1';
-        $callcode->save();
+        $result = Driver::where('taxi_id', $id)->get();
 
-        $taxi->delete();
-        return redirect()->back()->with('alert-success', 'Successfully deleted the Taxi');
+        if (!$result->count()) {
+            $callcode = CallCode::find($taxi->callcode_id);
+            $callcode->taken = '1';
+            $callcode->save();
+
+            $taxi->delete();
+            return redirect()->back()->with('alert-success', 'Successfully deleted the Taxi');
+        }
+        else {
+            return redirect()->back()->with('alert-danger', 'Driver(s) has been added under this taxi');
+        }
     }
 }
