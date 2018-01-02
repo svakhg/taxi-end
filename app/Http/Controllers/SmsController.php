@@ -24,19 +24,26 @@ class SmsController extends Controller
     {
         $message = $request->input('message');
         $phoneNumbers = $request->input('phoneNumber');
+        $from = $request->input('senderId');
+
+        //dd($from);
 
         $phoneNumber = '+960'.$phoneNumbers;
 
-        $this->sendMessage($phoneNumber, $message);
+        try {
+            $this->sendMessage($phoneNumber, $message, $from);
+            return redirect('sms')->with('alert-success', 'SMS successfully send');
 
-        return redirect('sms')->with('alert-success', 'SMS successfully send');
+        } catch ( \Twilio\Exceptions\RestException  $e ) {
+            return redirect('sms')->with('alert-danger', $e->getMessage());
+        }
     }
 
-    private function sendMessage($phoneNumber, $message)
+    private function sendMessage($phoneNumber, $message, $from)
     {
         $twilioPhoneNumber = config('services.twilio')['phoneNumber'];
         $messageParams = array(
-            'from' => 'Taviyani',
+            'from' => $from,
             'body' => $message
         );
 

@@ -26,30 +26,47 @@
                 <form class="form-horizontal" method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label class="col-md-4 control-label" for="senderId">Sender Id</label>
                             <div class="col-md-4">
                                 <input id="senderId" value="Taviyani" maxlength="11" pattern="^(?=.*[a-zA-Z])(?=.*[a-zA-Z0-9])([a-zA-Z0-9 ]{1,11})$" name="senderId" type="text" placeholder="Taviyani" class="form-control input-md" required="" title="Cannot Be Loner than 11 letter. Only letters and numbers allowed">
                                 <span class="help-block">Enter a sender Id here. It must be a combination of letters and numbers, It cannot be more than 11 characters.</span>
                             </div>
-                        </div>
+                        </div> -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="senderId">Select Sender id from list:</label>
+                            <div class="col-md-4">
+                                <select class="form-control" id="senderId" name="senderId" required>
+                                    <option value="Taviyani" selected>Taviyani</option>
+                                    <option value="TDS">TDS</option>
+                                    <option value="JR Taxi">JR Taxi</option>
+                                    <option value="City Cab">City Cab</option>
+                                </select>
+                            </div>
+                          </div>
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="phoneNumber">Phone Number</label>
                             <div class="col-md-4">
-                                <input id="phoneNumber" name="phoneNumber" type="tel" required>
-                                <p class="help-block">Enter the number here</p>
+                                <div class="input-group">
+                                    <span class="input-group-addon">+960</span>
+                                    <input id="phoneNumber" min="7" name="phoneNumber" type="tel" required>
+                                </div>
+                                <p class="help-block">Enter the number here, Must be a valid dhiraagu or ooredoo number.</p>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="message">Message</label>
                             <div class="col-md-4">
                                 <textarea class="form-control" rows="4" id="message" name="message" required></textarea>
-                                <ul id="sms-counter">
-                                    <li>Encoding: <span class="encoding"></span></li>
-                                    <li>Length: <span class="length"></span></li>
-                                    <li>Messages: <span class="messages"></span></li>
-                                    <li>Per Message: <span class="per_message"></span></li>
-                                    <li>Remaining: <span class="remaining"></span></li>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-11" style="text-align: center;">
+                                <ul id="sms-counter" style="list-style: none;">
+                                    <li style="display: inline-block;"><b>Length:</b> <span class="length"></span></li>
+                                    <li style="display: inline-block;"><b>Messages:</b> <span class="messages"></span></li>
+                                    <li style="display: inline-block;"><b>Per Message:</b> <span class="per_message"></span></li>
+                                    <li style="display: inline-block;"><b>Remaining:</b> <span class="remaining"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -70,21 +87,8 @@
 @endsection
 
 @section('js')
-<script src="/js/sms_counter.min.js"></script>
-<script>
-    $('#message').countSms('#sms-counter')
-</script>
-
-<script src="/js/intlTelInput.min.js"></script>
-<script>
-  $("#phoneNumber").intlTelInput({
-    preferredCountries: ["MV"]
-  });
-</script>
-
-@endsection
-
-@section('css')
-<link href="/css/intlTelInput.css" rel="stylesheet">
-
+    <script src="/js/sms_counter.min.js"></script>
+    <script>
+        $('#message').countSms('#sms-counter')
+    </script>
 @endsection
