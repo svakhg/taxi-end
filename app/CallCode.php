@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CallCode extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['center_id', 'callCode', 'taken'];
+    protected $fillable = ['center_id', 'callCode', 'taken', 'full_callcode'];
     protected $dates = ['deleted_at'];
 
     public function taxicenter()
@@ -20,4 +20,8 @@ class CallCode extends Model
     {
         return $this->hasOne('App\CallCode');
     }
+
+    // public function getFullCallcodeAttribute() {
+    //     return $this->callCode. ' - ' . $this->taxicenter->name;
+    // }
 }

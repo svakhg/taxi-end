@@ -72,9 +72,18 @@ Route::group(['prefix' => 'test'], function () {
             $i++;
         }
     });
-
     Route::get('/driver-dump', function () {
         $payments = paymentHistory::all();
+    });
+
+    Route::get('full-callcode-gen', function () {
+        $callcodes = \App\CallCode::all();
+        foreach ($callcodes as $callcode) {
+            $callcode->full_callcode = $callcode->callCode . ' - ' . $callcode->taxicenter->name;
+            $callcode->save();
+            echo 'Done ' . $callcode->id;
+            echo '<br>';
+        }
     });
 });
 /*Payment generation*/

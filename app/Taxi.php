@@ -24,5 +24,5 @@ class Taxi extends Model
     public function payment()
     {
         return $this->hasMany('App\paymentHistory');
-    }  
+    }
 }

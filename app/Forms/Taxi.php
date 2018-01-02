@@ -13,7 +13,7 @@ class Taxi extends Form
             ->add('callcode_id', 'entity', [
                 'class' => 'App\CallCode',
                 'label' => 'Call Code',
-                'property' => 'callCode',
+                'property' => 'full_callcode',
                 'query_builder' => function (CallCode $cc) {
                     return $cc->where('taken', 0);
                 }

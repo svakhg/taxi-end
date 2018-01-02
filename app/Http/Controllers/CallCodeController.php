@@ -35,7 +35,9 @@ class CallCodeController extends Controller
 
     public function store(Request $request)
     {
-        CallCode::create(Input::except('_token'));
+        $callcode = CallCode::create(Input::except('_token'));
+        $callcode->full_callcode = $callcode->callCode . ' - ' . $callcode->taxicenter->name;
+        $callcode->save();
         return back()->with('alert-success','Call Code Added successfully.');
     }
     public function edit($id, FormBuilder $formBuilder)
