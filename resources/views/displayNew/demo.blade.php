@@ -10,6 +10,7 @@
     function randomPhoneNumber() {
         $number = ['9', '7'];
         $randIndex = array_rand($number);
+        // Comment to push to git
         return $number[$randIndex].mt_rand(100000,999999);
     }
 ?>
