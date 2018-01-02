@@ -29,29 +29,23 @@
 
     <title>Taviyani Admin Portal</title>
 
-
     <!-- Styles -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/jszip-3.1.3/pdfmake-0.1.27/dt-1.10.15/b-1.3.1/b-colvis-1.3.1/b-html5-1.3.1/b-print-1.3.1/r-2.1.1/datatables.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Lato|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/jszip-3.1.3/pdfmake-0.1.27/dt-1.10.15/b-1.3.1/b-colvis-1.3.1/b-html5-1.3.1/b-print-1.3.1/r-2.1.1/datatables.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"/>
-    <link href="{{ url('css/app.css') }}" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
             background-color: #EEEEEE;
-        }
-        .navbar {
-            
         }
     </style>    
     @yield('css')
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
+        <div class="container-narrow">
             <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
@@ -64,7 +58,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                        <img src="{{asset('Taviyani_Logo.png')}}" width="100" height="60" style="margin-top:-17px;">
+                    <img src="{{asset('Taviyani_Logo.png')}}" width="100" height="60" style="margin-top:-17px;">
                 </a>
             </div>
 
@@ -121,7 +115,7 @@
                     @endif
                 </ul>
                 <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">Login</a></li>
@@ -167,6 +161,7 @@
         ga('create', 'UA-92445511-3', 'auto');
         ga('send', 'pageview');
     </script>
+    
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/jszip-3.1.3/pdfmake-0.1.27/dt-1.10.15/b-1.3.1/b-colvis-1.3.1/b-html5-1.3.1/b-print-1.3.1/r-2.1.1/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>

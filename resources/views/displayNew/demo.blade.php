@@ -13,6 +13,11 @@
         // Comment to push to git
         return $number[$randIndex].mt_rand(100000,999999);
     }
+    function randomCompany() {
+        $colors = ['JR Taxi', 'City Cab'];
+        $randIndex = array_rand($colors);
+        return $colors[$randIndex];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +34,11 @@
 </head>
 <body>
     <div id="app">
+        <div class="container">
+            <center>
+                <h1>{{ randomCompany() }} - </h1>
+            </center>
+        </div>
         <div class="row no-gutters">
             @for ($i = 0; $i < 150; $i++)
                 <div class="col-md-1">
