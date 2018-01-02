@@ -36,7 +36,12 @@
     <div id="app">
         <div class="container">
             <center>
-                <h1>{{ randomCompany() }} - Display</h1>
+                <h1>{{ randomCompany() }} - Display 
+                    <button class="btn btn-success">All</button>
+                    <button class="btn btn-info">Paid</button>
+                    <button class="btn btn-danger">Unpaid</button>
+                    <button class="btn btn-warning">Expired</button> 
+                </h1>
             </center>
         </div>
         <div class="row no-gutters">
