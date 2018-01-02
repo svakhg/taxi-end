@@ -10,6 +10,8 @@
   border: 0.5px solid black;
   text-align: center;
   margin: 5px;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 
 .taxiNo {
