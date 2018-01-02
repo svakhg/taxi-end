@@ -36,7 +36,7 @@
     <div id="app">
         <div class="container">
             <center>
-                <h1>{{ randomCompany() }} - </h1>
+                <h1>{{ randomCompany() }} - Display</h1>
             </center>
         </div>
         <div class="row no-gutters">
