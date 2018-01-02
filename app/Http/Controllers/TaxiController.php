@@ -141,8 +141,13 @@ class TaxiController extends Controller
     }
     public function destroy($id)
     {
-        $company = Taxi::findOrFail($id);
-        $company->delete();
+        $taxi = Taxi::findOrFail($id);
+        
+        $callcode = CallCode::find($taxi->callcode_id);
+        $callcode->taken = '1';
+        $callcode->save();
+
+        $taxi->delete();
         return redirect()->back()->with('alert-success', 'Successfully deleted the Taxi');
     }
 }

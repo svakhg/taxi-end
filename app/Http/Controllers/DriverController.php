@@ -154,8 +154,13 @@ class DriverController extends Controller
 
     public function destroy($id)
     {
-        $company = Driver::findOrFail($id);
-        $company->delete();
+        $driver = Driver::findOrFail($id);
+
+        $taxi = Taxi::find($driver->taxi_id);
+        $taxi->taken = '0';
+        $taxi->save();
+
+        $driver->delete();
         return redirect()->back()->with('alert-success', 'Successfully deleted the Driver');
     }
 }
