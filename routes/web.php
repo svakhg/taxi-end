@@ -305,3 +305,7 @@ Route::group(['prefix' => 'report'], function () {
         return view('report.paymentHistoryUnpaid.index', compact('unpaids'));
     });
 });
+
+Route::get('/display-demo', function () {
+    return view('displayNew.demo');
+});
