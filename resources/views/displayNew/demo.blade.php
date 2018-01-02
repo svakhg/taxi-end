@@ -4,19 +4,22 @@
         $randIndex = array_rand($colors);
         return $colors[$randIndex];
     }
+
     function randomTaxiNumber() {
         return mt_rand(1000,9999);
     }
+
     function randomPhoneNumber() {
         $number = ['9', '7'];
         $randIndex = array_rand($number);
         // Comment to push to git
         return $number[$randIndex].mt_rand(100000,999999);
     }
+
     function randomCompany() {
-        $colors = ['JR Taxi', 'City Cab'];
-        $randIndex = array_rand($colors);
-        return $colors[$randIndex];
+        $company = ['JR Taxi - 1919', 'City Cab - 1313', 'Cycle Taxi - 6090'];
+        $randIndex = array_rand($company);
+        return $company[$randIndex];
     }
 ?>
 <!DOCTYPE html>
@@ -36,7 +39,7 @@
     <div id="app">
         <div class="container">
             <center>
-                <h1>{{ randomCompany() }} - Display 
+                <h1>{{ randomCompany() }}
                     <button class="btn btn-success">All</button>
                     <button class="btn btn-info">Paid</button>
                     <button class="btn btn-danger">Unpaid</button>
