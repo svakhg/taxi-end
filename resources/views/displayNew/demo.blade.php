@@ -13,6 +13,9 @@
         // Comment to push to git
         return $number[$randIndex].mt_rand(100000,999999);
     }
+    function randomName() {
+        
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,8 +36,8 @@
             @for ($i = 0; $i < 150; $i++)
                 <div class="col-md-1">
                     <div class="box {{ randomColor() }}">
-                        <div class="taxiNo">T-{{ randomTaxiNumber() }}</div>
-                        <div class="callCode">CC: {{ $i + 1 }}</div>
+                        <div class="callCode circle">{{ $i + 1 }}</div>
+                        <div class="taxiNo">{{ randomTaxiNumber() }}</div>
                         <div class="phoneNumber">{{ randomPhoneNumber() }}</div>
                     </div>
                 </div>    

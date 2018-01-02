@@ -11,11 +11,31 @@ body {
     background-color: grey;
     border: 0.5px solid rgb(0, 0, 0);
     text-align: center;
-    text-shadow:1px 1px 3px rgb(83, 83, 83)
+    margin: 5px;
 }
 
 .taxiNo {
     font-size: 105%;
+    text-shadow:1px 1px 3px rgb(83, 83, 83);
+}
+
+.phoneNumber {
+    text-shadow:1px 1px 3px rgb(83, 83, 83);
+}
+
+.callCode {
+    position:absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.circle {
+    background:rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+    width:30px; height:30px; line-height: 30px;
+    text-align:center;
+    border-radius:50%;
+    box-shadow:0 0 1px #333;
 }
 
 .green {

@@ -14,7 +14,7 @@ class AddFullTaxi extends Migration
     public function up()
     {
         Schema::table('taxis', function($table) {
-            $table->string('full_taxi');
+            $table->string('full_taxi')->nullable();
         });
     }
 

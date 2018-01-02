@@ -9,11 +9,34 @@
   background-color: grey;
   border: 0.5px solid black;
   text-align: center;
-  text-shadow: 1px 1px 3px #535353;
+  margin: 5px;
 }
 
 .taxiNo {
   font-size: 105%;
+  text-shadow: 1px 1px 3px #535353;
+}
+
+.phoneNumber {
+  text-shadow: 1px 1px 3px #535353;
+}
+
+.callCode {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.circle {
+  background: white;
+  color: black;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 1px #333;
+          box-shadow: 0 0 1px #333;
 }
 
 .green {

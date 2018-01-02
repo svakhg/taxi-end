@@ -14,7 +14,7 @@ class AddFullCallCode extends Migration
     public function up()
     {
         Schema::table('call_codes', function($table) {
-            $table->string('full_callcode');
+            $table->string('full_callcode')->nullable();
         });
     }
 
