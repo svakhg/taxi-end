@@ -1,3 +1,18 @@
+<?php
+    function randomColor() {
+        $colors = ['green', 'red', 'purple', 'green'];
+        $randIndex = array_rand($colors);
+        return $colors[$randIndex];
+    }
+    function randomTaxiNumber() {
+        return mt_rand(1000,9999);
+    }
+    function randomPhoneNumber() {
+        $number = ['9', '7'];
+        $randIndex = array_rand($number);
+        return $number[$randIndex].mt_rand(100000,999999);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,34 +28,13 @@
 </head>
 <body>
     <div id="app">
-        <div class="row">
-            <?php
-                function randomColor() {
-                    $colors = ['green', 'red', 'purple', 'green'];
-                    $randIndex = array_rand($colors);
-                    return $colors[$randIndex];
-                }
-                function randomTaxiNumber() {
-                    return mt_rand(1000,9999);
-                }
-                function randomPhoneNumber() {
-                    $number = ['9', '7'];
-                    $randIndex = array_rand($number);
-                    return $number[$randIndex].mt_rand(100000,999999);
-                }
-            ?>
+        <div class="row no-gutters">
             @for ($i = 0; $i < 150; $i++)
                 <div class="col-md-1">
                     <div class="box {{ randomColor() }}">
-                        <div class="taxiNo">
-                            T-{{ randomTaxiNumber() }}
-                        </div>
-                        <div class="callCode">
-                            CC: {{ $i + 1 }}
-                        </div>
-                        <div class="phoneNumber">
-                            {{ randomPhoneNumber() }}
-                        </div>
+                        <div class="taxiNo">T-{{ randomTaxiNumber() }}</div>
+                        <div class="callCode">CC: {{ $i + 1 }}</div>
+                        <div class="phoneNumber">{{ randomPhoneNumber() }}</div>
                     </div>
                 </div>    
             @endfor
