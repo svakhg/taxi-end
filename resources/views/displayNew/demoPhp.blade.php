@@ -47,18 +47,23 @@
 <body>
     <div id="app">
         <div class="container">
-            <center>
-                <h1>{{ $title }}
-                    <a href="{{ url()->current() }}" class="btn btn-info">All</a>
-                    <a href="{{ url()->current() }}?status=paid"  class="btn btn-success">Paid</a>
-                    <a href="{{ url()->current() }}?status=unpaid"  class="btn btn-danger">Unpaid</a>
-                    <a href="{{ url()->current() }}?status=expired"  class="btn purple">Expired</a>
-                </h1>
-            </center>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <h1 class="title">{{ $title }}</h1>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="buttons">
+                        <a href="{{ url()->current() }}" class="btn btn-info">All</a>
+                        <a href="{{ url()->current() }}?status=paid"  class="btn btn-success">Paid</a>
+                        <a href="{{ url()->current() }}?status=unpaid"  class="btn btn-danger">Unpaid</a>
+                        <a href="{{ url()->current() }}?status=expired"  class="btn purple">Expired</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row no-gutters">
             @foreach ($taxis as $taxi)
-                <div class="col-md-1">
+                <div class="col-lg-1 col-md-2 col-sm-6 col-xs-6">
                     <?php $color = checkColor($taxi->state, $taxi->anualFeeExpiry, $taxi->roadWorthinessExpiry, $taxi->insuranceExpiry) ?>
                     @if (checkStatus(request()->status, $color))
                         <div class="box {{ $color }}">
