@@ -1,15 +1,10 @@
 <?php
-    function randomColor() {
-        $colors = ['green', 'red', 'purple', 'green'];
-        $randIndex = array_rand($colors);
-        return $colors[$randIndex];
-    }
     function checkColor($state, $feeDate, $roadDate, $insDate) {
         $paid = ($state == '1') ? true : false;
         $feeExpired = (strtotime($feeDate) > time()) ? true : false;
         $roadExpired = (strtotime($roadDate) > time()) ? true : false;
         $insuranceExpired = (strtotime($insDate) > time()) ? true : false;
-        // dd($feeDate, $paid, $feeExpired, $roadExpired, $insuranceExpired);
+        // dd($paid, $feeDate, $roadDate, $insDate, $feeExpired, $roadExpired, $insuranceExpired);
         if(!$paid) {
             return 'red';
         }
