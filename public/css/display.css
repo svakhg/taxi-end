@@ -32,7 +32,6 @@
 
 .circle {
   background: white;
-  color: black;
   width: 30px;
   height: 30px;
   line-height: 30px;
@@ -52,5 +51,17 @@
 
 .purple {
   background-color: #9b59b6 !important;
+}
+
+.green-color {
+  color: #27ae60 !important;
+}
+
+.red-color {
+  color: #e74c3c !important;
+}
+
+.purple-color {
+  color: #9b59b6 !important;
 }
 

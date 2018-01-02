@@ -34,7 +34,6 @@ body {
 
 .circle {
     background:rgb(255, 255, 255);
-    color:rgb(0, 0, 0);
     width:30px; height:30px; line-height: 30px;
     text-align:center;
     border-radius:50%;
@@ -51,4 +50,16 @@ body {
 
 .purple {
     background-color: #9b59b6 !important;
+}
+
+.green-color {
+    color: #27ae60 !important;
+}
+
+.red-color {
+    color: #e74c3c !important;
+}
+
+.purple-color {
+    color: #9b59b6 !important;
 }

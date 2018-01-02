@@ -50,8 +50,9 @@
         <div class="row no-gutters">
             @for ($i = 0; $i < 150; $i++)
                 <div class="col-md-1">
-                    <div class="box {{ randomColor() }}">
-                        <div class="callCode circle">{{ $i + 1 }}</div>
+                    <?php $randomColor = randomColor() ?>
+                    <div class="box {{ $randomColor }}">
+                        <div class="callCode circle {{ $randomColor }}-color">{{ $i + 1 }}</div>
                         <div class="taxiNo">{{ randomTaxiNumber() }}</div>
                         <div class="phoneNumber">{{ randomPhoneNumber() }}</div>
                     </div>
