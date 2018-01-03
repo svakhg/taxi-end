@@ -43,7 +43,6 @@
                                             <option value="TDS">TDS</option>
                                             <option value="JR Taxi">JR Taxi</option>
                                             <option value="City Cab">City Cab</option>
-                                            <option value="+9609105616">drftghyjCity Cab</option>
                                         </select>
                                     </div>
                                 </div>
