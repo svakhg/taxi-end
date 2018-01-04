@@ -40,7 +40,7 @@
                         <center>
                             <form action="/image-upload/taxi_front/{{ $taxi->id }}" method="POST" class="form-inline" role="form">
                                 <h5>Upload new Image</h5>
-                                <input type="file" name="image" id="image-{{ $taxi->id }}">
+                                <input type="file" name="image" id="image-{{ $taxi->id }}" disabled>
                                 <br>
                                 <button type="submit" class="btn btn-large btn-block btn-success disabled" disabled>Submit</button>
                             </form>
@@ -59,7 +59,7 @@
                         <center>
                             <form action="/image-upload/taxi_back/{{ $taxi->id }}" method="POST" class="form-inline" role="form">
                                 <h5>Upload new Image</h5>
-                                <input type="file" name="image" id="image--{{ $taxi->id }}">
+                                <input type="file" name="image" id="image--{{ $taxi->id }}" disabled>
                                 <br>
                                 <button type="submit" class="btn btn-large btn-block btn-success disabled" disabled>Submit</button>
                             </form>
