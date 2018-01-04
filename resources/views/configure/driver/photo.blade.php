@@ -30,12 +30,12 @@
                     <div class="col-md-4">
                         <h5>Licence front</h5>
                         <hr>
-                        <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->li_front_url_t) }}" class="img-thumbnail img-responsive" alt="Driver Front Image">
+                        <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->li_front_url_o) }}" class="img-thumbnail img-responsive" alt="Driver Front Image">
                     </div>
                     <div class="col-md-4">
                         <h5>Licence back</h5>
                         <hr>
-                        <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->li_back_url_t) }}" class="img-thumbnail img-responsive" alt="Driver Back Image">
+                        <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->li_back_url_o) }}" class="img-thumbnail img-responsive" alt="Driver Back Image">
                     </div>
                     <div class="col-md-4">
                         <h5>Driver Photo</h5>
