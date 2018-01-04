@@ -134,7 +134,21 @@ class DriverController extends Controller
         $taxi->taken = '0';
         $taxi->save();
 
+        Helper::delete_image_s3($driver->li_front_url_o);
+        Helper::delete_image_s3($driver->li_front_url_t);
+        Helper::delete_image_s3($driver->li_back_url_o);
+        Helper::delete_image_s3($driver->li_back_url_t);
+        Helper::delete_image_s3($driver->driver_photo_url_o);
+        Helper::delete_image_s3($driver->driver_photo_url_t);
+        
         $driver->delete();
         return redirect()->back()->with('alert-success', 'Successfully deleted the Driver');
+    }
+
+    public function photo($id)
+    {
+        $driver = Driver::findOrFail($id);
+
+        return view('configure.driver.photo', compact('driver'));
     }
 }

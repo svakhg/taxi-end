@@ -197,6 +197,8 @@ Route::group(['prefix' => 'configure'], function () {
         Route::post('/update/{id}', 'TaxiController@update');
         
         Route::get('/delete/{id}', 'TaxiController@destroy');
+        
+        Route::get('/photo/{id}', 'TaxiController@photo');
     });
     
     /*End of Taxi Configure Routes*/
@@ -214,7 +216,9 @@ Route::group(['prefix' => 'configure'], function () {
         Route::post('/update/{id}', 'DriverController@update');
         
         Route::get('/delete/{id}', 'DriverController@destroy');
-        Route::get('/ajax/{id}', 'DriverController@ajax');
+
+        Route::get('/photo/{id}', 'DriverController@photo');
+        // Route::get('/ajax/{id}', 'DriverController@ajax');
     });
  
     /*End of Driver Configure Routes*/

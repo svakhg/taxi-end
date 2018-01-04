@@ -133,6 +133,7 @@ class TaxiController extends Controller
 
         return view('configure.taxi.view', compact('taxi'));
     }
+    
     public function destroy($id)
     {
         $taxi = Taxi::findOrFail($id);
@@ -154,5 +155,12 @@ class TaxiController extends Controller
         else {
             return redirect()->back()->with('alert-danger', 'Driver(s) has been added under this taxi');
         }
+    }
+
+    public function photo($id)
+    {
+        $taxi = Taxi::findOrFail($id);
+
+        return view('configure.taxi.photo', compact('taxi'));
     }
 }
