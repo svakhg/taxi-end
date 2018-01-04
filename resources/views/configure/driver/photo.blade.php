@@ -28,13 +28,16 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->li_front_url_o) }}" class="img-thumbnail img-responsive" alt="Driver Front Image">
+                        <h6>Licence front</h6>
+                        <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->li_front_url_t) }}" class="img-thumbnail img-responsive" alt="Driver Front Image">
                     </div>
                     <div class="col-md-4">
-                        <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->li_back_url_o) }}" class="img-thumbnail img-responsive" alt="Driver Back Image">
+                        <h6>Licence back</h6>
+                        <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->li_back_url_t) }}" class="img-thumbnail img-responsive" alt="Driver Back Image">
                     </div>
                     <div class="col-md-4">
-                        <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->driver_photo_url_o) }}" class="img-thumbnail img-responsive" alt="Driver Back Image">
+                        <h6>Driver Photo</h6>
+                        <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->driver_photo_url_t) }}" class="img-thumbnail img-responsive" alt="Driver Back Image">
                     </div>
                 </div>
                 <hr>
