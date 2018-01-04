@@ -125,7 +125,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 @foreach ($taxi_centers as $center)
-                                <li><a href="/display-demo/{{ $center->cCode }}">Display {{ $center->name }}</a></li>    
+                                <li><a href="/display/{{ $center->cCode }}">Display {{ $center->name }}</a></li>    
                                 @endforeach
                             </ul>
                         </li>

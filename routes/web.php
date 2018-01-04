@@ -234,30 +234,21 @@ Route::group(['prefix' => 'payments'], function () {
 
 /*
 |--------------------------------------------------------------------------
-|Diplay Routes (JR)
+|Diplay Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix' => 'display'], function () {
-    Route::get('jr', 'DisplayController@jrIndex');
-
-    Route::get('jr-ajax', function () {
-        $taxis = App\Taxi::where('center_name', 'JRMM')->where('taken', '1')->get();
-        $payments = App\paymentHistory::all();
-        return view('display.Ajax', compact('taxis', 'payments'));
-    });
-
-    Route::get('city-cab', 'DisplayController@cityIndex');
-
-    Route::get('city-ajax', function () {
-        $taxis = App\Taxi::where('center_name', 'CBMM')->where('taken', '1')->get();
-        $payments = App\paymentHistory::all();
-        return view('display.Ajax', compact('taxis', 'payments'));
-    });
-
-    Route::get('driver-ajax/{id}', function ($id) {
-        $driver = App\Driver::find($id);
-        return view('configure.driverAjax', compact('driver'));
-    });
+Route::get('/display', function () {
+    return view('displayNew.demo');
+});
+Route::get('/display/{center_name}', function ($center_name) {
+    $taxis = \App\Taxi::where('center_name', $center_name)->with('driver')->with('callcode')->get();
+    $center = \App\TaxiCenter::find($taxis[0]->callcode->center_id);
+    $title = $center->name.' - '.$center->telephone;
+    return view('displayNew.demoPhp', compact('taxis', 'title'));
+});
+Route::get('api/display/{center_name}', function ($center_name) {
+    $taxis = \App\Taxi::where('center_name', $center_name)->with('driver')->with('callcode')->get();
+    return $taxis;
 });
 
 /*
@@ -305,18 +296,3 @@ Route::group(['prefix' => 'report'], function () {
 });
 
 
-Route::get('/display-demo', function () {
-    return view('displayNew.demo');
-});
-
-Route::get('/display-demo/{center_name}', function ($center_name) {
-    $taxis = \App\Taxi::where('center_name', $center_name)->with('driver')->with('callcode')->get();
-    $center = \App\TaxiCenter::find($taxis[0]->callcode->center_id);
-    $title = $center->name.' - '.$center->telephone;
-    return view('displayNew.demoPhp', compact('taxis', 'title'));
-});
-
-Route::get('api/display-demo/{center_name}', function ($center_name) {
-    $taxis = \App\Taxi::where('center_name', $center_name)->with('driver')->with('callcode')->get();
-    return $taxis;
-});
