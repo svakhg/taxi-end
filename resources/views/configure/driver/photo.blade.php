@@ -31,16 +31,19 @@
                         <h5>Licence front</h5>
                         <hr>
                         <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->li_front_url_o) }}" class="img-thumbnail img-responsive" alt="Driver Front Image">
+                        <a type="button" class="btn btn-large btn-block btn-danger disabled">Delete</a>
                     </div>
                     <div class="col-md-4">
                         <h5>Licence back</h5>
                         <hr>
                         <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->li_back_url_o) }}" class="img-thumbnail img-responsive" alt="Driver Back Image">
+                        <a type="button" class="btn btn-large btn-block btn-danger disabled">Delete</a>
                     </div>
                     <div class="col-md-4">
                         <h5>Driver Photo</h5>
                         <hr>
                         <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->driver_photo_url_o) }}" class="img-thumbnail img-responsive" alt="Driver Back Image">
+                        <a type="button" class="btn btn-large btn-block btn-danger disabled">Delete</a>
                     </div>
                 </div>
                 <hr>

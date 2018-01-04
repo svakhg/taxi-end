@@ -31,11 +31,13 @@
                         <h5>Taxi front</h5>
                         <hr>
                         <img src="{{ \App\Helpers\Helper::s3_url_gen($taxi->taxi_front_url_o) }}" class="img-thumbnail img-responsive" alt="Taxi Front Image">
+                        <a type="button" class="btn btn-large btn-block btn-danger disabled">Delete</a>
                     </div>
                     <div class="col-md-6">
                         <h5>Taxi back</h5>
                         <hr>
                         <img src="{{ \App\Helpers\Helper::s3_url_gen($taxi->taxi_back_url_o) }}" class="img-thumbnail img-responsive" alt="Taxi Back Image">
+                        <a type="button" class="btn btn-large btn-block btn-danger disabled">Delete</a>
                     </div>
                 </div>
                 <hr>
