@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-md-4">
                         <h6>Driver Photo</h6>
-                        <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->driver_photo_url_t) }}" class="img-thumbnail img-responsive" alt="Driver Back Image">
+                        <img src="{{ \App\Helpers\Helper::s3_url_gen($driver->driver_photo_url_o) }}" class="img-thumbnail img-responsive" alt="Driver Back Image">
                     </div>
                 </div>
                 <hr>
