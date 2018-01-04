@@ -33,7 +33,7 @@ class Helper
     }
 
     public static function photo_upload_original_s3($file, $fileName, $location) {
-        $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
+        $s3 = \Storage::disk(env('UPLOAD_TYPE', 's3'));
         $upload_location = $location."/original"."/".$fileName;
         //Original Image Resize
         $original = Image::make($file)->resize(1080, null, function ($constraint) {
@@ -53,7 +53,7 @@ class Helper
     }
 
     public static function photo_upload_thumbnail_s3($file, $fileName, $location) {
-        $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
+        $s3 = \Storage::disk(env('UPLOAD_TYPE', 's3'));
         $upload_location = $location."/thumbnail"."/".$fileName;
 
         //Thumbnail image Resize
@@ -74,7 +74,7 @@ class Helper
     }        
 
     public static function delete_image_s3($location) {
-        $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
+        $s3 = \Storage::disk(env('UPLOAD_TYPE', 's3'));
 
         if($s3->exists($location)) {
             $s3->delete($location);
