@@ -28,11 +28,13 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-6">
-                        <h6>Taxi front</h6>
+                        <h5>Taxi front</h5>
+                        <hr>
                         <img src="{{ \App\Helpers\Helper::s3_url_gen($taxi->taxi_front_url_t) }}" class="img-thumbnail img-responsive" alt="Taxi Front Image">
                     </div>
                     <div class="col-md-6">
-                        <h6>Taxi back</h6>
+                        <h5>Taxi back</h5>
+                        <hr>
                         <img src="{{ \App\Helpers\Helper::s3_url_gen($taxi->taxi_back_url_t) }}" class="img-thumbnail img-responsive" alt="Taxi Back Image">
                     </div>
                 </div>
