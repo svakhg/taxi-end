@@ -9,3 +9,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
+/.vscode
+/public/js/app.js
+/public/js/display.js
+/public/css/app.css
+/public/css/display.css

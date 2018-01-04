@@ -30,14 +30,40 @@
                     <div class="col-md-6">
                         <h5>Taxi front</h5>
                         <hr>
-                        <img src="{{ \App\Helpers\Helper::s3_url_gen($taxi->taxi_front_url_o) }}" class="img-thumbnail img-responsive" alt="Taxi Front Image">
-                        <a type="button" class="btn btn-large btn-block btn-danger disabled">Delete</a>
+                        <img src="{{ \App\Helpers\Helper::s3_url_gen($taxi->taxi_front_url_o) }}" class="img-thumbnail img-responsive" alt="Taxi Front Image" width="100%"
+                        @if ($taxi->taxi_front_url_o == null)
+                        height="300px"
+                        @endif
+                        >
+                        <a type="button" class="btn btn-large btn-block btn-danger disabled" disabled>Delete</a>
+                        <hr>
+                        <center>
+                            <form action="/image-upload/taxi_front/{{ $taxi->id }}" method="POST" class="form-inline" role="form">
+                                <h5>Upload new Image</h5>
+                                <input type="file" name="image" id="image-{{ $taxi->id }}">
+                                <br>
+                                <button type="submit" class="btn btn-large btn-block btn-success disabled" disabled>Submit</button>
+                            </form>
+                        </center>
                     </div>
                     <div class="col-md-6">
                         <h5>Taxi back</h5>
                         <hr>
-                        <img src="{{ \App\Helpers\Helper::s3_url_gen($taxi->taxi_back_url_o) }}" class="img-thumbnail img-responsive" alt="Taxi Back Image">
-                        <a type="button" class="btn btn-large btn-block btn-danger disabled">Delete</a>
+                        <img src="{{ \App\Helpers\Helper::s3_url_gen($taxi->taxi_back_url_o) }}" class="img-thumbnail img-responsive" alt="Taxi Back Image" width="100%"
+                        @if ($taxi->taxi_back_url_o == null)
+                        height="300px"
+                        @endif
+                        >
+                        <a type="button" class="btn btn-large btn-block btn-danger disabled" disabled>Delete</a>
+                        <hr>
+                        <center>
+                            <form action="/image-upload/taxi_back/{{ $taxi->id }}" method="POST" class="form-inline" role="form">
+                                <h5>Upload new Image</h5>
+                                <input type="file" name="image" id="image--{{ $taxi->id }}">
+                                <br>
+                                <button type="submit" class="btn btn-large btn-block btn-success disabled" disabled>Submit</button>
+                            </form>
+                        </center>
                     </div>
                 </div>
                 <hr>
