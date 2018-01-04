@@ -89,9 +89,7 @@ Route::group(['prefix' => 'test'], function () {
     Route::get('full-taxi-gen', function () {
         $taxis = \App\Taxi::all();
         foreach ($taxis as $taxi) {
-            $callcode = \App\CallCode::find($taxi->callcode_id);
-
-            $taxi->full_taxi = 'Call Code: '.$callcode->callCode.' - Taxi Number: '.$taxi->taxiNo;
+            $taxi->full_taxi = 'Call Code: '.$taxi->callcode->callCode.' - Taxi Number: '.$taxi->taxiNo.' Center Name: '.$taxi->callcode->taxicenter->name;
             $taxi->save();
             echo 'Done ' . $taxi->id;
             echo '<br>';

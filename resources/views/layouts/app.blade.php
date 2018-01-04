@@ -110,8 +110,25 @@
                                 <li><a href="{{ url('configure/driver') }}">Configure Drivers</a></li>
                             </ul>
                         </li>
-                        <li class="disabled"><a href="">Display JR</a></li>
-                        <li class="disabled"><a href="">Display City Cab</a></li>
+                        <li class="dropdown" disabled>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Manage Users <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li disabled><a href="{{ url('users/all') }}" onclick="return false;">View All</a></li>
+                                <li disabled><a href="{{ url('users/add') }}" onclick="return false;">Add New</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Displays <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach ($taxi_centers as $center)
+                                <li><a href="/display-demo/{{ $center->cCode }}">Display {{ $center->name }}</a></li>    
+                                @endforeach
+                            </ul>
+                        </li>
                     @endif
                 </ul>
                 <!-- Right Side Of Navbar -->
