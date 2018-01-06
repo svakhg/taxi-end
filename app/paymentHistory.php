@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class paymentHistory extends Model
 {
     use SoftDeletes;
+    
     protected $fillable = ['taxi_id', 'month', 'year', 'qty', 'total', 'subtotal', 'gstAmount', 'totalAmount', 'slipNo', 'desc', 'user_id', 'paymentStatus'];
 
     public function taxi()

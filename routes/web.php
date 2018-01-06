@@ -296,8 +296,8 @@ Route::group(['prefix' => 'report'], function () {
         return view('report.paymentHistory.index', compact('paids'));
     });
     Route::get('/payment-history-unpaid', function () {
-        $unpaids = \App\paymentHistory::where('paymentStatus', '0')->get();
-        return view('report.paymentHistoryUnpaid.index', compact('unpaids'));
+        $taxis = \App\Taxi::all();
+        return view('report.paymentHistoryUnpaid.index', compact('taxis'));
     });
 });
 
