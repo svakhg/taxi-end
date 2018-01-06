@@ -225,6 +225,8 @@ Route::group(['prefix' => 'configure'], function () {
 });
 
 
+
+
 /*
 |--------------------------------------------------------------------------
 |Payment Routes
@@ -299,4 +301,5 @@ Route::group(['prefix' => 'report'], function () {
     });
 });
 
-
+// Route::get('/voice-test', function () {
+// })->middleware('auth');
