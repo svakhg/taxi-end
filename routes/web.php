@@ -303,3 +303,10 @@ Route::group(['prefix' => 'report'], function () {
 
 // Route::get('/voice-test', function () {
 // })->middleware('auth');
+
+Route::group(['prefix' => 'users'], function () {
+    Route::get('/all', function () {
+        $users = \App\User::all();
+        return view('user.index', compact('users'));
+    });
+});

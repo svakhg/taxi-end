@@ -84,7 +84,8 @@
                                 Message Center <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ url('sms') }}">Send SMS</a></li>
+                                <li><a href="{{ url('sms') }}">Single SMS</a></li>
+                                <li class="disabled"><a href="#">Group SMS</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
