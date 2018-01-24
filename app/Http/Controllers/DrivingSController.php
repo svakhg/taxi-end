@@ -39,11 +39,6 @@ class DrivingSController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'name' => 'required',
-            'category' => 'required',
-            'remarks' => 'required'
-        ]);
 
         DrivingS::create([
             'name' => request('name'),
