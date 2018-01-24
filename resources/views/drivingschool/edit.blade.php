@@ -25,7 +25,7 @@
                         </div>
                     </div>                      
             <div class="col-md-12">
-                <form method="POST" enctype="multipart/form-data" action="create/success">
+                <form method="POST" enctype="multipart/form-data" action="edit">
                     {{ csrf_field() }}
                     <div class="form-group">
                     <label for="name">Name</label>
