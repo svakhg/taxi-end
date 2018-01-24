@@ -95,6 +95,11 @@ Route::group(['prefix' => 'test'], function () {
             echo '<br>';
         }
     });
+
+    Route::get('receipt', function () {
+        $payment = \App\paymentHistory::find(1);
+        return view('receipt.taxi_payment', compact('payment'));
+    });
 });
 /*Payment generation*/
 Route::get('payment-generation', function () {

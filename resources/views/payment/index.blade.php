@@ -373,7 +373,8 @@
 </script>
 
 <script>
-    var totalValue = 0; 
+    var totalValue = 0;
+
     function c_payment(id){
         var view_url = $("#hidden_view").val();
         $.ajax({
@@ -413,7 +414,7 @@
                 var paymentMonth = result.month;
                 var paymentYear = result.year;
 
-                var smsGeText = "A Payment of MVR 600 on "+ today +" was recieved for "+ paymentMonth + "/" + paymentYear + '. Taxi number: T-'+ result.taxi.taxiNo;
+                var smsGeText = "A Payment of MVR 600 on "+ today +" was received for "+ paymentMonth + "/" + paymentYear + '. Taxi number: T-'+ result.taxi.taxiNo;
                 $('#smsText').html(smsGeText);
             }
         });
