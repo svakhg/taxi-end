@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class DrivingSController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,7 @@ class DrivingSController extends Controller
      */
     public function index()
     {
-        //
+        return view('drivingschool.index');
     }
 
     /**
@@ -24,7 +28,7 @@ class DrivingSController extends Controller
      */
     public function create()
     {
-        //
+        return view('drivingschool.add');
     }
 
     /**
@@ -35,7 +39,27 @@ class DrivingSController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'name' => 'required',
+            'category' => 'required',
+            'remarks' => 'required'
+        ]);
+
+        DrivingS::create([
+            'name' => request('name'),
+            'id_card' => request('id_card'),
+            'phone' => request('phone'),
+            'category' => request('category'),
+            'c_address' => request('c_address'),
+            'p_address' => request('p_address'),
+            'instructor' => request('instructor'),
+            'rate' => request('rate'),
+            'remarks' => request('remarks'),
+            'finisheddate' => request('finisheddate'),
+            'user_id' => auth()->id(),
+        ]);
+        
+        return redirect('driving-school')->with('alert-success', 'Successfully Registered a new Student');
     }
 
     /**

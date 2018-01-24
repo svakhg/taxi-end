@@ -315,3 +315,14 @@ Route::group(['prefix' => 'users'], function () {
         return view('user.index', compact('users'));
     });
 });
+
+
+Route::group(['prefix' => 'driving-school'], function () {
+    Route::get('/', 'DrivingSController@index');
+    Route::get('/create', 'DrivingSController@create');
+    Route::post('/create/success', 'DrivingSController@store');
+    Route::get('/students/{drivingS}', 'DrivingSController@show'); 
+    Route::get('/students/{drivingS}/edit', 'DrivingSController@edit');
+    Route::post('/students/{drivingS}/edit', 'DrivingSController@update');
+    Route::get('/students/{drivingS}/delete', 'DrivingSController@destroy');
+});

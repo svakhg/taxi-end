@@ -15,6 +15,7 @@ class CreateDrivingSTable extends Migration
     {
         Schema::create('driving_s', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('user_id');
             $table->string('name')->nullable();
             $table->string('id_card')->nullable();
             $table->integer('phone')->nullable();

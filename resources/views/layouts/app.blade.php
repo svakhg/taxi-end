@@ -111,6 +111,15 @@
                                 <li><a href="{{ url('configure/driver') }}">Configure Drivers</a></li>
                             </ul>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Driving School <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url('driving-school') }}">View All Users</a></li>
+                                <li><a href="{{ url('driving-school/create') }}">Register a new user to the Driving School</a></li>
+                            </ul>
+                        </li>
                         <li class="dropdown" disabled>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Manage Users <span class="caret"></span>
