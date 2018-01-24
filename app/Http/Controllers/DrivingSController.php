@@ -64,9 +64,10 @@ class DrivingSController extends Controller
      * @param  \App\DrivingS  $drivingS
      * @return \Illuminate\Http\Response
      */
-    public function show(DrivingS $drivingS)
+    public function show($id)
     {
-        //
+        $payment = DrivingS::findOrFail($id);
+        return view('receipt.drivingschool',compact('payment'));
     }
 
     /**
@@ -75,9 +76,10 @@ class DrivingSController extends Controller
      * @param  \App\DrivingS  $drivingS
      * @return \Illuminate\Http\Response
      */
-    public function edit(DrivingS $drivingS)
+    public function edit($id)
     {
-        //
+        $student = DrivingS::findorfail($id);
+        return view('drivingschool.edit', compact('student'));
     }
 
     /**

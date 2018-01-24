@@ -327,6 +327,11 @@ Route::group(['prefix' => 'driving-school'], function () {
 
     Route::get('/students/{drivingS}/edit', 'DrivingSController@edit');
     Route::post('/students/{drivingS}/edit', 'DrivingSController@update');
-    
+
     Route::get('/students/{drivingS}/delete', 'DrivingSController@destroy');
+});
+
+Route::get('receipt/driving', function () {
+    $payment = \App\DrivingS::find(2);
+    return view('receipt.drivingschool', compact('payment'));
 });

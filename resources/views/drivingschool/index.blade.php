@@ -52,8 +52,9 @@
                                     <td>{{ $student->user->name }}</td>
                                     <td>{{ $student->created_at->toFormattedDateString() }}</td>
                                     <td>
-                                        <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/update/">Edit</a>
+                                        <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/students/{{ $student->id }}/edit">Edit</a>
                                         <a style="margin:1px" class="btn btn-info" href="{{ url()->current() }}/view/">View</a>
+                                        <a style="margin:1px" class="btn btn-success" href="{{ url()->current() }}/students/{{ $student->id }}">Reciept</a>
                                     </td>
                                 </tr>                            
                                 @endforeach
