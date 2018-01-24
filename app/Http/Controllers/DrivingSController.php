@@ -91,7 +91,18 @@ class DrivingSController extends Controller
      */
     public function update(Request $request, DrivingS $drivingS)
     {
-        //
+        $drivingS->name = $request->name;
+        $drivingS->id_card = $request->id_card;
+        $drivingS->phone = $request->phone;
+        $drivingS->category = $request->category;
+        $drivingS->c_address = $request->c_address;
+        $drivingS->p_address = $request->p_address;
+        $drivingS->instructor = $request->instructor;
+        $drivingS->rate = $request->rate;
+        $drivingS->remarks = $request->remarks;
+        $drivingS->finisheddate = $request->finisheddate;
+        $drivingS->save();
+        return redirect('/driving-school')->with('alert-success','Successfully edited the Student');
     }
 
     /**
