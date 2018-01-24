@@ -18,12 +18,12 @@ class CreateDrivingSTable extends Migration
             $table->string('user_id');
             $table->string('name')->nullable();
             $table->string('id_card')->nullable();
-            $table->integer('phone')->nullable();
+            $table->string('phone')->nullable();
             $table->string('category')->nullable();
             $table->string('c_address')->nullable();
             $table->string('p_address')->nullable();
             $table->string('instructor')->nullable();
-            $table->integer('rate')->nullable();
+            $table->string('rate')->nullable();
             $table->string('remarks')->nullable();
             $table->string('finisheddate')->nullable();
             $table->string('photo_url')->nullable();

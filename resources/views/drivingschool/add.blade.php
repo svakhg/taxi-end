@@ -72,8 +72,8 @@
                         <input type="text" class="form-control" name="rate" id="rate"  >
                     </div>
                     <div class="form-group">
-                        <label for="phone">Remarks</label>
-                        <select class="form-control" id="instructor" name="instructor" required>
+                        <label for="remarks">Remarks</label>
+                        <select class="form-control" id="remarks" name="remarks" required>
                             <option >Select Remarks</option>
                             <option value="Not Assigned">Not Assigned</option>
                             <option value="Card Issued">Card Issued</option>

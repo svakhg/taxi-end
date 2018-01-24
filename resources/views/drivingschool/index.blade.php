@@ -10,7 +10,7 @@
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">All Users</h3>
+        <h3 class="panel-title">All Driving School Students</h3>
     </div>
     <div class="panel-body">
         <div class="row">          
@@ -26,7 +26,39 @@
                         </div>
                     </div>          
             <div class="col-md-12">
-                
+                    <table id="taxi" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>                            
+                                    <th>Name</th>
+                                    <th>ID Card</th>
+                                    <th>Phone</th>
+                                    <th>Category</th>
+                                    <th>Instructor</th>
+                                    <th>Remarks</th>
+                                    <th>Registered By</th>
+                                    <th>Joined on</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($students as $student)
+                                <tr>
+                                    <td>{{ $student->name }}</th>
+                                    <td>{{ $student->id_card }}</td>
+                                    <td>{{ $student->phone }}</td>
+                                    <td>{{ $student->category }}</td>
+                                    <td>{{ $student->instructor }}</td>
+                                    <td>{{ $student->remarks }}</td>
+                                    <td>{{ $student->user->name }}</td>
+                                    <td>{{ $student->created_at->toFormattedDateString() }}</td>
+                                    <td>
+                                        <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/update/">Edit</a>
+                                        <a style="margin:1px" class="btn btn-info" href="{{ url()->current() }}/view/">View</a>
+                                    </td>
+                                </tr>                            
+                                @endforeach
+                            </tbody>
+                        </table>
             </div> 
         </div>
     </div>        
@@ -34,83 +66,4 @@
 
 
 
-@endsection
-
-@section('js')
-<script>
-    $(document).ready(function() {
-          var dataSrc = [];
-  
-          $.fn.dataTable.ext.buttons.add = {
-              text: 'Add',
-              action: function () {
-                window.location.href = './call-code/add';
-              }
-          };
-        
-          $('#callcode').DataTable({
-              'initComplete': function(){
-                  var api = this.api();
-                  api.cells('tr', [0, 1]).every(function(){
-                      var data = this.data();
-                      if(dataSrc.indexOf(data) === -1){ dataSrc.push(data); }
-              });
-              $('.dataTables_filter input[type="search"]', api.table().container())
-                  .typeahead({
-                      source: dataSrc,
-                      afterSelect: function(value){
-                          api.search(value).draw();
-                      }
-                  }
-                  );
-              },
-  
-              responsive: true,
-              dom: 'Bfrtip',
-              buttons: [
-                      {
-                      extend: 'add',
-                      className: 'btn btn-success',
-                  },
-                      {
-                      extend: 'print',
-                      className: 'btn btn-success',
-                      exportOptions: {
-                          columns: ':visible'
-                      }
-                  },
-                      {
-                      extend: 'csv',
-                      className: 'btn btn-success',
-                      exportOptions: {
-                          columns: ':visible'
-                      }
-                  },
-                      {
-                      extend: 'excel',
-                      className: 'btn btn-success',
-                      exportOptions: {
-                          columns: ':visible'
-                      }
-                  },
-                      {
-                      extend: 'pdf',
-                      className: 'btn btn-success',
-                      exportOptions: {
-                          columns: ':visible'
-                      }
-                  },
-                      {
-                      extend: 'colvis',
-                      className: 'btn btn-success',
-                  },
-              ],
-              columnDefs: [ {
-                  targets: false,
-                  visible: false
-              } ]
-          } );
-  
-    } );
-  </script>
 @endsection

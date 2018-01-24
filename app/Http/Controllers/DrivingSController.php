@@ -18,7 +18,8 @@ class DrivingSController extends Controller
      */
     public function index()
     {
-        return view('drivingschool.index');
+        $students = DrivingS::all();
+        return view('drivingschool.index', compact('students'));
     }
 
     /**
