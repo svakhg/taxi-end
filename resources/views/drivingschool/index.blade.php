@@ -1,11 +1,26 @@
 @extends('layouts.app')
 
+@section('css')
+<style>
+        #myInput {
+            background-image: url('/searchicon.png');
+            background-position: 10px 12px; 
+            background-repeat: no-repeat; 
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px; 
+            border: 1px solid #ddd; 
+            margin-bottom: 12px; 
+        }
+</style>
+@endsection
+
 @section('content')
 
 <ul class="breadcrumb">
     <li><a href="{{ url('home') }}">Home</a></li>
     <li><a href="{{ url('driving-school') }}">Driving School</a></li>
-    <li><a href="{{ url('driving-school') }}" class="active">All Users</a></li>
+    <li><a href="{{ url('driving-school') }}" class="active">All Registered Driving Students</a></li>
 </ul>
 
 <div class="panel panel-primary">
@@ -26,6 +41,7 @@
                         </div>
                     </div>          
             <div class="col-md-12">
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for student names..">
                     <table id="taxi" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>                            
@@ -67,4 +83,28 @@
 
 
 
+@endsection
+@section('js')
+<script>
+        function myFunction() {
+          // Declare variables 
+          var input, filter, table, tr, td, i;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("taxi");
+          tr = table.getElementsByTagName("tr");
+        
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            } 
+          }
+        }
+        </script>
 @endsection

@@ -40,10 +40,6 @@
                     <input type="text" class="form-control" name="phone" id="phone" value="{{ $student->phone }}" >
                     </div>
                     <div class="form-group">
-                        <label for="phone">Category</label>
-                        <input type="text" class="form-control" name="rate" id="rate" value="{{ $student->category }}" >
-                    </div>
-                    <div class="form-group">
                         <label for="c_address">Current Address</label>
                         <input type="text" class="form-control" name="c_address" id="c_address" value="{{ $student->c_address }}" >
                     </div>
@@ -52,16 +48,8 @@
                         <input type="text" class="form-control" name="p_address" id="p_address" value="{{ $student->p_address }}" >
                     </div>
                     <div class="form-group">
-                        <label for="phone">Instructor</label>
-                        <input type="text" class="form-control" name="rate" id="rate" value="{{ $student->instructor }}" >
-                    </div>
-                    <div class="form-group">
                         <label for="rate">Rate</label>
                         <input type="text" class="form-control" name="rate" id="rate" value="{{ $student->rate }}" >
-                    </div>
-                    <div class="form-group">
-                        <label for="remarks">Remarks</label>
-                        <input type="text" class="form-control" name="rate" id="rate" value="{{ $student->remarks }}" >
                     </div>
                     <div class="form-group">
                             <label for="finisheddate">Finshed Date</label>

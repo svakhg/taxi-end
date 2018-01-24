@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Driving School Payment</title>
 
     <style>
@@ -26,10 +26,14 @@
             bottom: -3px;
             left: 0;   
         }
+
+        
     </style>
 </head>
 
 <body>
+    <br>
+    <div class ="container" id="printableArea">
     <table width="100%" border="0" style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif; font-size:12px; ">
         <tr>
             <td width="80%">
@@ -39,11 +43,11 @@
                 <table width="100%" border="0">
                     <tr>
                         <td><strong>Date :</strong></td>
-                        <td align="right">{{ Carbon\Carbon::parse($payment->updated_at)->format('d/m/Y') }}</td>
+                        <td align="right"><?php echo date("d/m/Y") ?></td>
                     </tr>
                     <tr>
                         <td><strong>Slip No. :</strong></td>
-                        <td align="right">TDS/{{ $payment->year }}{{ $payment->id }}</td>
+                        <td align="right">TDS/<?php echo date("Y"); ?>/<?php echo date("M"); ?>/{{ $payment->id }}</td>
                     </tr>
                     <tr>
                         <td><strong>TIN No. :</strong></td>
@@ -69,10 +73,10 @@
                     <tr>
                         <td rowspan="5" class="doubleline" style="font-weight:normal">
                             &nbsp;{{ $payment->name }}<br>
-                            &nbsp; {{ $payment->id_card }}<br>
+                            &nbsp;{{ $payment->id_card }}<br>
                             &nbsp;{{ $payment->phone  }}<br>
-                            &nbsp; {{ $payment->c_address }}<br>
-                            &nbsp; {{ $payment->p_address }}<br>
+                            &nbsp;{{ $payment->c_address }}<br>
+                            &nbsp;{{ $payment->p_address }}<br>
                         </td>
                         <td>&nbsp;{{ $payment->created_at->toFormattedDateString() }}</td>
                         <td>&nbsp;Payment to {{ $payment->category }} Category Driving Course</td>
@@ -104,14 +108,14 @@
                         <td class="doubleline">&nbsp;</td>
                         <td class="doubleline">&nbsp;</td>
                         <td colspan="2" align="center">GST 6%</td>
-                        <td align="right">{{ $payment->rate }}</td>
+                        <td align="right"><?php  echo round( $payment->rate  * 6/106 ,2 );?></td>
                     </tr>
                     <tr>
                         <td colspan="2">&nbsp;</td>
                         <td class="doubleline">&nbsp;&nbsp;&nbsp; Collected By :
                             {{ $payment->user->name }}
                         </td>
-                        <td colspan="2" align="center" class="doubleline">TOTAL</td>
+                        <td colspan="2" align="center" class="doubleline">TOTAL (GST INCLUSIVE)</td>
                         <td class="doubleline" align="right">{{ $payment->rate }}</td>
                     </tr>
                     <tr>
@@ -129,11 +133,29 @@
             </td>
         </tr>
     </table>
+    </div>
 
+    <br>
+   <div class= "container">
+       <button class="btn btn-info" onclick="printDiv('printableArea')"><i class="fa fa-print" aria-hidden="true"></i> Print Reciept</button>
+       <button class="btn btn-info" ><i class="fa fa-arrow-left" aria-hidden="true"></i></i> <a href="{{ url('/driving-school') }}" style="color:white;">Go Back</a></button>
+   </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous'></script>
+    <script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+    
+        document.body.innerHTML = printContents;
+    
+        window.print();
+    
+        document.body.innerHTML = originalContents;
+    }
+    </script>
 </body>
 </html>
