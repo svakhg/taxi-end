@@ -39,6 +39,9 @@ class Taxi extends Form
             ->add('taxiOwnerName', 'text', [
                 'label' => 'Owner Name'
             ])
+            ->add('taxiOwnerMobile', 'text', [
+                'label' => 'Owner Phone Number'
+            ])
             ->add('taxiOwnerEmail', 'text', [
                 'label' => 'Email'
             ])

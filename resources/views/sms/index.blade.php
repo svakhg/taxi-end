@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="phoneNumber">Phone Number</label>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">+960</span>
                                             <input id="phoneNumber" min="7" name="phoneNumber" type="tel" required>
@@ -58,8 +58,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="message">Message</label>
-                                    <div class="col-md-4">
-                                        <textarea class="form-control" rows="4" id="message" name="message" required></textarea>
+                                    <div class="col-md-6">
+                                        <textarea style="font-size: 15px" class="form-control" rows="4" id="message" name="message" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">

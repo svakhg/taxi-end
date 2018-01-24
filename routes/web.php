@@ -225,6 +225,8 @@ Route::group(['prefix' => 'configure'], function () {
 });
 
 
+
+
 /*
 |--------------------------------------------------------------------------
 |Payment Routes
@@ -294,9 +296,17 @@ Route::group(['prefix' => 'report'], function () {
         return view('report.paymentHistory.index', compact('paids'));
     });
     Route::get('/payment-history-unpaid', function () {
-        $unpaids = \App\paymentHistory::where('paymentStatus', '0')->get();
-        return view('report.paymentHistoryUnpaid.index', compact('unpaids'));
+        $taxis = \App\Taxi::all();
+        return view('report.paymentHistoryUnpaid.index', compact('taxis'));
     });
 });
 
+// Route::get('/voice-test', function () {
+// })->middleware('auth');
 
+Route::group(['prefix' => 'users'], function () {
+    Route::get('/all', function () {
+        $users = \App\User::all();
+        return view('user.index', compact('users'));
+    });
+});

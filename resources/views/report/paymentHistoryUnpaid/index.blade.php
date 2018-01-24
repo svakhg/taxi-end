@@ -1,3 +1,11 @@
+<?php
+    function changeToMonth($monthNum, $year) {
+        $date = $monthNum.'-'.$year;
+        $dateObj = DateTime::createFromFormat('!m-Y', $date);
+        return $dateObj->format('F Y');
+    }
+?>
+
 @extends('layouts.app')
 
 @section('content')
@@ -18,24 +26,31 @@
                     <table id="printable" class="table table-bordered">
                         <thead>
                                 <th>#</th>
-                                <th>Call Code</th>
+                                <th>Call Code and Center</th>
                                 <th>Taxi Number</th>
-                                <th>Month</th>
-                                <th>Year</th>
-                                <th>Collected By</th>
+                                <th>Date(s)</th>
+                                <th>Taxi Owner Number</th>
+                                <th>Taxi Driver Number</th>
                         </thead>
                         <tbody>
                             <?php $i = 0 ?>
-                            @foreach ($unpaids as $unpaid)
+                            @foreach ($taxis as $taxi)
+                                @if (!$taxi->payment_unpaid->isEmpty())
                                 <?php $i++ ?>
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>{{ $unpaid->taxi->callcode->callCode }} - {{ $unpaid->taxi->callcode->taxicenter->name }}</td>
-                                    <td>T-{{ $unpaid->taxi->taxiNo }}</td>
-                                    <td>{{ date("F", $unpaid->month) }}</td>
-                                    <td>{{ $unpaid->year }}</td>
-                                    <td></td>
+                                    <td class="verticalAlign">{{ $i }}</td>
+                                    <td class="verticalAlign">Call Code: {{ $taxi->callcode->callCode }} - {{ $taxi->callcode->taxicenter->name }}</td>
+                                    <td class="verticalAlign">T-{{ $taxi->taxiNo }}</td>
+                                    <td>
+                                        @foreach ($taxi->payment_unpaid as $unpaid)
+                                        <b>+</b> {{ changeToMonth($unpaid->month, $unpaid->year) }}
+                                        <br>
+                                        @endforeach
+                                    </td>
+                                    <td class="verticalAlign">{{ $taxi->taxiOwnerMobile }}</td>
+                                    <td class="verticalAlign">{{ $taxi->driver->driverMobile }}</td>
                                 </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
@@ -74,6 +89,9 @@
 @section('css')
 
 <style>
+    .verticalAlign {
+        vertical-align: middle !important;
+    }
         
     /* Print styling */
     @media print {
