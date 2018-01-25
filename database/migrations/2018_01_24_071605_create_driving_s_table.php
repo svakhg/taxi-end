@@ -26,6 +26,7 @@ class CreateDrivingSTable extends Migration
             $table->string('rate')->nullable();
             $table->string('remarks')->nullable();
             $table->string('finisheddate')->nullable();
+            $table->string('theorydate')->nullable();
             $table->string('photo_url')->nullable();
             $table->string('licence_url')->nullable();
             $table->timestamps();

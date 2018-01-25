@@ -84,9 +84,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                            <label for="finisheddate">Finshed Date</label>
-                            <input type="text" class="form-control" name="finisheddate" id="finisheddate"  >
-                        </div>
+                        <label for="finisheddate">Driving Test Date</label>
+                        <input type="text" class="form-control" name="finisheddate" id="finisheddate"  >
+                    </div>
+                    <div class="form-group">
+                        <label for="theorydate">Theory Test Date</label>
+                        <input type="text" class="form-control" name="theorydate" id="theorydate"  >
+                    </div>
                       <div class="form-group">
                         <button type="submit" class="btn btn-primary">Submit</button>
                       </div>

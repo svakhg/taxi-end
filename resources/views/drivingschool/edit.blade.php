@@ -52,9 +52,13 @@
                         <input type="text" class="form-control" name="rate" id="rate" value="{{ $student->rate }}" >
                     </div>
                     <div class="form-group">
-                            <label for="finisheddate">Finshed Date</label>
-                            <input type="text" class="form-control" name="finisheddate" id="finisheddate" value="{{ $student->finisheddate }}" >
-                        </div>
+                        <label for="finisheddate">Driving Test Date</label>
+                        <input type="text" class="form-control" name="finisheddate" id="finisheddate" value="{{ $student->finisheddate }}" >
+                    </div>
+                    <div class="form-group">
+                        <label for="theorydate">Theory Test Date</label>
+                        <input type="text" class="form-control" name="theorydate" id="theorydate" value="{{ $student->theorydate }}" >
+                    </div>
                       <div class="form-group">
                         <button type="submit" class="btn btn-primary">Submit</button>
                       </div>

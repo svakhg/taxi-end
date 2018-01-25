@@ -41,41 +41,54 @@
                         </div>
                     </div>          
             <div class="col-md-12">
+                    <div class="btn-group">
+                        <button class="btn btn-success" onclick="printDiv('printableArea')"><i class="fa fa-print" aria-hidden="true"></i> Print the Page</button>
+                        <button type="button" class="btn btn-primary"><a href="{{ url('driving-school/create') }}" style="color:white;"><i class="fa fa-user-plus" aria-hidden="true"></i> Register a new Student</a></button>
+                        <button type="button" class="btn btn-warning">Export To Excel</button>
+                    </div>         
+                    <div style="margin-top:10px;">
+                    </div>
                     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for student names..">
-                    <table id="taxi" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>                            
-                                    <th>Name</th>
-                                    <th>ID Card</th>
-                                    <th>Phone</th>
-                                    <th>Category</th>
-                                    <th>Instructor</th>
-                                    <th>Remarks</th>
-                                    <th>Registered By</th>
-                                    <th>Joined on</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($students as $student)
-                                <tr>
-                                    <td>{{ $student->name }}</th>
-                                    <td>{{ $student->id_card }}</td>
-                                    <td>{{ $student->phone }}</td>
-                                    <td>{{ $student->category }}</td>
-                                    <td>{{ $student->instructor }}</td>
-                                    <td>{{ $student->remarks }}</td>
-                                    <td>{{ $student->user->name }}</td>
-                                    <td>{{ $student->created_at->toFormattedDateString() }}</td>
-                                    <td>
-                                        <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/students/{{ $student->id }}/edit">Edit</a>
-                                        <a style="margin:1px" class="btn btn-info" href="{{ url()->current() }}/view/">View</a>
-                                        <a style="margin:1px" class="btn btn-success" href="{{ url()->current() }}/students/{{ $student->id }}">Reciept</a>
-                                    </td>
-                                </tr>                            
-                                @endforeach
-                            </tbody>
+                    <div id="printableArea">
+                        <center><h3>Taviyani Driving School Record Sheet</h3></center>
+                        <table id="taxi" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>                            
+                                        <th>Name</th>
+                                        <th>ID Card</th>
+                                        <th>Phone</th>
+                                        <th>Category</th>
+                                        <th>Instructor</th>
+                                        <th>Remarks</th>
+                                        <th>Driving Test</th>
+                                        <th>Theory Test</th>
+                                        <th>Joined on</th>
+                                        <th>Registered By</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($students as $student)
+                                    <tr>
+                                        <td>{{ $student->name }}</th>
+                                        <td>{{ $student->id_card }}</td>
+                                        <td>{{ $student->phone }}</td>
+                                        <td>{{ $student->category }}</td>
+                                        <td>{{ $student->instructor }}</td>
+                                        <td>{{ $student->remarks }}</td>
+                                        <td>{{ $student->finisheddate }}</td>
+                                        <td>{{ $student->theorydate }}</td>
+                                        <td>{{ $student->created_at->toFormattedDateString() }}</td>
+                                        <td>{{ $student->user->name }}</td>
+                                        <td>
+                                            <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/students/{{ $student->id }}/edit">Edit</a>
+                                            <a style="margin:1px" class="btn btn-success" href="{{ url()->current() }}/students/{{ $student->id }}">Reciept</a>
+                                        </td>
+                                    </tr>                            
+                                    @endforeach
+                                </tbody>
                         </table>
+                    </div>
             </div> 
         </div>
     </div>        
@@ -106,5 +119,17 @@
             } 
           }
         }
+        </script>
+        <script>
+            function printDiv(divName) {
+                var printContents = document.getElementById(divName).innerHTML;
+                var originalContents = document.body.innerHTML;
+            
+                document.body.innerHTML = printContents;
+            
+                window.print();
+            
+                document.body.innerHTML = originalContents;
+            }
         </script>
 @endsection

@@ -52,6 +52,7 @@ class DrivingSController extends Controller
             'rate' => request('rate'),
             'remarks' => request('remarks'),
             'finisheddate' => request('finisheddate'),
+            'theorydate' => request('theorydate'),
             'user_id' => auth()->id(),
         ]);
         
@@ -98,6 +99,7 @@ class DrivingSController extends Controller
         $drivingS->p_address = $request->p_address;
         $drivingS->rate = $request->rate;
         $drivingS->finisheddate = $request->finisheddate;
+        $drivingS->theorydate = $request->theorydate;
         $drivingS->save();
         return redirect('/driving-school')->with('alert-success','Successfully edited the Student');
     }
