@@ -304,6 +304,21 @@ Route::group(['prefix' => 'report'], function () {
         $taxis = \App\Taxi::all();
         return view('report.paymentHistoryUnpaid.index', compact('taxis'));
     });
+
+    Route::get('/driving-school', function (Request $request) {
+        if(request()->exists('to') AND request()->exists('from')) {
+            $to = $request->input('to');
+            $from = $request->input('from');
+            $students = \App\DrivingS::whereBetween('created_at', array($from, $to))
+                                        ->get();    
+        } else {
+            $to = $request->input('to');
+            $from = $request->input('from');
+            $students = \App\DrivingS::whereBetween('created_at', array($from, $to))
+            ->get();    
+        }
+        return view('report.drivingschool.index', compact('students'));
+    });
 });
 
 // Route::get('/voice-test', function () {

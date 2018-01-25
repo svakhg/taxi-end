@@ -97,6 +97,7 @@
                                 <li><a href="{{ url('report/taxi') }}">Taxi Report</a></li>
                                 <li><a href="{{ url('report/payment-history') }}">Payment History Report</a></li>
                                 <li><a href="{{ url('report/payment-history-unpaid') }}">Payment History Report (Unpaid)</a></li>
+                                <li><a href="{{ url('report/driving-school') }}">Driving School History Report</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

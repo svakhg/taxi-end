@@ -35,7 +35,7 @@
                     </div>
                     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for student names..">
                     <div id="printableArea">
-                        <center><h3>Taviyani Driving School Record Sheet</h3></center>
+                        <center><h4>Taviyani Driving School Record Sheet</h4></center>
                         <table id="taxi" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>                            
