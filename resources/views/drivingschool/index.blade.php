@@ -28,7 +28,7 @@
             <div class="col-md-12">
                     <div class="btn-group">
                         <button class="btn btn-success" onclick="printDiv('printableArea')"><i class="fa fa-print" aria-hidden="true"></i> Print the Page</button>
-                        <button type="button" class="btn btn-primary"><a href="{{ url('driving-school/create') }}" style="color:white;"><i class="fa fa-user-plus" aria-hidden="true"></i> Register a new Student</a></button>
+                        <a href="{{ url('driving-school/create') }}" class="btn btn-primary" style="color:white;"><i class="fa fa-user-plus" aria-hidden="true"></i> Register a new Student</a>
                         <button type="button" class="btn btn-warning" onclick="excelGen()">Export To Excel</button>
                     </div>         
                     <div style="margin-top:10px;">

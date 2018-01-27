@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\DrivingS;
 use Illuminate\Http\Request;
 
+use Twilio\Rest\Client;
+
 class DrivingSController extends Controller
 {
-    public function __construct()
+    public function __construct(Client $client)
     {
         $this->middleware('auth');
+        $this->client = $client;
     }
     /**
      * Display a listing of the resource.
@@ -41,7 +44,7 @@ class DrivingSController extends Controller
     public function store(Request $request)
     {
 
-        DrivingS::create([
+        $student = DrivingS::create([
             'name' => request('name'),
             'id_card' => request('id_card'),
             'phone' => request('phone'),
@@ -56,7 +59,23 @@ class DrivingSController extends Controller
             'user_id' => auth()->id(),
         ]);
         
-        return redirect('driving-school')->with('alert-success', 'Successfully Registered a new Student');
+        $message = "Welcome ". $student->name .", to Taviyani Driving School. You will be receving further updatest through sms";
+        $phoneNumbers = $student->phone;
+        $from = "TDS";
+
+        //dd($from);
+
+        $phoneNumber = '+960'.$phoneNumbers;
+
+        try {
+            $this->sendMessage($phoneNumber, $message, $from);
+            return redirect('driving-school')->with('alert-success', 'Successfully Registered a new Student');
+
+        } catch ( \Twilio\Exceptions\RestException  $e ) {
+            return redirect('driving-school')->with('alert-danger', 'Driver added but '.$e->getMessage());
+        }
+
+        
     }
 
     /**
@@ -113,5 +132,19 @@ class DrivingSController extends Controller
     public function destroy(DrivingS $drivingS)
     {
         //
+    }
+
+    private function sendMessage($phoneNumber, $message, $from)
+    {
+        $twilioPhoneNumber = config('services.twilio')['phoneNumber'];
+        $messageParams = array(
+            'from' => $from,
+            'body' => $message
+        );
+
+        $this->client->messages->create(
+            $phoneNumber,
+            $messageParams
+        );
     }
 }

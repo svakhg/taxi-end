@@ -70,12 +70,15 @@ class DriverController extends Controller
         $driver_photo_t = Helper::photo_upload_thumbnail_s3($driver_photo, $driver_photo_filename, $driver_photo_location);
 
         //DB save
-        $driver->li_front_url_o = $fileNameFO;
-        $driver->li_front_url_t = $fileNameFT;
-        $driver->li_back_url_o = $fileNameBO;
-        $driver->li_back_url_t = $fileNameBT;
-        $driver->driver_photo_url_o = $fileNameDP;
-        $driver->driver_photo_url_t = $fileNameDPT;
+        $driver->li_front_url_o = $licence_front_o;
+        $driver->li_front_url_t = $licence_front_t;
+
+        $driver->li_back_url_o = $licence_back_o;
+        $driver->li_back_url_t = $licence_back_t;
+        
+        $driver->driver_photo_url_o = $driver_photo_o;
+        $driver->driver_photo_url_t = $driver_photo_t;
+        
         $driver->save();
 
 
