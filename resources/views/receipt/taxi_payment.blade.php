@@ -33,7 +33,8 @@
     <table width="100%" border="0" style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif; font-size:12px; ">
         <tr>
             <td width="80%">
-                <img src="/logo/CBMM.jpg" height="70"  alt=""/>
+                <?php $logo = '/logo'.$payment->taxi->callcode->taxicenter->cCode.'.jpg' ?>
+                <img src="{{ $logo }}" height="70"  alt=""/>
             </td>
             <td width="20%" colspan="2" align="left">
                 <table width="100%" border="0">
