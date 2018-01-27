@@ -95,11 +95,6 @@ Route::group(['prefix' => 'test'], function () {
             echo '<br>';
         }
     });
-
-    Route::get('receipt', function () {
-        $payment = \App\paymentHistory::find(1);
-        return view('receipt.taxi_payment', compact('payment'));
-    });
 });
 /*Payment generation*/
 Route::get('payment-generation', function () {
@@ -241,6 +236,10 @@ Route::group(['prefix' => 'payments'], function () {
     Route::get('taxi-payment', 'PaymentHistoryController@index')->name('payment');
     Route::post('taxi-payment', 'PaymentHistoryController@add');
     Route::get('taxi-payment/view', 'PaymentHistoryController@view');
+    Route::get('/taxi-payment/receipt/{id}', function ($id) {
+        $payment = \App\paymentHistory::find(1);
+        return view('receipt.taxi_payment', compact('payment'));
+    });
 });
 
 /*

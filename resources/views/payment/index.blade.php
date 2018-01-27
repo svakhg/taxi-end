@@ -43,27 +43,20 @@
                             <td>{{ $payment->taxi->rate }}</td>
                             <td>{{ date("F", $payment->month) }}/{{ $payment->year }}</td>
                             <td>
-                            <?php 
-                                if ($payment->paymentStatus == "0") {
-                                    echo '<button id="status" style="display: block; margin: auto;"  class="btn-danger" disabled>Not Paid</button>';
-                                } elseif($payment->paymentStatus == "1") {
-                                    echo '<button id="status" style="display: block; margin: auto;"  class="btn-success" disabled>Paid</button>';
-                                }
-                            ?>
+                                @if ($payment->paymentStatus == "0")
+                                    <button id="status" style="display: block; margin: auto;"  class="btn-danger" disabled>Not Paid</button>
+                                @endif
+                                @if ($payment->paymentStatus == "1")
+                                    <button id="status" style="display: block; margin: auto;"  class="btn-success" disabled>Paid</button>
+                                @endif
                             </td>
                             <td>
-                            <?php
-                            if ($payment->paymentStatus == "0") 
-                            {
-                            ?>
-                                <button style="display: block; margin: auto;" class="btn btn-info" data-toggle="modal" data-target="#paymentModal" onclick="c_payment('{{ $payment->id }}')">Recive Payment</button>
-                            <?php
-                            } elseif($payment->paymentStatus == "1") {
-                                echo '<button style="display: block; margin: auto;" class="btn btn-info" disabled>View</button>';
-                            } else {
-                                return;
-                            }
-                            ?>
+                                @if ($payment->paymentStatus == "0")
+                                    <button style="display: block; margin: auto;" class="btn btn-info" data-toggle="modal" data-target="#paymentModal" onclick="c_payment('{{ $payment->id }}')">Recive Payment</button>
+                                @endif
+                                @if ($payment->paymentStatus == "1")
+                                    <a href="{{ url()->current() }}/receipt/{{ $payment->id }}" style="display: block; margin: auto;" class="btn btn-info">View</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
