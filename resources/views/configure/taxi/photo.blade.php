@@ -37,11 +37,12 @@
                         >
                         <hr>
                         <center>
-                            <form action="/image-upload/taxi_front/{{ $taxi->id }}" method="POST" class="form-inline" role="form">
+                            <form action="/image-upload/taxi_front/{{ $taxi->id }}" method="POST" class="form-inline" role="form" enctype="multipart/form-data">
+                                {{ csrf_field() }}
                                 <h5>Upload new Image</h5>
-                                <input type="file" name="image" id="image-{{ $taxi->id }}" disabled>
+                                <input type="file" name="image" id="image-{{ $taxi->id }}">
                                 <br>
-                                <button type="submit" class="btn btn-large btn-block btn-success disabled" disabled>Submit</button>
+                                <button type="submit" class="btn btn-large btn-block btn-success">Submit</button>
                             </form>
                         </center>
                     </div>
@@ -55,11 +56,12 @@
                         >
                         <hr>
                         <center>
-                            <form action="/image-upload/taxi_back/{{ $taxi->id }}" method="POST" class="form-inline" role="form">
+                            <form action="/image-upload/taxi_back/{{ $taxi->id }}" method="POST" class="form-inline" role="form" enctype="multipart/form-data">
+                                {{ csrf_field() }}
                                 <h5>Upload new Image</h5>
-                                <input type="file" name="image" id="image--{{ $taxi->id }}" disabled>
+                                <input type="file" name="image" id="image--{{ $taxi->id }}">
                                 <br>
-                                <button type="submit" class="btn btn-large btn-block btn-success disabled" disabled>Submit</button>
+                                <button type="submit" class="btn btn-large btn-block btn-success">Submit</button>
                             </form>
                         </center>
                     </div>

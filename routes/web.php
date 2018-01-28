@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Http\Request;
-
+use Mohamedathik\PhotoUpload\Upload;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -397,5 +397,38 @@ Route::get('/test-taxi-2', function () {
 
 
 Route::group(['prefix' => 'image-upload'], function () {
-    //
+    Route::post('/taxi_front/{id}', function (Request $request, $id) {
+        $taxi = \App\Taxi::find($id);
+
+        $photo = $request->image;
+        $file_name = $photo->getClientOriginalName();
+        $location = 'Taxi/'.$taxi->taxiNo.'/front';
+
+        $url_original = Upload::upload_original($photo, $file_name, $location);
+        $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
+
+        $taxi->taxi_front_url_o = $url_original;
+        $taxi->taxi_front_url_t = $url_thumbnail;
+
+        $taxi->save();
+
+        return back()->with('alert-success', 'Photo updated');        
+    });
+    Route::post('/taxi_back/{id}', function (Request $request, $id) {
+        $taxi = \App\Taxi::find($id);
+
+        $photo = $request->image;
+        $file_name = $photo->getClientOriginalName();
+        $location = 'Taxi/'.$taxi->taxiNo.'/back';
+
+        $url_original = Upload::upload_original($photo, $file_name, $location);
+        $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
+
+        $taxi->taxi_back_url_o = $url_original;
+        $taxi->taxi_back_url_t = $url_thumbnail;
+
+        $taxi->save();
+
+        return back()->with('alert-success', 'Photo updated');
+    });
 });
