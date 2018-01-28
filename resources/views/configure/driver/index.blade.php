@@ -38,7 +38,6 @@
                 <table id="driver" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>Driver Photo</th>
                             <th>Taxi No</th>
                             <th>Driver Name</th>
                             <th>Driver Licence No.</th>
@@ -55,9 +54,6 @@
                     <tbody>
                     @foreach($drivers as $driver)
                         <tr>
-                            <td>
-                                <img src="{{ 'https://s3-ap-southeast-1.amazonaws.com/taviyani/'.$driver->driver_photo_url_t }}" class="img-responsive img-thumbnail"> 
-                            </td>
                             <td>{{ $driver->taxi->taxiNo }}</td>
                             <td>{{ $driver->driverName }}</td>
                             <td>{{ $driver->driverLicenceNo }}</td>

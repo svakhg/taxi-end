@@ -343,3 +343,17 @@ Route::group(['prefix' => 'driving-school'], function () {
     Route::post('/students/{drivingS}/edit', 'DrivingSController@update');
 
 });
+
+Route::get('/test-driver', function () {
+    $driver = \App\Driver::doesntHave('taxi')->get();
+});
+
+Route::get('/test-taxi', function () {
+    $taxis = \App\Taxi::doesntHave('driver')->get();
+    foreach ($taxis as $taxi) {
+        echo 'Taxi No: '.$taxi->taxiNo;
+        echo '<br>';
+        echo 'CallCode: '.$taxi->callcode->callCode;
+        echo '<hr>';
+    }
+});

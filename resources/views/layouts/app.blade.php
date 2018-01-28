@@ -110,6 +110,9 @@
                                 <li><a href="{{ url('configure/call-code') }}">Configure Call Codes</a></li>
                                 <li><a href="{{ url('configure/taxi') }}">Configure Taxis</a></li>
                                 <li><a href="{{ url('configure/driver') }}">Configure Drivers</a></li>
+                                <hr>
+                                <li><a href="{{ url('test-taxi') }}">Taxis with no drivers</a></li>
+                                <li><a href="{{ url('test-driver') }}">Drivers with no taxis</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
