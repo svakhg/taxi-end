@@ -59,13 +59,13 @@
               </table>
             </div> 
             <div class="col-md-12">
-                <img src="{{ 'https://s3-ap-southeast-1.amazonaws.com/taviyani/'.($taxi->taxi_front_url_o }}" alt="">
+                <img src="{{ 'https://s3-ap-southeast-1.amazonaws.com/taviyani/'.$taxi->taxi_front_url_o }}" alt="">
                 <hr>
-                <img src="{{ 'https://s3-ap-southeast-1.amazonaws.com/taviyani/'.($taxi->taxi_back_url_o }}" alt="">
+                <img src="{{ 'https://s3-ap-southeast-1.amazonaws.com/taviyani/'.$taxi->taxi_back_url_o }}" alt="">
                 <hr>
-                <img src="{{ 'https://s3-ap-southeast-1.amazonaws.com/taviyani/'.($taxi->taxi_front_url_t }}" alt="">
+                <img src="{{ 'https://s3-ap-southeast-1.amazonaws.com/taviyani/'.$taxi->taxi_front_url_t }}" alt="">
                 <hr>
-                <img src="{{ 'https://s3-ap-southeast-1.amazonaws.com/taviyani/'.($taxi->taxi_back_url_t }}" alt="">
+                <img src="{{ 'https://s3-ap-southeast-1.amazonaws.com/taviyani/'.$taxi->taxi_back_url_t }}" alt="">
                 <hr>
             </div> 
         </div>

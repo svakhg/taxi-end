@@ -32,12 +32,8 @@ class TaxiController extends Controller
 
     public function create(FormBuilder $formBuilder)
     {
-        $form = $formBuilder->create(\App\Forms\Taxi::class, [
-            'method' => 'POST',
-            'url' => url('configure/taxi/add')
-        ]);
-
-        return view('configure.taxi.add', compact('form'));
+        $callcodes = \App\CallCode::where('taken', '0')->get();
+        return view('configure.taxi.new.add', compact('callcodes'));
     }
 
     public function store(Request $request)
@@ -53,52 +49,57 @@ class TaxiController extends Controller
         $callcode->save();
 
         // Image Upload (Taxi front URL)
-        $front_image = $request->taxi_front_url;
-        $front_image_filename = $front_image->getClientOriginalName();
-        $front_image_location = 'Taxi/'.$taxi->taxiNo.'/front';        
-        $front_o = Helper::photo_upload_original_s3($front_image, $front_image_filename, $front_image_location);
-        $front_t = Helper::photo_upload_thumbnail_s3($front_image, $front_image_filename, $front_image_location);
+        if($request->has('taxi_front_url')) {
+            $front_image = $request->taxi_front_url;
+            $front_image_filename = $front_image->getClientOriginalName();
+            $front_image_location = 'Taxi/'.$taxi->taxiNo.'/front';        
+            $front_o = Helper::photo_upload_original_s3($front_image, $front_image_filename, $front_image_location);
+            $front_t = Helper::photo_upload_thumbnail_s3($front_image, $front_image_filename, $front_image_location);
+            $taxi->taxi_front_url_o = $front_o;
+            $taxi->taxi_front_url_t = $front_t;
+        } else {
+            $taxi->taxi_front_url_o = "Taxi/default/photo.jpg";
+            $taxi->taxi_front_url_t = "Taxi/default/photo.jpg";
+        }
 
         // Image Upload (Taxi back URL)
-        $back_image = $request->taxi_back_url;
-        $back_image_filename = $back_image->getClientOriginalName();
-        $back_image_location = 'Taxi/'.$taxi->taxiNo.'/back';
-        $back_o = Helper::photo_upload_original_s3($back_image, $back_image_filename, $back_image_location);
-        $back_t = Helper::photo_upload_thumbnail_s3($back_image, $back_image_filename, $back_image_location);
+        if($request->has('taxi_back_url')) {
+            $back_image = $request->taxi_back_url;
+            $back_image_filename = $back_image->getClientOriginalName();
+            $back_image_location = 'Taxi/'.$taxi->taxiNo.'/back';
+            $back_o = Helper::photo_upload_original_s3($back_image, $back_image_filename, $back_image_location);
+            $back_t = Helper::photo_upload_thumbnail_s3($back_image, $back_image_filename, $back_image_location);
+            $taxi->taxi_back_url_o = $back_o;
+            $taxi->taxi_back_url_t = $back_t;
+        } else {
+            $taxi->taxi_back_url_o = "Taxi/default/photo.jpg";
+            $taxi->taxi_back_url_t = "Taxi/default/photo.jpg";
+        }
         
         //Save to DB
         $taxi->full_taxi = 'Call Code: '.$callcode->callCode.' - Taxi Number: '.$taxi->taxiNo.' Center Name: '.$taxi->callcode->taxicenter->name;
-        $taxi->taxi_front_url_o = $front_o;
-        $taxi->taxi_front_url_t = $front_t;
-        $taxi->taxi_back_url_o = $back_o;
-        $taxi->taxi_back_url_t = $back_t;
         $taxi->save();
         
         return back()->with('alert-success','Taxi Added successfully.');
     }
     
-    public function edit($id, FormBuilder $formBuilder)
+    public function edit($id)
     {
         $taxi = Taxi::findOrFail($id);
-        $url = url('configure/taxi/update') .'/'. $taxi->id;
-
-        $form = $formBuilder->create(\App\Forms\Taxi::class, [
-            'method' => 'POST',
-            'model' => $taxi,
-            'url' => $url
-        ]);
-
-        return view('configure.taxi.edit', compact('form'));
+        $callcodes = \App\CallCode::where('taken', '0')->get();
+        return view('configure.taxi.new.edit', compact('taxi', 'callcodes'));
     }
 
     public function update($id, Request $request)
     {
         $taxi = Taxi::findOrFail($id);
-        $callcode_old = CallCode::find($taxi->callcode_id);
-        $callcode_old->taken = '0';
-        $callcode_old->save();
         
-        $taxi->callcode_id = $request->callcode_id;
+        $old_callcode_id = $taxi->callcode_id;
+        $new_callcode_id = $request->callcode_id;
+
+        // dd($old_callcode_id, $new_callcode_id);
+
+        // $taxi->callcode_id = $request->callcode_id;
         $taxi->taxiNo = $request->taxiNo;
         $taxi->taxiChasisNo = $request->taxiChasisNo;
         $taxi->taxiEngineNo = $request->taxiEngineNo;
@@ -115,16 +116,24 @@ class TaxiController extends Controller
         $taxi->insuranceExpiry = $request->insuranceExpiry;
         $taxi->rate = $request->rate;
         $taxi->center_name = $request->center_name;
+
+        if ($old_callcode_id !== $new_callcode_id) {
+            $old_callcode = CallCode::find($old_callcode_id);
+            $old_callcode->taken = '0';
+            $old_callcode->save();
+
+            $taxi->callcode_id = $new_callcode_id;
+
+            $new_callcode = CallCode::find($new_callcode_id);
+            $new_callcode->taken = '1';
+            $new_callcode->save();
+        } else {
+            $taxi->callcode_id = $old_callcode_id;
+        }
+        // $taxi->full_taxi = 'Call Code: '.$taxi->callcode->callCode.' - Taxi Number: '.$taxi->taxiNo.' Center Name: '.$taxi->callcode->taxicenter->name;
         $taxi->save();
-
-        $callcode = CallCode::find($taxi->callcode_id);
-        $callcode->taken = '1';
-        $callcode->save();
-
-        $taxi->full_taxi = 'Call Code: '.$callcode->callCode.' - Taxi Number: '.$taxi->taxiNo.' Center Name: '.$taxi->callcode->taxicenter->name;
-        $taxi->save();
-
-        return back()->with('alert-success','Taxi Updated successfully.');
+        
+        return redirect('configure/taxi')->with('alert-success','Taxi Updated successfully.');
     }
 
     public function view($id)
@@ -136,25 +145,7 @@ class TaxiController extends Controller
     
     public function destroy($id)
     {
-        $taxi = Taxi::findOrFail($id);
-        $result = Driver::where('taxi_id', $id)->get();
-
-        if (!$result->count()) {
-            $callcode = CallCode::find($taxi->callcode_id);
-            $callcode->taken = '0';
-            $callcode->save();
-
-            Helper::delete_image_s3($taxi->taxi_front_url_o);
-            Helper::delete_image_s3($taxi->taxi_front_url_t);
-            Helper::delete_image_s3($taxi->taxi_back_url_o);
-            Helper::delete_image_s3($taxi->taxi_back_url_t);
-
-            $taxi->delete();
-            return redirect()->back()->with('alert-success', 'Successfully deleted the Taxi');
-        }
-        else {
-            return redirect()->back()->with('alert-danger', 'Driver(s) has been added under this taxi');
-        }
+        
     }
 
     public function photo($id)

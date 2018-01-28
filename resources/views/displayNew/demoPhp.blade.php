@@ -109,7 +109,6 @@
         </div>
     </div>
     
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="">Launch Model</button>
 
     <div id="driverDetail" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Driver Detail" aria-hidden="true">
         <div class="modal-dialog modal-lg">
