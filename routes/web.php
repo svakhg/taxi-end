@@ -278,6 +278,9 @@ Route::get('/api/driver', function(Request $request) {
 Route::group(['prefix' => 'sms'], function () {
     Route::get('/', 'SmsController@index'); 
     Route::post('/', 'SmsController@send'); 
+    
+    Route::get('/group', 'SmsController@group'); 
+    Route::post('/group', 'SmsController@groupSend'); 
 });
 
 /*

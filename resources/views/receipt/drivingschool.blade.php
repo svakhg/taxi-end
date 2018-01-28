@@ -89,11 +89,12 @@
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td>&nbsp;Valid from {{ $payment->created_at->toFormattedDateString()  }} to <?php 
+                            <?php 
                                 $t = $payment->created_at;
                                 $x = strtotime($t);
                                 $n = date("M d, Y",strtotime("+3 month",$x));
-                                echo $n ?></td>
+                            ?>
+                            <td>&nbsp;Valid from {{ $payment->created_at->toFormattedDateString()  }} to {{ $n }}</td>
                             <td align="center">&nbsp;</td>
                             <td align="center">&nbsp;</td>
                             <td align="right">&nbsp;</td>
