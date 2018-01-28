@@ -14,7 +14,7 @@ class AddSuspendToTaxis extends Migration
     public function up()
     {
         Schema::table('taxis', function (Blueprint $table) {
-            //
+            $table->string('active')->default('0')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddSuspendToTaxis extends Migration
     public function down()
     {
         Schema::table('taxis', function (Blueprint $table) {
-            //
+            $table->dropColumn('active');
         });
     }
 }

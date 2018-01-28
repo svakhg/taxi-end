@@ -145,7 +145,7 @@ class TaxiController extends Controller
     
     public function destroy($id)
     {
-        
+        //
     }
 
     public function photo($id)
@@ -153,5 +153,31 @@ class TaxiController extends Controller
         $taxi = Taxi::findOrFail($id);
 
         return view('configure.taxi.photo', compact('taxi'));
+    }
+
+    public function deactivate($id)
+    {
+        $taxi = Taxi::findOrFail($id);
+        $old_callcode = CallCode::find($taxi->callcode_id);
+        $old_callcode->taken = '0';
+        $old_callcode->save();
+
+        $taxi->active = '0';
+        $taxi->callcode_id = '301';
+        $taxi->save();
+
+        return redirect('configure/taxi')->with('alert-success', 'Taxi deactivated successfully.');
+    }
+
+    public function activate($id)
+    {
+        $taxi = Taxi::findOrFail($id);
+        $new_callcode = CallCode::where('taken', 0)->first();
+        
+        $taxi->callcode_id = $new_callcode->id;
+        $taxi->active = '1';
+        $taxi->save();
+         
+        return redirect('configure/taxi')->with('alert-success', 'Taxi activated successfully.');
     }
 }

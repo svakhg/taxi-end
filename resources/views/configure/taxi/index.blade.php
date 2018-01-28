@@ -51,10 +51,14 @@
                             <td>{{ $taxi->registeredDate }}</td>
                             <td>{{ $taxi->rate }}</td>
                             <td>
-                                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $taxi->id }}" onclick="return confirm('Are you sure you would like to suspend this taxi?.')">Suspend</a>
+                                @if ($taxi->active == '1')
+                                    <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/deactivate/{{ $taxi->id }}" onclick="return confirm('Are you sure you would like to deacativate this taxi?.')">Deactivate</a>    
+                                @else
+                                    <a style="margin:1px" class="btn btn-success" href="{{ url()->current() }}/activate/{{ $taxi->id }}" onclick="return confirm('Are you sure you would like to activate this taxi?.')">Activate</a>
+                                @endif
                                 <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/update/{{ $taxi->id }}">Edit</a>
                                 <a style="margin:1px" class="btn btn-info" href="{{ url()->current() }}/view/{{ $taxi->id }}">View</a>
-                                <a style="margin:1px" class="btn btn-success" href="{{ url()->current() }}/photo/{{ $taxi->id }}">Photos</a>
+                                <a style="margin:1px" class="btn btn-primary" href="{{ url()->current() }}/photo/{{ $taxi->id }}">Photos</a>
                             </td>
                         </tr>                            
                         @endforeach

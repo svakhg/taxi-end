@@ -196,7 +196,10 @@ Route::group(['prefix' => 'configure'], function () {
         Route::get('/update/{id}', 'TaxiController@edit');
         Route::post('/update/{id}', 'TaxiController@update');
         
-        Route::get('/delete/{id}', 'TaxiController@destroy');
+        Route::get('/deactivate/{id}', 'TaxiController@deactivate');
+        Route::get('/activate/{id}', 'TaxiController@activate');
+
+        // Route::get('/delete/{id}', 'TaxiController@destroy');
         
         Route::get('/photo/{id}', 'TaxiController@photo');
     });
