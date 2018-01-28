@@ -78,11 +78,11 @@
                                 &nbsp;A{{ $payment->taxi->driver->driverIdNo }}<br>
                                 &nbsp;{{ $payment->taxi->driver->driverMobile }}<br>
                             </td>
-                            <td>&nbsp;{{ $payment->month }}/{{ $payment->year }}</td>
+                            <td align="center">&nbsp;{{ $payment->month }}/{{ $payment->year }}</td>
                             <td>&nbsp;{{ $payment->desc }}</td>
                             <td align="center">{{ $payment->qty }}</td>
-                            <td align="center">{{ $payment->rate }}</td>
-                            <td align="right">{{ $payment->total }}</td>
+                            <td align="center">{{ $payment->total }}</td>
+                            <td align="center">{{ $payment->total }}</td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
@@ -102,13 +102,13 @@
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td colspan="2"  align="center">SUBTOTAL </td>
-                            <td align="right" >{{ $payment->total }}</td>
+                            <td align="center" >{{ $payment->total }}</td>
                         </tr>
                         <tr>
                             <td class="doubleline">&nbsp;</td>
                             <td class="doubleline">&nbsp;</td>
                             <td colspan="2" align="center">GST 6%</td>
-                            <td align="right">-</td>
+                            <td align="center">-</td>
                         </tr>
                         <tr>
                             <td colspan="2">&nbsp;</td>
@@ -116,12 +116,12 @@
                                 {{ $payment->user->name }}
                             </td>
                             <td colspan="2" align="center" class="doubleline">TOTAL</td>
-                            <td class="doubleline" align="right">{{ $payment->total }}</td>
+                            <td class="doubleline" align="center">{{ $payment->total }}</td>
                         </tr>
                         <tr>
                             <td colspan="3" height="30px" style="border-left:0px">&nbsp;&nbsp;&nbsp;&nbsp; Follow Traffic Signals, Avoid Overtaking from Left and Avoid Cell Phones while Driving.</td>
                             <td colspan="2" align="center" class="doubleline">Date and Time </td>
-                            <td align="right" class="doubleline">{{ $payment->updated_at }}</td>
+                            <td align="center" class="doubleline">{{ $payment->updated_at }}</td>
                         </tr>
                         <tr>
                             <td height="36" colspan="6" align="center" style="border-top:1px solid #000"><strong>

@@ -75,7 +75,7 @@
                         <label for="remarks">Remarks</label>
                         <select class="form-control" id="remarks" name="remarks" required>
                             <option >Select Remarks</option>
-                            <option value="Not Assigned">Not Assigned</option>
+                            <option value="Form Processed">Form Processed</option>
                             <option value="Card Issued">Card Issued</option>
                             <option value="Finished">Finished</option>
                             <option value="Not Coming">Not Coming</option>

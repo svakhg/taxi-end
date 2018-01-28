@@ -20,6 +20,7 @@ class TaxiCenter extends Form
             ->add('address', 'text')
             ->add('telephone', 'text')
             ->add('mobile', 'text')
+            ->add('email', 'text')
             ->add('fax', 'text')
             ->add('submit', 'submit', [
                 'class' => 'btn btn-success btn-lg'
