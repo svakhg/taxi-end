@@ -237,7 +237,7 @@ Route::group(['prefix' => 'payments'], function () {
     Route::post('taxi-payment', 'PaymentHistoryController@add');
     Route::get('taxi-payment/view', 'PaymentHistoryController@view');
     Route::get('/taxi-payment/receipt/{id}', function ($id) {
-        $payment = \App\paymentHistory::find(1);
+        $payment = \App\paymentHistory::findOrFail($id);
         return view('receipt.taxi_payment', compact('payment'));
     });
 });
