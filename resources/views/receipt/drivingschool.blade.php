@@ -67,7 +67,7 @@
                     <table width="100%" border="1" style="border-collapse:collapse">
                         <tr>
                             <td width="21%" align="center"><strong>INFO</strong></td>
-                            <td width="7%" align="center"><strong>JOINED DATE</strong></td>
+                            <td width="7%" align="center"><strong>CATEGORY</strong></td>
                             <td width="37%" align="center"><strong>DESCRIPTION</strong></td>
                             <td width="10%" align="center"><strong>QTY</strong></td>
                             <td width="11%" align="center"><strong>RATE</strong></td>
@@ -81,7 +81,7 @@
                                 &nbsp;{{ $payment->c_address }}<br>
                                 &nbsp;{{ $payment->p_address }}<br>
                             </td>
-                            <td>&nbsp;{{ $payment->created_at->toFormattedDateString() }}</td>
+                            <td align="center">&nbsp;{{ $payment->category }}</td>
                             <td>&nbsp;Payment to {{ $payment->category }} Category Driving Course</td>
                             <td align="center">1</td>
                             <td align="center">{{ $payment->rate }}</td>
@@ -89,7 +89,11 @@
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td>&nbsp;Valid from {{ $payment->created_at->toFormattedDateString()  }} to <?php 
+                                $t = $payment->created_at;
+                                $x = strtotime($t);
+                                $n = date("M d, Y",strtotime("+3 month",$x));
+                                echo $n ?></td>
                             <td align="center">&nbsp;</td>
                             <td align="center">&nbsp;</td>
                             <td align="right">&nbsp;</td>
