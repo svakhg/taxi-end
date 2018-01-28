@@ -394,3 +394,8 @@ Route::get('/test-taxi-2', function () {
     $callcode = \App\CallCode::find(109);
     return $callcode->taxi;
 });
+
+
+Route::group(['prefix' => 'image-upload'], function () {
+    //
+});

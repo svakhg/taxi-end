@@ -35,7 +35,6 @@
                         height="300px"
                         @endif
                         >
-                        <a type="button" class="btn btn-large btn-block btn-danger disabled" disabled>Delete</a>
                         <hr>
                         <center>
                             <form action="/image-upload/taxi_front/{{ $taxi->id }}" method="POST" class="form-inline" role="form">
@@ -54,7 +53,6 @@
                         height="300px"
                         @endif
                         >
-                        <a type="button" class="btn btn-large btn-block btn-danger disabled" disabled>Delete</a>
                         <hr>
                         <center>
                             <form action="/image-upload/taxi_back/{{ $taxi->id }}" method="POST" class="form-inline" role="form">

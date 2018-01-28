@@ -15,8 +15,15 @@
         "laravel/tinker": "~1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
         "spatie/laravel-permission": "^2.7",
-        "twilio/sdk": "^5.16"
+        "twilio/sdk": "^5.16",
+        "mohamedathik/photo-upload": "1.*"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:mohamedathik/photo-upload.git"
+        }
+    ],
     "require-dev": {
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
