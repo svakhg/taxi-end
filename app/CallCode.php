@@ -16,9 +16,9 @@ class CallCode extends Model
         return $this->belongsTo('App\TaxiCenter', 'center_id');
     }
 
-    public function callcode()
+    public function taxi()
     {
-        return $this->hasOne('App\CallCode');
+        return $this->hasOne('App\Taxi', 'callcode_id');
     }
 
     // public function getFullCallcodeAttribute() {

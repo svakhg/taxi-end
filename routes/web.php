@@ -261,6 +261,14 @@ Route::get('api/display/{center_name}', function ($center_name) {
     return $taxis;
 });
 
+
+Route::get('/api/driver', function(Request $request) {
+    $driver = \App\Driver::with('taxi')->find($request->id);
+    $driver->paymentStatus = '<h4>Paid</h4>';
+    return $driver;
+});
+
+
 /*
 |--------------------------------------------------------------------------
 |SMS Routes
@@ -345,15 +353,38 @@ Route::group(['prefix' => 'driving-school'], function () {
 });
 
 Route::get('/test-driver', function () {
-    $driver = \App\Driver::doesntHave('taxi')->get();
+    $drivers = \App\Driver::doesntHave('taxi')->get();
+    foreach ($drivers as $driver) {
+        echo 'Database ID: '.$driver->id;
+        echo '<br>';
+        echo 'Driver Name: '.$driver->driverName;
+        echo '<br>';
+        echo 'Driver Id: '.$driver->driverIdNo;
+        echo '<br>';
+        echo 'Driver Mobile: '.$driver->driverMobile;
+        echo '<hr>';
+    }
+    if($drivers->isEmpty()){
+        echo 'All the added drivers has a taxi';
+    }
 });
 
 Route::get('/test-taxi', function () {
     $taxis = \App\Taxi::doesntHave('driver')->get();
     foreach ($taxis as $taxi) {
+        echo 'Database ID: '.$taxi->id;
+        echo '<br>';
         echo 'Taxi No: '.$taxi->taxiNo;
         echo '<br>';
         echo 'CallCode: '.$taxi->callcode->callCode;
         echo '<hr>';
     }
+    if($taxis->isEmpty()){
+        echo 'All the added taxis has a driver';
+    }
+});
+
+Route::get('/test-taxi-2', function () {
+    $callcode = \App\CallCode::find(109);
+    return $callcode->taxi;
 });
