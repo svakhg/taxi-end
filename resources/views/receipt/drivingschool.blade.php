@@ -128,8 +128,9 @@
                         </tr>
                         <tr>
                             <td colspan="3" height="30px" style="border-left:0px">&nbsp;&nbsp;&nbsp;&nbsp; Follow Traffic Signals, Avoid Overtaking from Left and Avoid Cell Phones while Driving.</td>
-                            <td colspan="2" align="center" class="doubleline">Date and Time </td>
-                            <td align="center" class="doubleline">{{ $payment->created_at }}</td>
+                            <td colspan="2" align="center" class="doubleline">Time </td>
+                            <td align="center" class="doubleline" id="todaysDate">
+                            </td>
                         </tr>
                         <tr>
                             <td height="36" colspan="6" align="center" style="border-top:1px solid #000"><strong>
@@ -141,6 +142,15 @@
                 </td>
             </tr>
         </table>
+        {{--  <img src="/paid-stamp-3.png" 
+        style="
+        height:5cm;
+        width:5cm;
+        position:absolute;
+        top:140px;
+        left:600px;
+
+        "/>  --}}
     </div>
 
     <br>
@@ -164,6 +174,27 @@
     
         document.body.innerHTML = originalContents;
     }
+    </script>
+    <script>
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+
+        function updateDate()
+        {
+            var str = "";
+
+            var now = new Date();
+
+            str +=  addZero(now.getHours()) +":" + addZero(now.getMinutes()) + ":" + addZero(now.getSeconds());
+            document.getElementById("todaysDate").innerHTML = str;
+        }
+
+        setInterval(updateDate, 1000);
+        updateDate();
     </script>
 </body>
 </html>

@@ -31,6 +31,10 @@
 </head>
 
 <body>
+        <?php
+        $monthNum = $payment->month;
+        $monthName = date("F", mktime(0, 0, 0, $monthNum, 10));
+        ?>
     <br>
     <div class ="container" id="printableArea">
         <table width="100%" border="0" style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif; font-size:12px; ">
@@ -43,11 +47,11 @@
                     <table width="100%" border="0">
                         <tr>
                             <td><strong>Date :</strong></td>
-                            <td align="right">{{ Carbon\Carbon::parse($payment->update_at)->format('d/m/Y') }}</td>
+                            <td align="right">{{ Carbon\Carbon::parse($payment->created_at)->format('d/m/Y') }}</td>
                         </tr>
                         <tr>
                             <td><strong>Slip No. :</strong></td>
-                            <td align="right">TPL/{{ $payment->year }}/{{ $payment->month }}/{{ $payment->taxi->taxiNo }}</td>
+                            <td align="right">TPL/{{ $payment->year }}/{{ $payment->id }}</td>
                         </tr>
                         <tr>
                             <td><strong>TIN No. :</strong></td>
@@ -78,7 +82,7 @@
                                 &nbsp;A{{ $payment->taxi->driver->driverIdNo }}<br>
                                 &nbsp;{{ $payment->taxi->driver->driverMobile }}<br>
                             </td>
-                            <td align="center">&nbsp;{{ $payment->month }}/{{ $payment->year }}</td>
+                            <td align="center">&nbsp;{{ $monthName }}/{{ $payment->year }}</td>
                             <td>&nbsp;{{ $payment->desc }}</td>
                             <td align="center">{{ $payment->qty }}</td>
                             <td align="center">{{ $payment->total }}</td>
@@ -120,8 +124,8 @@
                         </tr>
                         <tr>
                             <td colspan="3" height="30px" style="border-left:0px">&nbsp;&nbsp;&nbsp;&nbsp; Follow Traffic Signals, Avoid Overtaking from Left and Avoid Cell Phones while Driving.</td>
-                            <td colspan="2" align="center" class="doubleline">Date and Time </td>
-                            <td align="center" class="doubleline">{{ $payment->updated_at }}</td>
+                            <td colspan="2" align="center" class="doubleline">Time </td>
+                            <td align="center" class="doubleline" id="todaysDate"></td>
                         </tr>
                         <tr>
                             <td height="36" colspan="6" align="center" style="border-top:1px solid #000"><strong>
@@ -156,6 +160,27 @@
         
             document.body.innerHTML = originalContents;
         }
+        </script>
+        <script>
+            function addZero(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                }
+                return i;
+            }
+    
+            function updateDate()
+            {
+                var str = "";
+    
+                var now = new Date();
+    
+                str +=  addZero(now.getHours()) +":" + addZero(now.getMinutes()) + ":" + addZero(now.getSeconds());
+                document.getElementById("todaysDate").innerHTML = str;
+            }
+    
+            setInterval(updateDate, 1000);
+            updateDate();
         </script>
 </body>
 </html>
