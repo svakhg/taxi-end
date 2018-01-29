@@ -36,7 +36,6 @@
                             <th>Owner Name</th>
                             <th>Owner Mobile</th>
                             <th>Register Date</th>
-                            <th>Rate</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -49,7 +48,6 @@
                             <td>{{ $taxi->taxiOwnerName }}</td>
                             <td>{{ $taxi->taxiOwnerMobile }}</td>
                             <td>{{ $taxi->registeredDate }}</td>
-                            <td>{{ $taxi->rate }}</td>
                             <td>
                                 @if ($taxi->active == '1')
                                     <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/deactivate/{{ $taxi->id }}" onclick="return confirm('Are you sure you would like to deacativate this taxi?.')">Deactivate</a>    
