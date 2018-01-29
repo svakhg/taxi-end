@@ -64,9 +64,9 @@
                             <td>{{ $driver->driverTempAdd }}</td>
                             <td>
                                 @if ($driver->active == '1')
-                                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{  $driver->id }}" onclick="return confirm('Are you sure you would like to deactivate this?')">Deactivate</a>    
+                                    <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/deactivate/{{  $driver->id }}" onclick="return confirm('Are you sure you would like to deactivate this?')">Deactivate</a>    
                                 @else
-                                <a style="margin:1px" class="btn btn-success" href="{{ url()->current() }}/delete/{{  $driver->id }}" onclick="return confirm('Are you sure you would like to activate this?')">Activate</a>
+                                    <a style="margin:1px" class="btn btn-success" href="{{ url()->current() }}/activate/{{  $driver->id }}" onclick="return confirm('Are you sure you would like to activate this?')">Activate</a>
                                 @endif
                                 <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/update/{{  $driver->id }}">Edit</a>
                                 <a style="margin:1px" class="btn btn-info" href="{{ url()->current() }}/view/{{  $driver->id }}">View</a>

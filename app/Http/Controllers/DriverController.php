@@ -93,11 +93,11 @@ class DriverController extends Controller
         $driver->active = '1';
         $driver->save();
 
-        return back()->with('alert-success','Driver Added successfully.');
+        return redirect()->back()->with('alert-success', 'Driver Added successfully.');
 
     }
 
-    public function edit($id, FormBuilder $formBuilder)
+    public function edit($id)
     {
         $driver = Driver::findOrFail($id);
         $taxis = Taxi::where('active', '1')->get();
@@ -121,7 +121,7 @@ class DriverController extends Controller
         $driver->driverPermitExp = $request->driverPermitExp;
         $driver->save();
 
-        return back()->with('alert-success','Driver Added successfully.');
+        return redirect('configure/driver')->with('alert-success','Driver edited successfully.');
 
     }
 
@@ -134,21 +134,21 @@ class DriverController extends Controller
 
     public function destroy($id)
     {
-        $driver = Driver::findOrFail($id);
+        // $driver = Driver::findOrFail($id);
 
-        $taxi = Taxi::find($driver->taxi_id);
-        $taxi->taken = '0';
-        $taxi->save();
+        // $taxi = Taxi::find($driver->taxi_id);
+        // $taxi->taken = '0';
+        // $taxi->save();
 
-        Helper::delete_image_s3($driver->li_front_url_o);
-        Helper::delete_image_s3($driver->li_front_url_t);
-        Helper::delete_image_s3($driver->li_back_url_o);
-        Helper::delete_image_s3($driver->li_back_url_t);
-        Helper::delete_image_s3($driver->driver_photo_url_o);
-        Helper::delete_image_s3($driver->driver_photo_url_t);
+        // Helper::delete_image_s3($driver->li_front_url_o);
+        // Helper::delete_image_s3($driver->li_front_url_t);
+        // Helper::delete_image_s3($driver->li_back_url_o);
+        // Helper::delete_image_s3($driver->li_back_url_t);
+        // Helper::delete_image_s3($driver->driver_photo_url_o);
+        // Helper::delete_image_s3($driver->driver_photo_url_t);
         
-        $driver->delete();
-        return redirect()->back()->with('alert-success', 'Successfully deleted the Driver');
+        // $driver->delete();
+        // return redirect()->back()->with('alert-success', 'Successfully deleted the Driver');
     }
 
     public function photo($id)
@@ -156,5 +156,23 @@ class DriverController extends Controller
         $driver = Driver::findOrFail($id);
 
         return view('configure.driver.photo', compact('driver'));
+    }
+
+    public function deactivate($id)
+    {
+        $driver = Driver::findOrFail($id);
+        $driver->active = '0';
+        $driver->save();
+
+        return redirect()->back()->with('alert-success', 'Successfully deactivated the Driver');
+    }
+
+    public function activate($id)
+    {
+        $driver = Driver::findOrFail($id);
+        $driver->active = '1';
+        $driver->save();
+
+        return redirect()->back()->with('alert-success', 'Successfully activated the Driver');
     }
 }

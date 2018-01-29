@@ -218,7 +218,9 @@ Route::group(['prefix' => 'configure'], function () {
         Route::get('/update/{id}', 'DriverController@edit');
         Route::post('/update/{id}', 'DriverController@update');
         
-        Route::get('/delete/{id}', 'DriverController@destroy');
+        // Route::get('/delete/{id}', 'DriverController@destroy');
+        Route::get('/deactivate/{id}', 'DriverController@deactivate');
+        Route::get('/activate/{id}', 'DriverController@activate');
 
         Route::get('/photo/{id}', 'DriverController@photo');
         // Route::get('/ajax/{id}', 'DriverController@ajax');
