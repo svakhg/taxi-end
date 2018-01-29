@@ -115,7 +115,7 @@ class TaxiController extends Controller
         $taxi->roadWorthinessExpiry = $request->roadWorthinessExpiry;
         $taxi->insuranceExpiry = $request->insuranceExpiry;
         $taxi->rate = $request->rate;
-        $taxi->center_name = $request->center_name;
+        // $taxi->center_name = $request->center_name;
 
         if ($old_callcode_id !== $new_callcode_id) {
             $old_callcode = CallCode::find($old_callcode_id);
