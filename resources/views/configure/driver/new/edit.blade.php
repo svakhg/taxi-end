@@ -3,8 +3,9 @@
 @section('content')
 <ul class="breadcrumb">
     <li><a href="{{ url('home') }}">Home</a></li>
-    <li><a href="{{ url('driving-school') }}">Driving School Registration</a></li>
-    <li><a href="{{ url('driving-school/create') }}" class="active">Add</a></li>
+    <li><a href="#">Configure</a></li>
+    <li><a href="{{ url('configure/driver') }}">Driver</a></li>
+    <li class="active">Add</li>
 </ul>
 
 <div class="panel panel-primary">
@@ -25,52 +26,63 @@
                         </div>
                     </div>                      
             <div class="col-md-12">
-                <form method="POST" enctype="multipart/form-data" action="">
+                <form method="POST" enctype="multipart/form-data" action="{{ url()->current() }}">
                     {{ csrf_field() }}
                     <div class="form-group">
-                    <label for="driverName">Driver Name</label>
-                    <input type="text" class="form-control" id="driverName" name="driverName" value="{{ $driver->driverName }}">
+                        <label>Taxi</label>
+                        <select name="taxi_id" class="form-control">
+                            @foreach ($taxis as $taxi)
+                                <option value="{{ $taxi->id }}"
+                                @if ($taxi->id == $driver->taxi_id)
+                                selected
+                                @endif    
+                                >{{ $taxi->full_taxi }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
-                    <label for="driverIdNo">Driver ID Number</label>
-                    <input type="text" class="form-control" name="driverIdNo" id="driverIdNo" value="{{ $driver->driverIdNo }}" >
+                        <label for="driverName">Driver Name</label>
+                        <input type="text" class="form-control" id="driverName" name="driverName" value="{{ $driver->driverName }}">
                     </div>
                     <div class="form-group">
-                    <label for="driverTempAdd">Driver Temperory Address</label>
-                    <input type="text" class="form-control" name="driverTempAdd" id="driverTempAdd" value="{{ $driver->driverName }}" >
+                        <label for="driverIdNo">Driver ID Number</label>
+                        <input type="text" class="form-control" name="driverIdNo" id="driverIdNo" value="{{ $driver->driverIdNo }}" >
                     </div>
                     <div class="form-group">
-                    <label for="driverPermAdd">Driver Permanant Address</label>
-                    <input type="text" class="form-control" name="driverPermAdd" id="driverPermAdd" value="{{ $driver->driverPermAdd }}" >
+                        <label for="driverTempAdd">Driver Temperory Address</label>
+                        <input type="text" class="form-control" name="driverTempAdd" id="driverTempAdd" value="{{ $driver->driverName }}" >
                     </div>
                     <div class="form-group">
-                    <label for="driverMobile">Driver Mobile</label>
-                    <input type="text" class="form-control" name="driverMobile" id="driverMobile" value="{{ $driver->driverMobile }}" >
+                        <label for="driverPermAdd">Driver Permanant Address</label>
+                        <input type="text" class="form-control" name="driverPermAdd" id="driverPermAdd" value="{{ $driver->driverPermAdd }}" >
                     </div>
                     <div class="form-group">
-                    <label for="driverEmail">Driver Email</label>
-                    <input type="text" class="form-control" name="driverEmail" id="driverEmail" value="{{ $driver->driverEmail }}" >
+                        <label for="driverMobile">Driver Mobile</label>
+                        <input type="text" class="form-control" name="driverMobile" id="driverMobile" value="{{ $driver->driverMobile }}" >
                     </div>
                     <div class="form-group">
-                    <label for="driverLicenceNo">Driver Licence Number</label>
-                    <input type="text" class="form-control" name="driverLicenceNo" id="driverLicenceNo" value="{{ $driver->driverLicenceNo }}" >
+                        <label for="driverEmail">Driver Email</label>
+                        <input type="text" class="form-control" name="driverEmail" id="driverEmail" value="{{ $driver->driverEmail }}" >
                     </div>
                     <div class="form-group">
-                    <label for="driverLicenceExp">Driver Licence Expiry</label>
-                    <input type="date" class="form-control" name="driverLicenceExp" id="driverLicenceExp" value="{{ $driver->driverLicenceExp }}">
+                        <label for="driverLicenceNo">Driver Licence Number</label>
+                        <input type="text" class="form-control" name="driverLicenceNo" id="driverLicenceNo" value="{{ $driver->driverLicenceNo }}" >
                     </div>
                     <div class="form-group">
-                    <label for="driverPermitNo">Driver Permit No</label>
-                    <input type="text" class="form-control" name="driverPermitNo" id="driverPermitNo" value="{{ $driver->driverPermitNo }}" >
+                        <label for="driverLicenceExp">Driver Licence Expiry</label>
+                        <input type="date" class="form-control" name="driverLicenceExp" id="driverLicenceExp" value="{{ $driver->driverLicenceExp }}">
                     </div>
                     <div class="form-group">
-                    <label for="driverPermitExp">Driver Permit Expiry</label>
-                    <input type="date" class="form-control" name="driverPermitExp" id="driverPermitExp" value="{{ $driver->driverPermitExp }}">
+                        <label for="driverPermitNo">Driver Permit No</label>
+                        <input type="text" class="form-control" name="driverPermitNo" id="driverPermitNo" value="{{ $driver->driverPermitNo }}" >
+                    </div>
+                    <div class="form-group">
+                        <label for="driverPermitExp">Driver Permit Expiry</label>
+                        <input type="date" class="form-control" name="driverPermitExp" id="driverPermitExp" value="{{ $driver->driverPermitExp }}">
                     </div>   
-                      <div class="form-group">
+                    <div class="form-group">
                         <button type="submit" class="btn btn-primary">Submit</button>
-                      </div>
-                      
+                    </div>      
                 </form>
             </div> 
         </div>

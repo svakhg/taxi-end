@@ -29,8 +29,7 @@ class CreateDriversTable extends Migration
             $table->string('photoURL')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
-            $table->string('active')->nullable();
-
+            $table->string('active')->default('1')->nullable();
             $table->string('li_front_url_o')->nullable();
             $table->string('li_back_url_o')->nullable();
             $table->string('driver_photo_url_o')->nullable();

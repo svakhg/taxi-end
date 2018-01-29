@@ -27,6 +27,13 @@ class TaxiController extends Controller
         $centers = TaxiCenter::all();
         $callcodes = CallCode::where('taken', '0')->orderBy('callCode')->get();
         $taxis = Taxi::all();
+        
+        $callcodes_change = \App\CallCode::all();
+        foreach ($callcodes_change as $callcode) {
+            $callcode->full_callcode = $callcode->callCode . ' - ' . $callcode->taxicenter->name;
+            $callcode->save();
+        }
+        
         return view('configure.taxi.index', compact('centers', 'callcodes', 'taxis'));
     }
 

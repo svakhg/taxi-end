@@ -46,7 +46,6 @@
                             <th>Driver Permit Expiry</th>
                             <th>Driver Mobile</th>
                             <th>Driver Id Card</th>
-                            <th>Driver Perm Address</th>
                             <th>Driver Temp Address</th>
                             <th>Actions</th>
                         </tr>                            
@@ -62,13 +61,16 @@
                             <td>{{ $driver->driverPermitExp }}</td>
                             <td>{{ $driver->driverMobile }}</td>
                             <td>{{ $driver->driverIdNo }}</td>
-                            <td>{{ $driver->driverPermAdd }}</td>
                             <td>{{ $driver->driverTempAdd }}</td>
                             <td>
-                                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{  $driver->id }}" onclick="return confirm('Are you sure you would like to delete this? This process cannot be reversed.')">Delete</a>
+                                @if ($driver->active == '1')
+                                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{  $driver->id }}" onclick="return confirm('Are you sure you would like to deactivate this?')">Deactivate</a>    
+                                @else
+                                <a style="margin:1px" class="btn btn-success" href="{{ url()->current() }}/delete/{{  $driver->id }}" onclick="return confirm('Are you sure you would like to activate this?')">Activate</a>
+                                @endif
                                 <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/update/{{  $driver->id }}">Edit</a>
                                 <a style="margin:1px" class="btn btn-info" href="{{ url()->current() }}/view/{{  $driver->id }}">View</a>
-                                <a style="margin:1px" class="btn btn-success" href="{{ url()->current() }}/photo/{{ $driver->id }}">Photos</a>
+                                <a style="margin:1px" class="btn btn-primary" href="{{ url()->current() }}/photo/{{ $driver->id }}">Photos</a>
                             </td>
                         </tr>
                     @endforeach

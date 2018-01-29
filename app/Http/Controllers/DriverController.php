@@ -28,60 +28,70 @@ class DriverController extends Controller
         $callcodes = CallCode::all();
         $taxis = Taxi::where('taken', '0')->get();
         $drivers = Driver::all();
+
+        $taxis_change = \App\Taxi::all();
+        foreach ($taxis_change as $taxi) {
+            $taxi->full_taxi = 'Call Code: '.$taxi->callcode->callCode.' - Taxi Number: '.$taxi->taxiNo.' Center Name: '.$taxi->callcode->taxicenter->name;
+            $taxi->save();
+        }
+
         return view('configure.driver.index', compact('centers', 'callcodes', 'taxis', 'drivers'));
     }
 
-    public function create(FormBuilder $formBuilder)
+    public function create()
     {
-        $form = $formBuilder->create(\App\Forms\Driver::class, [
-            'method' => 'POST',
-            'url' => url('configure/driver/add')
-        ]);
-
-        return view('configure.driver.add', compact('form'));
+        $taxis = Taxi::where('active', '1')->get();
+        return view('configure.driver.new.add', compact('taxis'));
     }
 
     public function store(Request $request)
     {
         $driver = Driver::create(Input::except('_token', 'li_front_url', 'li_back_url', 'driver_photo_url'));
-        $taxi = Taxi::find($driver->taxi_id);
-        $taxi->taken = '1';
-        $taxi->save();
 
         // Image Upload (Licence Front)
-        $licence_front = $request->li_front_url;
-        $licence_front_filename = $licence_front->getClientOriginalName();
-        $licence_front_location = 'Taxi/'.$taxi->taxiNo.'/driver'.'/licence'.'/front';
-        $licence_front_o = Helper::photo_upload_original_s3($licence_front, $licence_front_filename, $licence_front_location);
-        $licence_front_t = Helper::photo_upload_thumbnail_s3($licence_front, $licence_front_filename, $licence_front_location);
+        if($request->has('li_front_url')) {
+            $licence_front = $request->li_front_url;
+            $licence_front_filename = $licence_front->getClientOriginalName();
+            $licence_front_location = 'Taxi/'.$taxi->taxiNo.'/driver'.'/licence'.'/front';
+            $licence_front_o = Helper::photo_upload_original_s3($licence_front, $licence_front_filename, $licence_front_location);
+            $licence_front_t = Helper::photo_upload_thumbnail_s3($licence_front, $licence_front_filename, $licence_front_location);
+            $driver->li_front_url_o = $licence_front_o;
+            $driver->li_front_url_t = $licence_front_t;
+        } else {
+            $driver->li_front_url_o = 'Taxi/default/pc-front.png';
+            $driver->li_front_url_t = 'Taxi/default/pc-front.png';
+        }
 
         // Image Upload (License back)
-        $licence_back = $request->li_back_url;
-        $licence_back_filename = $licence_back->getClientOriginalName();
-        $licence_back_location = 'Taxi/'.$taxi->taxiNo.'/driver'.'/licence'.'/back';
-        $licence_back_o = Helper::photo_upload_original_s3($licence_back, $licence_back_filename, $licence_back_location);
-        $licence_back_t = Helper::photo_upload_thumbnail_s3($licence_back, $licence_back_filename, $licence_back_location);
+        if($request->has('li_back_url')) {
+            $licence_back = $request->li_back_url;
+            $licence_back_filename = $licence_back->getClientOriginalName();
+            $licence_back_location = 'Taxi/'.$taxi->taxiNo.'/driver'.'/licence'.'/back';
+            $licence_back_o = Helper::photo_upload_original_s3($licence_back, $licence_back_filename, $licence_back_location);
+            $licence_back_t = Helper::photo_upload_thumbnail_s3($licence_back, $licence_back_filename, $licence_back_location);
+            $driver->li_back_url_o = $licence_back_o;
+            $driver->li_back_url_t = $licence_back_t;
+        } else {
+            $driver->li_back_url_o = 'Taxi/default/pc-front.png';
+            $driver->li_back_url_t = 'Taxi/default/pc-front.png';
+        }
 
         // Image Upload (Driver Photo)
-        $driver_photo = $request->driver_photo_url;
-        $driver_photo_filename = $driver_photo->getClientOriginalName();
-        $driver_photo_location = 'Taxi/'.$taxi->taxiNo.'/driver'.'/photo';
-        $driver_photo_o = Helper::photo_upload_original_s3($driver_photo, $driver_photo_filename, $driver_photo_location);
-        $driver_photo_t = Helper::photo_upload_thumbnail_s3($driver_photo, $driver_photo_filename, $driver_photo_location);
+        if($request->has('driver_photo_url')) {
+            $driver_photo = $request->driver_photo_url;
+            $driver_photo_filename = $driver_photo->getClientOriginalName();
+            $driver_photo_location = 'Taxi/'.$taxi->taxiNo.'/driver'.'/photo';
+            $driver_photo_o = Helper::photo_upload_original_s3($driver_photo, $driver_photo_filename, $driver_photo_location);
+            $driver_photo_t = Helper::photo_upload_thumbnail_s3($driver_photo, $driver_photo_filename, $driver_photo_location);
+            $driver->driver_photo_url_o = $driver_photo_o;
+            $driver->driver_photo_url_t = $driver_photo_t;
+        } else {
+            $driver->driver_photo_url_o = 'Taxi/default/Taxi-Driver-PNG-File.png';
+            $driver->driver_photo_url_t = 'Taxi/default/Taxi-Driver-PNG-File.png';
+        }
 
-        //DB save
-        $driver->li_front_url_o = $licence_front_o;
-        $driver->li_front_url_t = $licence_front_t;
-
-        $driver->li_back_url_o = $licence_back_o;
-        $driver->li_back_url_t = $licence_back_t;
-        
-        $driver->driver_photo_url_o = $driver_photo_o;
-        $driver->driver_photo_url_t = $driver_photo_t;
-        
+        $driver->active = '1';
         $driver->save();
-
-
 
         return back()->with('alert-success','Driver Added successfully.');
 
@@ -90,15 +100,8 @@ class DriverController extends Controller
     public function edit($id, FormBuilder $formBuilder)
     {
         $driver = Driver::findOrFail($id);
-        $url = url('configure/driver/update') .'/'. $driver->id;
-
-        $form = $formBuilder->create(\App\Forms\Driver::class, [
-            'method' => 'POST',
-            'model' => $driver,
-            'url' => $url
-        ]);
-
-        return view('configure.driver.edit', compact('form'));
+        $taxis = Taxi::where('active', '1')->get();
+        return view('configure.driver.new.edit', compact('driver', 'taxis'));
     }
     
     public function update($id, Request $request)

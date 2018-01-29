@@ -29,7 +29,7 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Callcode</label>
-                        <select class="form-control">
+                        <select name="callcode_id" class="form-control">
                             @foreach ($callcodes as $callcode)
                                 <option value="{{ $callcode->id }}">{{ $callcode->full_callcode }}</option>
                             @endforeach
