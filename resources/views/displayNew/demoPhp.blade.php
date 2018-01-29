@@ -92,7 +92,7 @@
                             <div class="callCode circle {{ $color }}-color">
                                 {{ $taxi->callcode->callCode }}
                             </div>
-                            <div class="taxiNo" style = "margin-left:1.2cm;">
+                            <div class="taxiNo">
                                 {{ $taxi->taxiNo }}
                             </div>
                             <div class="phoneNumber">
