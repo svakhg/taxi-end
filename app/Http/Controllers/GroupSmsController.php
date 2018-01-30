@@ -14,7 +14,7 @@ class GroupSmsController extends Controller
      */
     public function index()
     {
-        //
+        return view('sms.group');
     }
 
     /**

@@ -126,6 +126,42 @@ Route::get('payment-generation', function () {
 
     
 });
+Route::get('/test-driver', function () {
+    $drivers = \App\Driver::doesntHave('taxi')->get();
+    foreach ($drivers as $driver) {
+        echo 'Database ID: '.$driver->id;
+        echo '<br>';
+        echo 'Driver Name: '.$driver->driverName;
+        echo '<br>';
+        echo 'Driver Id: '.$driver->driverIdNo;
+        echo '<br>';
+        echo 'Driver Mobile: '.$driver->driverMobile;
+        echo '<hr>';
+    }
+    if($drivers->isEmpty()){
+        echo 'All the added drivers has a taxi';
+    }
+});
+
+Route::get('/test-taxi', function () {
+    $taxis = \App\Taxi::doesntHave('driver')->get();
+    foreach ($taxis as $taxi) {
+        echo 'Database ID: '.$taxi->id;
+        echo '<br>';
+        echo 'Taxi No: '.$taxi->taxiNo;
+        echo '<br>';
+        echo 'CallCode: '.$taxi->callcode->callCode;
+        echo '<hr>';
+    }
+    if($taxis->isEmpty()){
+        echo 'All the added taxis has a driver';
+    }
+});
+
+Route::get('/test-taxi-2', function () {
+    $callcode = \App\CallCode::find(109);
+    return $callcode->taxi;
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -283,8 +319,8 @@ Route::group(['prefix' => 'sms'], function () {
     Route::get('/', 'SmsController@index'); 
     Route::post('/', 'SmsController@send'); 
     
-    Route::get('/group', 'SmsController@group'); 
-    Route::post('/group', 'SmsController@groupSend'); 
+    Route::get('/group', 'GroupSmsController@index'); 
+    Route::post('/group', 'GroupSmsController@send'); 
 });
 
 /*
@@ -358,44 +394,6 @@ Route::group(['prefix' => 'driving-school'], function () {
     Route::post('/students/{drivingS}/edit', 'DrivingSController@update');
 
 });
-
-Route::get('/test-driver', function () {
-    $drivers = \App\Driver::doesntHave('taxi')->get();
-    foreach ($drivers as $driver) {
-        echo 'Database ID: '.$driver->id;
-        echo '<br>';
-        echo 'Driver Name: '.$driver->driverName;
-        echo '<br>';
-        echo 'Driver Id: '.$driver->driverIdNo;
-        echo '<br>';
-        echo 'Driver Mobile: '.$driver->driverMobile;
-        echo '<hr>';
-    }
-    if($drivers->isEmpty()){
-        echo 'All the added drivers has a taxi';
-    }
-});
-
-Route::get('/test-taxi', function () {
-    $taxis = \App\Taxi::doesntHave('driver')->get();
-    foreach ($taxis as $taxi) {
-        echo 'Database ID: '.$taxi->id;
-        echo '<br>';
-        echo 'Taxi No: '.$taxi->taxiNo;
-        echo '<br>';
-        echo 'CallCode: '.$taxi->callcode->callCode;
-        echo '<hr>';
-    }
-    if($taxis->isEmpty()){
-        echo 'All the added taxis has a driver';
-    }
-});
-
-Route::get('/test-taxi-2', function () {
-    $callcode = \App\CallCode::find(109);
-    return $callcode->taxi;
-});
-
 
 Route::group(['prefix' => 'image-upload'], function () {
     // Taxi
@@ -489,4 +487,15 @@ Route::group(['prefix' => 'image-upload'], function () {
 
         return back()->with('alert-success', 'Photo updated');        
     });
+});
+
+
+Route::get('contacts-generate', function() {
+    $drivers = \App\Driver::where('active', '1')->where('driverMobile', '!=', '-')->pluck('driverMobile')->toArray();
+    $taxis = \App\Taxi::where('active', '1')->where('taxiOwnerMobile', '!=', '-')->pluck('taxiOwnerMobile')->toArray();
+    $taxi_center = \App\TaxiCenter::all();
+    $students = \App\DrivingS::where('phone', '!=', '-')->pluck('phone')->toArray();
+
+    dd($drivers,$taxis,$students);
+
 });
