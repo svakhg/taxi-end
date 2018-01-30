@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGroupSmsStatusesTable extends Migration
+class CreateContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateGroupSmsStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('group_sms_statuses', function (Blueprint $table) {
+        Schema::create('contacts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('groupsms_id')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->string('status')->default('sending')->nullable();
-            $table->integer('delivered')->default('0')->nullable();
+            $table->string('group_name')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateGroupSmsStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_sms_statuses');
+        Schema::dropIfExists('contacts');
     }
 }
