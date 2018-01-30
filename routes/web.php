@@ -47,7 +47,7 @@ Route::group(['prefix' => 'test'], function () {
         $lbt = 'Taxi/1234/back/thumbnail/airporttaxiburlingame2.jpg';
         $lft = 'Taxi/1234/front/thumbnail/airporttaxiburlingame2.jpg';
         $zero = '0';
-        // ssaddasdas        
+        
         for ($i=0; $i < count($id); $i++) { 
             echo "(".$id[$i].", '".$id[$i]."', '".$taxi[$i]."', ".$null.", ".$null.", ".$null.", ".$null.", ".$null.", '".$driver[$i]."', ".$null.", ".$null.", '".$address[$i]."', '".$date[$i]."', '".$date[$i]."', '".$date[$i]."', '".$date[$i]."', '".$rate."', '".$zero."', '".$up_date."', '".$up_date."', ".$null.", '".$lfo."', '".$lbo."', '".$lft."', '".$lbt."', '".$cccode."', '".$zero."'),";
             echo '<br>';
