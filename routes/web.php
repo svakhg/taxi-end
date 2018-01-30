@@ -399,8 +399,9 @@ Route::get('/test-taxi-2', function () {
 
 
 Route::group(['prefix' => 'image-upload'], function () {
+    // Taxi
     Route::post('/taxi_front/{id}', function (Request $request, $id) {
-        $taxi = \App\Taxi::find($id);
+        $taxi = \App\Taxi::findOrFail($id);
 
         $photo = $request->image;
         $file_name = $photo->getClientOriginalName();
@@ -417,7 +418,7 @@ Route::group(['prefix' => 'image-upload'], function () {
         return back()->with('alert-success', 'Photo updated');        
     });
     Route::post('/taxi_back/{id}', function (Request $request, $id) {
-        $taxi = \App\Taxi::find($id);
+        $taxi = \App\Taxi::findOrFail($id);
 
         $photo = $request->image;
         $file_name = $photo->getClientOriginalName();
@@ -432,5 +433,61 @@ Route::group(['prefix' => 'image-upload'], function () {
         $taxi->save();
 
         return back()->with('alert-success', 'Photo updated');
+    });
+
+    //Driver
+    Route::post('/driver_photo/{id}', function (Request $request, $id) {
+        $driver = \App\Driver::findOrFail($id);
+        $taxi = \App\Taxi::findOrFail($driver->taxi_id);
+
+        $photo = $request->image;
+        $file_name = $photo->getClientOriginalName();
+        $location = 'Taxi/'.$taxi->taxiNo.'/driver'.'/photo';
+
+        $url_original = Upload::upload_original($photo, $file_name, $location);
+        $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
+
+        $driver->driver_photo_url_o = $url_original;
+        $driver->driver_photo_url_t = $url_thumbnail;
+
+        $driver->save();
+
+        return back()->with('alert-success', 'Photo updated');        
+    });
+    Route::post('/li_front/{id}', function (Request $request, $id) {
+        $driver = \App\Driver::findOrFail($id);
+        $taxi = \App\Taxi::findOrFail($driver->taxi_id);
+
+        $photo = $request->image;
+        $file_name = $photo->getClientOriginalName();
+        $location = 'Taxi/'.$taxi->taxiNo.'/driver'.'/licence'.'/front';
+
+        $url_original = Upload::upload_original($photo, $file_name, $location);
+        $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
+
+        $driver->li_front_url_o = $url_original;
+        $driver->li_front_url_t = $url_thumbnail;
+
+        $driver->save();
+
+        return back()->with('alert-success', 'Photo updated');        
+    });
+    Route::post('/li_back/{id}', function (Request $request, $id) {
+        $driver = \App\Driver::findOrFail($id);
+        $taxi = \App\Taxi::findOrFail($driver->taxi_id);
+
+        $photo = $request->image;
+        $file_name = $photo->getClientOriginalName();
+        $location = 'Taxi/'.$taxi->taxiNo.'/driver'.'/licence'.'/back';
+
+        $url_original = Upload::upload_original($photo, $file_name, $location);
+        $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
+
+        $driver->li_back_url_o = $url_original;
+        $driver->li_back_url_t = $url_thumbnail;
+
+        $driver->save();
+
+        return back()->with('alert-success', 'Photo updated');        
     });
 });

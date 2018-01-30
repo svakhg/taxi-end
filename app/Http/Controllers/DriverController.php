@@ -47,7 +47,7 @@ class DriverController extends Controller
     public function store(Request $request)
     {
         $driver = Driver::create(Input::except('_token', 'li_front_url', 'li_back_url', 'driver_photo_url'));
-
+        $taxi = Taxi::findOrFail($driver->taxi_id);
         // Image Upload (Licence Front)
         if($request->has('li_front_url')) {
             $licence_front = $request->li_front_url;
