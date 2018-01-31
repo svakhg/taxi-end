@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Http\Request;
 use Mohamedathik\PhotoUpload\Upload;
+use App\Helpers\Helper;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -491,11 +493,5 @@ Route::group(['prefix' => 'image-upload'], function () {
 
 
 Route::get('contacts-generate', function() {
-    $drivers = \App\Driver::where('active', '1')->where('driverMobile', '!=', '-')->pluck('driverMobile')->toArray();
-    $taxis = \App\Taxi::where('active', '1')->where('taxiOwnerMobile', '!=', '-')->pluck('taxiOwnerMobile')->toArray();
-    $taxi_center = \App\TaxiCenter::all();
-    $students = \App\DrivingS::where('phone', '!=', '-')->pluck('phone')->toArray();
-
-    dd($drivers,$taxis,$students);
-
+    
 });
