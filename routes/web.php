@@ -537,4 +537,6 @@ Route::get('contacts-generate', function() {
     else {
         $student_group = \App\Contact::where('group_name', 'All Driving School Students')->first();
     }
+
+    dd($taxi_numbers, $driver_numbers, $student_numbers);
 });
