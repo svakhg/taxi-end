@@ -92,4 +92,24 @@ class Helper
     
         return $seperated;
     }
+
+    public static function remove_all_space_in_string ($input_array) {
+        // Remove Space
+        $pattern = '/\s*/m';
+        $replace = '';
+        $space_removed = [];
+        foreach ($input_array as $key => $number) {
+            if (preg_match('/\s*/m', $number)) {
+                $spaceRemoved = preg_replace($pattern, $replace, $number);
+                $space_removed[] = $spaceRemoved;
+            } else {
+                $space_removed[] = $number;
+            }
+
+        }
+
+        $space_removed = array_values($space_removed);
+
+        return $space_removed;
+    }
 }
