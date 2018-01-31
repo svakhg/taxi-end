@@ -120,7 +120,25 @@ class Helper
     public static function validate_numbers($numbers) {
         // Remove all space from numbers
         $space_removed = self::remove_all_space_in_string($numbers);
-        
-        
+    
+        // Remove illegal characters
+        $long_numbers_with_slash = [];
+        $i = 0;
+        foreach ($space_removed as $number) {
+            if (strlen($number) < 7) {
+                unset($space_removed[$i]);
+            }
+            if (strpos($number, ',') !== false) {
+                unset($space_removed[$i]);
+            }
+            if (strpos($number, '/') !== false) {
+                $long_numbers_with_slash[] = $number;
+                unset($space_removed[$i]);
+            }
+            if (strlen($number) > 7) {
+                unset($space_removed[$i]);
+            }
+            $i++;
+        }
     }
 }
