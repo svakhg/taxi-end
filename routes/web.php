@@ -528,4 +528,13 @@ Route::get('contacts-generate', function() {
     else {
         $driver_group = \App\Contact::where('group_name', 'All Drivers')->first();
     }
+
+    if (check_if_group_exists('All Driving School Students')) {
+        $student_group = \App\Contact::create([
+            'group_name' => 'All Driving School Students'
+        ]);
+    } 
+    else {
+        $student_group = \App\Contact::where('group_name', 'All Driving School Students')->first();
+    }
 });
