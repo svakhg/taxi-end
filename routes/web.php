@@ -499,4 +499,9 @@ Route::get('contacts-generate', function() {
     // Driver
     $drivers = \App\Driver::where('active', '1')->where('driverMobile', '!=', '-')->pluck('driverMobile')->toArray();
     $driver_numbers = Helper::validate_numbers($drivers);
+    // Students
+    $students = \App\DrivingS::where('phone', '!=', '-')->pluck('phone')->toArray();
+    $student_numbers = Helper::validate_numbers($students);
+
+    
 });
