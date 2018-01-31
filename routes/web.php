@@ -2,6 +2,7 @@
 use Illuminate\Http\Request;
 use Mohamedathik\PhotoUpload\Upload;
 use App\Helpers\Helper;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -582,4 +583,10 @@ Route::get('contacts-generate/students', function() {
     }
 
     return $student_numbers;
+});
+
+
+Route::get('server-time', function() {
+    $mytime = Carbon\Carbon::now();
+    echo $mytime->toDateTimeString();
 });
