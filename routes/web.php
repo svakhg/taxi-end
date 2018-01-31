@@ -491,12 +491,6 @@ Route::group(['prefix' => 'image-upload'], function () {
     });
 });
 
-
-Route::get('contacts-generate', function() {
-    
-    
-});
-
 Route::get('contacts-generate/taxi', function() {
     // Taxi
     $taxis = \App\Taxi::where('active', '1')->where('taxiOwnerMobile', '!=', '-')->pluck('taxiOwnerMobile')->toArray();
