@@ -493,23 +493,14 @@ Route::group(['prefix' => 'image-upload'], function () {
 
 
 Route::get('contacts-generate', function() {
-    // Driver
-    $drivers = \App\Driver::where('active', '1')->where('driverMobile', '!=', '-')->pluck('driverMobile')->toArray();
-    $driver_numbers = Helper::validate_numbers($drivers);
+    
     // Students
     $students = \App\DrivingS::where('phone', '!=', '-')->pluck('phone')->toArray();
     $student_numbers = Helper::validate_numbers($students);
 
     
 
-    if (check_if_group_exists('All Drivers')) {
-        $driver_group = \App\Contact::create([
-            'group_name' => 'All Drivers'
-        ]);
-    } 
-    else {
-        $driver_group = \App\Contact::where('group_name', 'All Drivers')->first();
-    }
+    
 
     if (check_if_group_exists('All Driving School Students')) {
         $student_group = \App\Contact::create([
@@ -535,5 +526,20 @@ Route::get('contacts-generate/taxi', function() {
     } 
     else {
         $taxi_group = \App\Contact::where('group_name', 'All Taxi Owners')->first();
+    }
+});
+
+Route::get('contacts-generate/driver', function() {
+    // Driver
+    $drivers = \App\Driver::where('active', '1')->where('driverMobile', '!=', '-')->pluck('driverMobile')->toArray();
+    $driver_numbers = Helper::validate_numbers($drivers);
+
+    if (check_if_group_exists('All Drivers')) {
+        $driver_group = \App\Contact::create([
+            'group_name' => 'All Drivers'
+        ]);
+    } 
+    else {
+        $driver_group = \App\Contact::where('group_name', 'All Drivers')->first();
     }
 });
