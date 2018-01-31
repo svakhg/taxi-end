@@ -554,7 +554,11 @@ Route::get('contacts-generate/students', function() {
     }
 
     $numbers = $student_group->numbers;
-    
+    if (!$numbers->isEmpty()) {
+        foreach ($numbers as $number) {
+            $number->delete();
+        }
+    }
 
     return $student_numbers;
 });
