@@ -574,7 +574,12 @@ Route::get('contacts-generate/students', function() {
         }
     }
 
-    
+    foreach ($taxi_numbers as $number) {
+        \App\PhoneNumbers::create([
+            'number' => $number,
+            'contact_id' => $taxi_group->id
+        ]);
+    }
 
     return $student_numbers;
 });
