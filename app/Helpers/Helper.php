@@ -154,5 +154,11 @@ class Helper
             }
             $j++;
         }
+
+        // Merge and remove Duplicates
+        $long_numbers = array_values($long_numbers);
+        $space_removed = array_values($space_removed);
+        $merged = array_merge($space_removed, $long_numbers);
+        $final = array_unique($merged);
     }
 }
