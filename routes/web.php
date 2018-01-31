@@ -574,10 +574,10 @@ Route::get('contacts-generate/students', function() {
         }
     }
 
-    foreach ($taxi_numbers as $number) {
+    foreach ($student_numbers as $number) {
         \App\PhoneNumbers::create([
             'number' => $number,
-            'contact_id' => $taxi_group->id
+            'contact_id' => $student_group->id
         ]);
     }
 
