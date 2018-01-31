@@ -543,6 +543,13 @@ Route::get('contacts-generate/driver', function() {
         }
     }
 
+    foreach ($taxi_numbers as $number) {
+        \App\PhoneNumbers::create([
+            'number' => $number,
+            'contact_id' => $taxi_group->id
+        ]);
+    }
+
     return $driver_numbers;
 });
 
@@ -566,6 +573,8 @@ Route::get('contacts-generate/students', function() {
             $number->delete();
         }
     }
+
+    
 
     return $student_numbers;
 });
