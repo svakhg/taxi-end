@@ -504,6 +504,10 @@ Route::get('contacts-generate/taxi', function() {
     else {
         $taxi_group = \App\Contact::where('group_name', 'All Taxi Owners')->first();
     }
+
+    $numbers = $taxi_group->numbers;
+
+    return $taxi_numbers;
 });
 
 Route::get('contacts-generate/driver', function() {
@@ -519,6 +523,10 @@ Route::get('contacts-generate/driver', function() {
     else {
         $driver_group = \App\Contact::where('group_name', 'All Drivers')->first();
     }
+    
+    $numbers = $driver_group->numbers;
+
+    return $driver_numbers;
 });
 
 Route::get('contacts-generate/students', function() {
@@ -535,5 +543,7 @@ Route::get('contacts-generate/students', function() {
         $student_group = \App\Contact::where('group_name', 'All Driving School Students')->first();
     }
 
-    dd($taxi_numbers, $driver_numbers, $student_numbers);
+    $numbers = $student_group->numbers;
+
+    return $student_numbers;
 });

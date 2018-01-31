@@ -10,6 +10,6 @@ class Contact extends Model
 
     public function numbers()
     {
-        return $this->hasMany('App\PhoneNumbers');
+        return $this->hasMany('App\PhoneNumbers', 'contact_id');
     }
 }
