@@ -116,4 +116,11 @@ class Helper
     public static function check_for_duplicates (array $input_array) {
         return count($input_array) === count(array_flip($input_array));
     }
+
+    public static function validate_numbers($numbers) {
+        // Remove all space from numbers
+        $space_removed = self::remove_all_space_in_string($numbers);
+        
+        
+    }
 }
