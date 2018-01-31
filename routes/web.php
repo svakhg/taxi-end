@@ -540,3 +540,9 @@ Route::get('contacts-generate', function() {
 
     dd($taxi_numbers, $driver_numbers, $student_numbers);
 });
+
+Route::get('contacts-generate/taxi', function() {
+    // Taxi
+    $taxis = \App\Taxi::where('active', '1')->where('taxiOwnerMobile', '!=', '-')->pluck('taxiOwnerMobile')->toArray();
+    $taxi_numbers = Helper::validate_numbers($taxis);
+});
