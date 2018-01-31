@@ -543,10 +543,10 @@ Route::get('contacts-generate/driver', function() {
         }
     }
 
-    foreach ($taxi_numbers as $number) {
+    foreach ($driver_numbers as $number) {
         \App\PhoneNumbers::create([
             'number' => $number,
-            'contact_id' => $taxi_group->id
+            'contact_id' => $driver_group->id
         ]);
     }
 
