@@ -112,4 +112,8 @@ class Helper
 
         return $space_removed;
     }
+
+    public static function check_for_duplicates (array $input_array) {
+        return count($input_array) === count(array_flip($input_array));
+    }
 }
