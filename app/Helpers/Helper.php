@@ -164,4 +164,12 @@ class Helper
         return $final;
         // dd(self::check_for_duplicates($final));
     }
+
+    public static function check_if_group_exists($name) {
+        $group = \App\Contact::where('group_name', $name)->get();
+        if ($group->isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 }
