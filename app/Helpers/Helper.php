@@ -82,5 +82,14 @@ class Helper
         return;
     }
 
+    public static function split_string_by_slash($input_array) {
+        $seperated = [];
+        foreach ($input_array as $number) {
+            $splited = preg_split("#/#", $number);
+            $seperated[] = $splited[0];
+            $seperated[] = $splited[1];
+        }
     
+        return $seperated;
+    }
 }
