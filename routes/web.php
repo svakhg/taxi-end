@@ -530,7 +530,11 @@ Route::get('contacts-generate/driver', function() {
     }
     
     $numbers = $driver_group->numbers;
-    
+    if (!$numbers->isEmpty()) {
+        foreach ($numbers as $number) {
+            $number->delete();
+        }
+    }
 
     return $driver_numbers;
 });
