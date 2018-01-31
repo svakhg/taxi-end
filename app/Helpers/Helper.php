@@ -140,5 +140,19 @@ class Helper
             }
             $i++;
         }
+
+        // Add numbers split by '/' to array
+        $long_numbers_with_illegal = self::split_string_by_slash($long_numbers_with_slash);
+        $long_numbers = [];
+        $j = 0;
+        foreach ($long_numbers as $number) {
+            if (strlen($number) < 7) {
+                unset($long_numbers_with_illegal[$j]);
+            }
+            if (strlen($number) > 7) {
+                unset($long_numbers_with_illegal[$j]);
+            }
+            $j++;
+        }
     }
 }
