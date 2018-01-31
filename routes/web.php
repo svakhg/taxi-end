@@ -496,4 +496,7 @@ Route::get('contacts-generate', function() {
     // Taxi
     $taxis = \App\Taxi::where('active', '1')->where('taxiOwnerMobile', '!=', '-')->pluck('taxiOwnerMobile')->toArray();
     $taxi_numbers = Helper::validate_numbers($taxis);
+    // Driver
+    $drivers = \App\Driver::where('active', '1')->where('driverMobile', '!=', '-')->pluck('driverMobile')->toArray();
+    $driver_numbers = Helper::validate_numbers($drivers);
 });
