@@ -493,5 +493,7 @@ Route::group(['prefix' => 'image-upload'], function () {
 
 
 Route::get('contacts-generate', function() {
-    
+    // Taxi
+    $taxis = \App\Taxi::where('active', '1')->where('taxiOwnerMobile', '!=', '-')->pluck('taxiOwnerMobile')->toArray();
+    $taxi_numbers = Helper::validate_numbers($taxis);
 });
