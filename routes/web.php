@@ -506,6 +506,11 @@ Route::get('contacts-generate/taxi', function() {
     }
 
     $numbers = $taxi_group->numbers;
+    if (!$numbers->isEmpty()) {
+        foreach ($numbers as $number) {
+            $number->delete();
+        }
+    }
 
     return $taxi_numbers;
 });
@@ -525,6 +530,7 @@ Route::get('contacts-generate/driver', function() {
     }
     
     $numbers = $driver_group->numbers;
+    
 
     return $driver_numbers;
 });
@@ -544,6 +550,7 @@ Route::get('contacts-generate/students', function() {
     }
 
     $numbers = $student_group->numbers;
+    
 
     return $student_numbers;
 });
