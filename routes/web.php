@@ -503,5 +503,11 @@ Route::get('contacts-generate', function() {
     $students = \App\DrivingS::where('phone', '!=', '-')->pluck('phone')->toArray();
     $student_numbers = Helper::validate_numbers($students);
 
-    
+    function check_if_group_exists($name) {
+        $group = \App\Contact::where('group_name', $name)->get();
+        if ($group->isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 });
