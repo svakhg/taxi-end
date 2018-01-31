@@ -510,4 +510,13 @@ Route::get('contacts-generate', function() {
         }
         return false;
     }
+
+    if (check_if_group_exists('All Taxi Owners')) {
+        $taxi_group = \App\Contact::create([
+            'group_name' => 'All Taxi Owners'
+        ]);
+    } 
+    else {
+        $taxi_group = \App\Contact::where('group_name', 'All Taxi Owners')->first();
+    }
 });
