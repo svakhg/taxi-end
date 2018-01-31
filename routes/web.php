@@ -587,6 +587,6 @@ Route::get('contacts-generate/students', function() {
 
 
 Route::get('server-time', function() {
-    $mytime = Carbon\Carbon::now();
+    $mytime = Carbon::now();
     echo $mytime->toDateTimeString();
 });
