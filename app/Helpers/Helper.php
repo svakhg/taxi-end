@@ -160,5 +160,8 @@ class Helper
         $space_removed = array_values($space_removed);
         $merged = array_merge($space_removed, $long_numbers);
         $final = array_unique($merged);
+
+        return $final;
+        // dd(self::check_for_duplicates($final));
     }
 }
