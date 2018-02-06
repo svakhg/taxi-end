@@ -20,9 +20,9 @@ class SendGroupSms implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(GroupSms $groupSms)
+    public function __construct(GroupSmsStatus $groupSmsStatus)
     {
-        $this->groupSms = $groupSms;
+        $this->groupSmsStatus = $groupSmsStatus;
     }
 
     /**

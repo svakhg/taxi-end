@@ -38,7 +38,10 @@
         "psr-4": {
             "App\\": "app/"
         },
-        "files": ["app/Helpers/Helper.php"]
+        "files": [
+            "app/Helpers/Helper.php",
+            "app/Helpers/Twilio.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

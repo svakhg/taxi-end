@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-use Twilio\Rest\Client;
+use App\Helpers\Twilio;
 
 class SmsController extends Controller
 {
-    public function __construct(Client $client)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->client = $client;
     }
 
     public function index()
@@ -22,35 +21,24 @@ class SmsController extends Controller
 
     public function send(Request $request)
     {
+        new Twilio;
+        
         $message = $request->input('message');
         $phoneNumbers = $request->input('phoneNumber');
-        $from = $request->input('senderId');
+        // $from = $request->input('senderId');
 
-        //dd($from);
+        $from = '+15005550006';
 
         $phoneNumber = '+960'.$phoneNumbers;
 
-        try {
-            $this->sendMessage($phoneNumber, $message, $from);
+        $sendSMS = Twilio::sendSms($phoneNumber, $message, $from);
+
+        if ($sendSMS == true) {
             return redirect('sms')->with('alert-success', 'SMS successfully send');
-
-        } catch ( \Twilio\Exceptions\RestException  $e ) {
-            return redirect('sms')->with('alert-danger', $e->getMessage());
+        } else {
+            return redirect('sms')->with('alert-danger', $sendSMS->getMessage());
         }
-    }
 
-    private function sendMessage($phoneNumber, $message, $from)
-    {
-        $twilioPhoneNumber = config('services.twilio')['phoneNumber'];
-        $messageParams = array(
-            'from' => $from,
-            'body' => $message
-        );
-
-        $this->client->messages->create(
-            $phoneNumber,
-            $messageParams
-        );
     }
 
 }
