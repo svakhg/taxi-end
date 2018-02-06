@@ -323,7 +323,9 @@ Route::group(['prefix' => 'sms'], function () {
     Route::post('/', 'SmsController@send'); 
     
     Route::get('/group', 'GroupSmsController@index'); 
-    Route::post('/group', 'GroupSmsController@send'); 
+    Route::post('/group', 'GroupSmsController@store'); 
+
+    Route::get('/group/status/{id}', 'GroupSmsController@status'); 
 });
 
 /*

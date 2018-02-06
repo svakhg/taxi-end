@@ -2,84 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
 use App\GroupSms;
+use App\GroupSmsStatus;
 use Illuminate\Http\Request;
 
 class GroupSmsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('sms.group');
+        $contacts = Contact::all();   
+        return view('sms.group', compact('contacts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $senderId = $request->senderId;
+        $contact = Contact::find($request->contact_id);
+        $message = $request->message;
+        $numbers = $contact->numbers->pluck('number')->toArray();
+
+        // dd($contact, $numbers);
+
+        $groupSms = new GroupSms;
+        $groupSms->senderId = $senderId;
+        $groupSms->message = $message;
+        $groupSms->save();
+
+        foreach ($numbers as $number) {
+            $status = new GroupSmsStatus;
+            $status->groupsms_id = $groupSms->id;
+            $status->phone_number = $number;
+            $status->save();
+        }
+
+        return 'Done';
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\GroupSms  $groupSms
-     * @return \Illuminate\Http\Response
-     */
-    public function show(GroupSms $groupSms)
+    public function status($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\GroupSms  $groupSms
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(GroupSms $groupSms)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\GroupSms  $groupSms
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, GroupSms $groupSms)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\GroupSms  $groupSms
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(GroupSms $groupSms)
-    {
-        //
+        
     }
 }

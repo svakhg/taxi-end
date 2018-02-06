@@ -2,6 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Contact;
+use App\GroupSms;
+use App\GroupSmsStatus;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -17,9 +20,9 @@ class SendGroupSms implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(GroupSms $groupSms)
     {
-        //
+        $this->groupSms = $groupSms;
     }
 
     /**

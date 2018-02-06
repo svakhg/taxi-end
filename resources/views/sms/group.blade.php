@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <form class="form-horizontal" method="POST">
+                        <form class="form-horizontal" action="{{ url()->current() }}" method="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <fieldset>
                                 <!-- <div class="form-group">
@@ -35,16 +35,6 @@
                                         <span class="help-block">Enter a sender Id here. It must be a combination of letters and numbers, It cannot be more than 11 characters.</span>
                                     </div>
                                 </div> -->
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="group_id">Select Contact group from list:</label>
-                                    <div class="col-md-4">
-                                        <select class="form-control" id="contact_id" name="contact_id" required>
-                                            @foreach ($contacts as $contact)
-                                                <option value="{{ $contact>id }}">{{ $group->group_name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="senderId">Select Sender id from list:</label>
                                     <div class="col-md-4">
@@ -57,13 +47,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" for="phoneNumber">Phone Number</label>
-                                    <div class="col-md-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">+960</span>
-                                            <input id="phoneNumber" min="7" name="phoneNumber" type="tel" required>
-                                        </div>
-                                        <p class="help-block">Enter the number here, Must be a valid dhiraagu or ooredoo number.</p>
+                                    <label class="col-md-4 control-label" for="group_id">Select Contact group from list:</label>
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="contact_id" name="contact_id" required>
+                                            @foreach ($contacts as $contact)
+                                                <option value="{{ $contact->id }}">{{ $contact->group_name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
