@@ -12,7 +12,7 @@ class GroupSmsController extends Controller
     public function index()
     {
         $contacts = Contact::all();   
-        return view('sms.group', compact('contacts'));
+        return view('sms.group.index', compact('contacts'));
     }
 
     public function store(Request $request)
@@ -36,11 +36,14 @@ class GroupSmsController extends Controller
             $status->save();
         }
 
-        return 'Done';
+        $url = "sms/group/status/".$groupSms->id;
+
+        return redirect($url);
     }
 
     public function status($id)
     {
-        
+        $groupSms = GroupSms::with('numbers')->where('id', $id)->first();
+        return view('sms.group.status', compact('groupSms'));
     }
 }
