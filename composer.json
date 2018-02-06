@@ -39,8 +39,7 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Helpers/Helper.php",
-            "app/Helpers/Twilio.php"
+            "app/Helpers/Helper.php"
         ]
     },
     "autoload-dev": {
