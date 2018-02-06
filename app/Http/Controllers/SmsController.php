@@ -24,8 +24,16 @@ class SmsController extends Controller
     {
         $message = $request->input('message');
         $phoneNumbers = $request->input('phoneNumber');
-        // $from = $request->input('senderId');
-        $from = '+15005550006';
+        
+        $from = $request->input('senderId');
+        
+        // Testing Numbers
+        // (Pass Validation)
+        // $from = '+15005550006';
+        // (Invalid Number)
+        // $from = '+15005550001';
+        // (Not available for the account)
+        // $from = '+15005550007';
         //dd($from);
 
         $phoneNumber = '+960'.$phoneNumbers;
