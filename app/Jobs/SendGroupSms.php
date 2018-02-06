@@ -10,11 +10,14 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Twilio\Rest\Client;
 
 class SendGroupSms implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    protected $groupSmsStatus;
+    public $tries = 1;
     /**
      * Create a new job instance.
      *
@@ -32,6 +35,39 @@ class SendGroupSms implements ShouldQueue
      */
     public function handle()
     {
-        //
+        $phoneNumber = "+960".$this->groupSmsStatus->phone_number;
+        $message = $this->groupSmsStatus->groupsms->message;
+        // $from = $this->groupSmsStatus->groupsms->senderId;
+        $from = '+15005550006';
+
+        $this->sendMessage($phoneNumber, $message, $from);
+        $this->groupSmsStatus->satus = "Sms send successfully";
+        $this->groupSmsStatus->delivered = "1";
+    }
+
+    public function failed(\Twilio\Exceptions\RestException $e)
+    {
+        $this->groupSmsStatus->status = $e->getMessage();
+        $this->groupSmsStatus->delivered = "2";
+        $this->groupSmsStatus->save();
+    }
+
+    private function sendMessage($phoneNumber, $message, $from)
+    {
+        $account_sid = 'AC59bdc3127177b2ec11250b51b259e391';
+        $auth_token = 'ba88068fb461e2ceac2b49dfe26d2a5d';
+
+        $client = new Client($account_sid, $auth_token);
+
+        $twilioPhoneNumber = config('services.twilio')['phoneNumber'];
+        $messageParams = array(
+            'from' => $from,
+            'body' => $message
+        );
+
+        $client->messages->create(
+            $phoneNumber,
+            $messageParams
+        );
     }
 }

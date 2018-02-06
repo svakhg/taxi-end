@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contact;
 use App\GroupSms;
 use App\GroupSmsStatus;
+use App\Jobs\SendGroupSms;
 use Illuminate\Http\Request;
 
 class GroupSmsController extends Controller
@@ -35,6 +36,14 @@ class GroupSmsController extends Controller
             $status->phone_number = $number;
             $status->save();
         }
+
+        $groupSmsStatuses = GroupSmsStatus::where('groupsms_id', $groupSms->id)->get();
+
+        // dd($groupSmsStatuses);
+
+        // foreach ($groupSmsStatuses as $groupSmsStatus) {
+        //     SendGroupSms::dispatch($groupSmsStatus);
+        // }
 
         $url = "sms/group/status/".$groupSms->id;
 
