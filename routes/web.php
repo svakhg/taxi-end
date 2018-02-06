@@ -434,7 +434,6 @@ Route::group(['prefix' => 'image-upload'], function () {
 
         return back()->with('alert-success', 'Photo updated');
     });
-
     //Driver
     Route::post('/driver_photo/{id}', function (Request $request, $id) {
         $driver = \App\Driver::findOrFail($id);
@@ -492,101 +491,101 @@ Route::group(['prefix' => 'image-upload'], function () {
     });
 });
 
-Route::get('contacts-generate/taxi', function() {
-    // Taxi
-    $taxis = \App\Taxi::where('active', '1')->where('taxiOwnerMobile', '!=', '-')->pluck('taxiOwnerMobile')->toArray();
-    $taxi_numbers = Helper::validate_numbers($taxis);
+// Contatcts generation routes
+Route::group(['prefix' => 'contacts-generate'], function () {
+    Route::get('taxi', function() {
+        // Taxi
+        $taxis = \App\Taxi::where('active', '1')->where('taxiOwnerMobile', '!=', '-')->pluck('taxiOwnerMobile')->toArray();
+        $taxi_numbers = Helper::validate_numbers($taxis);
 
-    if (Helper::check_if_group_exists('All Taxi Owners')) {
-        $taxi_group = \App\Contact::create([
-            'group_name' => 'All Taxi Owners'
-        ]);
-    } 
-    else {
-        $taxi_group = \App\Contact::where('group_name', 'All Taxi Owners')->first();
-    }
-
-    $numbers = $taxi_group->numbers;
-    if (!$numbers->isEmpty()) {
-        foreach ($numbers as $number) {
-            $number->delete();
+        if (Helper::check_if_group_exists('All Taxi Owners')) {
+            $taxi_group = \App\Contact::create([
+                'group_name' => 'All Taxi Owners'
+            ]);
+        } 
+        else {
+            $taxi_group = \App\Contact::where('group_name', 'All Taxi Owners')->first();
         }
-    }
 
-    foreach ($taxi_numbers as $number) {
-        \App\PhoneNumbers::create([
-            'number' => $number,
-            'contact_id' => $taxi_group->id
-        ]);
-    }
-
-    return $taxi_numbers;
-});
-
-Route::get('contacts-generate/driver', function() {
-    // Driver
-    $drivers = \App\Driver::where('active', '1')->where('driverMobile', '!=', '-')->pluck('driverMobile')->toArray();
-    $driver_numbers = Helper::validate_numbers($drivers);
-
-    if (check_if_group_exists('All Drivers')) {
-        $driver_group = \App\Contact::create([
-            'group_name' => 'All Drivers'
-        ]);
-    } 
-    else {
-        $driver_group = \App\Contact::where('group_name', 'All Drivers')->first();
-    }
-    
-    $numbers = $driver_group->numbers;
-    if (!$numbers->isEmpty()) {
-        foreach ($numbers as $number) {
-            $number->delete();
+        $numbers = $taxi_group->numbers;
+        if (!$numbers->isEmpty()) {
+            foreach ($numbers as $number) {
+                $number->delete();
+            }
         }
-    }
 
-    foreach ($driver_numbers as $number) {
-        \App\PhoneNumbers::create([
-            'number' => $number,
-            'contact_id' => $driver_group->id
-        ]);
-    }
-
-    return $driver_numbers;
-});
-
-Route::get('contacts-generate/students', function() {
-    // Students
-    $students = \App\DrivingS::where('phone', '!=', '-')->pluck('phone')->toArray();
-    $student_numbers = Helper::validate_numbers($students);
-
-    if (check_if_group_exists('All Driving School Students')) {
-        $student_group = \App\Contact::create([
-            'group_name' => 'All Driving School Students'
-        ]);
-    } 
-    else {
-        $student_group = \App\Contact::where('group_name', 'All Driving School Students')->first();
-    }
-
-    $numbers = $student_group->numbers;
-    if (!$numbers->isEmpty()) {
-        foreach ($numbers as $number) {
-            $number->delete();
+        foreach ($taxi_numbers as $number) {
+            \App\PhoneNumbers::create([
+                'number' => $number,
+                'contact_id' => $taxi_group->id
+            ]);
         }
-    }
 
-    foreach ($student_numbers as $number) {
-        \App\PhoneNumbers::create([
-            'number' => $number,
-            'contact_id' => $student_group->id
-        ]);
-    }
+        return $taxi_numbers;
+    });
+    Route::get('driver', function() {
+        // Driver
+        $drivers = \App\Driver::where('active', '1')->where('driverMobile', '!=', '-')->pluck('driverMobile')->toArray();
+        $driver_numbers = Helper::validate_numbers($drivers);
 
-    return $student_numbers;
+        if (Helper::check_if_group_exists('All Drivers')) {
+            $driver_group = \App\Contact::create([
+                'group_name' => 'All Drivers'
+            ]);
+        } 
+        else {
+            $driver_group = \App\Contact::where('group_name', 'All Drivers')->first();
+        }
+        
+        $numbers = $driver_group->numbers;
+        if (!$numbers->isEmpty()) {
+            foreach ($numbers as $number) {
+                $number->delete();
+            }
+        }
+
+        foreach ($driver_numbers as $number) {
+            \App\PhoneNumbers::create([
+                'number' => $number,
+                'contact_id' => $driver_group->id
+            ]);
+        }
+
+        return $driver_numbers;
+    });
+    Route::get('students', function() {
+        // Students
+        $students = \App\DrivingS::where('phone', '!=', '-')->pluck('phone')->toArray();
+        $student_numbers = Helper::validate_numbers($students);
+
+        if (Helper::check_if_group_exists('All Driving School Students')) {
+            $student_group = \App\Contact::create([
+                'group_name' => 'All Driving School Students'
+            ]);
+        } 
+        else {
+            $student_group = \App\Contact::where('group_name', 'All Driving School Students')->first();
+        }
+
+        $numbers = $student_group->numbers;
+        if (!$numbers->isEmpty()) {
+            foreach ($numbers as $number) {
+                $number->delete();
+            }
+        }
+
+        foreach ($student_numbers as $number) {
+            \App\PhoneNumbers::create([
+                'number' => $number,
+                'contact_id' => $student_group->id
+            ]);
+        }
+
+        return $student_numbers;
+    });
+    Route::get('server-time', function() {
+        $mytime = Carbon::now();
+        echo $mytime->toDateTimeString();
+    });
 });
-
-
-Route::get('server-time', function() {
-    $mytime = Carbon::now();
-    echo $mytime->toDateTimeString();
-});
+// Contatcts generation routes
