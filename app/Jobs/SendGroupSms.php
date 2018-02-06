@@ -54,8 +54,8 @@ class SendGroupSms implements ShouldQueue
 
     private function sendMessage($phoneNumber, $message, $from)
     {
-        $account_sid = 'AC59bdc3127177b2ec11250b51b259e391';
-        $auth_token = 'ba88068fb461e2ceac2b49dfe26d2a5d';
+        $account_sid = env('TWILIO_ACCOUNT_SID');
+        $auth_token = env('TWILIO_AUTH_TOKEN');
 
         $client = new Client($account_sid, $auth_token);
 
