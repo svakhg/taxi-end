@@ -267,8 +267,6 @@ Route::group(['prefix' => 'configure', 'middleware' => 'auth'], function () {
     /*End of Driver Configure Routes*/
 });
 
-
-
 /*
 |--------------------------------------------------------------------------
 |Payment Routes
