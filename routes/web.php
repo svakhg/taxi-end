@@ -22,7 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'test'], function () {
+Route::group(['prefix' => 'test', 'middleware' => 'auth'], function () {
     Route::get('edit-gen', function () {
         $type = '$taxi';
         $fields = ['callcode_id', 'taxiNo', 'taxiChasisNo', 'taxiEngineNo', 'taxiBrand', 'taxiModel', 'taxiColor', 'taxiOwnerName', 'taxiOwnerMobile', 'taxiOwnerEmail', 'taxiOwnerAddress', 'registeredDate', 'anualFeeExpiry', 'roadWorthinessExpiry', 'insuranceExpiry', 'rate', 'taken', 'center_name'];
@@ -128,7 +128,7 @@ Route::get('payment-generation', function () {
     }    
 
     
-});
+})->middleware('auth');
 Route::get('/test-driver', function () {
     $drivers = \App\Driver::doesntHave('taxi')->get();
     foreach ($drivers as $driver) {
@@ -144,7 +144,7 @@ Route::get('/test-driver', function () {
     if($drivers->isEmpty()){
         echo 'All the added drivers has a taxi';
     }
-});
+})->middleware('auth');
 
 Route::get('/test-taxi', function () {
     $taxis = \App\Taxi::doesntHave('driver')->get();
@@ -159,19 +159,19 @@ Route::get('/test-taxi', function () {
     if($taxis->isEmpty()){
         echo 'All the added taxis has a driver';
     }
-});
+})->middleware('auth');
 
 Route::get('/test-taxi-2', function () {
     $callcode = \App\CallCode::find(109);
     return $callcode->taxi;
-});
+})->middleware('auth');
 
 /*
 |--------------------------------------------------------------------------
 |Configure Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix' => 'configure'], function () {
+Route::group(['prefix' => 'configure', 'middleware' => 'auth'], function () {
     
     /*Company Configure Routes*/
     Route::group(['prefix' => 'company'], function () {
@@ -269,13 +269,12 @@ Route::group(['prefix' => 'configure'], function () {
 
 
 
-
 /*
 |--------------------------------------------------------------------------
 |Payment Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix' => 'payments'], function () {
+Route::group(['prefix' => 'payments', 'middleware' => 'auth'], function () {
     Route::get('taxi-payment', 'PaymentHistoryController@index')->name('payment');
     Route::post('taxi-payment', 'PaymentHistoryController@add');
     Route::get('taxi-payment/view', 'PaymentHistoryController@view');
@@ -292,24 +291,22 @@ Route::group(['prefix' => 'payments'], function () {
 */
 Route::get('/display', function () {
     return view('displayNew.demo');
-});
+})->middleware('auth');
 Route::get('/display/{center_name}', function ($center_name) {
     $taxis = \App\Taxi::where('center_name', $center_name)->with('driver')->with('callcode')->get();
     $center = \App\TaxiCenter::find($taxis[0]->callcode->center_id);
     $title = $center->name.' - '.$center->telephone;
     return view('displayNew.demoPhp', compact('taxis', 'title'));
-});
+})->middleware('auth');
 Route::get('api/display/{center_name}', function ($center_name) {
     $taxis = \App\Taxi::where('center_name', $center_name)->with('driver')->with('callcode')->get();
     return $taxis;
-});
-
-
+})->middleware('auth');
 Route::get('/api/driver', function(Request $request) {
     $driver = \App\Driver::with('taxi')->find($request->id);
     $driver->paymentStatus = '<h4>Paid</h4>';
     return $driver;
-});
+})->middleware('auth');
 
 
 /*
@@ -318,7 +315,7 @@ Route::get('/api/driver', function(Request $request) {
 |--------------------------------------------------------------------------
 */
 
-Route::group(['prefix' => 'sms'], function () {
+Route::group(['prefix' => 'sms', 'middleware' => 'auth'], function () {
     Route::get('/', 'SmsController@index'); 
     Route::post('/', 'SmsController@send'); 
     
@@ -334,7 +331,7 @@ Route::group(['prefix' => 'sms'], function () {
 |--------------------------------------------------------------------------
 */
 
-Route::group(['prefix' => 'report'], function () {
+Route::group(['prefix' => 'report', 'middleware' => 'auth'], function () {
     Route::get('/driver', function () {
         $drivers = \App\Driver::all();
         return view('report.driver.index', compact('drivers'));
@@ -379,7 +376,7 @@ Route::group(['prefix' => 'report'], function () {
 // Route::get('/voice-test', function () {
 // })->middleware('auth');
 
-Route::group(['prefix' => 'users'], function () {
+Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     Route::get('/all', function () {
         $users = \App\User::all();
         return view('user.index', compact('users'));
@@ -387,7 +384,7 @@ Route::group(['prefix' => 'users'], function () {
 });
 
 
-Route::group(['prefix' => 'driving-school'], function () {
+Route::group(['prefix' => 'driving-school', 'middleware' => 'auth'], function () {
     Route::get('/', 'DrivingSController@index');
 
     Route::get('/create', 'DrivingSController@create');
@@ -400,7 +397,7 @@ Route::group(['prefix' => 'driving-school'], function () {
 
 });
 
-Route::group(['prefix' => 'image-upload'], function () {
+Route::group(['prefix' => 'image-upload', 'middleware' => 'auth'], function () {
     // Taxi
     Route::post('/taxi_front/{id}', function (Request $request, $id) {
         $taxi = \App\Taxi::findOrFail($id);
@@ -494,7 +491,7 @@ Route::group(['prefix' => 'image-upload'], function () {
 });
 
 // Contatcts generation routes
-Route::group(['prefix' => 'contacts-generate'], function () {
+Route::group(['prefix' => 'contacts-generate', 'middleware' => 'auth'], function () {
     Route::get('taxi', function() {
         // Taxi
         $taxis = \App\Taxi::where('active', '1')->where('taxiOwnerMobile', '!=', '-')->pluck('taxiOwnerMobile')->toArray();
@@ -591,3 +588,49 @@ Route::group(['prefix' => 'contacts-generate'], function () {
     });
 });
 // Contatcts generation routes
+
+// Quiz
+Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
+    Route::get('/', function() {
+        $quiz = \App\Quiz::with('questions')->findOrFail(1);
+        return view('theory.index', compact('quiz'));
+    });
+       
+    Route::post('/post', function(Request $request) {
+        $quiz = \App\Quiz::with('questions')->findOrFail(1);
+        $questions = $quiz->questions;
+
+        $total_score = count($questions);
+        $score = 0;
+
+        foreach ($questions as $question) {
+            $question_i = 'question-'.$question->id;
+            $user_answer = $request->input($question_i);
+            $correct_answer = $question->answers->where('is_correct', '1')->first();
+            
+            echo $question_i;
+            echo '<br>';
+            if ($user_answer == $correct_answer->id) {
+                echo 'Answer is correct';
+                $score++;
+
+            } else {
+                echo 'Answer is wrong, The correct answer is '.$correct_answer->answer;
+            }
+            echo '<br>';
+            echo '--------------------------------';
+            echo '<br>';
+        }
+
+        
+        echo '<br>';
+        echo 'Final Score is '. $score;
+        echo '<br>';
+        echo $score.' out of '.$total_score;
+
+        if ($score == $total_score) {
+            echo '<br>';
+            echo 'Congratulations, Full Marks';
+        }
+    });
+});
