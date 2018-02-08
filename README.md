@@ -28,3 +28,6 @@ php artisan migrate
 php artisan serve
 
 ```
+
+Reg No: TDS0294
+Recipt 2018/001
