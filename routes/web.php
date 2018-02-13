@@ -2,7 +2,9 @@
 use Illuminate\Http\Request;
 use Mohamedathik\PhotoUpload\Upload;
 use App\Helpers\Helper;
+use App\paymentHistory;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,8 +52,8 @@ Route::group(['prefix' => 'test', 'middleware' => 'auth'], function () {
         $lbt = 'Taxi/1234/back/thumbnail/airporttaxiburlingame2.jpg';
         $lft = 'Taxi/1234/front/thumbnail/airporttaxiburlingame2.jpg';
         $zero = '0';
-        
-        for ($i=0; $i < count($id); $i++) { 
+
+        for ($i=0; $i < count($id); $i++) {
             echo "(".$id[$i].", '".$id[$i]."', '".$taxi[$i]."', ".$null.", ".$null.", ".$null.", ".$null.", ".$null.", '".$driver[$i]."', ".$null.", ".$null.", '".$address[$i]."', '".$date[$i]."', '".$date[$i]."', '".$date[$i]."', '".$date[$i]."', '".$rate."', '".$zero."', '".$up_date."', '".$up_date."', ".$null.", '".$lfo."', '".$lbo."', '".$lft."', '".$lbt."', '".$cccode."', '".$zero."'),";
             echo '<br>';
         }
@@ -59,9 +61,9 @@ Route::group(['prefix' => 'test', 'middleware' => 'auth'], function () {
     });
     Route::get('callCode-gen', function () {
         $up_date = '2017-12-31 11:06:41';
-        for ($i=1; $i < 151; $i++) { 
+        for ($i=1; $i < 151; $i++) {
             echo "(".$i.", '1', '".$i."', '".$up_date."', '".$up_date."', NULL, '0'),";
-            echo '<br>';   
+            echo '<br>';
         }
     });
     Route::get('callCode-gen-1', function () {
@@ -103,12 +105,12 @@ Route::get('payment-generation', function () {
     $payments = App\paymentHistory::where('month', date("m"))
                                   ->where('year', date("Y"))
                                   ->first();
-    
+
     if ($payments) {
         $info = array('status' => 'payment already generated for this month');
         return response()->json([$info]);
     }
-    
+
     else
     {
         $taxis = App\Taxi::all();
@@ -119,15 +121,13 @@ Route::get('payment-generation', function () {
                 'year' => date("Y"),
                 'desc' => "Monthly Taxi Fee",
             ]);
-            
+
         }
 
         $taxiUp = App\Taxi::where('state', '1')->update(['state' => 0]);
-        
-        return redirect()->route('payment')->with('success','Payment Generated Successfully.');
-    }    
 
-    
+        return redirect()->route('payment')->with('success','Payment Generated Successfully.');
+    }
 })->middleware('auth');
 Route::get('/test-driver', function () {
     $drivers = \App\Driver::doesntHave('taxi')->get();
@@ -172,19 +172,19 @@ Route::get('/test-taxi-2', function () {
 |--------------------------------------------------------------------------
 */
 Route::group(['prefix' => 'configure', 'middleware' => 'auth'], function () {
-    
+
     /*Company Configure Routes*/
     Route::group(['prefix' => 'company'], function () {
         Route::get('/', 'CompanyController@index');
-        
+
         Route::get('/add', 'CompanyController@create');
         Route::post('/add', 'CompanyController@store');
-        
+
         Route::get('/view/{id}', 'CompanyController@view');
-        
+
         Route::get('/update/{id}', 'CompanyController@edit');
         Route::post('/update/{id}', 'CompanyController@update');
-        
+
         Route::get('/delete/{id}', 'CompanyController@destroy');
     });
     /*End of Company Configure Routes*/
@@ -192,15 +192,15 @@ Route::group(['prefix' => 'configure', 'middleware' => 'auth'], function () {
     /*Taxi Center Configure Routes*/
     Route::group(['prefix' => 'taxi-center'], function () {
         Route::get('/', 'TaxicenterController@index');
-        
+
         Route::get('/add', 'TaxicenterController@create');
         Route::post('/add', 'TaxicenterController@store');
-        
+
         Route::get('/view/{id}', 'TaxicenterController@view');
-        
+
         Route::get('/update/{id}', 'TaxicenterController@edit');
         Route::post('/update/{id}', 'TaxicenterController@update');
-        
+
         Route::get('/delete/{id}', 'TaxicenterController@destroy');
     });
     /*End of Taxi Center Configure Routes*/
@@ -208,54 +208,54 @@ Route::group(['prefix' => 'configure', 'middleware' => 'auth'], function () {
     /*Call Code Configure Routes*/
     Route::group(['prefix' => 'call-code'], function () {
         Route::get('/', 'CallCodeController@index');
-        
+
         Route::get('/add', 'CallCodeController@create');
         Route::post('/add', 'CallCodeController@store');
-        
+
         Route::get('/view/{id}', 'CallCodeController@view');
-        
+
         Route::get('/update/{id}', 'CallCodeController@edit');
         Route::post('/update/{id}', 'CallCodeController@update');
-        
+
         Route::get('/delete/{id}', 'CallCodeController@destroy');
     });
-    
+
     /*End of Call Code Configure Routes*/
 
     /*Taxi Configure Routes*/
     Route::group(['prefix' => 'taxi'], function () {
         Route::get('/', 'TaxiController@index');
-        
+
         Route::get('/add', 'TaxiController@create');
         Route::post('/add', 'TaxiController@store');
-        
+
         Route::get('/view/{id}', 'TaxiController@view');
-        
+
         Route::get('/update/{id}', 'TaxiController@edit');
         Route::post('/update/{id}', 'TaxiController@update');
-        
+
         Route::get('/deactivate/{id}', 'TaxiController@deactivate');
         Route::get('/activate/{id}', 'TaxiController@activate');
 
         // Route::get('/delete/{id}', 'TaxiController@destroy');
-        
+
         Route::get('/photo/{id}', 'TaxiController@photo');
     });
-    
+
     /*End of Taxi Configure Routes*/
 
     /*Driver Configure Routes*/
     Route::group(['prefix' => 'driver'], function () {
         Route::get('/', 'DriverController@index');
-        
+
         Route::get('/add', 'DriverController@create');
         Route::post('/add', 'DriverController@store');
-        
+
         Route::get('/view/{id}', 'DriverController@view');
-        
+
         Route::get('/update/{id}', 'DriverController@edit');
         Route::post('/update/{id}', 'DriverController@update');
-        
+
         // Route::get('/delete/{id}', 'DriverController@destroy');
         Route::get('/deactivate/{id}', 'DriverController@deactivate');
         Route::get('/activate/{id}', 'DriverController@activate');
@@ -263,7 +263,7 @@ Route::group(['prefix' => 'configure', 'middleware' => 'auth'], function () {
         Route::get('/photo/{id}', 'DriverController@photo');
         // Route::get('/ajax/{id}', 'DriverController@ajax');
     });
- 
+
     /*End of Driver Configure Routes*/
 });
 
@@ -314,13 +314,13 @@ Route::get('/api/driver', function(Request $request) {
 */
 
 Route::group(['prefix' => 'sms', 'middleware' => 'auth'], function () {
-    Route::get('/', 'SmsController@index'); 
-    Route::post('/', 'SmsController@send'); 
-    
-    Route::get('/group', 'GroupSmsController@index'); 
-    Route::post('/group', 'GroupSmsController@store'); 
+    Route::get('/', 'SmsController@index');
+    Route::post('/', 'SmsController@send');
 
-    Route::get('/group/status/{id}', 'GroupSmsController@status'); 
+    Route::get('/group', 'GroupSmsController@index');
+    Route::post('/group', 'GroupSmsController@store');
+
+    Route::get('/group/status/{id}', 'GroupSmsController@status');
 });
 
 /*
@@ -344,7 +344,7 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth'], function () {
             $from = $request->input('from');
             $paids = \App\paymentHistory::where('paymentStatus', '1')
                                         ->whereBetween('created_at', array($from, $to))
-                                        ->get();    
+                                        ->get();
         } else {
             $paids = \App\paymentHistory::where('paymentStatus', '1')->get();
         }
@@ -360,12 +360,12 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth'], function () {
             $to = $request->input('to');
             $from = $request->input('from');
             $students = \App\DrivingS::whereBetween('created_at', array($from, $to))
-                                        ->get();    
+                                        ->get();
         } else {
             $to = $request->input('to');
             $from = $request->input('from');
             $students = \App\DrivingS::whereBetween('created_at', array($from, $to))
-            ->get();    
+            ->get();
         }
         return view('report.drivingschool.index', compact('students'));
     });
@@ -388,7 +388,7 @@ Route::group(['prefix' => 'driving-school', 'middleware' => 'auth'], function ()
     Route::get('/create', 'DrivingSController@create');
     Route::post('/create/success', 'DrivingSController@store');
 
-    Route::get('/students/{drivingS}', 'DrivingSController@show'); 
+    Route::get('/students/{drivingS}', 'DrivingSController@show');
 
     Route::get('/students/{drivingS}/edit', 'DrivingSController@edit');
     Route::post('/students/{drivingS}/edit', 'DrivingSController@update');
@@ -412,7 +412,7 @@ Route::group(['prefix' => 'image-upload', 'middleware' => 'auth'], function () {
 
         $taxi->save();
 
-        return back()->with('alert-success', 'Photo updated');        
+        return back()->with('alert-success', 'Photo updated');
     });
     Route::post('/taxi_back/{id}', function (Request $request, $id) {
         $taxi = \App\Taxi::findOrFail($id);
@@ -448,7 +448,7 @@ Route::group(['prefix' => 'image-upload', 'middleware' => 'auth'], function () {
 
         $driver->save();
 
-        return back()->with('alert-success', 'Photo updated');        
+        return back()->with('alert-success', 'Photo updated');
     });
     Route::post('/li_front/{id}', function (Request $request, $id) {
         $driver = \App\Driver::findOrFail($id);
@@ -466,7 +466,7 @@ Route::group(['prefix' => 'image-upload', 'middleware' => 'auth'], function () {
 
         $driver->save();
 
-        return back()->with('alert-success', 'Photo updated');        
+        return back()->with('alert-success', 'Photo updated');
     });
     Route::post('/li_back/{id}', function (Request $request, $id) {
         $driver = \App\Driver::findOrFail($id);
@@ -484,7 +484,7 @@ Route::group(['prefix' => 'image-upload', 'middleware' => 'auth'], function () {
 
         $driver->save();
 
-        return back()->with('alert-success', 'Photo updated');        
+        return back()->with('alert-success', 'Photo updated');
     });
 });
 
@@ -499,7 +499,7 @@ Route::group(['prefix' => 'contacts-generate', 'middleware' => 'auth'], function
             $taxi_group = \App\Contact::create([
                 'group_name' => 'All Taxi Owners'
             ]);
-        } 
+        }
         else {
             $taxi_group = \App\Contact::where('group_name', 'All Taxi Owners')->first();
         }
@@ -529,11 +529,11 @@ Route::group(['prefix' => 'contacts-generate', 'middleware' => 'auth'], function
             $driver_group = \App\Contact::create([
                 'group_name' => 'All Drivers'
             ]);
-        } 
+        }
         else {
             $driver_group = \App\Contact::where('group_name', 'All Drivers')->first();
         }
-        
+
         $numbers = $driver_group->numbers;
         if (!$numbers->isEmpty()) {
             foreach ($numbers as $number) {
@@ -559,7 +559,7 @@ Route::group(['prefix' => 'contacts-generate', 'middleware' => 'auth'], function
             $student_group = \App\Contact::create([
                 'group_name' => 'All Driving School Students'
             ]);
-        } 
+        }
         else {
             $student_group = \App\Contact::where('group_name', 'All Driving School Students')->first();
         }
@@ -593,7 +593,7 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
         $quiz = \App\Quiz::with('questions')->findOrFail(1);
         return view('theory.index', compact('quiz'));
     });
-       
+
     Route::post('/post', function(Request $request) {
         $quiz = \App\Quiz::with('questions')->findOrFail(1);
         $questions = $quiz->questions;
@@ -605,7 +605,7 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
             $question_i = 'question-'.$question->id;
             $user_answer = $request->input($question_i);
             $correct_answer = $question->answers->where('is_correct', '1')->first();
-            
+
             echo $question_i;
             echo '<br>';
             if ($user_answer == $correct_answer->id) {
@@ -620,7 +620,7 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
             echo '<br>';
         }
 
-        
+
         echo '<br>';
         echo 'Final Score is '. $score;
         echo '<br>';
@@ -631,4 +631,98 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
             echo 'Congratulations, Full Marks';
         }
     });
+});
+
+Route::get('/encrypt/{string}', function($string) {
+    $encrypted = Crypt::encrypt($string);
+    try {
+        $decrypted = decrypt($encrypted);
+        return $decrypted;
+    } catch (DecryptException $e) {
+        return $e;
+    }
+});
+
+Route::get('new-payment-generation', function() {
+    $now = Carbon::now();
+    // dd($now);
+    $next_month = $now->addMonth();
+    $day = $now->day;
+    $taxis = App\Taxi::all();
+
+    // dd($next_month->month);
+
+    function checkPaymentGeneration($month, $year) {
+        $payments = paymentHistory::where('month', $month)->where('year', $year)->first();
+        if ($payments){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // dd(checkPaymentGeneration($now->month, $now->year));
+    // dd(checkPaymentGeneration($next_month->month, $next_month->year));
+
+    function generatePayment($id, $month, $year) {
+        App\paymentHistory::create([
+            'taxi_id' => $id,
+            'month' => $month,
+            'year' => $year,
+            'desc' => "Monthly Taxi Fee",
+        ]);
+        return true;
+    }
+
+    if ($day < 25) {
+        if (checkPaymentGeneration($now->month, $now->year)) {
+            
+            return 'Payment Already generated for this month.';
+
+        } else {
+            echo 'Generating payment for this month. <br>';
+            $now = Carbon::now();
+            foreach ($taxis as $taxi) {
+                generatePayment($taxi->id, $now->month, $now->year);
+            }
+            $taxiUp = App\Taxi::where('state', '1')->update(['state' => 0]);
+            
+            return 'Generated payment for this month';
+        }
+
+        return 'Before 25th';
+    }
+    elseif ($day == 25 or $day > 25) {
+        $now = Carbon::now();
+        if (checkPaymentGeneration($now->month, $now->year)) {
+
+            if (checkPaymentGeneration($next_month->month, $next_month->year)) {
+
+                return 'Payment generated for this and the next month.';
+
+            } else {
+                echo 'Payment already generated for this month, generating payment for next month. <br>';
+                foreach ($taxis as $taxi) {
+                    generatePayment($taxi->id, $next_month->month, $next_month->year);
+                }
+                $taxiUp = App\Taxi::where('state', '1')->update(['state' => 0]);
+
+                return 'Generated payment for the next month';
+            }
+
+        } else {
+            echo 'Generating payment for this month. <br>';
+            $now = Carbon::now();
+            // dd($now);
+            // dd($next_month);
+            foreach ($taxis as $taxi) {
+                generatePayment($taxi->id, $now->month, $now->year);
+            }
+            $taxiUp = App\Taxi::where('state', '1')->update(['state' => 0]);
+            
+            return 'Generated payment for this month';
+
+        }
+        return '25 or later';
+    }
 });
