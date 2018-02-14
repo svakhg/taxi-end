@@ -16,27 +16,39 @@
                         <?php $i = 0 ?>
                         @foreach ($quiz->questions->shuffle() as $question)
                             <?php $i++ ?>
-                            <fieldset class="">
-                                <h4 class="">{{ $i }}) {{ $question->body }}</h4>
-                                
-                                @foreach ($question->answers->shuffle() as $answer)
-                                    
-                                    <div class=" radio">
-                                        <label class="" style="font-size: 17px">
-                                            <input type="radio" name="question-{{ $question->id }}" value="{{ $answer->id }}"> {{ $answer->answer }}
-                                        </label>
-                                    </div>    
-
-                                @endforeach
+                            <fieldset class="question" id="question{{ $i }}">
+                                <h1 class="">{{ $i }}) {{ $question->body }}</h1>
+                                <div class="answers">
+                                    @foreach ($question->answers->shuffle() as $answer)        
+                                        <div class="radio">
+                                            <label class="" style="font-size: 30px">
+                                                <input type="radio" name="question-{{ $question->id }}" value="{{ $answer->id }}" style="margin-top: 18px; margin-left: 10px;">
+                                                <span class="answer">
+                                                    {{ $answer->answer }}
+                                                </span>
+                                            </label>
+                                        </div>    
+                                    @endforeach
+                                </div>
+                                <div>
+                                    @if ($i !== $quiz->questions->count())
+                                        <a name="" id="" class="btn btn-primary" href="#question{{ $i + 1 }}" role="button">
+                                            Next
+                                        </a>
+                                    @else
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    @endif
+                                    @if ($i !== 1)
+                                        <a name="" id="" class="btn btn-info" href="#question{{ $i - 1 }}" role="button">
+                                            Previous
+                                        </a>
+                                    @endif
+                                </div>
                             </fieldset>
                             
                             <hr style="border-top: 1px solid #000000;">
 
                         @endforeach
-
-                        
-                        
-                        <button type="submit" class="">Submit</button>
                     </form>
                     
 

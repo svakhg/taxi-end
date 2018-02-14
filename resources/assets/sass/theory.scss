@@ -15,3 +15,19 @@
 .dhivehi-font {
     font-family: 'Faruma' !important;
 }
+
+.question {
+    height: 100vh;
+}
+
+.answers {
+    margin-top: 30px;
+}
+
+.answer {
+    margin-right: 20px;
+}
+
+input[type='radio'] {
+    transform: scale(2); 
+}
