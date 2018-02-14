@@ -593,7 +593,6 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
         $quiz = \App\Quiz::with('questions')->findOrFail(1);
         return view('theory.index', compact('quiz'));
     });
-
     Route::post('/post', function(Request $request) {
         $quiz = \App\Quiz::with('questions')->findOrFail(1);
         $questions = $quiz->questions;
@@ -630,6 +629,12 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
             echo '<br>';
             echo 'Congratulations, Full Marks';
         }
+    });
+
+    Route::get('/add', function() {
+        $quiz = \App\Quiz::with('questions')->findOrFail(1);
+        $questions = $quiz->questions;
+        return view('theory.add', compact('questions'));
     });
 });
 
