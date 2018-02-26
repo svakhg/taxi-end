@@ -41,7 +41,7 @@
                             <td>{{ $payment->taxi->taxiNo }}</td>
                             <td>{{ $payment->taxi->callcode->taxicenter->name }}</td>
                             <td>{{ $payment->taxi->rate }}</td>
-                            <td>{{ date("F", $payment->month) }}/{{ $payment->year }}</td>
+                            <td>{{ date("F", '1/'.$payment->month.'/'.$payment->year) }}/{{ $payment->year }}</td>
                             <td>
                                 @if ($payment->paymentStatus == "0")
                                     <button id="status" style="display: block; margin: auto;"  class="btn-danger" disabled>Not Paid</button>
