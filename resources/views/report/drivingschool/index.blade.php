@@ -44,7 +44,7 @@
                             <th>Registered By</th>
                         </thead>
                         <tbody>
-                                <?php $i = 0 ?>
+                            <?php $i = 0 ?>
                             @foreach ($students as $student)
                             <?php $i++ ?>
                                 <tr>

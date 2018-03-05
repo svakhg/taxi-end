@@ -731,3 +731,29 @@ Route::get('new-payment-generation', function() {
         return '25 or later';
     }
 });
+
+
+Route::group(['prefix' => 'other-payments', 'middleware' => 'auth'], function () {
+    Route::get('/', function() {
+        return view('otherPayments.index');
+    });
+
+    Route::post('/redirect', function(Request $request) {
+        $type = $request->type;
+        $company = $request->company;
+        
+        return redirect('other-payments/'.$type.'/'.$company);
+    });
+
+    Route::get('invoice/{company}', function($company) {
+        return view('otherPayments.invoice.index', compact('company'));
+    });
+
+    Route::get('quotation/{company}', function($company) {
+        return view('otherPayments.quotation.index', compact('company'));
+    });
+
+    Route::get('receipt/{company}', function($company) {
+        return view('otherPayments.receipt.index', compact('company'));
+    });
+});
