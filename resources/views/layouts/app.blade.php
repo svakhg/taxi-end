@@ -75,7 +75,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ url('payments/taxi-payment') }}">Taxi Payments</a></li>
-                                <li><a href="{{ url('other-payments') }}">Other Payments</a></li> 
+                                <li><a href="https://invoice.taviyani.xyz/">Other Payments</a></li> 
                             </ul>
                         </li>
                         <!-- <li><a href="#">Taxi Log</a></li> -->

@@ -17,7 +17,7 @@
 			<p>Maldives</p>
 			<p>+960 330 2002</p>
 		</address>
-		<span><img alt="" src="/img/logo/invoice/{{ $company }}.jpg"><input type="file" accept="image/*"></span>
+		<span><img alt="" height="100px" src="/img/logo/invoice/{{ $company }}.jpg"><input type="file" accept="image/*"></span>
 	</header>
 	<article>
 		<h1>Recipient</h1>
