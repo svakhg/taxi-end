@@ -22,7 +22,7 @@ body {
     margin: 5px;
     padding-top: 7px;
     padding-bottom: 7px;
-    border-radius: 0 20px 0 0;
+    border-top-left-radius: 20px;
 }
 
 .taxiNo {
@@ -37,7 +37,7 @@ body {
 .callCode {
     position:absolute;
     top: 10px;
-    right: 10px;
+    left: 10px;
 }
 
 .circle {
