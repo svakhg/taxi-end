@@ -51,7 +51,7 @@
                         </tr>
                         <tr>
                             <td><strong>Slip No. :</strong></td>
-                            <td align="right">TDS/{{ date("Y") }}{{ date("M") }}/{{ $payment->id }}</td>
+                            <td align="right">TDS/{{ date("Y") }}/{{ date("m") }}/{{ $payment->id }}</td>
                         </tr>
                         <tr>
                             <td><strong>TIN No. :</strong></td>
