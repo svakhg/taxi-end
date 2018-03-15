@@ -46,11 +46,11 @@
                     <table width="100%" border="0">
                         <tr>
                             <td><strong>Date :</strong></td>
-                            <td align="right"><?php echo date("d/m/Y") ?></td>
+                            <td align="right">{{ date("d/m/Y") }}</td>
                         </tr>
                         <tr>
                             <td><strong>Slip No. :</strong></td>
-                            <td align="right">TDS/<?php echo date("Y"); ?>/<?php echo date("M"); ?>/{{ $payment->id }}</td>
+                            <td align="right">TDS/{{ date("Y") }}{{ date("M") }}/{{ $payment->id }}</td>
                         </tr>
                         <tr>
                             <td><strong>TIN No. :</strong></td>
