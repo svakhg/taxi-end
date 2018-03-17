@@ -640,6 +640,39 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
     Route::get('/add', function() {
         return view('theory.add');
     });
+
+    Route::post('/add', function(Request $request) {
+        $question = App\Question::create([
+            'quiz_id' => '1',
+            'body' => $request->question
+        ]);
+
+        $answer1 = App\Answer::create([
+            'question_id' => $question->id,
+            'answer' => $request->answer1,
+            'is_correct' => '1'
+        ]);
+
+        $answer2 = App\Answer::create([
+            'question_id' => $question->id,
+            'answer' => $request->answer2,
+            'is_correct' => '0'
+        ]);
+
+        $answer3 = App\Answer::create([
+            'question_id' => $question->id,
+            'answer' => $request->answer3,
+            'is_correct' => '0'
+        ]);
+
+        $answer4 = App\Answer::create([
+            'question_id' => $question->id,
+            'answer' => $request->answer4,
+            'is_correct' => '0'
+        ]);
+
+        return redirect()->back()->with('alert-success','Question added');
+    });
 });
 
 Route::get('/encrypt/{string}', function($string) {

@@ -11,6 +11,7 @@
                     <center>
                         <h2 class="dhivehi-font">{{ $quiz->name }}</h2>
                     </center>
+                    <hr>
                     <form action="{{ url()->current() }}/post" class="dhivehi-font" method="POST" role="form">
                         {{ csrf_field() }}
                         <?php $i = 0 ?>

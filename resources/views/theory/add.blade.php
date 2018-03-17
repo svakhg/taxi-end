@@ -7,7 +7,7 @@
 @section('content')
 <ul class="breadcrumb">
     <li><a href="{{ url('home') }}">Home</a></li>
-    <li><a href="{{ url('theory/add') }}">Theory</a></li>
+    <li><a href="{{ url('theory/view') }}">Theory</a></li>
     <li class="active">Add</li>
 </ul>
 
@@ -29,7 +29,7 @@
                 </div>
             </div>                      
             <div class="col-md-12">
-                <form action="{{ url()->current() }}">
+                <form action="{{ url()->current() }}" method="POST">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="usr">Question</label>
@@ -55,7 +55,7 @@
 
                     <hr>
 
-                    
+                    <button type="submit" class="btn btn-success btn-block">Add</button>
                 </form>
             </div> 
         </div>
