@@ -1,1 +1,13 @@
-@font-face{font-family:Faruma;src:url(/fonts/Faruma.otf?e42b53091d89c01c362623c612fc46f4) format("opentype")}.dhivehi-font{font-family:Faruma!important}.dhivehi-rtl{direction:rtl}
+@font-face {
+  font-family: 'Faruma';
+  src: url(/fonts/Faruma.otf?e42b53091d89c01c362623c612fc46f4) format("opentype");
+}
+
+.dhivehi-font {
+  font-family: 'Faruma' !important;
+}
+
+.dhivehi-rtl {
+  direction: rtl;
+}
+

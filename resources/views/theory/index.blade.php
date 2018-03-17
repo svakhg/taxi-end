@@ -20,9 +20,12 @@
                             <fieldset class="question" id="question{{ $i }}">
                                 <h1 class="">{{ $i }}) {{ $question->body }}</h1>
                                 <div class="answers">
-                                    @foreach ($question->answers->shuffle() as $answer)        
+                                    @foreach ($question->answers->shuffle() as $answer)
+                                        @if ($answer->photo_url)
+                                            <img src="{{ \App\Helpers\Helper::s3_url_gen($answer->photo_url) }}" alt="">
+                                        @endif
                                         <div class="radio">
-                                            <label class="" style="font-size: 30px">
+                                            <label class="" style="font-size: 25px">
                                                 <input type="radio" name="question-{{ $question->id }}" value="{{ $answer->id }}" style="margin-top: 18px; margin-left: 10px;">
                                                 <span class="answer">
                                                     {{ $answer->answer }}

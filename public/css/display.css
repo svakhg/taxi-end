@@ -1,1 +1,116 @@
-@import url(https://fonts.googleapis.com/css?family=Lato);body{background-color:#000;background-image:url("/img/background.jpg");color:#fff;padding:10px;font-family:Lato,sans-serif}.title{text-align:left}.buttons{text-align:right}.box{background-color:grey;border:.5px solid #000;text-align:center;margin:5px;padding-top:7px;padding-bottom:7px;border-top-left-radius:20px}.taxiNo{font-size:105%}.phoneNumber,.taxiNo{text-shadow:1px 1px 3px #535353}.callCode{position:absolute;top:10px;left:10px}.circle{background:#fff;width:30px;height:30px;line-height:30px;text-align:center;border-radius:50%;-webkit-box-shadow:0 0 1px #333;box-shadow:0 0 1px #333}.green{background-color:#27ae60!important;color:#fff}.red{background-color:#e74c3c!important;color:#fff}.purple{background-color:#9b59b6!important;color:#fff}.green-color{color:#27ae60!important}.red-color{color:#e74c3c!important}.purple-color{color:#9b59b6!important}@media only screen and (max-width:1450px){.taxiNo{text-align:right;margin-right:15px}}@media only screen and (max-width:1240px){.taxiNo{text-align:right;margin-right:15px}}@media only screen and (max-width:1165px){.taxiNo{text-align:right;margin-right:10px}}@media only screen and (max-width:991px){.taxiNo{text-align:center}}@media only screen and (max-width:767px){.title{text-align:left}.buttons{text-align:right}}
+@import url(https://fonts.googleapis.com/css?family=Lato);body {
+  background-color: black;
+  background-image: url("/img/background.jpg");
+  color: white;
+  padding: 10px;
+  font-family: 'Lato', sans-serif;
+}
+
+.title {
+  text-align: left;
+}
+
+.buttons {
+  text-align: right;
+}
+
+.box {
+  background-color: grey;
+  border: 0.5px solid black;
+  text-align: center;
+  margin: 5px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-top-left-radius: 20px;
+}
+
+.taxiNo {
+  font-size: 105%;
+  text-shadow: 1px 1px 3px #535353;
+}
+
+.phoneNumber {
+  text-shadow: 1px 1px 3px #535353;
+}
+
+.callCode {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.circle {
+  background: white;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 1px #333;
+          box-shadow: 0 0 1px #333;
+}
+
+.green {
+  background-color: #27ae60 !important;
+  color: white;
+}
+
+.red {
+  background-color: #e74c3c !important;
+  color: white;
+}
+
+.purple {
+  background-color: #9b59b6 !important;
+  color: white;
+}
+
+.green-color {
+  color: #27ae60 !important;
+}
+
+.red-color {
+  color: #e74c3c !important;
+}
+
+.purple-color {
+  color: #9b59b6 !important;
+}
+
+@media only screen and (max-width: 1450px) {
+  .taxiNo {
+    text-align: right;
+    margin-right: 15px;
+  }
+}
+
+@media only screen and (max-width: 1240px) {
+  .taxiNo {
+    text-align: right;
+    margin-right: 15px;
+  }
+}
+
+@media only screen and (max-width: 1165px) {
+  .taxiNo {
+    text-align: right;
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .taxiNo {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .title {
+    text-align: left;
+  }
+
+  .buttons {
+    text-align: right;
+  }
+}
+
