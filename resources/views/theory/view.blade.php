@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+    <link href="/css/dhivehi.css" rel="stylesheet">
+@endsection
+
 @section('content')
 
 <ul class="breadcrumb">
@@ -37,7 +41,7 @@
                     <tbody>
                         @foreach($questions as $question)
                         <tr>
-                            <td>{{ $question->body }}</th>
+                            <td class="dhivehi-font dhivehi-rtl">{{ $question->body }}</th>
                             <td>
                                 <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $question->id }}" onclick="return confirm('Are you sure you would like to delete this question?.')">Delete</a>
                                 <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/edit/{{ $question->id }}">Edit</a>
@@ -60,7 +64,7 @@
             $.fn.dataTable.ext.buttons.add = {
                 text: 'Add',
                 action: function () {
-                    window.location.href = './add/new';
+                    window.location.href = './add';
                 }
             };
             $('#taxi').DataTable({

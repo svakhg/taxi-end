@@ -641,6 +641,10 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
         return view('theory.add');
     });
 
+    Route::get('/edit/{id}', function() {
+        return view('theory.add');
+    });
+
     Route::post('/add', function(Request $request) {
         $question = App\Question::create([
             'quiz_id' => '1',
@@ -671,8 +675,17 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
             'is_correct' => '0'
         ]);
 
+        if($request->has('answerPhoto1')) {
+            $image1 = $request->answerPhoto1;
+            $image1_filename = $image1->getClientOriginalName();
+            $image1_location = "theory/".$question->id;
+            $answer1->photo_url = Helper::photo_upload_original_s3($image1, $image1_filename, $image1_location);
+            $answer1->save();
+        }
+
         return redirect()->back()->with('alert-success','Question added');
     });
+
 });
 
 Route::get('/encrypt/{string}', function($string) {
@@ -768,7 +781,6 @@ Route::get('new-payment-generation', function() {
         return '25 or later';
     }
 });
-
 
 Route::group(['prefix' => 'other-payments', 'middleware' => 'auth'], function () {
     Route::get('/', function() {

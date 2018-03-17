@@ -7,7 +7,7 @@
 @section('content')
 <ul class="breadcrumb">
     <li><a href="{{ url('home') }}">Home</a></li>
-    <li><a href="{{ url('theory/view') }}">Theory</a></li>
+    <li><a href="{{ url('theory/questions') }}">Theory</a></li>
     <li class="active">Add</li>
 </ul>
 
@@ -29,28 +29,51 @@
                 </div>
             </div>                      
             <div class="col-md-12">
-                <form action="{{ url()->current() }}" method="POST">
+                <form action="{{ url()->current() }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="usr">Question</label>
                         <input type="text" class="dhivehi-font dhivehi-rtl form-control" name="question">
                     </div>
                     <hr>
-                    <div class="form-group">
-                        <label for="usr">Answer 1 (Write the correct answer here)</label>
-                        <input type="text" class="dhivehi-font dhivehi-rtl form-control" name="answer1">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="usr">Answer 1 (Write the correct answer here)</label>
+                            <input type="text" class="dhivehi-font dhivehi-rtl form-control" name="answer1">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="usr">Answer 2</label>
-                        <input type="text" class="dhivehi-font dhivehi-rtl form-control" name="answer2">
+                    <div class="col-md-3">
+                        <input type="file" name="answerPhoto1">
                     </div>
-                    <div class="form-group">
-                        <label for="usr">Answer 3</label>
-                        <input type="text" class="dhivehi-font dhivehi-rtl form-control" name="answer3">
+
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="usr">Answer 2</label>
+                            <input type="text" class="dhivehi-font dhivehi-rtl form-control" name="answer2">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="usr">Answer 4</label>
-                        <input type="text" class="dhivehi-font dhivehi-rtl form-control" name="answer4">
+                    <div class="col-md-3">
+                        <input type="file" name="answerPhoto2">
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="usr">Answer 3</label>
+                            <input type="text" class="dhivehi-font dhivehi-rtl form-control" name="answer3">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="file" name="answerPhoto3">
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="usr">Answer 4</label>
+                            <input type="text" class="dhivehi-font dhivehi-rtl form-control" name="answer4">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="file" name="answerPhoto4">
                     </div>
 
                     <hr>
