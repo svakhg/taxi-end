@@ -48,14 +48,16 @@
                                     <div>
                                         @if ($i !== $quiz->questions->count())
                                             <a name="" id="" class="btn btn-primary" href="#question{{ $i + 1 }}" role="button">
-                                                Next
+                                                ކުރިޔަށް
                                             </a>
                                         @else
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary">
+                                                ޓެސްޓް ނިންމާ
+                                            </button>
                                         @endif
                                         @if ($i !== 1)
                                             <a name="" id="" class="btn btn-info" href="#question{{ $i - 1 }}" role="button">
-                                                Previous
+                                                ފަހަތަށް
                                             </a>
                                         @endif
                                     </div>
