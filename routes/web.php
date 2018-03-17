@@ -678,9 +678,33 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
         if($request->has('answerPhoto1')) {
             $image1 = $request->answerPhoto1;
             $image1_filename = $image1->getClientOriginalName();
-            $image1_location = "theory/".$question->id;
+            $image1_location = "theory/".$question->id."/".$answer1->id;
             $answer1->photo_url = Helper::photo_upload_original_s3($image1, $image1_filename, $image1_location);
             $answer1->save();
+        }
+
+        if($request->has('answerPhoto2')) {
+            $image2 = $request->answerPhoto2;
+            $image2_filename = $image2->getClientOriginalName();
+            $image2_location = "theory/".$question->id."/".$answer2->id;
+            $answer2->photo_url = Helper::photo_upload_original_s3($image2, $image2_filename, $image2_location);
+            $answer2->save();
+        }
+
+        if($request->has('answerPhoto3')) {
+            $image3 = $request->answerPhoto3;
+            $image3_filename = $image3->getClientOriginalName();
+            $image3_location = "theory/".$question->id."/".$answer3->id;
+            $answer3->photo_url = Helper::photo_upload_original_s3($image3, $image3_filename, $image3_location);
+            $answer3->save();
+        }
+
+        if($request->has('answerPhoto4')) {
+            $image4 = $request->answerPhoto4;
+            $image4_filename = $image4->getClientOriginalName();
+            $image4_location = "theory/".$question->id."/".$answer4->id;
+            $answer4->photo_url = Helper::photo_upload_original_s3($image4, $image4_filename, $image4_location);
+            $answer4->save();
         }
 
         return redirect()->back()->with('alert-success','Question added');
