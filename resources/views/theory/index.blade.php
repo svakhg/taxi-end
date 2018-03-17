@@ -31,10 +31,10 @@
                                 <fieldset class="question" id="question{{ $i }}">
                                     <h1 class="">{{ $i }}) {{ $question->body }}</h1>
                                     <div class="answers">
+                                        @if ($question->answers[0]->photo_url)
+                                            <img src="{{ \App\Helpers\Helper::s3_url_gen($answer->photo_url) }}" alt="">
+                                        @endif
                                         @foreach ($question->answers->shuffle() as $answer)
-                                            @if ($answer->photo_url)
-                                                <img src="{{ \App\Helpers\Helper::s3_url_gen($answer->photo_url) }}" alt="">
-                                            @endif
                                             <div class="radio">
                                                 <label class="" style="font-size: 25px">
                                                     <input type="radio" name="question-{{ $question->id }}" value="{{ $answer->id }}" style="margin-top: 18px; margin-left: 10px;">
@@ -45,6 +45,8 @@
                                             </div>    
                                         @endforeach
                                     </div>
+                                    <br>
+                                    <br>
                                     <div>
                                         @if ($i !== $quiz->questions->count())
                                             <a name="" id="" class="btn btn-primary" href="#question{{ $i + 1 }}" role="button">
