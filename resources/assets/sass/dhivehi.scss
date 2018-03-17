@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Faruma';
+    src: url("./font/Faruma.otf") format("opentype");
+}
+
+.dhivehi-font {
+    font-family: 'Faruma' !important;
+}
+
+.dhivehi-rtl {
+    direction: rtl;
+}

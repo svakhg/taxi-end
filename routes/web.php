@@ -631,10 +631,14 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
         }
     });
 
-    Route::get('/add', function() {
+    Route::get('/questions', function() {
         $quiz = \App\Quiz::with('questions')->findOrFail(1);
         $questions = $quiz->questions;
-        return view('theory.add', compact('questions'));
+        return view('theory.view', compact('questions'));
+    });
+
+    Route::get('/add', function() {
+        return view('theory.add');
     });
 });
 
