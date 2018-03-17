@@ -2,8 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/display.css": "/css/display.css",
+    "/css/theory.css": "/css/theory.css",
     "/css/dhivehi.css": "/css/dhivehi.css",
     "/js/theory.js": "/js/theory.js",
-    "/js/display.js": "/js/display.js",
-    "/css/theory.css": "/css/theory.css"
+    "/js/display.js": "/js/display.js"
 }

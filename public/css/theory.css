@@ -8377,6 +8377,10 @@ button.close {
   padding-bottom: 30px;
 }
 
+.first-panel {
+  height: 100vh;
+}
+
 input[type='radio'] {
   -webkit-transform: scale(2);
           transform: scale(2);
