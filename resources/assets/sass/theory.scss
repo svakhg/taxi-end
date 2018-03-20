@@ -24,9 +24,10 @@
     height: 100vh;
     padding-top: 100px;
 }
-.answers {
-    margin-top: 30px;
-}
+
+// .answers {
+//     // margin-top: 30px;
+// }
 
 .answer {
     margin-right: 20px;
@@ -48,9 +49,10 @@ input[type='radio'] {
 
 .timer {
     background-color: #fff;
+    border: 1px solid black;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    color: red;
+    color: #5989ff;
     position: fixed;
     font-size: 40px;
     text-align: center;
@@ -58,4 +60,5 @@ input[type='radio'] {
     left: 30px;
     max-height: 100%;
     overflow-y: hidden;
+    padding: 5px;
 }

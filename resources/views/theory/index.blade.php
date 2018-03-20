@@ -99,6 +99,8 @@
 @endsection
 
 @section('js')
+    <script defer src="/js/jquery.flexverticalcenter.js"></script>
+
     <script>
         $(function() {
             console.log("Disabling Scrollg");
@@ -111,10 +113,12 @@
             document.onkeydown  = preventDefaultForScrollKeys;
 
             console.log("Scrolling Disabled");
+
+            $('.question-inner').flexVerticalCenter();
         });
 
         function startTimer() {
-            var countdown = 5 * 1000;
+            var countdown = 30 * 60 * 1000;
             var timerId = setInterval(function(){
                 countdown -= 1000;
                 var min = Math.floor(countdown / (60 * 1000));
