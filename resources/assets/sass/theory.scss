@@ -22,8 +22,8 @@
 
 .question {
     height: 100vh;
+    padding-top: 100px;
 }
-
 .answers {
     margin-top: 30px;
 }
@@ -40,4 +40,22 @@
 
 input[type='radio'] {
     transform: scale(2); 
+}
+
+.no-dhivehi {
+    direction: ltr !important;
+}
+
+.timer {
+    background-color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: red;
+    position: fixed;
+    font-size: 40px;
+    text-align: center;
+    top: 30px;
+    left: 30px;
+    max-height: 100%;
+    overflow-y: hidden;
 }
