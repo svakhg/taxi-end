@@ -18,24 +18,28 @@
                             ?>
                             </span>
                             <br>
-                            <span class="score-text">30 of 57 correct</span>
+                            <span class="score-text">{{ $score }} of {{ $total_score }} correct</span>
                         </div>
                         <hr>
-                        <div class="details">
+                        <div class="details dhivehi-font dhivehi-rtl" style="font-size: 20px">
                             <?php
                             foreach ($questions as $question) {
-                                $question_i = 'question-'.$question->id;
+                                $question_i = 'ސުވާލު - '.$question->body;
                                 $user_answer = $request->input($question_i);
                                 $correct_answer = $question->answers->where('is_correct', '1')->first();
 
                                 echo $question_i;
                                 echo "<br>";
                                 if ($user_answer == $correct_answer->id) {
-                                    echo 'Answer is correct';
+                                    echo 'ޖަވާބު ރަނގަޅު';
+                                    echo "<br>";
+                                    echo "ރަނގަޅު ޖަވާބަކީ ".$correct_answer->answer;
                                     echo "<br>";
                                 } 
                                 else {
-                                    echo 'Answer is wrong, The correct answer is '.$correct_answer->answer;
+                                    echo 'ޖަވާބު ނުބާ';
+                                    echo "<br>";
+                                    echo "ރަނގަޅު ޖަވާބަކީ ".$correct_answer->answer;
                                     echo "<br>";
                                 }
                                 echo "<hr>";
