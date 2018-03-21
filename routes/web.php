@@ -605,30 +605,12 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
             $user_answer = $request->input($question_i);
             $correct_answer = $question->answers->where('is_correct', '1')->first();
 
-            echo $question_i;
-            echo '<br>';
             if ($user_answer == $correct_answer->id) {
-                echo 'Answer is correct';
                 $score++;
-
-            } else {
-                echo 'Answer is wrong, The correct answer is '.$correct_answer->answer;
             }
-            echo '<br>';
-            echo '--------------------------------';
-            echo '<br>';
         }
 
-
-        echo '<br>';
-        echo 'Final Score is '. $score;
-        echo '<br>';
-        echo $score.' out of '.$total_score;
-
-        if ($score == $total_score) {
-            echo '<br>';
-            echo 'Congratulations, Full Marks';
-        }
+        return view('theory.result', compact('score', 'total_score', 'questions', 'request'));
     });
 
     Route::get('/questions', function() {
@@ -710,6 +692,9 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
         return redirect()->back()->with('alert-success','Question added');
     });
 
+    Route::get('/result', function(){
+        return view('theory.result');
+    });
 });
 
 Route::get('/encrypt/{string}', function($string) {

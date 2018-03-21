@@ -9,7 +9,7 @@
             <div class="panel panel-success">
                 <div class="panel-body">
                     <div class="first-panel">
-                        <div class="no-dhivehi timer" id="countTime"></div>
+                        <div class="no-dhivehi timer" id="countTime" style="display: none;"></div>
                         <center>
                             <img src="/bismilah.jpg" height="90px">
                             <br>
@@ -48,7 +48,7 @@
                                                 </div>
                                                 @if ($question->answers->first()->photo_url)
                                                     <div class="col-md-3">
-                                                        <img src="{{ \App\Helpers\Helper::s3_url_gen($question->answers->first()->photo_url) }}" alt="">
+                                                        <img height="200px" src="{{ \App\Helpers\Helper::s3_url_gen($question->answers->first()->photo_url) }}" alt="">
                                                     </div>
                                                 @endif
                                             </div>
@@ -130,7 +130,7 @@
                     document.getElementById("theory-submit").submit();
                     //doSomething();
                 } else {
-                    $("#countTime").html(min + " : " + sec);
+                    $("#countTime").html(min + " : " + sec).show();
                 }
             }, 1000); //1000ms. = 1sec.
         }
