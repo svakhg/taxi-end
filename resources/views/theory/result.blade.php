@@ -25,19 +25,22 @@
                             <?php
                             foreach ($questions as $question) {
                                 $question_i = 'ސުވާލު - '.$question->body;
-                                $user_answer = $request->input($question_i);
+                                $question_id = 'question-'.$question->id;
+
+                                
+                                
                                 $correct_answer = $question->answers->where('is_correct', '1')->first();
 
                                 echo $question_i;
                                 echo "<br>";
-                                if ($user_answer == $correct_answer->id) {
-                                    echo 'ޖަވާބު ރަނގަޅު';
+                                if ($user_answers[$question_id] == $correct_answer->id) {
+                                    echo '<span style="color: green">ޖަވާބު ރަނގަޅު</span>';
                                     echo "<br>";
                                     echo "ރަނގަޅު ޖަވާބަކީ ".$correct_answer->answer;
                                     echo "<br>";
                                 } 
                                 else {
-                                    echo 'ޖަވާބު ނުބާ';
+                                    echo '<span style="color: red">ޖަވާބު ނުބާ</span>';
                                     echo "<br>";
                                     echo "ރަނގަޅު ޖަވާބަކީ ".$correct_answer->answer;
                                     echo "<br>";

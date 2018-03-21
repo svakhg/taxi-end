@@ -600,17 +600,25 @@ Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
         $total_score = count($questions);
         $score = 0;
 
+        // dd($request->parameters);
+
+        $user_answers = [];
+
         foreach ($questions as $question) {
             $question_i = 'question-'.$question->id;
             $user_answer = $request->input($question_i);
             $correct_answer = $question->answers->where('is_correct', '1')->first();
+
+            $user_answers[$question_i] = $user_answer;
 
             if ($user_answer == $correct_answer->id) {
                 $score++;
             }
         }
 
-        return view('theory.result', compact('score', 'total_score', 'questions', 'request'));
+        // dd($user_answers);
+
+        return view('theory.result', compact('score', 'total_score', 'questions', 'user_answers'));
     });
 
     Route::get('/questions', function() {
