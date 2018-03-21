@@ -34,14 +34,12 @@
                                 echo $question_i;
                                 echo "<br>";
                                 if ($user_answers[$question_id] == $correct_answer->id) {
-                                    echo '<span style="color: green">ޖަވާބު ރަނގަޅު</span>';
-                                    echo "<br>";
+                                    echo '<span style="color: green">ޖަވާބު ރަނގަޅު </span>';
                                     echo "ރަނގަޅު ޖަވާބަކީ ".$correct_answer->answer;
                                     echo "<br>";
                                 } 
                                 else {
-                                    echo '<span style="color: red">ޖަވާބު ނުބާ</span>';
-                                    echo "<br>";
+                                    echo '<span style="color: red">ޖަވާބު ނުބާ </span>';
                                     echo "ރަނގަޅު ޖަވާބަކީ ".$correct_answer->answer;
                                     echo "<br>";
                                 }
