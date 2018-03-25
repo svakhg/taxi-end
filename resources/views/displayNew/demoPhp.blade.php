@@ -82,8 +82,6 @@
                 <div class="col-lg-1 col-md-2 col-sm-6 col-xs-6" data-toggle="modal" data-target="#driverDetail"
                 @if ($taxi->driver)
                     onclick="driverModal('{{ $taxi->driver->id }}')"
-                @else
-                    onclick="console.log('No Driver')"
                 @endif
                 >
                     <?php $color = checkColor($taxi->state, $taxi->anualFeeExpiry, $taxi->roadWorthinessExpiry, $taxi->insuranceExpiry) ?>
@@ -99,7 +97,7 @@
                                 @if ($taxi->driver)
                                     {{ $taxi->driver->driverMobile }}
                                 @else
-                                    No driver
+                                    No Number
                                 @endif
                             </div>
                         </div>
@@ -114,7 +112,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Driver Detail</h5>
+                    <h5 style="color: black" class="modal-title">Driver Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -126,38 +124,50 @@
                         </div>
                         <div class="col">
                             <h3>Name: <span id="driverName"></span></h3>
-                            <h5>Driver Phone: <span id="driverPhone"></span></h5>
                             <h5>Id card: <span id="driverId"></span></h5>
+                            <h5>Driver License No. <span id="driverLicenceNo"></span></h5>
                             <h5>Driver Temp. Address: <span id="driverTempAdd"></span></h5>
                             <h5>Driver Perm. Address: <span id="driverPermAdd"></span></h5>
+                            <h5>Driver Phone: <span id="driverPhone"></span></h5>
                             <h5>Driver Email: <span id="driverEmail"></span></h5>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col">
-                            <center>
-                                <h5 id="paymentStatus"></h5>
-                                <h5>Anual Fee expiry: <span id="annualFee"></span></h5>
-                                <h5>Road Worthiness expiry: <span id="roadWorthiness"></span></h5>
-                                <h5>Insurance expiry: <span id="insuranceExpiry"></span></h5>
-                            </center>
+                            <h3>BIA <span id="taxiNumber"></span></h3>
+                            <h5 id="paymentStatus"></h5>
+                            <h5>Anual Fee expiry: <span id="annualFee"></span></h5>
+                            <h5>Road Worthiness expiry: <span id="roadWorthiness"></span></h5>
+                            <h5>Insurance expiry: <span id="insuranceExpiry"></span></h5>
+                            <h5>Driver License expiry: <span id="driverLicenceExp"></span></h5>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            <center>
-                                <h5>Driver License No. <span id="driverLicenceNo"></span> - Driver License expiry: <span id="driverLicenceExp"></span></h5>
-                            </center>
+                            <div></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
+                            <h5>License Card</h5>
                             <img id="licenceFront" class="img-fluid img-thumbnail" src="http://graphics8.nytimes.com/packages/images/multimedia/bundles/projects/2013/Licenses/2008back.jpg" alt="">
                         </div>
                         <div class="col-md-6">
+                            <h5>Taxi Permit</h5>
                             <img id="licenceBack" class="img-fluid img-thumbnail" src="http://graphics8.nytimes.com/packages/images/multimedia/bundles/projects/2013/Licenses/2008back.jpg" alt="">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Taxi Front</h5>
+                            <img id="taxiFront" class="img-fluid img-thumbnail" src="http://graphics8.nytimes.com/packages/images/multimedia/bundles/projects/2013/Licenses/2008back.jpg" alt="">
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Taxi Back</h5>
+                            <img id="taxiBack" class="img-fluid img-thumbnail" src="http://graphics8.nytimes.com/packages/images/multimedia/bundles/projects/2013/Licenses/2008back.jpg" alt="">
                         </div>
                     </div>
                 </div>
@@ -175,6 +185,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="/js/display.js"></script>
     <script>
+        function checkDate(date) {
+            var selectedDate = new Date(date);
+            var now = new Date();
+            now.setHours(0,0,0,0);
+            if (selectedDate < now) {
+                console.log("Selected date is in the past");                
+                return false;
+            } else {
+                console.log("Selected date is NOT in the past");
+                return true;
+            }
+        }
+
         function driverModal(id) {
             var view_url = $("#hidden_view").val();
             $.ajax({
@@ -186,6 +209,10 @@
                     var driverPhoto = 'https://s3-ap-southeast-1.amazonaws.com/taviyani/' + result.driver_photo_url_t;
                     var licenceFront = 'https://s3-ap-southeast-1.amazonaws.com/taviyani/' + result.li_front_url_t;
                     var licenceBack = 'https://s3-ap-southeast-1.amazonaws.com/taviyani/' + result.li_back_url_t;
+
+                    var taxiFront = 'https://s3-ap-southeast-1.amazonaws.com/taviyani/' + result.taxi.taxi_front_url_o;
+                    var taxiBack = 'https://s3-ap-southeast-1.amazonaws.com/taviyani/' + result.taxi.taxi_back_url_o;
+
                     $('#driverName').text(result.driverName);
                     $('#driverPhone').text(result.driverMobile);
                     $('#driverId').text(result.driverIdNo);
@@ -193,15 +220,40 @@
                     $('#driverPermAdd').text(result.driverPermAdd);
                     $('#driverEmail').text(result.driverEmail);
                     $('#driverLicenceNo').text(result.driverLicenceNo);
-                    $('#driverLicenceExp').text(result.driverLicenceExp);
+                    $('#taxiNumber').text(result.taxi.taxiNo);
+
                     $('#driverPhoto').attr("src", driverPhoto);
                     $('#licenceFront').attr("src", licenceFront);
                     $('#licenceBack').attr("src", licenceBack);
-                    $('#driverLicenceExp').text(result.driverLicenceExp);
+                    
 
-                    $('#annualFee').text(result.taxi.anualFeeExpiry);
-                    $('#roadWorthiness').text(result.taxi.roadWorthinessExpiry);
-                    $('#insuranceExpiry').text(result.taxi.insuranceExpiry);
+                    $('#taxiFront').attr("src", taxiFront);
+                    $('#taxiBack').attr("src", taxiBack);
+
+                    if (checkDate(result.taxi.anualFeeExpiry) == true) {
+                        $('#annualFee').addClass('green-color').text(result.taxi.anualFeeExpiry);
+                    } else {
+                        $('#annualFee').addClass('red-color').text(result.taxi.anualFeeExpiry);
+                    }
+                    
+                    if (checkDate(result.taxi.roadWorthinessExpiry) == true) {
+                        $('#roadWorthiness').addClass('green-color').text(result.taxi.roadWorthinessExpiry);
+                    } else {
+                        $('#roadWorthiness').addClass('red-color').text(result.taxi.roadWorthinessExpiry);
+                    }
+
+                    if (checkDate(result.taxi.insuranceExpiry) == true) {
+                        $('#insuranceExpiry').addClass('green-color').text(result.taxi.insuranceExpiry);
+                    } else {
+                        $('#insuranceExpiry').addClass('red-color').text(result.taxi.insuranceExpiry);
+                    }
+
+                    if (checkDate(result.driverLicenceExp) == true) {
+                        $('#driverLicenceExp').addClass('green-color').text(result.driverLicenceExp);
+                    } else {
+                        $('#driverLicenceExp').addClass('red-color').text(result.driverLicenceExp);
+                    }
+
                 }
             });
         }

@@ -291,9 +291,25 @@ Route::get('/display', function () {
     return view('displayNew.demo');
 })->middleware('auth');
 Route::get('/display/{center_name}', function ($center_name) {
-    $taxis = \App\Taxi::where('center_name', $center_name)->with('driver')->with('callcode')->get();
+    $taxis = \App\Taxi::where('active', '1')
+                    ->where('center_name', $center_name)
+                    ->where('taxiNo', '!=', '-')
+                    ->with('driver')
+                    ->with('callcode')
+                    ->get();
     $center = \App\TaxiCenter::find($taxis[0]->callcode->center_id);
     $title = $center->name.' - '.$center->telephone;
+
+    foreach ($taxis as $key => $taxi) {
+        if (!is_null($taxi->driver)) {
+            if ($taxi->driver->driverName == '-'){
+                $taxis->pull($key);
+            }
+        } else {
+            $taxis->pull($key);
+        }
+    }
+
     return view('displayNew.demoPhp', compact('taxis', 'title'));
 })->middleware('auth');
 Route::get('api/display/{center_name}', function ($center_name) {
@@ -590,9 +606,18 @@ Route::group(['prefix' => 'contacts-generate', 'middleware' => 'auth'], function
 // Quiz
 Route::group(['prefix' => 'theory', 'middleware' => 'auth'], function () {
     Route::get('/', function() {
+        $quiz = \App\Quiz::with(['questions' => function($query) {
+            $query->orderByRaw('RAND()')->take(30);
+        }])->findOrFail(1);
+        $quiz->questions->random(30);
+        return view('theory.index', compact('quiz'));
+    });
+
+    Route::get('/all', function() {
         $quiz = \App\Quiz::with('questions')->findOrFail(1);
         return view('theory.index', compact('quiz'));
     });
+    
     Route::post('/post', function(Request $request) {
         $quiz = \App\Quiz::with('questions')->findOrFail(1);
         $questions = $quiz->questions;
@@ -720,7 +745,17 @@ Route::get('new-payment-generation', function() {
     // dd($now);
     $next_month = $now->addMonth();
     $day = $now->day;
-    $taxis = App\Taxi::all();
+    $taxis = App\Taxi::has('driver')->where('active', '1')->get();
+
+    foreach ($taxis as $key => $taxi) {
+        if (!is_null($taxi->driver)) {
+            if ($taxi->driver->driverName == '-'){
+                $taxis->pull($key);
+            }
+        } else {
+            $taxis->pull($key);
+        }
+    }
 
     // dd($next_month->month);
 

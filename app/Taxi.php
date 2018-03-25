@@ -13,7 +13,7 @@ class Taxi extends Model
 
     public function callcode()
     {
-        return $this->belongsTo('App\CallCode', 'callcode_id');
+        return $this->belongsTo('App\CallCode', 'callcode_id')->orderBy('callCode');
     }  
 
     public function driver()

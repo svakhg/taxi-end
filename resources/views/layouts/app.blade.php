@@ -143,6 +143,15 @@
                                 @endforeach
                             </ul>
                         </li>
+                        <li class="dropdown" disabled>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Theory <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url('theory/all') }}">Theory (All Questions)</a></li>
+                                <li><a href="{{ url('theory') }}">Theory Test</a></li>
+                            </ul>
+                        </li>
                     @endif
                 </ul>
                 <!-- Right Side Of Navbar -->

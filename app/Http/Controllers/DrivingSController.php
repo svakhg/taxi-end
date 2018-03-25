@@ -21,7 +21,7 @@ class DrivingSController extends Controller
      */
     public function index()
     {
-        $students = DrivingS::all();
+        $students = DrivingS::orderBy('created_at', 'desc')->get();
         return view('drivingschool.index', compact('students'));
     }
 
