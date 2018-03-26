@@ -13,7 +13,7 @@
                     <p><div id="todaysDate"></div></p>
                     <p>-Taviyani-</p>
                     <hr>
-                    <form class="form-inline" action="{{ url('/flash-message') }}" method="POST">
+                    <form action="{{ url('/flash-message') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="message">Flash Message:</label>
