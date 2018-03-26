@@ -31,7 +31,10 @@ Route::post('/flash-message', function (Request $request) {
 })->middleware('auth');
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home', function () {
+    return redirect('/');
+})->middleware('auth');
 
 Route::group(['prefix' => 'test', 'middleware' => 'auth'], function () {
     Route::get('edit-gen', function () {
