@@ -3,6 +3,7 @@ use Illuminate\Http\Request;
 use Mohamedathik\PhotoUpload\Upload;
 use App\Helpers\Helper;
 use App\paymentHistory;
+use App\FlashMessage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 
@@ -18,7 +19,15 @@ use Illuminate\Support\Facades\Crypt;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $flashmessage = Flashmessage::find(1);
+    return view('home', compact('flashmessage'));
+})->middleware('auth');
+
+Route::post('/flash-message', function (Request $request) {
+    $flashmessage = Flashmessage::find(1);
+    $flashmessage->message = $request->message;
+    $flashmessage->save();
+    return redirect()->back();
 })->middleware('auth');
 
 Auth::routes();
@@ -310,7 +319,9 @@ Route::get('/display/{center_name}', function ($center_name) {
         }
     }
 
-    return view('displayNew.demoPhp', compact('taxis', 'title'));
+    $flashmessage = Flashmessage::find(1);
+
+    return view('displayNew.demoPhp', compact('taxis', 'title', 'flashmessage'));
 })->middleware('auth');
 Route::get('api/display/{center_name}', function ($center_name) {
     $taxis = \App\Taxi::where('center_name', $center_name)->with('driver')->with('callcode')->get();

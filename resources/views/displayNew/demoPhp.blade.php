@@ -58,22 +58,33 @@
     <!-- Styles and Scripts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/display.css">
-    
+    <style>
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 10px;
+            font-weigh: bold;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="col-md-6">
                     <h1 class="title">{{ $title }}</h1>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="col-md-6">
                     <div class="buttons">
                         <a href="{{ url()->current() }}" class="btn btn-info">All</a>
                         <a href="{{ url()->current() }}?status=paid"  class="btn btn-success">Paid</a>
                         <a href="{{ url()->current() }}?status=unpaid"  class="btn btn-danger">Unpaid</a>
                         <a href="{{ url()->current() }}?status=expired"  class="btn purple">Expired</a>
                     </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="marquee">{{ $flashmessage->message }}</div>
                 </div>
             </div>
         </div>
@@ -184,6 +195,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="/js/display.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery.marquee@1.5.0/jquery.marquee.min.js" type="text/javascript"></script>
     <script>
         function checkDate(date) {
             var selectedDate = new Date(date);
@@ -257,6 +269,11 @@
                 }
             });
         }
+
+
+        $('.marquee').marquee({
+            duration: 10000,
+        });
     </script>
 </body>
 </html>

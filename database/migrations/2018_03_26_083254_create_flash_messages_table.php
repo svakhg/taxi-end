@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPhotoUrlAnswer extends Migration
+class CreateFlashMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddPhotoUrlAnswer extends Migration
      */
     public function up()
     {
-        Schema::table('answers', function($table) {
-            $table->string('photo_url')->nullable();
+        Schema::create('flash_messages', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('message')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AddPhotoUrlAnswer extends Migration
      */
     public function down()
     {
-        Schema::table('answers', function($table) {
-            $table->dropColumn('photo_url');
-        });
+        Schema::dropIfExists('flash_messages');
     }
 }
