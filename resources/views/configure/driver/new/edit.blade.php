@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label for="driverTempAdd">Driver Temperory Address</label>
-                        <input type="text" class="form-control" name="driverTempAdd" id="driverTempAdd" value="{{ $driver->driverName }}" >
+                        <input type="text" class="form-control" name="driverTempAdd" id="driverTempAdd" value="{{ $driver->driverTempAdd }}" >
                     </div>
                     <div class="form-group">
                         <label for="driverPermAdd">Driver Permanant Address</label>

@@ -1,17 +1,18 @@
 <?php
-    function checkColor($state, $feeDate, $roadDate, $insDate) {
+    function checkColor($state, $feeDate, $roadDate, $insDate, $permDate) {
         $paid = ($state == '1') ? true : false;
         $feeExpired = (strtotime($feeDate) > time()) ? true : false;
         $roadExpired = (strtotime($roadDate) > time()) ? true : false;
         $insuranceExpired = (strtotime($insDate) > time()) ? true : false;
+        $permitExpired = (strtotime($permDate) > time()) ? true : false;
         // dd($paid, $feeDate, $roadDate, $insDate, $feeExpired, $roadExpired, $insuranceExpired);
         if(!$paid) {
             return 'red';
         }
-        if($paid AND !$feeExpired OR !$roadExpired OR !$insuranceExpired) {
+        if($paid AND !$feeExpired OR !$roadExpired OR !$insuranceExpired OR !$permitExpired) {
             return 'purple';
         } 
-        elseif($paid AND $feeExpired AND $roadExpired AND $insuranceExpired) {
+        elseif($paid AND $feeExpired AND $roadExpired AND $insuranceExpired OR !$permitExpired) {
             return 'green';
         }
 
@@ -37,6 +38,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="refresh" content="30; URL={{ url()->current() }}">
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="57x57" href="{{asset('Taviyani_Logo.png')}}">
@@ -95,7 +97,7 @@
                     onclick="driverModal('{{ $taxi->driver->id }}')"
                 @endif
                 >
-                    <?php $color = checkColor($taxi->state, $taxi->anualFeeExpiry, $taxi->roadWorthinessExpiry, $taxi->insuranceExpiry) ?>
+                    <?php $color = checkColor($taxi->state, $taxi->anualFeeExpiry, $taxi->roadWorthinessExpiry, $taxi->insuranceExpiry, $taxi->driver->driverPermitExp) ?>
                     @if (checkStatus(request()->status, $color))
                         <div class="box {{ $color }}">
                             <div class="callCode circle {{ $color }}-color">
@@ -152,6 +154,7 @@
                             <h5>Road Worthiness expiry: <span id="roadWorthiness"></span></h5>
                             <h5>Insurance expiry: <span id="insuranceExpiry"></span></h5>
                             <h5>Driver License expiry: <span id="driverLicenceExp"></span></h5>
+                            <h5>Driver Permit expiry: <span id="driverPermitExp"></span></h5>
                         </div>
                     </div>
                     <hr>
@@ -210,6 +213,22 @@
             }
         }
 
+        function formatDate(date) {
+            var d = new Date(date);
+            var monthNames = [
+                "January", "February", "March",
+                "April", "May", "June", "July",
+                "August", "September", "October",
+                "November", "December"
+            ];
+
+            var day = d.getDate();
+            var monthIndex = d.getMonth();
+            var year = d.getFullYear();
+
+            return day + ' ' + monthNames[monthIndex] + ' ' + year;
+        }
+
         function driverModal(id) {
             var view_url = $("#hidden_view").val();
             $.ajax({
@@ -243,27 +262,33 @@
                     $('#taxiBack').attr("src", taxiBack);
 
                     if (checkDate(result.taxi.anualFeeExpiry) == true) {
-                        $('#annualFee').addClass('green-color').text(result.taxi.anualFeeExpiry);
+                        $('#annualFee').removeClass().addClass('green-color').text(formatDate(result.taxi.anualFeeExpiry));
                     } else {
-                        $('#annualFee').addClass('red-color').text(result.taxi.anualFeeExpiry);
+                        $('#annualFee').removeClass().addClass('red-color').text(formatDate(result.taxi.anualFeeExpiry));
                     }
                     
                     if (checkDate(result.taxi.roadWorthinessExpiry) == true) {
-                        $('#roadWorthiness').addClass('green-color').text(result.taxi.roadWorthinessExpiry);
+                        $('#roadWorthiness').removeClass().addClass('green-color').text(formatDate(result.taxi.roadWorthinessExpiry));
                     } else {
-                        $('#roadWorthiness').addClass('red-color').text(result.taxi.roadWorthinessExpiry);
+                        $('#roadWorthiness').removeClass().addClass('red-color').text(formatDate(result.taxi.roadWorthinessExpiry));
                     }
 
                     if (checkDate(result.taxi.insuranceExpiry) == true) {
-                        $('#insuranceExpiry').addClass('green-color').text(result.taxi.insuranceExpiry);
+                        $('#insuranceExpiry').removeClass().addClass('green-color').text(formatDate(result.taxi.insuranceExpiry));
                     } else {
-                        $('#insuranceExpiry').addClass('red-color').text(result.taxi.insuranceExpiry);
+                        $('#insuranceExpiry').removeClass().addClass('red-color').text(formatDate(result.taxi.insuranceExpiry));
                     }
 
                     if (checkDate(result.driverLicenceExp) == true) {
-                        $('#driverLicenceExp').addClass('green-color').text(result.driverLicenceExp);
+                        $('#driverLicenceExp').removeClass().addClass('green-color').text(formatDate(result.driverLicenceExp));
                     } else {
-                        $('#driverLicenceExp').addClass('red-color').text(result.driverLicenceExp);
+                        $('#driverLicenceExp').removeClass().addClass('red-color').text(formatDate(result.driverLicenceExp));
+                    }
+
+                    if (checkDate(result.driverPermitExp) == true) {
+                        $('#driverPermitExp').removeClass().addClass('green-color').text(formatDate(result.driverPermitExp));
+                    } else {
+                        $('#driverPermitExp').removeClass().addClass('red-color').text(formatDate(result.driverPermitExp));
                     }
 
                 }

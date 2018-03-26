@@ -23,6 +23,14 @@ Route::get('/', function () {
     return view('home', compact('flashmessage'));
 })->middleware('auth');
 
+Route::get('/privacy-policy', function () {
+    return view('privacyPolicy');
+});
+
+Route::get('/generate', function () {
+    return redirect('/test/full-taxi-gen');
+})->middleware('auth');
+
 Route::post('/flash-message', function (Request $request) {
     $flashmessage = Flashmessage::find(1);
     $flashmessage->message = $request->message;
@@ -100,16 +108,20 @@ Route::group(['prefix' => 'test', 'middleware' => 'auth'], function () {
             echo 'Done ' . $callcode->id;
             echo '<br>';
         }
+
+        return redirect('contacts-generate/taxi');
     });
 
     Route::get('full-taxi-gen', function () {
         $taxis = \App\Taxi::all();
         foreach ($taxis as $taxi) {
-            $taxi->full_taxi = 'Call Code: '.$taxi->callcode->callCode.' - Taxi Number: '.$taxi->taxiNo.' Center Name: '.$taxi->callcode->taxicenter->name;
+            $taxi->full_taxi = 'Call Code: '.$taxi->callcode->callCode.' - Taxi Number: '.$taxi->taxiNo.' - Center Name: '.$taxi->callcode->taxicenter->name;
             $taxi->save();
             echo 'Done ' . $taxi->id;
             echo '<br>';
         }
+
+        return redirect('test/full-callcode-gen');
     });
 });
 /*Payment generation*/
@@ -546,9 +558,9 @@ Route::group(['prefix' => 'contacts-generate', 'middleware' => 'auth'], function
                 'number' => $number,
                 'contact_id' => $taxi_group->id
             ]);
-        }
+        }        
 
-        return $taxi_numbers;
+        return redirect('contacts-generate/driver');
     });
     Route::get('driver', function() {
         // Driver
@@ -578,7 +590,7 @@ Route::group(['prefix' => 'contacts-generate', 'middleware' => 'auth'], function
             ]);
         }
 
-        return $driver_numbers;
+        return redirect('/');
     });
     Route::get('students', function() {
         // Students
