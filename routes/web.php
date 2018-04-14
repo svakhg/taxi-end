@@ -44,6 +44,10 @@ Route::get('/home', function () {
     return redirect('/');
 })->middleware('auth');
 
+Route::get('/register', function () {
+    return redirect('/login');
+});
+
 Route::group(['prefix' => 'test', 'middleware' => 'auth'], function () {
     Route::get('edit-gen', function () {
         $type = '$taxi';
