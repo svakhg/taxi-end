@@ -61,4 +61,9 @@ class SmsController extends Controller
         );
     }
 
+    public function call()
+    {
+        return view('call');
+    }
+
 }

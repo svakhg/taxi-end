@@ -137,24 +137,27 @@
                         </div>
                         <div class="col">
                             <h3>Name: <span id="driverName"></span></h3>
-                            <h5>Id card: <span id="driverId"></span></h5>
-                            <h5>Driver License No. <span id="driverLicenceNo"></span></h5>
                             <h5>Driver Temp. Address: <span id="driverTempAdd"></span></h5>
                             <h5>Driver Perm. Address: <span id="driverPermAdd"></span></h5>
+                            <h5>Id card: <span id="driverId"></span></h5>
+                            <h5>Driver License No. <span id="driverLicenceNo"></span></h5>
                             <h5>Driver Phone: <span id="driverPhone"></span></h5>
                             <h5>Driver Email: <span id="driverEmail"></span></h5>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-5">
                             <h3>BIA <span id="taxiNumber"></span></h3>
+                        </div>
+                        <div class="col-md-7">
                             <h5 id="paymentStatus"></h5>
                             <h5>Anual Fee expiry: <span id="annualFee"></span></h5>
                             <h5>Road Worthiness expiry: <span id="roadWorthiness"></span></h5>
                             <h5>Insurance expiry: <span id="insuranceExpiry"></span></h5>
                             <h5>Driver License expiry: <span id="driverLicenceExp"></span></h5>
                             <h5>Driver Permit expiry: <span id="driverPermitExp"></span></h5>
+                        </div>
                         </div>
                     </div>
                     <hr>

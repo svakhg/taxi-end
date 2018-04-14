@@ -46,7 +46,7 @@
                     <table width="100%" border="0">
                         <tr>
                             <td><strong>Date :</strong></td>
-                            <td align="right">{{ date("d/m/Y") }}</td>
+                            <td align="right">{{ $payment->updated_at->format('d/m/Y') }}</td>
                         </tr>
                         <tr>
                             <td><strong>Slip No. :</strong></td>

@@ -13,7 +13,7 @@
                         <center>
                             <img src="/bismilah.jpg" height="90px">
                             <br>
-                            <img src="/Taviyani_Logo.png" height="250px">
+                            <img src="/logo/dr.png" height="150px">
                             <hr>
                             <span style="font-size: 60px" class="dhivehi-font">{{ $quiz->name }}</span>
                             <hr>

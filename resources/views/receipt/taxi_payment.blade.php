@@ -46,12 +46,12 @@
                 <td width="20%" colspan="2" align="left">
                     <table width="100%" border="0">
                         <tr>
-                            <td><strong>Date :</strong></td>
-                            <td align="right">{{ date("d/m/Y") }}</td>
+                            <td><strong>Date Paid:</strong></td>
+                            <td align="right">{{ $payment->updated_at->format('d/m/Y') }}</td>
                         </tr>
                         <tr>
                             <td><strong>Slip No. :</strong></td>
-                            <td align="right">TDS/{{ date("Y") }}/{{ date("m") }}/{{ $payment->id }}</td>
+                            <td align="right">TPL/{{ date("Y") }}/{{ date("m") }}/{{ $payment->id }}</td>
                         </tr>
                         <tr>
                             <td><strong>TIN No. :</strong></td>

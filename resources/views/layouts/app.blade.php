@@ -129,8 +129,8 @@
                                 Manage Users <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li disabled><a href="{{ url('users/all') }}" onclick="return false;">View All</a></li>
-                                <li disabled><a href="{{ url('users/add') }}" onclick="return false;">Add New</a></li>
+                                <li disabled><a href="{{ url('users/all') }}">View All</a></li>
+                                <li disabled><a href="{{ url('users/add') }}">Add New</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
