@@ -124,7 +124,7 @@
                         </tr>
                         <tr>
                             <td colspan="3" height="30px" style="border-left:0px">&nbsp;&nbsp;&nbsp;&nbsp; Follow Traffic Signals, Avoid Overtaking from Left and Avoid Cell Phones while Driving.</td>
-                            <td colspan="2" align="center" class="doubleline">Time </td>
+                            <td colspan="2" align="center" class="doubleline">Date and Time </td>
                             <td align="center" class="doubleline" id="todaysDate"></td>
                         </tr>
                         <tr>
@@ -172,10 +172,14 @@
             function updateDate()
             {
                 var str = "";
-    
-                var now = new Date();
-    
-                str +=  addZero(now.getHours()) +":" + addZero(now.getMinutes()) + ":" + addZero(now.getSeconds());
+                var currentdate = new Date(); 
+                str += currentdate.getDate() + "/"
+                    + (currentdate.getMonth()+1)  + "/" 
+                    + currentdate.getFullYear() + " @ "  
+                    + addZero(currentdate.getHours()) + ":"  
+                    + addZero(currentdate.getMinutes()) + ":" 
+                    + addZero(currentdate.getSeconds());
+
                 document.getElementById("todaysDate").innerHTML = str;
             }
     
