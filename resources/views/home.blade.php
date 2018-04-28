@@ -36,17 +36,31 @@
                 <div class="panel-body" style="font-size: 15px;">
                     <table class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Email</th>
+                            <tr>                            
+                                <th>Name</th>
+                                <th>ID Card</th>
+                                <th>Phone</th>
+                                <th>Category</th>
+                                <th>Instructor</th>
+                                <th>Remarks</th>
+                                <th>Driving Test</th>
+                                <th>Theory Test</th>
+                                <th>Joined on</th>
+                                <th>Registered By</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
+                                <td class="verticalAlign">{{ $student->name }}</th>
+                                <td class="verticalAlign">{{ $student->id_card }}</td>
+                                <td class="verticalAlign">{{ $student->phone }}</td>
+                                <td class="verticalAlign">{{ $student->category }}</td>
+                                <td class="verticalAlign">{{ $student->instructor }}</td>
+                                <td class="verticalAlign">{{ $student->remarks }}</td>
+                                <td class="verticalAlign">{{ $student->finisheddate }}</td>
+                                <td class="verticalAlign">{{ $student->theorydate }}</td>
+                                <td class="verticalAlign">{{ $student->created_at->toFormattedDateString() }}</td>
+                                <td class="verticalAlign">{{ $student->user->name }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -62,17 +76,32 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Email</th>
+                                <th>Call Code</th>
+                                <th>Driver Name</th>
+                                <th>Taxi Number</th>
+                                <th>Center Name</th>
+                                <th>Taxi Fee</th>
+                                <th>Date</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                            </tr>
+                            <tr>   
+                            <td>{{ $payment->taxi->callcode->callCode }}</td>
+                            <td>{{ $payment->taxi->driver->driverName  }}</td>
+                            <td>{{ $payment->taxi->taxiNo }}</td>
+                            <td>{{ $payment->taxi->callcode->taxicenter->name }}</td>
+                            <td>{{ $payment->taxi->rate }}</td>
+                            <td>{{ Carbon\Carbon::createFromFormat('m', $payment->month)->format('F') . ' ' . $payment->year }}</td>
+                            <td>
+                                @if ($payment->paymentStatus == "0")
+                                    <button id="status" style="display: block; margin: auto;"  class="btn-danger" disabled>Not Paid</button>
+                                @endif
+                                @if ($payment->paymentStatus == "1")
+                                    <button id="status" style="display: block; margin: auto;"  class="btn-success" disabled>Paid</button>
+                                @endif
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

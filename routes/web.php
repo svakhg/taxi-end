@@ -20,7 +20,11 @@ use Illuminate\Support\Facades\Crypt;
 
 Route::get('/', function () {
     $flashmessage = Flashmessage::find(1);
-    return view('home', compact('flashmessage'));
+
+    $student = \App\DrivingS::latest()->first();
+    $payment = \App\paymentHistory::where('paymentStatus', '1')->latest()->first();
+
+    return view('home', compact('flashmessage', 'student', 'payment'));
 })->middleware('auth');
 
 Route::get('/privacy-policy', function () {
