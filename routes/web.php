@@ -194,6 +194,16 @@ Route::get('/test-taxi-2', function () {
     return $callcode->taxi;
 })->middleware('auth');
 
+Route::get('/taxi-callcode', function () {
+    $taxis = \App\Taxi::all();
+    foreach ($taxis as $taxi) {
+        $callcode = \App\CallCode::find($taxi->callcode_id);
+        $taxi->callcode = $callcode->callCode;
+        $taxi->save();
+        echo 'Done'. $taxi->id;
+    }
+})->middleware('auth');
+
 /*
 |--------------------------------------------------------------------------
 |Configure Routes
@@ -324,7 +334,7 @@ Route::get('/display/{center_name}', function ($center_name) {
                     ->where('taxiNo', '!=', '-')
                     ->with('driver')
                     ->with('callcode')
-                    ->orderBy('callcode_id')
+                    ->orderBy('callcode')
                     ->get();
     $center = \App\TaxiCenter::find($taxis[0]->callcode->center_id);
     $title = $center->name.' - '.$center->telephone;

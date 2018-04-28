@@ -134,7 +134,7 @@
                         </tr>
                         <tr>
                             <td height="36" colspan="6" align="center" style="border-top:1px solid #000"><strong>
-                                    Address: H.Kuhlhavahmaage, Moonlight higun, Male’ | Telephone: 330 2002 , 773 2002 | Fax: 301 1919 | Email: taviyanigroup@gmail.com
+                                    Address: H.Kuhlhavahmaage, Moonlight higun, Male’ | Telephone: 330 2002 , 767 2002 | Fax: 301 1919 | Email: taviyanigroup@gmail.com
                                 </strong>
                             </td>
                         </tr>
