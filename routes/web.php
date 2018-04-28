@@ -198,7 +198,7 @@ Route::get('/taxi-callcode', function () {
     $taxis = \App\Taxi::all();
     foreach ($taxis as $taxi) {
         $callcode = \App\CallCode::find($taxi->callcode_id);
-        $taxi->callcode = $callcode->callCode;
+        $taxi->cc = $callcode->callCode;
         $taxi->save();
         echo 'Done'. $taxi->id;
     }

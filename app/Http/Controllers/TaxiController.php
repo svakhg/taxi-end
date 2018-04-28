@@ -85,7 +85,7 @@ class TaxiController extends Controller
         
         //Save to DB
         $taxi->full_taxi = 'Call Code: '.$callcode->callCode.' - Taxi Number: '.$taxi->taxiNo.' Center Name: '.$taxi->callcode->taxicenter->name;
-        $taxi->callcode = $callcode->callCode;
+        $taxi->cc = $callcode->callCode;
         $taxi->save();
         
         return back()->with('alert-success','Taxi Added successfully.');
@@ -139,7 +139,7 @@ class TaxiController extends Controller
             $taxi->callcode_id = $old_callcode_id;
         }
         // $taxi->full_taxi = 'Call Code: '.$taxi->callcode->callCode.' - Taxi Number: '.$taxi->taxiNo.' Center Name: '.$taxi->callcode->taxicenter->name;
-        $taxi->callcode = $callcode->callCode;
+        $taxi->cc = $callcode->callCode;
         $taxi->save();
         
         return redirect('configure/taxi')->with('alert-success','Taxi Updated successfully.');
@@ -173,7 +173,7 @@ class TaxiController extends Controller
 
         $taxi->active = '0';
         $taxi->callcode_id = '301';
-        $taxi->callcode = '0';
+        $taxi->cc = '0';
         $taxi->save();
 
         return redirect('configure/taxi')->with('alert-success', 'Taxi deactivated successfully.');
@@ -186,7 +186,7 @@ class TaxiController extends Controller
         
         $taxi->callcode_id = $new_callcode->id;
         $taxi->active = '1';
-        $taxi->callcode = $new_callcode->callCode;
+        $taxi->cc = $new_callcode->callCode;
         $taxi->save();
          
         return redirect('configure/taxi')->with('alert-success', 'Taxi activated successfully.');

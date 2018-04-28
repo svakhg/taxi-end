@@ -14,7 +14,7 @@ class AddCcToTaxi extends Migration
     public function up()
     {
         Schema::table('taxis', function($table) {
-            $table->integer('callcode')->nullable();
+            $table->integer('cc')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddCcToTaxi extends Migration
     public function down()
     {
         Schema::table('taxis', function($table) {
-            $table->dropColumn('callcode');
+            $table->dropColumn('cc');
         });
     }
 }
