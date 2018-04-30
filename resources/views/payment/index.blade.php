@@ -38,7 +38,7 @@
                         <tr>   
                             <td>{{ $payment->taxi->callcode->callCode }}</td>
                             @if (is_null($payment->taxi->driver))
-                                <td>ItsEmpty</td>
+                                <td>No Driver Assigned</td>
                             @else
                                 <td>{{ $payment->taxi->driver->driverName  }}</td>
                             @endif
