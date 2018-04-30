@@ -37,10 +37,10 @@
                         @foreach($payments as $payment)
                         <tr>   
                             <td>{{ $payment->taxi->callcode->callCode }}</td>
-                            @if (!$payment->taxi->driver->isEmpty())
-                                <td>{{ $payment->taxi->driver->driverName  }}</td>
-                            @else
+                            @if (is_null($payment->taxi->driver))
                                 <td>ItsEmpty</td>
+                            @else
+                                <td>{{ $payment->taxi->driver->driverName  }}</td>
                             @endif
                             <td>{{ $payment->taxi->taxiNo }}</td>
                             <td>{{ $payment->taxi->callcode->taxicenter->name }}</td>
