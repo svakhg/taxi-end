@@ -37,7 +37,7 @@
                         @foreach($payments as $payment)
                         <tr>   
                             <td>{{ $payment->taxi->callcode->callCode }}</td>
-                            @if ($payment->taxi->driver->driverName)
+                            @if (!$payment->taxi->driver->isEmpty())
                                 <td>{{ $payment->taxi->driver->driverName  }}</td>
                             @else
                                 <td>ItsEmpty</td>
