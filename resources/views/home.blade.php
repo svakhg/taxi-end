@@ -50,18 +50,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="verticalAlign">{{ $student->name }}</th>
-                                <td class="verticalAlign">{{ $student->id_card }}</td>
-                                <td class="verticalAlign">{{ $student->phone }}</td>
-                                <td class="verticalAlign">{{ $student->category }}</td>
-                                <td class="verticalAlign">{{ $student->instructor }}</td>
-                                <td class="verticalAlign">{{ $student->remarks }}</td>
-                                <td class="verticalAlign">{{ $student->finisheddate }}</td>
-                                <td class="verticalAlign">{{ $student->theorydate }}</td>
-                                <td class="verticalAlign">{{ $student->created_at->toFormattedDateString() }}</td>
-                                <td class="verticalAlign">{{ $student->user->name }}</td>
-                            </tr>
+                            @foreach ($students as $student)
+                                <tr>
+                                    <td class="verticalAlign">{{ $student->name }}</th>
+                                    <td class="verticalAlign">{{ $student->id_card }}</td>
+                                    <td class="verticalAlign">{{ $student->phone }}</td>
+                                    <td class="verticalAlign">{{ $student->category }}</td>
+                                    <td class="verticalAlign">{{ $student->instructor }}</td>
+                                    <td class="verticalAlign">{{ $student->remarks }}</td>
+                                    <td class="verticalAlign">{{ $student->finisheddate }}</td>
+                                    <td class="verticalAlign">{{ $student->theorydate }}</td>
+                                    <td class="verticalAlign">{{ $student->created_at->toFormattedDateString() }}</td>
+                                    <td class="verticalAlign">{{ $student->user->name }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -86,22 +88,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>   
-                            <td>{{ $payment->taxi->callcode->callCode }}</td>
-                            <td>{{ $payment->taxi->driver->driverName  }}</td>
-                            <td>{{ $payment->taxi->taxiNo }}</td>
-                            <td>{{ $payment->taxi->callcode->taxicenter->name }}</td>
-                            <td>{{ $payment->taxi->rate }}</td>
-                            <td>{{ Carbon\Carbon::createFromFormat('m', $payment->month)->format('F') . ' ' . $payment->year }}</td>
-                            <td>
-                                @if ($payment->paymentStatus == "0")
-                                    <button id="status" style="display: block; margin: auto;"  class="btn-danger" disabled>Not Paid</button>
-                                @endif
-                                @if ($payment->paymentStatus == "1")
-                                    <button id="status" style="display: block; margin: auto;"  class="btn-success" disabled>Paid</button>
-                                @endif
-                            </td>
-                        </tr>
+                            @foreach ($payments as $payment)
+                                <tr>   
+                                    <td>{{ $payment->taxi->callcode->callCode }}</td>
+                                    <td>{{ $payment->taxi->driver->driverName  }}</td>
+                                    <td>{{ $payment->taxi->taxiNo }}</td>
+                                    <td>{{ $payment->taxi->callcode->taxicenter->name }}</td>
+                                    <td>{{ $payment->taxi->rate }}</td>
+                                    <td>{{ Carbon\Carbon::createFromFormat('m', $payment->month)->format('F') . ' ' . $payment->year }}</td>
+                                    <td>
+                                        @if ($payment->paymentStatus == "0")
+                                            <button id="status" style="display: block; margin: auto;"  class="btn-danger" disabled>Not Paid</button>
+                                        @endif
+                                        @if ($payment->paymentStatus == "1")
+                                            <button id="status" style="display: block; margin: auto;"  class="btn-success" disabled>Paid</button>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

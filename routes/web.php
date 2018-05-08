@@ -21,10 +21,10 @@ use Illuminate\Support\Facades\Crypt;
 Route::get('/', function () {
     $flashmessage = Flashmessage::find(1);
 
-    $student = \App\DrivingS::latest()->first();
-    $payment = \App\paymentHistory::where('paymentStatus', '1')->latest()->first();
+    $students = \App\DrivingS::latest()->take(5)->get();
+    $payments = \App\paymentHistory::where('paymentStatus', '1')->orderBy('updated_at', 'DESC')->take(5)->get();
 
-    return view('home', compact('flashmessage', 'student', 'payment'));
+    return view('home', compact('flashmessage', 'students', 'payments'));
 })->middleware('auth');
 
 Route::get('/privacy-policy', function () {
@@ -445,7 +445,6 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
         return view('user.update', compact('user'));
     });
 });
-
 
 Route::group(['prefix' => 'driving-school', 'middleware' => 'auth'], function () {
     Route::get('/', 'DrivingSController@index');
