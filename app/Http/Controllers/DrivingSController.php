@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DrivingS;
+use App\Instructors;
 use Illuminate\Http\Request;
 
 use Twilio\Rest\Client;
@@ -31,8 +32,9 @@ class DrivingSController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('drivingschool.add');
+    {   
+        $instructors = Instructors::all();
+        return view('drivingschool.add', compact('instructors'));
     }
 
     /**
@@ -99,7 +101,8 @@ class DrivingSController extends Controller
     public function edit($id)
     {
         $student = DrivingS::findorfail($id);
-        return view('drivingschool.edit', compact('student'));
+        $instructors = Instructors::all();
+        return view('drivingschool.edit', compact('student', 'instructors'));
     }
 
     /**
@@ -116,6 +119,7 @@ class DrivingSController extends Controller
         $drivingS->phone = $request->phone;
         $drivingS->c_address = $request->c_address;
         $drivingS->p_address = $request->p_address;
+        $drivingS->instructor = $request->instructor;
         $drivingS->rate = $request->rate;
         $drivingS->finisheddate = $request->finisheddate;
         $drivingS->theorydate = $request->theorydate;
@@ -131,7 +135,8 @@ class DrivingSController extends Controller
      */
     public function destroy(DrivingS $drivingS)
     {
-        //
+        $drivingS->delete();
+        return redirect('/driving-school')->with('alert-success','Successfully deleted the Student');
     }
 
     private function sendMessage($phoneNumber, $message, $from)

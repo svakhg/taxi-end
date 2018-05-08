@@ -129,7 +129,7 @@
                         </tr>
                         <tr>
                             <td height="36" colspan="6" align="center" style="border-top:1px solid #000"><strong>
-                                Address: {{ $payment->taxi->callcode->taxicenter->address }} | Telephone: {{ $payment->taxi->callcode->taxicenter->telephone }} | Fax: {{ $payment->taxi->callcode->taxicenter->fax }} | Email: {{ $payment->taxi->callcode->taxicenter->email }} 
+                                Address: {{ $payment->taxi->callcode->taxicenter->address }} | Telephone: {{ $payment->taxi->callcode->taxicenter->telephone }} | Fax: {{ $payment->taxi->callcode->taxicenter->fax }} | Email: {{ $payment->taxi->callcode->taxicenter->email }} | Website: taviyani.com.mv
                                 </strong>
                             </td>
                         </tr>

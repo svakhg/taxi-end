@@ -28,16 +28,16 @@
                 <form method="POST" enctype="multipart/form-data" action="edit">
                     {{ csrf_field() }}
                     <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ $student->name }}">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $student->name }}">
                     </div>
                     <div class="form-group">
-                    <label for="id_card">ID Card Number</label>
-                    <input type="text" class="form-control" name="id_card" id="id_card" value="{{ $student->id_card }}">
+                        <label for="id_card">ID Card Number</label>
+                        <input type="text" class="form-control" name="id_card" id="id_card" value="{{ $student->id_card }}">
                     </div>
                     <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="text" class="form-control" name="phone" id="phone" value="{{ $student->phone }}" >
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" name="phone" id="phone" value="{{ $student->phone }}" >
                     </div>
                     <div class="form-group">
                         <label for="c_address">Current Address</label>
@@ -46,6 +46,20 @@
                     <div class="form-group">
                         <label for="p_address">Permanent Address</label>
                         <input type="text" class="form-control" name="p_address" id="p_address" value="{{ $student->p_address }}" >
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Instructor</label>
+                        <select class="form-control" id="instructor" name="instructor" required>
+                            <option>Select Instructor</option>
+                            @foreach ($instructors as $instructor)
+                                <option
+                                @if ($instructor->name == $student->instructor)
+                                    selected
+                                @endif
+                                value="{{ $instructor->name }}"
+                                >{{ $instructor->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="rate">Rate</label>

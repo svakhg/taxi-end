@@ -62,9 +62,10 @@
                     <div class="form-group">
                         <label for="phone">Instructor</label>
                         <select class="form-control" id="instructor" name="instructor" required>
-                            <option >Select Instructor</option>
-                            <option value="Nadheem">Nadeem</option>
-                            <option value="Hussain">Hussain</option>
+                            <option>Select Instructor</option>
+                            @foreach ($instructors as $instructor)
+                                <option value="{{ $instructor->name }}">{{ $instructor->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">

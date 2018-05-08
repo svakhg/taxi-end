@@ -459,6 +459,7 @@ Route::group(['prefix' => 'driving-school', 'middleware' => 'auth'], function ()
     Route::get('/students/{drivingS}/edit', 'DrivingSController@edit');
     Route::post('/students/{drivingS}/edit', 'DrivingSController@update');
 
+    Route::get('/students/{drivingS}/delete', 'DrivingSController@destroy');
 });
 
 Route::group(['prefix' => 'image-upload', 'middleware' => 'auth'], function () {
