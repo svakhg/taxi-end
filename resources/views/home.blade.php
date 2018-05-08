@@ -114,7 +114,7 @@
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Taxi Fee
+                    Earnings Summary
                 </div>
                 <div class="panel-body" style="font-size: 15px;">
                     <table class="table table-bordered">
