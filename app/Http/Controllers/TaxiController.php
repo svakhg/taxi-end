@@ -139,7 +139,9 @@ class TaxiController extends Controller
             $taxi->callcode_id = $old_callcode_id;
         }
         // $taxi->full_taxi = 'Call Code: '.$taxi->callcode->callCode.' - Taxi Number: '.$taxi->taxiNo.' Center Name: '.$taxi->callcode->taxicenter->name;
-        $taxi->cc = $callcode->callCode;
+        
+        $new_callcode = CallCode::find($new_callcode_id);
+        $taxi->cc = $new_callcode->callCode;
         $taxi->save();
         
         return redirect('configure/taxi')->with('alert-success','Taxi Updated successfully.');
