@@ -111,6 +111,41 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Taxi Fee
+                </div>
+                <div class="panel-body" style="font-size: 15px;">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Taxi Fee</th>
+                                <th>Driving School</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for ($i = 1; $i < 13; $i++)
+                                <tr>
+                                    <td>{{ Carbon\Carbon::createFromFormat('m', $i)->format('F') }}</td>
+                                    <td>
+                                        <?php
+                                            echo "MVR " . \App\paymentHistory::getTotalPrice($i, '2018');
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                            echo "MVR " . \App\DrivingS::getTotalPrice($i, '2018');
+                                        ?>
+                                    </td>
+                                </tr>
+                            @endfor
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

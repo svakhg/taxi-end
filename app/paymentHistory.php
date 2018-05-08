@@ -20,5 +20,9 @@ class paymentHistory extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function scopeGetTotalPrice($query, $month, $year) {
+        return $query->where('month', $month)->where('year', $year)->sum('totalAmount');
+    }
     
 }

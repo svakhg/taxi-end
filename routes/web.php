@@ -24,6 +24,11 @@ Route::get('/', function () {
     $students = \App\DrivingS::latest()->take(5)->get();
     $payments = \App\paymentHistory::where('paymentStatus', '1')->orderBy('updated_at', 'DESC')->take(5)->get();
 
+    $now = Carbon::now();
+
+    // $taxiPayments = \App\paymentHistory::getTotalPrice('3', '2018');
+    // dd($taxiPayments);
+
     return view('home', compact('flashmessage', 'students', 'payments'));
 })->middleware('auth');
 
@@ -205,6 +210,17 @@ Route::get('/taxi-callcode', function () {
         $taxi->cc = $callcode->callCode;
         $taxi->save();
         echo 'Done'. $taxi->id;
+    }
+})->middleware('auth');
+
+Route::get('/test-driving-school', function () {
+    $students = \App\DrivingS::all();
+    foreach ($students as $student) {
+        $student->month = $student->created_at->format('m'); 
+        $student->year = $student->created_at->format('Y');
+        $student->save();
+        echo $student->created_at->format('m');
+        echo $student->created_at->format('Y');
     }
 })->middleware('auth');
 

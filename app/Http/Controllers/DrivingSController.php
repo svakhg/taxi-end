@@ -60,6 +60,10 @@ class DrivingSController extends Controller
             'theorydate' => request('theorydate'),
             'user_id' => auth()->id(),
         ]);
+
+        $student->month = $student->created_at->format('m'); 
+        $student->year = $student->created_at->format('Y');
+        $student->save();
         
         $message = "Welcome ". $student->name .", to Taviyani Driving School. You will be receving further updatest through sms";
         $phoneNumbers = $student->phone;
