@@ -17,11 +17,19 @@
                 <form class="form-inline" action="" method="GET">
                     <div class="form-group">
                         <label for="from">Date From</label>
-                        <input type="date" class="form-control" id="from" name="from">
+                        <input type="date" class="form-control" id="from" name="from"
+                        @if (request()->exists('from'))
+                            value="{{ request('from') }}"
+                        @endif
+                        >
                     </div>
                     <div class="form-group">
                         <label for="to">Date To</label>
-                        <input type="date" class="form-control" id="to" name="to">
+                        <input type="date" class="form-control" id="to" name="to"
+                        @if (request()->exists('to'))
+                            value="{{ request('to') }}"
+                        @endif
+                        >
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>                      
@@ -34,8 +42,7 @@
                             <th>#</th>
                             <th>Call Code</th>
                             <th>Taxi Number</th>
-                            <th>Month</th>
-                            <th>Year</th>
+                            <th>Date</th>
                             <th>Qty</th>
                             <th>Rate</th>
                             <th>Subtotal</th>
@@ -46,13 +53,14 @@
                             <th>Collected By</th>
                         </thead>
                         <tbody>
+                            <?php $i = 0 ?>
                             @foreach ($paids as $paid)
+                            <?php $i++ ?>
                                 <tr>
-                                    <td>{{ $paid->id }}</td>
+                                    <td>{{ $i }}</td>
                                     <td>{{ $paid->taxi->callcode->callCode }}</td>
                                     <td>{{ $paid->taxi->taxiNo }}</td>
-                                    <td>{{ date("F", $paid->month) }}</td>
-                                    <td>{{ $paid->year }}</td>
+                                    <td>{{ Carbon\Carbon::createFromFormat('m', $paid->month)->format('F') . ' ' . $paid->year }}</td>
                                     <td>{{ $paid->qty }}</td>
                                     <td>{{ $paid->taxi->rate }}</td>
                                     <td>{{ $paid->subtotal }}</td>

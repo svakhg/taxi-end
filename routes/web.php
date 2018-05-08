@@ -405,9 +405,8 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth'], function () {
             $from = $request->input('from');
             $paids = \App\paymentHistory::where('paymentStatus', '1')
                                         ->whereBetween('created_at', array($from, $to))
+                                        ->orderBy('updated_at', 'DESC')
                                         ->get();
-        } else {
-            $paids = \App\paymentHistory::where('paymentStatus', '1')->get();
         }
         return view('report.paymentHistory.index', compact('paids'));
     });
