@@ -981,7 +981,21 @@ Route::get('/callcode-taken-test', function () {
             echo $callcode->taxi->taxiNo . ",". $callcode->callCode . ",". $callcode->taxicenter->name;
             echo "<br>";
         } else {
-            echo "-,". $callcode->callCode.",". $callcode->taxicenter->name;
+            echo "No Taxi,". $callcode->callCode.",". $callcode->taxicenter->name;
+            echo "<br>";
+        }
+    }
+});
+
+Route::get('/taxi-taken-test', function () {
+    // Taxi Taken (Driver->exists)
+    $taxis = \App\Taxi::all();
+    foreach ($taxis as $taxi) {
+        if (!is_null($taxi->driver)) {
+            echo $taxi->taxiNo.",".$taxi->callcode->callCode.",".$taxi->callcode->taxicenter->name.",".$taxi->driver->driverName;
+            echo "<br>";
+        } else {
+            echo $taxi->taxiNo.",".$taxi->callcode->callCode.",".$taxi->callcode->taxicenter->name.",No Driver";
             echo "<br>";
         }
     }
