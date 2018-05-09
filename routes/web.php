@@ -973,7 +973,7 @@ Route::post('/outbound/{salesPhone}', function ($salesPhone) {
     return $response;
 });
 
-Route::get('/taxi-reset', function () {
+Route::get('/callcode-taken-test', function () {
     // Call Code Taken (Taxi->notDeactivated)
     $callcodes = \App\CallCode::all();
     foreach ($callcodes as $callcode) {
