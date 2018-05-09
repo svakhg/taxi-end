@@ -1005,11 +1005,11 @@ Route::get('/taxi-taken-test', function () {
         }
 
     $taxis = \App\Taxi::all();
-    echo "Taxi No,Call Code,Taxi Center Name,Driver Name,Taken,Acitve,ShownInDisplay";
+    echo "Taxi No,Call Code,Taxi Center Name,Driver Name,Taken,Acitve,CallCodeTaken,ShownInDisplay";
     echo "<br>";
     foreach ($taxis as $taxi) {
         if (!is_null($taxi->driver)) {
-            echo $taxi->taxiNo.",".$taxi->callcode->callCode.",".$taxi->callcode->taxicenter->name.",".$taxi->driver->driverName.",".$taxi->taken.",".$taxi->active.",";
+            echo $taxi->taxiNo.",".$taxi->callcode->callCode.",".$taxi->callcode->taxicenter->name.",".$taxi->driver->driverName.",".$taxi->taken.",".$taxi->active.",".$taxi->callcode->taken.",";
             if (shownInDisplay($taxi) === false) {
                 echo "NO";
             } else {
@@ -1017,7 +1017,7 @@ Route::get('/taxi-taken-test', function () {
             }
             echo "<br>";
         } else {
-            echo $taxi->taxiNo.",".$taxi->callcode->callCode.",".$taxi->callcode->taxicenter->name.",No Driver".",".$taxi->taken.",".$taxi->active.",";
+            echo $taxi->taxiNo.",".$taxi->callcode->callCode.",".$taxi->callcode->taxicenter->name.",No Driver".",".$taxi->taken.",".$taxi->active.",".$taxi->callcode->taken.",";
             if (shownInDisplay($taxi) === false) {
                 echo "NO";
             } else {
