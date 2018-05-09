@@ -972,3 +972,17 @@ Route::post('/outbound/{salesPhone}', function ($salesPhone) {
     $response->header('Content-Type', 'text/xml');
     return $response;
 });
+
+Route::get('/taxi-reset', function () {
+    // Call Code Taken (Taxi->notDeactivated)
+    $callcodes = \App\CallCode::all();
+    foreach ($callcodes as $callcode) {
+        if (!is_null($callcode->taxi)) {
+            echo $callcode->taxi->taxiNo . ",". $callcode->callCode . ",". $callcode->taxicenter->name;
+            echo "<br>";
+        } else {
+            echo "-,". $callcode->callCode.",". $callcode->taxicenter->name;
+            echo "<br>";
+        }
+    }
+});

@@ -94,7 +94,7 @@ class TaxiController extends Controller
     public function edit($id)
     {
         $taxi = Taxi::findOrFail($id);
-        $callcodes = \App\CallCode::where('taken', '0')->get();
+        $callcodes = \App\CallCode::orderBy('callCode', 'ASC')->where('taken', '0')->get();
         return view('configure.taxi.new.edit', compact('taxi', 'callcodes'));
     }
 
