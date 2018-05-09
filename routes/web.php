@@ -976,12 +976,14 @@ Route::post('/outbound/{salesPhone}', function ($salesPhone) {
 Route::get('/callcode-taken-test', function () {
     // Call Code Taken (Taxi->notDeactivated)
     $callcodes = \App\CallCode::all();
+    echo "Taxi No,Call Code,Taxi Center Name,Taken";
+    echo "<br>";
     foreach ($callcodes as $callcode) {
         if (!is_null($callcode->taxi)) {
-            echo $callcode->taxi->taxiNo . ",". $callcode->callCode . ",". $callcode->taxicenter->name;
+            echo $callcode->taxi->taxiNo . ",". $callcode->callCode . ",". $callcode->taxicenter->name.",".$callcode->taken;
             echo "<br>";
         } else {
-            echo "No Taxi,". $callcode->callCode.",". $callcode->taxicenter->name;
+            echo "No Taxi,". $callcode->callCode.",". $callcode->taxicenter->name.",".$callcode->taken;
             echo "<br>";
         }
     }
@@ -989,13 +991,38 @@ Route::get('/callcode-taken-test', function () {
 
 Route::get('/taxi-taken-test', function () {
     // Taxi Taken (Driver->exists)
+    function shownInDisplay($taxi) {
+        if ($taxi->taxiNo == "-") {
+            return false;
+        } 
+        elseif (!is_null($taxi->driver)) {
+                if ($taxi->driver->driverName == '-'){
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
     $taxis = \App\Taxi::all();
+    echo "Taxi No,Call Code,Taxi Center Name,Driver Name,Taken,Acitve,ShownInDisplay";
+    echo "<br>";
     foreach ($taxis as $taxi) {
         if (!is_null($taxi->driver)) {
-            echo $taxi->taxiNo.",".$taxi->callcode->callCode.",".$taxi->callcode->taxicenter->name.",".$taxi->driver->driverName;
+            echo $taxi->taxiNo.",".$taxi->callcode->callCode.",".$taxi->callcode->taxicenter->name.",".$taxi->driver->driverName.",".$taxi->taken.",".$taxi->active.",";
+            if (shownInDisplay($taxi) === false) {
+                echo "NO";
+            } else {
+                echo "YES";
+            }
             echo "<br>";
         } else {
-            echo $taxi->taxiNo.",".$taxi->callcode->callCode.",".$taxi->callcode->taxicenter->name.",No Driver";
+            echo $taxi->taxiNo.",".$taxi->callcode->callCode.",".$taxi->callcode->taxicenter->name.",No Driver".",".$taxi->taken.",".$taxi->active.",";
+            if (shownInDisplay($taxi) === false) {
+                echo "NO";
+            } else {
+                echo "YES";
+            }
             echo "<br>";
         }
     }
