@@ -1072,5 +1072,7 @@ Route::get('/full-taken-test', function () {
 });
 
 Route::get('/export-callcodes', function () {
-    return Excel::download(new CallcodeExport, 'callcodes.xlsx');
+    $name = 'callcodes-'.Carbon::now()->toDateTimeString().'.xlsx';
+    // dd($name);
+    return Excel::download(new CallcodeExport, $name);
 });
