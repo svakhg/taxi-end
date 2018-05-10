@@ -996,13 +996,14 @@ Route::get('/taxi-taken-test', function () {
             return false;
         } 
         elseif (!is_null($taxi->driver)) {
-                if ($taxi->driver->driverName == '-'){
-                    return false;
-                }
-            } else {
+            if ($taxi->driver->driverName == '-'){
                 return false;
             }
+        } 
+        else {
+            return false;
         }
+    }
 
     $taxis = \App\Taxi::all();
     echo "Taxi No,Call Code,Taxi Center Name,Driver Name,Taken,Acitve,CallCodeTaken,ShownInDisplay";
@@ -1023,6 +1024,47 @@ Route::get('/taxi-taken-test', function () {
             } else {
                 echo "YES";
             }
+            echo "<br>";
+        }
+    }
+});
+
+Route::get('/full-taken-test', function () {
+    function shownInDisplay($taxi) {
+        if ($taxi->taxiNo == "-") {
+            return false;
+        } elseif ($taxi->active == '0') {
+            return false;
+        } elseif (!is_null($taxi->driver)) {
+            if ($taxi->driver->driverName == '-'){
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    $callcodes = \App\CallCode::all();
+    echo "Call Code ID,Taxi ID,Taxi No,Call Code,Taxi Center Name,Driver ID,Driver Name,Taxi Taken,Taxi Acitve Status,Call Code Taken,ShownInDisplay";
+    echo "<br>";
+    foreach ($callcodes as $callcode) {
+        echo $callcode->id.",";
+        if (!is_null($callcode->taxi)) { 
+            echo $callcode->taxi->id.",".$callcode->taxi->taxiNo .",". $callcode->callCode .",". $callcode->taxicenter->name .",";
+            if (!is_null($callcode->taxi->driver)) {
+                echo $callcode->taxi->driver->id.",".$callcode->taxi->driver->driverName. ",";
+            } else {
+                echo "No Driver,No Driver,";
+            }
+            echo $callcode->taxi->taken .",". $callcode->taxi->active .",". $callcode->taken.",";
+            if (shownInDisplay($callcode->taxi) === false) {
+                echo "No";
+            } else {
+                echo "Yes";
+            }
+            echo "<br>";
+        } else {
+            echo "No Taxi,No Taxi,". $callcode->callCode .",". $callcode->taxicenter->name .",No Driver (No Taxi),No Driver (No Taxi),No Taxi,No Taxi,". $callcode->taken .",No";
             echo "<br>";
         }
     }
