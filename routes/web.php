@@ -6,6 +6,7 @@ use App\paymentHistory;
 use App\FlashMessage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
+use App\Exports\CallCodeExport;
 
 /*
 |--------------------------------------------------------------------------
@@ -1068,4 +1069,8 @@ Route::get('/full-taken-test', function () {
             echo "<br>";
         }
     }
+});
+
+Route::get('/export-callcodes', function () {
+    return Excel::download(new CallCodeExport, 'callcodes.xlsx');
 });
