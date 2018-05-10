@@ -1072,5 +1072,5 @@ Route::get('/full-taken-test', function () {
 });
 
 Route::get('/export-callcodes', function () {
-    return Excel::download(new CallCodeExport, 'callcodes.xlsx');
+    return Excel::download(new CallcodeExport, 'callcodes.xlsx');
 });
