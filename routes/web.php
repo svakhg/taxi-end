@@ -3,6 +3,8 @@ use Illuminate\Http\Request;
 use Mohamedathik\PhotoUpload\Upload;
 use App\Helpers\Helper;
 use App\paymentHistory;
+use App\CallCode;
+use App\Taxi;
 use App\FlashMessage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
@@ -1075,4 +1077,51 @@ Route::get('/export-callcodes', function () {
     $name = 'callcodes-'.Carbon::now()->toDateTimeString().'.xlsx';
     // dd($name);
     return Excel::download(new CallcodeExport, $name);
+});
+
+Route::group(['prefix' => 'codefixes', 'middleware' => 'auth'], function () {
+    Route::get('/change-callcode-taken-from-0-to-1', function () {
+        $callcodes = ["2","28","29","281","283","284","286","287","288","289","290","291","292","293","294","295","296","297","298","299"];
+        foreach ($callcodes as $cc) {
+            $callcode = CallCode::find($cc);
+            $callcode->taken = "1";
+            $callcode->save();
+            echo 'Done';
+        }
+        echo 'Fully Done';
+    });
+
+    Route::get('/change-callcode-taken-from-1-to-0', function () {
+        $callcodes = ["110","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","320","149","321","150","255"];
+        foreach ($callcodes as $cc) {
+            $callcode = CallCode::find($cc);
+            $callcode->taken = "0";
+            $callcode->save();
+            echo 'Done';
+        }
+        echo 'Fully Done';
+    });
+
+    Route::get('/delete-duplicate-callcode-entries', function () {
+        $callcodes = [
+            "131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","317","146","318","147","319","148","320","149","321","150"
+        ];
+        foreach ($callcodes as $cc) {
+            $callcode = CallCode::find($cc);
+            $result = Taxi::where('callcode_id', $cc)->get();
+
+            if (!$result->count()) {
+                $callcode->delete();
+                echo 'Successfully deleted the Call Code';
+                echo '<br>';
+            }
+            else {
+                echo 'Taxi(s) has been added under this call code'. $callcode->callCode;
+                echo '<br>';
+            }
+        }
+        echo 'Fully Done';
+    });
+
+    
 });
