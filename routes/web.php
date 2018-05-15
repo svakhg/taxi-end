@@ -813,7 +813,7 @@ Route::get('new-payment-generation', function() {
     // dd($now);
     $next_month = $now->addMonth();
     $day = $now->day;
-    $taxis = App\Taxi::has('driver')->where('active', '1')->get();
+    $taxis = App\Taxi::has('driver')->where('taxiNo', '!=', '-')->where('active', '1')->get();
 
     foreach ($taxis as $key => $taxi) {
         if (!is_null($taxi->driver)) {
@@ -824,7 +824,8 @@ Route::get('new-payment-generation', function() {
             $taxis->pull($key);
         }
     }
-
+    
+    // return $taxis;
     // dd($next_month->month);
 
     function checkPaymentGeneration($month, $year) {
@@ -1121,7 +1122,5 @@ Route::group(['prefix' => 'codefixes', 'middleware' => 'auth'], function () {
             }
         }
         echo 'Fully Done';
-    });
-
-    
+    }); 
 });
