@@ -51,26 +51,26 @@
 ?>
 <table>
     <thead>
-    <tr>
-        <th>Call Code ID</th>
-        <th>Call Code</th>
-        <th>Call Code Taken</th>
+        <tr>
+            <th>Call Code ID</th>
+            <th>Call Code</th>
+            <th>Call Code Taken</th>
 
-        <th>Taxi Center Name</th>
+            <th>Taxi Center Name</th>
 
-        <th>Taxi ID</th>
-        <th>Taxi No</th>
-        <th>Taxi Taken</th>
-        <th>Taxi Acitve Status</th>
-        
-        <th>Driver ID</th>
-        <th>Driver Name</th>
+            <th>Taxi ID</th>
+            <th>Taxi No</th>
+            <th>Taxi Taken</th>
+            <th>Taxi Acitve Status</th>
+            
+            <th>Driver ID</th>
+            <th>Driver Name</th>
 
-        <th>Show in Display</th>
-        <th>Payment Generated</th>
+            <th>Show in Display</th>
+            <th>Payment Generated</th>
 
-        <th>Comment</th>
-    </tr>
+            <th>Comment</th>
+        </tr>
     </thead>
     <tbody>
     @foreach($callcodes as $callcode)

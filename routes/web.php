@@ -9,6 +9,7 @@ use App\FlashMessage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use App\Exports\CallcodeExport;
+use App\Exports\PaymentExport;
 
 /*
 |--------------------------------------------------------------------------
@@ -1078,6 +1079,12 @@ Route::get('/export-callcodes', function () {
     $name = 'callcodes-'.Carbon::now()->toDateTimeString().'.xlsx';
     // dd($name);
     return Excel::download(new CallcodeExport, $name);
+});
+
+Route::get('/export-payments', function () {
+    $name = 'taxi-payments-'.Carbon::now()->toDateTimeString().'.xlsx';
+    // dd($name);
+    return Excel::download(new PaymentExport, $name);
 });
 
 Route::group(['prefix' => 'codefixes', 'middleware' => 'auth'], function () {
